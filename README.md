@@ -6,7 +6,7 @@ About Scrotter
 ##Using Scrotter
 
 1. Install Microsoft [.NET Framework 4](http://www.microsoft.com/en-us/download/details.aspx?id=17851).
-2. Download the latest compiled release from our Downloads page (coming soon).
+2. Download the latest compiled release from our [Downloads](https://www.dropbox.com/sh/uforojjgr491o9a/Yiz3sjfDt5) page.
 3. Open your screenshot, pick your phone model, and select any modifications you want to make to the image (gloss, rotation, variants).
 4. Save the file.
 
