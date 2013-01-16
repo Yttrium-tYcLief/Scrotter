@@ -1,5 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
-'Copyright (C) 2013  Alex West
+'Copyright (C) 2013 Alex West
+'Version 0.1 Public Beta
 '
 'This program is free software; you can redistribute it and/or
 'modify it under the terms of the GNU General Public License
