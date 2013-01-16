@@ -1,7 +1,7 @@
 About Scrotter
 --------------
 
-**Scrotter** is an application written in Visual Basic .NET that allows the user to place a screenshot from their Android, iOS, or Windows Phone device into a frame of any support mobile devices, and then export their creation as an image.
+**Scrotter** is an application written in Visual Basic .NET that allows the user to place a screenshot from their Android, iOS, or Windows Phone device into a frame of any supported mobile devices, and then export their creation as an image.
 
 **PLEASE NOTE** that Scrotter is temporarily locked for most purposes as development begins. Once a decent application is ready, it will be released under a more suitable license.
 
