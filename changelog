@@ -1,7 +1,10 @@
 master
 - yttrium
   Added transparent PNG and GIF support.
-  New device: Motorola Droid RAZR M.
+  Devices:	Motorola Droid RAZR M
+		Sony Ericsson Xperia X10
+		HTC Google Nexus One
+		HTC Hero
 
 0.1
 - yttrium

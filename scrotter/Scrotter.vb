@@ -136,13 +136,21 @@ Public Class Scrotter
             GlossCheckbox.Checked = False
             UnderShadowCheckbox.Enabled = False
             UnderShadowCheckbox.Checked = False
-        ElseIf ModelBox.Text = "HTC One S" Or ModelBox.Text = "HTC One V" Or ModelBox.Text = "Samsung Galaxy Note II" Or ModelBox.Text = "Google Nexus 4" Then
-            UnderShadowCheckbox.Enabled = False
-            UnderShadowCheckbox.Checked = False
+		ElseIf ModelBox.Text = "HTC One S" Or ModelBox.Text = "HTC One V" Or ModelBox.Text = "Samsung Galaxy Note II" Or ModelBox.Text = "Google Nexus 4" Or ModelBox.Text = "HTC Google Nexus One" Then
+			UnderShadowCheckbox.Enabled = False
+			UnderShadowCheckbox.Checked = False
         ElseIf ModelBox.Text = "Apple iPhone 3G, 3GS" Then
             GlossCheckbox.Enabled = False
-            GlossCheckbox.Checked = False
-        End If
+			GlossCheckbox.Checked = False
+		ElseIf ModelBox.Text = "Sony Ericsson Xperia X10" Then
+			VariantBox.Enabled = True
+			VariantBox.Items.AddRange({"Black", "White"})
+			VariantBox.SelectedIndex = 0
+			GlossCheckbox.Enabled = False
+			GlossCheckbox.Checked = False
+			UnderShadowCheckbox.Enabled = False
+			UnderShadowCheckbox.Checked = False
+		End If
         RefreshPreview()
     End Sub
 
@@ -173,7 +181,8 @@ Public Class Scrotter
             Dim IndexH As Integer = 0
             Dim Overlay As New Bitmap(720, 1280)
             Dim r320480 As String = "http://103.imagebam.com/download/fMTlGS2hf2yruDFhmTf4Ng/23245/232441277/320x480.png"
-            Dim r480800 As String = "http://106.imagebam.com/download/F9adygThCFRUS6W77QbOpA/23245/232441280/480x800.png"
+			Dim r480800 As String = "http://106.imagebam.com/download/F9adygThCFRUS6W77QbOpA/23245/232441280/480x800.png"
+			Dim r480854 As String = "http://ompldr.org/vaDQzag/854x480.png"
             Dim r540960 As String = "http://107.imagebam.com/download/YhiAJ97ttnBH6Cry3vunsg/23245/232441281/540x960.png"
             Dim r640960 As String = "http://104.imagebam.com/download/ULwqOUIcom-pbM6ODaij_A/23245/232441284/640x960.png"
             Dim r6401136 As String = "http://107.imagebam.com/download/RndCBtk9guLnIAXusAaaWQ/23245/232441290/640x1136.png"
@@ -384,31 +393,55 @@ Public Class Scrotter
                 Image1 = FetchImage("http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png")
                 Shadow = FetchImage(r540960)
                 IndexW = 49
-                IndexH = 129
-            End If
-            Dim Background As New Bitmap(Image1.Width, Image1.Height)
-            Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
-            Dim g As Graphics = Graphics.FromImage(Image3)
-            g.Clear(Color.Transparent)
-            g.DrawImage(Background, New Point(0, 0))
-            If UnderShadowCheckbox.Checked = True Then
-                g.DrawImage(Undershadow, New Point(0, 0))
-            End If
-            g.DrawImage(Image2, New Point(IndexW, IndexH))
-            If ShadowCheckbox.Checked = True Then
-                g.DrawImage(Shadow, New Point(IndexW, IndexH))
-            End If
-            g.DrawImage(Image1, New Point(0, 0))
-            If GlossCheckbox.Checked = True Then
-                g.DrawImage(Gloss, New Point(0, 0))
-            End If
-            If args.model = "iPhone 5" Then
-                g.DrawImage(Overlay, New Point(0, 0))
-            End If
-            g.Dispose()
-            g = Nothing
-            SaveImg = Image3
-        End If
+				IndexH = 129
+			ElseIf args.model = "Sony Ericsson Xperia X10" Then
+				If args.var = "Black" Then
+					Image1 = FetchImage("http://ompldr.org/vaDQzaA/SonyEricssonXperia10Black.png")
+					IndexW = 235
+					IndexH = 191
+				ElseIf args.var = "White" Then
+					Image1 = FetchImage("http://ompldr.org/vaDQzaQ/SonyEricssonXperia10White.png")
+					IndexW = 255
+					IndexH = 205
+				End If
+				Shadow = FetchImage(r480854)
+			ElseIf args.model = "HTC Google Nexus One" Then
+				Image1 = FetchImage("http://ompldr.org/vaDQzZQ/HTCGoogleNexusOne.png")
+				Shadow = FetchImage(r480800)
+				Gloss = FetchImage("http://ompldr.org/vaDQzOQ/HTCGoogleNexusOne.png")
+				IndexW = 165
+				IndexH = 168
+			ElseIf args.model = "HTC Hero" Then
+				Image1 = FetchImage("http://ompldr.org/vaDQzZg/HTCHero.png")
+				Shadow = FetchImage(r320480)
+				Gloss = FetchImage("http://ompldr.org/vaDQzYQ/HTCHero.png")
+				Undershadow = FetchImage("http://ompldr.org/vaDQzYw/HTCHero.png")
+				IndexW = 67
+				IndexH = 131
+			End If
+			Dim Background As New Bitmap(Image1.Width, Image1.Height)
+			Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
+			Dim g As Graphics = Graphics.FromImage(Image3)
+			g.Clear(Color.Transparent)
+			g.DrawImage(Background, New Point(0, 0))
+			If UnderShadowCheckbox.Checked = True Then
+				g.DrawImage(Undershadow, New Point(0, 0))
+			End If
+			g.DrawImage(Image2, New Point(IndexW, IndexH))
+			If ShadowCheckbox.Checked = True Then
+				g.DrawImage(Shadow, New Point(IndexW, IndexH))
+			End If
+			g.DrawImage(Image1, New Point(0, 0))
+			If GlossCheckbox.Checked = True Then
+				g.DrawImage(Gloss, New Point(0, 0))
+			End If
+			If args.model = "iPhone 5" Then
+				g.DrawImage(Overlay, New Point(0, 0))
+			End If
+			g.Dispose()
+			g = Nothing
+			SaveImg = Image3
+		End If
     End Sub
 
     Public Class ArgumentType
