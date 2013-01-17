@@ -34,4 +34,4 @@ Development & Contribution
 ### Issues & Suggestions
 
 - If you have suggestions or issue reports, please post them in the [issues](https://github.com/Yttrium-tYcLief/Scrotter/issues) section.
-- If you wish to request a new device, please see [this page]() on doing so.
+- If you wish to request a new device, please see [this page](https://github.com/Yttrium-tYcLief/Scrotter/wiki/Requesting-a-New-Device) on doing so.
