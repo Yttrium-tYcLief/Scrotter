@@ -132,7 +132,7 @@ Public Class Scrotter
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Model 1", "Model 2"})
 				VariantBox.SelectedIndex = 0
-			Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M"
+			Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad"
 				GlossCheckbox.Enabled = False
 				GlossCheckbox.Checked = False
 				UnderShadowCheckbox.Enabled = False
@@ -190,7 +190,8 @@ Public Class Scrotter
             Dim r6401136 As String = "http://107.imagebam.com/download/RndCBtk9guLnIAXusAaaWQ/23245/232441290/640x1136.png"
             Dim r7201280 As String = "http://102.imagebam.com/download/xeX7cVyvK1Xm0azSM9Oc6g/23245/232441293/720x1280.png"
             Dim r7681280 As String = "http://104.imagebam.com/download/kladtG0tmUNkYB_IyP7NIw/23245/232441298/768x1280.png"
-            Dim r8001280 As String = "http://104.imagebam.com/download/AMmyrqvT4tRMwJuO186JVA/23245/232443308/800x1280.png"
+			Dim r8001280 As String = "http://104.imagebam.com/download/AMmyrqvT4tRMwJuO186JVA/23245/232443308/800x1280.png"
+			Dim r1024768 As String = "http://ompldr.org/vaDQ1eg/1024x768.png"
             Dim r1280800 As String = "http://106.imagebam.com/download/gtT3LsbDEEYKFSzYfEKIoA/23245/232443312/1280x800.png"
 			Select args.model
 				Case "Samsung Galaxy SIII Mini"
@@ -347,11 +348,11 @@ Public Class Scrotter
 					Gloss = FetchImage("http://104.imagebam.com/download/m_P6Sfcc3mCGd7IQZwVOTw/23245/232446202/GalaxyNoteII.png")
 					IndexW = 49
 					IndexH = 140
-				Case "Motorola Droid RAZR" Then
-					Image1 = FetchImage("http://106.imagebam.com/download/hM310SZGxmzR2wxM1IlEOQ/23245/232444231/DroidRAZR.png")
-					Shadow = FetchImage(r540960)
-					IndexW = 150
-					IndexH = 206
+                Case "Motorola Droid RAZR"
+                    Image1 = FetchImage("http://106.imagebam.com/download/hM310SZGxmzR2wxM1IlEOQ/23245/232444231/DroidRAZR.png")
+                    Shadow = FetchImage(r540960)
+                    IndexW = 150
+                    IndexH = 206
 				Case "Google Nexus 7"
 					If args.var = "Portrait" Then
 						Image1 = FetchImage("http://104.imagebam.com/download/26ocJdNoE8NTLRhoTR0CDA/23245/232444310/Nexus7Port.png")
@@ -435,6 +436,11 @@ Public Class Scrotter
 						graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
 						graphicsHandle.DrawImage(Image2, 0, 0, 212, 316)
 					End Using
+				Case "HP TouchPad"
+					Image1 = FetchImage("http://ompldr.org/vaDQ1eQ/HPTouchPad.png")
+					Shadow = FetchImage(r1024768)
+					IndexW = 188
+					IndexH = 170
 			End Select
 			Dim Background As New Bitmap(Image1.Width, Image1.Height)
 			Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
@@ -460,8 +466,13 @@ Public Class Scrotter
     End Class
 
     Private Function FetchImage(ByVal url As String)
-        Return New Bitmap(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(url))))
+        Try
+			Return New Bitmap(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(url))))
+        Catch ex As Exception
+		End Try
+		Return New Bitmap(720, 1280)
     End Function
+
     Private Sub BackgroundDownloader_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundDownloader.RunWorkerCompleted
         Preview.Image = SaveImg
         LoadImage.Image = Nothing

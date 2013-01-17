@@ -2,7 +2,10 @@ master
 - yttrium
   Added transparent PNG and GIF support.
   Switch to Select Case instead of If Elseif statements.
+  Changed location of modification checkboxes.
+  Fixed error handling on device selection.
   New Devices:
+	HP TouchPad
 	HTC Google Nexus One
 	HTC Hero
 	HTC Legend

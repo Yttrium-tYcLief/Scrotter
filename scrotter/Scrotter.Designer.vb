@@ -60,7 +60,7 @@ Partial Class Scrotter
 		'ModelBox
 		'
 		Me.ModelBox.FormattingEnabled = True
-		Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Google Nexus 10", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia X10"})
+		Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Google Nexus 10", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HP TouchPad", "HTC Desire HD, HTC Inspire 4G", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia X10"})
 		Me.ModelBox.Location = New System.Drawing.Point(315, 45)
 		Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
 		Me.ModelBox.Name = "ModelBox"
@@ -104,7 +104,7 @@ Partial Class Scrotter
 		'
 		Me.ShadowCheckbox.AutoSize = True
 		Me.ShadowCheckbox.Enabled = False
-		Me.ShadowCheckbox.Location = New System.Drawing.Point(464, 495)
+		Me.ShadowCheckbox.Location = New System.Drawing.Point(315, 526)
 		Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
 		Me.ShadowCheckbox.Name = "ShadowCheckbox"
 		Me.ShadowCheckbox.Size = New System.Drawing.Size(93, 17)
@@ -116,7 +116,7 @@ Partial Class Scrotter
 		'
 		Me.GlossCheckbox.AutoSize = True
 		Me.GlossCheckbox.Enabled = False
-		Me.GlossCheckbox.Location = New System.Drawing.Point(464, 470)
+		Me.GlossCheckbox.Location = New System.Drawing.Point(315, 501)
 		Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
 		Me.GlossCheckbox.Name = "GlossCheckbox"
 		Me.GlossCheckbox.Size = New System.Drawing.Size(52, 17)
@@ -128,7 +128,7 @@ Partial Class Scrotter
 		'
 		Me.UnderShadowCheckbox.AutoSize = True
 		Me.UnderShadowCheckbox.Enabled = False
-		Me.UnderShadowCheckbox.Location = New System.Drawing.Point(464, 520)
+		Me.UnderShadowCheckbox.Location = New System.Drawing.Point(315, 551)
 		Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
 		Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
 		Me.UnderShadowCheckbox.Size = New System.Drawing.Size(97, 17)
