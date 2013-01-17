@@ -131,7 +131,7 @@ Public Class Scrotter
             VariantBox.Enabled = True
             VariantBox.Items.AddRange({"Model 1", "Model 2"})
             VariantBox.SelectedIndex = 0
-        ElseIf ModelBox.Text = "HTC Desire HD, HTC Inspire 4G" Or ModelBox.Text = "Samsung Galaxy SIII Mini" Or ModelBox.Text = "Motorola Droid RAZR" Then
+        ElseIf ModelBox.Text = "HTC Desire HD, HTC Inspire 4G" Or ModelBox.Text = "Samsung Galaxy SIII Mini" Or ModelBox.Text = "Motorola Droid RAZR" Or ModelBox.Text = "Motorola Droid RAZR M" Then
             GlossCheckbox.Enabled = False
             GlossCheckbox.Checked = False
             UnderShadowCheckbox.Enabled = False
@@ -380,6 +380,11 @@ Public Class Scrotter
                 Gloss = FetchImage("http://104.imagebam.com/download/M_vkC9maazTeEad9DTvD9g/23245/232446224/Nexus4-G.png")
                 IndexW = 45
                 IndexH = 193
+            ElseIf args.model = "Motorola Droid RAZR M" Then
+                Image1 = FetchImage("http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png")
+                Shadow = FetchImage(r540960)
+                IndexW = 49
+                IndexH = 129
             End If
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
