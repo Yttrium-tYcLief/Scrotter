@@ -132,7 +132,7 @@ Public Class Scrotter
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Model 1", "Model 2"})
 				VariantBox.SelectedIndex = 0
-			Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad"
+			Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer"
 				GlossCheckbox.Enabled = False
 				GlossCheckbox.Checked = False
 				UnderShadowCheckbox.Enabled = False
@@ -237,9 +237,11 @@ Public Class Scrotter
 						Undershadow = FetchImage("http://102.imagebam.com/download/JnQpNQuQSEpDg50zBafe2Q/23245/232449473/Nexus10Port.png")
 						IndexW = 217
 						IndexH = 223
-						Using graphicsHandle As Graphics = Graphics.FromImage(Image2)
+						Dim imgtmp As New Bitmap(800, 1280)
+						Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
 							graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
 							graphicsHandle.DrawImage(Image2, 0, 0, 800, 1280)
+							Image2 = imgtmp
 						End Using
 					ElseIf args.var = "Landscape" Then
 						Image1 = FetchImage("http://106.imagebam.com/download/uLF_WIWlWDjLkGyn_FpiVw/23245/232444313/Nexus10Land.png")
@@ -248,9 +250,11 @@ Public Class Scrotter
 						Undershadow = FetchImage("http://101.imagebam.com/download/5DV_KRipd4et4lCWCxFB7A/23245/232449463/Nexus10Land.png")
 						IndexW = 227
 						IndexH = 217
-						Using graphicsHandle As Graphics = Graphics.FromImage(Image2)
+						Dim imgtmp As New Bitmap(1280, 800)
+						Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
 							graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
 							graphicsHandle.DrawImage(Image2, 0, 0, 1280, 800)
+							Image2 = imgtmp
 						End Using
 					End If
 				Case "Motorola Xoom"
@@ -428,19 +432,40 @@ Public Class Scrotter
 					Gloss = FetchImage("http://ompldr.org/vaDQzYg/HTCLegend.png")
 					IndexW = 67
 					IndexH = 131
-					Using graphicsHandle As Graphics = Graphics.FromImage(Image2)
+					Dim imgtmp As New Bitmap(212, 316)
+					Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
 						graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
 						graphicsHandle.DrawImage(Image2, 0, 0, 212, 316)
+						Image2 = imgtmp
 					End Using
-					Using graphicsHandle As Graphics = Graphics.FromImage(Shadow)
+					Dim shdtmp As New Bitmap(212, 316)
+					Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
 						graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-						graphicsHandle.DrawImage(Image2, 0, 0, 212, 316)
+						graphicsHandle.DrawImage(Shadow, 0, 0, 212, 316)
+						Shadow = shdtmp
 					End Using
 				Case "HP TouchPad"
 					Image1 = FetchImage("http://ompldr.org/vaDQ1eQ/HPTouchPad.png")
 					Shadow = FetchImage(r1024768)
 					IndexW = 188
 					IndexH = 170
+				Case "HP Veer"
+					Image1 = FetchImage("http://ompldr.org/vaDQ2NQ/HPVeer.png")
+					Shadow = FetchImage("http://ompldr.org/vaDQ2Ng/320x400.png")
+					IndexW = 54
+					IndexH = 77
+					Dim imgtmp As New Bitmap(219, 271)
+					Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
+						graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+						graphicsHandle.DrawImage(Image2, 0, 0, 219, 271)
+						Image2 = imgtmp
+					End Using
+					Dim shdtmp As New Bitmap(219, 271)
+					Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
+						graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+						graphicsHandle.DrawImage(Shadow, 0, 0, 219, 271)
+						Shadow = shdtmp
+					End Using
 			End Select
 			Dim Background As New Bitmap(Image1.Width, Image1.Height)
 			Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)

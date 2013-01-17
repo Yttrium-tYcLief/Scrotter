@@ -60,7 +60,7 @@ Partial Class Scrotter
 		'ModelBox
 		'
 		Me.ModelBox.FormattingEnabled = True
-		Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Google Nexus 10", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HP TouchPad", "HTC Desire HD, HTC Inspire 4G", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia X10"})
+		Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Google Nexus 10", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HP TouchPad", "HP Veer", "HTC Desire HD, HTC Inspire 4G", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia X10"})
 		Me.ModelBox.Location = New System.Drawing.Point(315, 45)
 		Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
 		Me.ModelBox.Name = "ModelBox"
