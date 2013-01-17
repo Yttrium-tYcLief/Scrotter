@@ -26,6 +26,7 @@ Development & Contribution
 ### Compiling
 
 - Feel free to compile locally. The standard Build > Build Solution option in Visual Basic Express (2012) is used for official builds.
+- Builds are NOT released for the master branch - builds will only be compiled and published for each version. The master branch is extremely experimental, and only those that know how to compile should test it.
 
 ### Contributing
 
