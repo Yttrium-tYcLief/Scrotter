@@ -1,10 +1,13 @@
 master
 - yttrium
   Added transparent PNG and GIF support.
-  Devices:	Motorola Droid RAZR M
-		Sony Ericsson Xperia X10
-		HTC Google Nexus One
-		HTC Hero
+  Switch to Select Case instead of If Elseif statements.
+  New Devices:
+	HTC Google Nexus One
+	HTC Hero
+	HTC Legend
+	Motorola Droid RAZR M
+	Sony Ericsson Xperia X10
 
 0.1
 - yttrium
