@@ -136,7 +136,7 @@ Public Class Scrotter
             GlossCheckbox.Checked = False
             UnderShadowCheckbox.Enabled = False
             UnderShadowCheckbox.Checked = False
-		ElseIf ModelBox.Text = "HTC One S" Or ModelBox.Text = "HTC One V" Or ModelBox.Text = "Samsung Galaxy Note II" Or ModelBox.Text = "Google Nexus 4" Or ModelBox.Text = "HTC Google Nexus One" Then
+		ElseIf ModelBox.Text = "HTC One S" Or ModelBox.Text = "HTC One V" Or ModelBox.Text = "Samsung Galaxy Note II" Or ModelBox.Text = "Google Nexus 4" Or ModelBox.Text = "HTC Google Nexus One" Or ModelBox.Text = "HTC Legend" Then
 			UnderShadowCheckbox.Enabled = False
 			UnderShadowCheckbox.Checked = False
         ElseIf ModelBox.Text = "Apple iPhone 3G, 3GS" Then
@@ -418,6 +418,20 @@ Public Class Scrotter
 				Undershadow = FetchImage("http://ompldr.org/vaDQzYw/HTCHero.png")
 				IndexW = 67
 				IndexH = 131
+			ElseIf args.model = "HTC Legend" Then
+				Image1 = FetchImage("http://ompldr.org/vaDQzZw/HTCLegend.png")
+				Shadow = FetchImage(r320480)
+				Gloss = FetchImage("http://ompldr.org/vaDQzYg/HTCLegend.png")
+				IndexW = 67
+				IndexH = 131
+				Using graphicsHandle As Graphics = Graphics.FromImage(Image2)
+					graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+					graphicsHandle.DrawImage(Image2, 0, 0, 212, 316)
+				End Using
+				Using graphicsHandle As Graphics = Graphics.FromImage(Shadow)
+					graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+					graphicsHandle.DrawImage(Image2, 0, 0, 212, 316)
+				End Using
 			End If
 			Dim Background As New Bitmap(Image1.Width, Image1.Height)
 			Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
