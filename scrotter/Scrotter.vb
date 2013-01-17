@@ -382,14 +382,9 @@ Public Class Scrotter
                 IndexH = 193
             End If
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
-            Dim x, y As Integer
-            For x = 0 To Background.Width - 1
-                For y = 0 To Background.Height - 1
-                    Background.SetPixel(x, y, Color.White)
-                Next
-            Next
-            Dim Image3 As New Bitmap(Image1.Width, Image1.Height)
+            Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
             Dim g As Graphics = Graphics.FromImage(Image3)
+            g.Clear(Color.Transparent)
             g.DrawImage(Background, New Point(0, 0))
             If UnderShadowCheckbox.Checked = True Then
                 g.DrawImage(Undershadow, New Point(0, 0))
