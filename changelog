@@ -4,8 +4,10 @@ master
   Switch to Select Case instead of If Elseif statements.
   Changed location of modification checkboxes.
   Fixed error handling on device selection.
+  Fixed image resizing.
   New Devices:
 	HP TouchPad
+	HP Veer
 	HTC Google Nexus One
 	HTC Hero
 	HTC Legend
