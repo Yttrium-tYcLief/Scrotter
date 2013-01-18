@@ -9,28 +9,29 @@
 		Me.Close()
 	End Sub
 
-    Private Sub CaptureBtn_Click(sender As Object, e As EventArgs) Handles CaptureBtn.Click
-        ' Dim tempPath As String = System.IO.Path.GetTempPath
-        ' Dim imgcap As New Process With {.StartInfo = _
-        ' New ProcessStartInfo With { _
-        ' .FileName = platformpath & "ADB.EXE ", _
-        ' .Arguments = "pull /dev/graphics/fb0", _
-        ' .WindowStyle = ProcessWindowStyle.Normal}}
-        ' imgcap.Start()
-        ' Dim imgconv As New Process With {.StartInfo = _
-        ' New ProcessStartInfo With { _
-        ' .FileName = platformpath & "ADB.EXE ", _
-        ' .Arguments = "ffmpeg -vframes 1 -f rawvideo -pix_fmt rgb32 -s " & 720 & "x" & 1280 & "-i fb0 " & tempPath & "capture.png", _
-        ' .WindowStyle = ProcessWindowStyle.Normal}}
-        ' imgconv.Start()
-        ' capimage = (tempPath & "capture.png")
-        Me.Close()
-    End Sub
+	Public Sub CaptureBtn_Click(sender As Object, e As EventArgs) Handles CaptureBtn.Click
+		Dim tempPath As String = System.IO.Path.GetTempPath
+		Dim imgcap As New Process With {.StartInfo = _
+		New ProcessStartInfo With { _
+		.FileName = platformpath & "ADB.EXE ", _
+		.Arguments = "pull /dev/graphics/fb0", _
+		.WindowStyle = ProcessWindowStyle.Normal}}
+		imgcap.Start()
+		Dim imgconv As New Process With {.StartInfo = _
+		New ProcessStartInfo With { _
+		.FileName = platformpath & "ADB.EXE ", _
+		.Arguments = "ffmpeg -vframes 1 -f rawvideo -pix_fmt rgb32 -s " & 720 & "x" & 1280 & "-i fb0 " & tempPath & "capture.png", _
+		.WindowStyle = ProcessWindowStyle.Normal}}
+		imgconv.Start()
+		capimage = (tempPath & "capture.png")
+		Scrotter.ADBCapture()
+		Me.Close()
+	End Sub
 
     Private Sub PathFolderBtn_Click(sender As Object, e As EventArgs) Handles PathFolderBtn.Click
         Dim platformpathdialog As New System.Windows.Forms.FolderBrowserDialog
         platformpathdialog.Description = "Select the Folder"
-        platformpathdialog.RootFolder = Environment.SpecialFolder.ProgramFiles
+		platformpathdialog.RootFolder = Environment.SpecialFolder.MyComputer
         Dim dlgResult As DialogResult = platformpathdialog.ShowDialog()
         If dlgResult = Windows.Forms.DialogResult.OK Then
             platformpath = platformpathdialog.SelectedPath
@@ -41,7 +42,7 @@
 
     Private Sub adb_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.LinkLabel1.Links.RemoveAt(0)
-        Me.LinkLabel1.Links.Add(0, 11, "http://developer.android.com/sdk/index.html")
+		Me.LinkLabel1.Links.Add(0, 11, "https://dl.google.com/android/installer_r21.0.1-windows.exe")
     End Sub
 
     Private Sub linkLabel1_LinkClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked

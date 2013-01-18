@@ -22,13 +22,14 @@ Imports System.Threading
 
 Public Class Scrotter
 
-    Public OpenPath, SavePath As String
+	Public Shared OpenPath, SavePath As String
     Public OpenStream As Stream = Nothing
     Public SaveStream As Stream = Nothing
     Public PhoneStream As Stream = Nothing
     Public SaveImg As Image = Nothing
     Public capimage As String = adb.capimage
-    Dim WithEvents adb As adb
+	Dim WithEvents adb As adb
+	Public popup As New adb
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -505,13 +506,13 @@ Public Class Scrotter
         LoadImage.Image = Nothing
     End Sub
 
-    Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
-        Dim popup As New adb
-        popup.Show()
-    End Sub
+	Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
+		popup.ShowDialog()
+	End Sub
 
-    Private Sub adbformclosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles adb.FormClosed
-        Label1.Text = "lol"
-    End Sub
+	Public Shared Sub ADBCapture()
+		OpenPath = adb.capimage
+		Scrotter.RefreshLists()
+	End Sub
 
 End Class
