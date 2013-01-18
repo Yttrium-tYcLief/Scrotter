@@ -44,7 +44,7 @@ Public Class Scrotter
                 OpenStream = openFileDialog1.OpenFile()
                 If (OpenStream IsNot Nothing) Then
                     OpenPath = openFileDialog1.FileName
-                    ScreenshotBox.Text = openFileDialog1.FileName
+                    ScreenshotBox.Text = OpenPath
                     RefreshLists()
                 End If
             Catch Ex As Exception
@@ -501,5 +501,9 @@ Public Class Scrotter
     Private Sub BackgroundDownloader_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundDownloader.RunWorkerCompleted
         Preview.Image = SaveImg
         LoadImage.Image = Nothing
+    End Sub
+
+    Private Sub CaptureBtn_Click(sender As Object, e As EventArgs) Handles CaptureBtn.Click
+        adb.ShowDialog()
     End Sub
 End Class
