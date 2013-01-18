@@ -34,27 +34,28 @@ Partial Class Scrotter
         Me.BackgroundDownloader = New System.ComponentModel.BackgroundWorker()
         Me.LoadImage = New System.Windows.Forms.PictureBox()
         Me.CaptureBtn = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoadImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LoadBtn
         '
-        Me.LoadBtn.Location = New System.Drawing.Point(464, 14)
-        Me.LoadBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.LoadBtn.Location = New System.Drawing.Point(619, 17)
+        Me.LoadBtn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.LoadBtn.Name = "LoadBtn"
-        Me.LoadBtn.Size = New System.Drawing.Size(75, 24)
+        Me.LoadBtn.Size = New System.Drawing.Size(100, 30)
         Me.LoadBtn.TabIndex = 0
         Me.LoadBtn.Text = "Browse..."
         Me.LoadBtn.UseVisualStyleBackColor = True
         '
         'ScreenshotBox
         '
-        Me.ScreenshotBox.Location = New System.Drawing.Point(315, 14)
-        Me.ScreenshotBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ScreenshotBox.Location = New System.Drawing.Point(420, 17)
+        Me.ScreenshotBox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ScreenshotBox.Name = "ScreenshotBox"
         Me.ScreenshotBox.ReadOnly = True
-        Me.ScreenshotBox.Size = New System.Drawing.Size(143, 20)
+        Me.ScreenshotBox.Size = New System.Drawing.Size(189, 22)
         Me.ScreenshotBox.TabIndex = 1
         Me.ScreenshotBox.Text = "Screenshot"
         '
@@ -62,19 +63,19 @@ Partial Class Scrotter
         '
         Me.ModelBox.FormattingEnabled = True
         Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Google Nexus 10", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HP TouchPad", "HP Veer", "HTC Desire HD, HTC Inspire 4G", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia X10"})
-        Me.ModelBox.Location = New System.Drawing.Point(315, 93)
-        Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ModelBox.Location = New System.Drawing.Point(420, 114)
+        Me.ModelBox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ModelBox.Name = "ModelBox"
-        Me.ModelBox.Size = New System.Drawing.Size(224, 21)
+        Me.ModelBox.Size = New System.Drawing.Size(297, 24)
         Me.ModelBox.TabIndex = 2
         Me.ModelBox.Text = "Device Model"
         '
         'SaveBtn
         '
-        Me.SaveBtn.Location = New System.Drawing.Point(464, 545)
-        Me.SaveBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.SaveBtn.Location = New System.Drawing.Point(619, 671)
+        Me.SaveBtn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.SaveBtn.Name = "SaveBtn"
-        Me.SaveBtn.Size = New System.Drawing.Size(75, 27)
+        Me.SaveBtn.Size = New System.Drawing.Size(100, 33)
         Me.SaveBtn.TabIndex = 5
         Me.SaveBtn.Text = "Save As..."
         Me.SaveBtn.UseVisualStyleBackColor = True
@@ -82,10 +83,10 @@ Partial Class Scrotter
         'Preview
         '
         Me.Preview.InitialImage = Nothing
-        Me.Preview.Location = New System.Drawing.Point(9, 14)
-        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Preview.Location = New System.Drawing.Point(12, 17)
+        Me.Preview.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Preview.Name = "Preview"
-        Me.Preview.Size = New System.Drawing.Size(300, 558)
+        Me.Preview.Size = New System.Drawing.Size(400, 687)
         Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Preview.TabIndex = 6
         Me.Preview.TabStop = False
@@ -94,10 +95,10 @@ Partial Class Scrotter
         '
         Me.VariantBox.Enabled = False
         Me.VariantBox.FormattingEnabled = True
-        Me.VariantBox.Location = New System.Drawing.Point(315, 122)
-        Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.VariantBox.Location = New System.Drawing.Point(420, 150)
+        Me.VariantBox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.VariantBox.Name = "VariantBox"
-        Me.VariantBox.Size = New System.Drawing.Size(224, 21)
+        Me.VariantBox.Size = New System.Drawing.Size(297, 24)
         Me.VariantBox.TabIndex = 7
         Me.VariantBox.Text = "Variant"
         '
@@ -105,10 +106,10 @@ Partial Class Scrotter
         '
         Me.ShadowCheckbox.AutoSize = True
         Me.ShadowCheckbox.Enabled = False
-        Me.ShadowCheckbox.Location = New System.Drawing.Point(315, 526)
-        Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ShadowCheckbox.Location = New System.Drawing.Point(420, 647)
+        Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ShadowCheckbox.Name = "ShadowCheckbox"
-        Me.ShadowCheckbox.Size = New System.Drawing.Size(93, 17)
+        Me.ShadowCheckbox.Size = New System.Drawing.Size(117, 21)
         Me.ShadowCheckbox.TabIndex = 8
         Me.ShadowCheckbox.Text = "Edge Shadow"
         Me.ShadowCheckbox.UseVisualStyleBackColor = True
@@ -117,10 +118,10 @@ Partial Class Scrotter
         '
         Me.GlossCheckbox.AutoSize = True
         Me.GlossCheckbox.Enabled = False
-        Me.GlossCheckbox.Location = New System.Drawing.Point(315, 501)
-        Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GlossCheckbox.Location = New System.Drawing.Point(420, 617)
+        Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GlossCheckbox.Name = "GlossCheckbox"
-        Me.GlossCheckbox.Size = New System.Drawing.Size(52, 17)
+        Me.GlossCheckbox.Size = New System.Drawing.Size(66, 21)
         Me.GlossCheckbox.TabIndex = 9
         Me.GlossCheckbox.Text = "Gloss"
         Me.GlossCheckbox.UseVisualStyleBackColor = True
@@ -129,10 +130,10 @@ Partial Class Scrotter
         '
         Me.UnderShadowCheckbox.AutoSize = True
         Me.UnderShadowCheckbox.Enabled = False
-        Me.UnderShadowCheckbox.Location = New System.Drawing.Point(315, 551)
-        Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.UnderShadowCheckbox.Location = New System.Drawing.Point(420, 678)
+        Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
-        Me.UnderShadowCheckbox.Size = New System.Drawing.Size(97, 17)
+        Me.UnderShadowCheckbox.Size = New System.Drawing.Size(123, 21)
         Me.UnderShadowCheckbox.TabIndex = 10
         Me.UnderShadowCheckbox.Text = "Under Shadow"
         Me.UnderShadowCheckbox.UseVisualStyleBackColor = True
@@ -143,27 +144,38 @@ Partial Class Scrotter
         'LoadImage
         '
         Me.LoadImage.InitialImage = Nothing
-        Me.LoadImage.Location = New System.Drawing.Point(394, 249)
-        Me.LoadImage.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.LoadImage.Location = New System.Drawing.Point(525, 306)
+        Me.LoadImage.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.LoadImage.Name = "LoadImage"
-        Me.LoadImage.Size = New System.Drawing.Size(64, 76)
+        Me.LoadImage.Size = New System.Drawing.Size(85, 94)
         Me.LoadImage.TabIndex = 11
         Me.LoadImage.TabStop = False
         '
         'CaptureBtn
         '
-        Me.CaptureBtn.Location = New System.Drawing.Point(315, 41)
+        Me.CaptureBtn.Location = New System.Drawing.Point(420, 50)
+        Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(4)
         Me.CaptureBtn.Name = "CaptureBtn"
-        Me.CaptureBtn.Size = New System.Drawing.Size(224, 23)
+        Me.CaptureBtn.Size = New System.Drawing.Size(299, 28)
         Me.CaptureBtn.TabIndex = 12
         Me.CaptureBtn.Text = "Capture from Android Device"
         Me.CaptureBtn.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(434, 201)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(51, 17)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "Label1"
+        '
         'Scrotter
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(551, 586)
+        Me.ClientSize = New System.Drawing.Size(735, 721)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CaptureBtn)
         Me.Controls.Add(Me.LoadImage)
         Me.Controls.Add(Me.UnderShadowCheckbox)
@@ -175,7 +187,7 @@ Partial Class Scrotter
         Me.Controls.Add(Me.ModelBox)
         Me.Controls.Add(Me.ScreenshotBox)
         Me.Controls.Add(Me.LoadBtn)
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "Scrotter"
         Me.Text = "Scrotter"
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).EndInit()
@@ -196,5 +208,6 @@ Partial Class Scrotter
     Friend WithEvents BackgroundDownloader As System.ComponentModel.BackgroundWorker
     Friend WithEvents LoadImage As System.Windows.Forms.PictureBox
     Friend WithEvents CaptureBtn As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 
 End Class

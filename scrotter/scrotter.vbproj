@@ -101,6 +101,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adb.Designer.vb">
+      <DependentUpon>adb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="adb.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Scrotter.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="adb.resx">
+      <DependentUpon>adb.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Scrotter.resx">
       <DependentUpon>Scrotter.vb</DependentUpon>
     </EmbeddedResource>
