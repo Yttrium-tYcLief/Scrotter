@@ -28,8 +28,6 @@ Public Class Scrotter
     Public PhoneStream As Stream = Nothing
     Public SaveImg As Image = Nothing
     Public capimage As String = adb.capimage
-	Dim WithEvents adb As adb
-	Public popup As New adb
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -507,7 +505,7 @@ Public Class Scrotter
     End Sub
 
 	Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
-		popup.ShowDialog()
+        adb.ShowDialog()
 	End Sub
 
 	Public Shared Sub ADBCapture()

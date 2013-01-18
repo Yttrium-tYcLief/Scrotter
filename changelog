@@ -1,4 +1,7 @@
 master
+- yttrium
+  Added ADB support for pulling Android screenshots from attached devices.
+  Various UX and performance fixes.
 
 0.2
 - yttrium

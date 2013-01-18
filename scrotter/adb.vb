@@ -42,7 +42,7 @@
 
     Private Sub adb_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.LinkLabel1.Links.RemoveAt(0)
-		Me.LinkLabel1.Links.Add(0, 11, "https://dl.google.com/android/installer_r21.0.1-windows.exe")
+        Me.LinkLabel1.Links.Add(0, 17, "https://dl.google.com/android/installer_r21.0.1-windows.exe")
     End Sub
 
     Private Sub linkLabel1_LinkClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
