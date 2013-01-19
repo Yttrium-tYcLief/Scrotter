@@ -27,7 +27,6 @@ Public Class Scrotter
     Public SaveStream As Stream = Nothing
     Public PhoneStream As Stream = Nothing
     Public SaveImg As Image = Nothing
-    Public capimage As String = adb.capimage
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -527,7 +526,7 @@ Public Class Scrotter
     End Sub
 
     Public Shared Sub ADBCapture()
-        OpenPath = adb.capimage
+        OpenPath = (Environment.GetEnvironmentVariable("Temp") & "\capture.png")
         Scrotter.RefreshLists()
     End Sub
 

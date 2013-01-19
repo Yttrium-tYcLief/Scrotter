@@ -1,7 +1,6 @@
 ﻿Public Class adb
 
     Private platformpath As String
-    Public Shared capimage As String
 
 	Private Sub CancelBtn_Click(sender As Object, e As EventArgs) Handles CancelBtn.Click
 		platformpath = Nothing
@@ -9,24 +8,25 @@
 		Me.Close()
 	End Sub
 
-	Public Sub CaptureBtn_Click(sender As Object, e As EventArgs) Handles CaptureBtn.Click
-		Dim tempPath As String = System.IO.Path.GetTempPath
-		Dim imgcap As New Process With {.StartInfo = _
-		New ProcessStartInfo With { _
-		.FileName = platformpath & "ADB.EXE ", _
-		.Arguments = "pull /dev/graphics/fb0", _
-		.WindowStyle = ProcessWindowStyle.Normal}}
-		imgcap.Start()
-		Dim imgconv As New Process With {.StartInfo = _
-		New ProcessStartInfo With { _
-		.FileName = platformpath & "ADB.EXE ", _
-		.Arguments = "ffmpeg -vframes 1 -f rawvideo -pix_fmt rgb32 -s " & 720 & "x" & 1280 & "-i fb0 " & tempPath & "capture.png", _
-		.WindowStyle = ProcessWindowStyle.Normal}}
-		imgconv.Start()
-		capimage = (tempPath & "capture.png")
-		Scrotter.ADBCapture()
-		Me.Close()
-	End Sub
+    Public Sub CaptureBtn_Click(sender As Object, e As EventArgs) Handles CaptureBtn.Click
+        Dim tempPath As String = Environment.GetEnvironmentVariable("Temp")
+        Dim imgcap As New Process With {.StartInfo = _
+        New ProcessStartInfo With { _
+        .FileName = platformpath & "\adb.exe", _
+        .Arguments = "shell /system/bin/screencap -p /sdcard/screenshot.png", _
+        .WindowStyle = ProcessWindowStyle.Normal}}
+        imgcap.Start()
+        imgcap.WaitForExit()
+        Dim imgconv As New Process With {.StartInfo = _
+        New ProcessStartInfo With { _
+        .FileName = platformpath & "\adb.exe", _
+        .Arguments = "pull /sdcard/screenshot.png " & tempPath & "\capture.png", _
+        .WindowStyle = ProcessWindowStyle.Normal}}
+        imgconv.Start()
+        imgconv.WaitForExit()
+        Scrotter.ADBCapture()
+        Me.Close()
+    End Sub
 
     Private Sub PathFolderBtn_Click(sender As Object, e As EventArgs) Handles PathFolderBtn.Click
         Dim platformpathdialog As New System.Windows.Forms.FolderBrowserDialog
