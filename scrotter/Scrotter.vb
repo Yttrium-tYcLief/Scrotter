@@ -60,7 +60,7 @@ Public Class Scrotter
     Private Sub Save(sender As Object, e As EventArgs) Handles SaveBtn.Click
         Dim saveFileDialog1 As New SaveFileDialog()
 
-        saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG" '|GIF Files(*.GIF)|*.GIF"
+        saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|GIF Files(*.GIF)|*.GIF"
         saveFileDialog1.FilterIndex = 3
         saveFileDialog1.RestoreDirectory = True
 
@@ -73,13 +73,7 @@ Public Class Scrotter
                 Dim Filetype As Integer = saveFileDialog1.FilterIndex
                 Dim bm As Bitmap = SaveImg
                 If Filetype = 1 Then
-                    Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                    Dim g As Graphics = Graphics.FromImage(Image3)
-                    g.Clear(Color.White)
-                    g.DrawImage(bm, New Point(0, 0))
-                    g.Dispose()
-                    g = Nothing
-                    Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Bmp)
+                    bm.Save(SavePath, System.Drawing.Imaging.ImageFormat.Bmp)
                 ElseIf Filetype = 2 Then
                     bm.Save(SavePath, System.Drawing.Imaging.ImageFormat.Png)
                 ElseIf Filetype = 3 Then
@@ -88,21 +82,9 @@ Public Class Scrotter
                     Dim myEncoderParameters As New EncoderParameters(1)
                     Dim myEncoderParameter As New EncoderParameter(myEncoder, 98&)
                     myEncoderParameters.Param(0) = myEncoderParameter
-                    Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                    Dim g As Graphics = Graphics.FromImage(Image3)
-                    g.Clear(Color.White)
-                    g.DrawImage(bm, New Point(0, 0))
-                    g.Dispose()
-                    g = Nothing
-                    Image3.Save(SavePath, jgpEncoder, myEncoderParameters)
-                    'ElseIf Filetype = 2 Then
-                    'Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                    'Dim g As Graphics = Graphics.FromImage(Image3)
-                    'g.Clear(Color.White)
-                    'g.DrawImage(bm, New Point(0, 0))
-                    'g.Dispose()
-                    'g = Nothing
-                    'Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
+                    bm.Save(SavePath, jgpEncoder, myEncoderParameters)
+                ElseIf Filetype = 2 Then
+                    bm.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
                 End If
             End If
         End If
