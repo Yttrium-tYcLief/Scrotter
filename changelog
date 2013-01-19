@@ -2,6 +2,8 @@ master
 - yttrium
   Added ADB support for pulling Android screenshots from attached devices.
   Various UX and performance fixes.
+  Remove GIF save support (was broken anyway).
+  Fix JPG black background when saving.
 
 0.2
 - yttrium
