@@ -22,6 +22,7 @@ Partial Class Scrotter
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Scrotter))
         Me.LoadBtn = New System.Windows.Forms.Button()
         Me.ScreenshotBox = New System.Windows.Forms.TextBox()
         Me.ModelBox = New System.Windows.Forms.ComboBox()
@@ -176,6 +177,7 @@ Partial Class Scrotter
         Me.Controls.Add(Me.ModelBox)
         Me.Controls.Add(Me.ScreenshotBox)
         Me.Controls.Add(Me.LoadBtn)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.Name = "Scrotter"
         Me.Text = "Scrotter"
