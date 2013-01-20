@@ -19,6 +19,8 @@ The name "Scrotter" is a compilation: **SCR**eensh<b>OT</b/> Fram<b>ER</b>.
 
 Scrotter supports .BMP, .JPG, .PNG, and .GIF.
 
+You can read the changelog [here](https://raw.github.com/Yttrium-tYcLief/Scrotter/master/changelog).
+
 Development & Contribution
 --------------------------
 
