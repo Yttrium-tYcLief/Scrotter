@@ -224,11 +224,11 @@ Public Class Scrotter
                     IndexH = 169
                 Case "HTC One X, HTC One X+"
                     If args.var = "Black" Then
-                        Image1 = FetchImage("http://103.imagebam.com/download/7wym9LK8dMWQolqbkRCgfg/23245/232444337/OneXBlack.png")
+                        Image1 = FetchImage("http://ompldr.org/vaDU3cQ/OneXBlack.png")
                         Gloss = FetchImage("http://101.imagebam.com/download/--FEg5N-X5Y6nV-4phRoTg/23245/232446246/OneXBlack.png")
                         IndexW = 113
                     ElseIf args.var = "White" Then
-                        Image1 = FetchImage("http://102.imagebam.com/download/nojbSYYHy-JwWVghbdoSMA/23245/232444340/OneXWhite.png")
+                        Image1 = FetchImage("http://ompldr.org/vaDU3cg/OneXWhite.png")
                         Gloss = FetchImage("http://102.imagebam.com/download/wKBWy425OEAiViV-1_L2JQ/23245/232446251/OneXWhite.png")
                         IndexW = 115
                     End If
