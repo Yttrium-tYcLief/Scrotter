@@ -1,5 +1,10 @@
+<p align="center">
+  <img src="http://ompldr.org/vaDU5Zw/westablenow2.png"/>
+</p>
+
 About Scrotter
 --------------
+<img src="http://ompldr.org/vaDU5NQ/scrotter.png"/>
 
 **Scrotter** is an application written in Visual Basic .NET that allows the user to place a screenshot from their Android, iOS, Windows Phone, or WebOS device into a frame of any supported mobile devices, and then export their creation as an image.
 
