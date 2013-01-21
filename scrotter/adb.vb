@@ -41,10 +41,18 @@
     Private Sub adb_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.LinkLabel1.Links.RemoveAt(0)
         Me.LinkLabel1.Links.Add(0, 17, "https://dl.google.com/android/installer_r21.0.1-windows.exe")
+        Me.LinkLabel2.Links.RemoveAt(0)
+        Me.LinkLabel2.Links.Add(3, 35, "http://developer.android.com/tools/extras/oem-usb.html")
     End Sub
 
     Private Sub linkLabel1_LinkClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Me.LinkLabel1.Links(LinkLabel1.Links.IndexOf(e.Link)).Visited = True
+        Dim target As String = CType(e.Link.LinkData, String)
+        System.Diagnostics.Process.Start(target)
+    End Sub
+
+    Private Sub linkLabel2_LinkClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        Me.LinkLabel2.Links(LinkLabel2.Links.IndexOf(e.Link)).Visited = True
         Dim target As String = CType(e.Link.LinkData, String)
         System.Diagnostics.Process.Start(target)
     End Sub
