@@ -1,3 +1,10 @@
+master
+- yttrium
+  Consistency fixes for ACU.
+  New Devices:
+	HTC Droid DNA
+	HTC Vivid
+
 0.3
 - yttrium
   Added ADB support for pulling Android screenshots from attached Android 4+ devices.

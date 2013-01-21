@@ -3,8 +3,6 @@
     Private platformpath As String
 
 	Private Sub CancelBtn_Click(sender As Object, e As EventArgs) Handles CancelBtn.Click
-		platformpath = Nothing
-		CaptureBtn.Enabled = False
 		Me.Close()
 	End Sub
 
