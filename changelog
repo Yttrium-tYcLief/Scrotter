@@ -2,6 +2,7 @@ master
 - yttrium
   Consistency fixes for ACU.
   Driver note added to ACU.
+  Improved error handling for the ACU.
   New Devices:
 	HTC Droid DNA
 	HTC Vivid

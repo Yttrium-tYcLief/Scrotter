@@ -13,14 +13,24 @@
         .FileName = platformpath & "\adb.exe", _
         .Arguments = "shell /system/bin/screencap -p /sdcard/screenshot.png", _
         .WindowStyle = ProcessWindowStyle.Normal}}
-        imgcap.Start()
+		Try
+			imgcap.Start()
+		Catch ex As Exception
+			MsgBox("Unable to find ADB. Did you select the platform-tools folder?")
+			Exit Sub
+		End Try
         imgcap.WaitForExit()
         Dim imgconv As New Process With {.StartInfo = _
         New ProcessStartInfo With { _
         .FileName = platformpath & "\adb.exe", _
         .Arguments = "pull /sdcard/screenshot.png " & tempPath & "\capture.png", _
         .WindowStyle = ProcessWindowStyle.Normal}}
-        imgconv.Start()
+		Try
+			imgconv.Start()
+		Catch ex As Exception
+			MsgBox("Unable to retrieve screenshot. Are the drivers for your device installed, and is your device properly connected?")
+			Exit Sub
+		End Try
         imgconv.WaitForExit()
         Scrotter.ADBCapture()
         Me.Close()
@@ -30,6 +40,7 @@
         Dim platformpathdialog As New System.Windows.Forms.FolderBrowserDialog
         platformpathdialog.Description = "Select the Folder"
 		platformpathdialog.RootFolder = Environment.SpecialFolder.MyComputer
+		platformpathdialog.SelectedPath = "C:\Users\" & SystemInformation.UserName & "AppData\Local\Android\android-sdk\platform-tools"
         Dim dlgResult As DialogResult = platformpathdialog.ShowDialog()
         If dlgResult = Windows.Forms.DialogResult.OK Then
             platformpath = platformpathdialog.SelectedPath
