@@ -150,7 +150,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -185,6 +185,10 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
+            Case "Nokia Lumia 920"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Red", "Cyan", "Yellow", "Black", "White", "Grey"})
+                VariantBox.SelectedIndex = 0
         End Select
 
         RefreshPreview()
@@ -554,6 +558,31 @@ Public Class Scrotter
                     Shadow = FetchImage(r320480)
                     IndexW = 87
                     IndexH = 179
+                Case "Nokia Lumia 920"
+                    Select Case args.var
+                        Case "Red"
+                            Image1 = FetchImage("http://ompldr.org/vaDY5OQ/Lumia920Red.png")
+                        Case "Cyan"
+                            Image1 = FetchImage("http://ompldr.org/vaDY5Nw/Lumia920Cyan.png")
+                        Case "Yellow"
+                            Image1 = FetchImage("http://ompldr.org/vaDY5Yg/Lumia920Yellow.png")
+                        Case "Black"
+                            Image1 = FetchImage("http://ompldr.org/vaDY5Ng/Lumia920Black.png")
+                        Case "White"
+                            Image1 = FetchImage("http://ompldr.org/vaDY5YQ/Lumia920White.png")
+                        Case "Grey"
+                            Image1 = FetchImage("http://ompldr.org/vaDY5OA/Lumia920Grey.png")
+                    End Select
+                    Gloss = FetchImage("http://ompldr.org/vaDY5NA/Lumia920.png")
+                    Undershadow = FetchImage("http://ompldr.org/vaDY5NQ/Lumia920.png")
+                    Shadow = FetchImage(r7681280)
+                    IndexW = 160
+                    IndexH = 170
+                Case "Sony Ericsson Xperia J"
+                    Image1 = FetchImage("http://ompldr.org/vaDY5aQ/XperiaJ.png")
+                    Shadow = FetchImage(r480854)
+                    IndexW = 75
+                    IndexH = 172
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
