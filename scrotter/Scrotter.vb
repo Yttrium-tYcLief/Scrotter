@@ -150,7 +150,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -372,12 +372,12 @@ Public Class Scrotter
                         Image1 = FetchImage("http://103.imagebam.com/download/Jqa13Vt7YJC7U6h05fmumg/23245/232444294/iPhone5Black.png")
                         Gloss = FetchImage("http://107.imagebam.com/download/-UigK0b5kRfPa4CP74WVTQ/23245/232446218/iPhone5Black-G.png")
                         Undershadow = FetchImage("http://106.imagebam.com/download/cNWALzDFezrQ1B1iGf4GGg/23245/232449448/iPhone5Black-DS.png")
-                        Overlay = FetchImage("http://102.imagebam.com/download/6xv-MuIJokyXH6zsyGZWjg/23245/232445222/iPhone5Black.png")
+                        Overlay = FetchImage("http://ompldr.org/vaDZhNQ/iPhone5Black.png")
                     ElseIf args.var = "White" Then
                         Image1 = FetchImage("http://101.imagebam.com/download/ISQSv4cFMh7LrkX8c7EW7A/23245/232444295/iPhone5White.png")
                         Gloss = FetchImage("http://102.imagebam.com/download/6uEehtOHOtHqI8BsnbhU0g/23245/232446221/iPhone5White-G.png")
                         Undershadow = FetchImage("http://108.imagebam.com/download/vDD3AxG4EWHdYi7Hhxz9Cg/23245/232449452/iPhone5White-DS.png")
-                        Overlay = FetchImage("http://107.imagebam.com/download/UHXGQ2mbqaLcl28FOnRpTw/23245/232445225/iPhone5White.png")
+                        Overlay = FetchImage("http://ompldr.org/vaDZhNg/iPhone5White.png")
                     End If
                     Shadow = FetchImage(r6401136)
                     IndexW = 133
@@ -609,6 +609,11 @@ Public Class Scrotter
                         IndexW = 135
                     End If
                     IndexH = 135
+                Case "Samsung Galaxy SII Skyrocket"
+                    Image1 = FetchImage("http://ompldr.org/vaDZhYw/GSII%20Skyrocket.png")
+                    Shadow = FetchImage(r480800)
+                    IndexW = 86
+                    IndexH = 148
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
