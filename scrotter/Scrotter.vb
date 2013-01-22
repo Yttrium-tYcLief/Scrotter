@@ -630,7 +630,7 @@ Public Class Scrotter
                     IndexW = 86
                     IndexH = 148
                 Case "HTC Evo 4G LTE"
-                    Image1 = FetchImage(placeherepls)
+                    Image1 = FetchImage("http://ompldr.org/vaDZoYw/EVO4GLTE.png")
                     Shadow = FetchImage(r7201280)
                     IndexW = 88
                     IndexH = 199
