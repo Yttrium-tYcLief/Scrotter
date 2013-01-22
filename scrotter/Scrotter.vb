@@ -150,12 +150,12 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA"
+            Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA", "Nokia N9"
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
             Case "Apple iPhone 3G, 3GS"
@@ -582,6 +582,21 @@ Public Class Scrotter
                     Image1 = FetchImage("http://ompldr.org/vaDY5aQ/XperiaJ.png")
                     Shadow = FetchImage(r480854)
                     IndexW = 75
+                    IndexH = 172
+                Case "Nokia N9"
+                    Select Case GlossCheckbox.Checked
+                        Case True
+                            Image1 = FetchImage("http://ompldr.org/vaDY5cw/N9Gloss.png")
+                        Case False
+                            Image1 = FetchImage("http://ompldr.org/vaDY5cQ/N9.png")
+                    End Select
+                    Shadow = FetchImage(r480854)
+                    IndexW = 83
+                    IndexH = 172
+                Case "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II"
+                    Image1 = FetchImage("http://ompldr.org/vaDY5eA/Nitro.png")
+                    Shadow = FetchImage(r7201280)
+                    IndexW = 83
                     IndexH = 172
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
