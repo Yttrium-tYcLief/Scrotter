@@ -150,12 +150,12 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Droid DNA", "HTC Vivid"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend"
+            Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA"
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
             Case "Apple iPhone 3G, 3GS"
@@ -491,6 +491,7 @@ Public Class Scrotter
                 Case "HTC Droid DNA"
                     Image1 = FetchImage("http://ompldr.org/vaDVxcQ/DroidDNA.png")
                     Shadow = FetchImage(r10801920)
+                    Gloss = FetchImage("http://ompldr.org/vaDY3cw/DroidDNA.png)"
                     IndexW = 106
                     IndexH = 300
                 Case "HTC Vivid"
@@ -498,6 +499,11 @@ Public Class Scrotter
                     Shadow = FetchImage(r540960)
                     IndexW = 66
                     IndexH = 125
+                Case "HTC Evo 3D"
+                    Image1 = FetchImage("http://ompldr.org/vaDY3dA/Evo3D.png")
+                    Shadow = FetchImage(r540960)
+                    IndexW = 78
+                    IndexH = 153
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
