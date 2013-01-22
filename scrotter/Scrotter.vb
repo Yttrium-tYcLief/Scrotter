@@ -130,7 +130,7 @@ Public Class Scrotter
         Select Case ModelBox.Text
             Case "Samsung Galaxy SIII"
                 VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"White", "Blue"})
+                VariantBox.Items.AddRange({"White", "Blue", "Red", "Brown", "Black"})
                 VariantBox.SelectedIndex = 0
             Case "Google Nexus 7", "Google Nexus 10", "Motorola Xoom"
                 VariantBox.Enabled = True
@@ -150,7 +150,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -268,6 +268,21 @@ Public Class Scrotter
                         Image1 = FetchImage("http://104.imagebam.com/download/BKXFsSBq3X47fU9nlBVAGA/23245/232444265/GSIIIWhite.png")
                         Gloss = FetchImage("http://101.imagebam.com/download/g_k_BEsUGrFjPRF_VSoTug/23245/232446208/GSIIIWhite.png")
                         IndexW = 84
+                    ElseIf args.var = "Black" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDZnMg/GSIIIBlack.png")
+                        IndexW = 88
+                        GlossCheckbox.Enabled = False
+                        GlossCheckbox.Checked = False
+                    ElseIf args.var = "Red" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDZnMA/GSIIIRed.png")
+                        IndexW = 88
+                        GlossCheckbox.Enabled = False
+                        GlossCheckbox.Checked = False
+                    ElseIf args.var = "Brown" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDZnMQ/GSIIIBrown.png")
+                        IndexW = 88
+                        GlossCheckbox.Enabled = False
+                        GlossCheckbox.Checked = False
                     End If
                     Undershadow = FetchImage("http://104.imagebam.com/download/M8YSsamRuFX-UdmMMGVaRQ/23245/232449429/GSIII.png")
                     Shadow = FetchImage(r7201280)
@@ -614,6 +629,11 @@ Public Class Scrotter
                     Shadow = FetchImage(r480800)
                     IndexW = 86
                     IndexH = 148
+                Case "HTC Evo 4G LTE"
+                    Image1 = FetchImage(placeherepls)
+                    Shadow = FetchImage(r7201280)
+                    IndexW = 88
+                    IndexH = 199
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
