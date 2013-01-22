@@ -150,7 +150,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -525,6 +525,16 @@ Public Class Scrotter
                         IndexW = 189
                         IndexH = 79
                     End If
+                Case "HTC Desire"
+                    Image1 = FetchImage("http://ompldr.org/vaDY4Yw/Desire.png")
+                    Shadow = FetchImage(r480800)
+                    IndexW = 136
+                    IndexH = 180
+                Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"
+                    Image1 = FetchImage("http://ompldr.org/vaDY4ZQ/DroidCharge.png")
+                    Shadow = FetchImage(r480800)
+                    IndexW = 60
+                    IndexH = 115
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
