@@ -169,7 +169,7 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "HTC Desire Z, T-Mobile G2"
+            Case "HTC Desire Z, T-Mobile G2", "Samsung Galaxy Tab 10.1"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Portrait", "Landscape"})
                 VariantBox.SelectedIndex = 1
@@ -598,6 +598,17 @@ Public Class Scrotter
                     Shadow = FetchImage(r7201280)
                     IndexW = 83
                     IndexH = 172
+                Case "Samsung Galaxy Tab 10.1"
+                    If args.var = "Portrait" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png")
+                        Shadow = FetchImage(r8001280)
+                        IndexW = 129
+                    ElseIf args.var = "Landscape" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDZhMg/GalaxyTab10.1Land.png")
+                        Shadow = FetchImage(r1280800)
+                        IndexW = 135
+                    End If
+                    IndexH = 135
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
