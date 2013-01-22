@@ -169,6 +169,14 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
+            Case "HTC Desire Z, T-Mobile G2"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Portrait", "Landscape"})
+                VariantBox.SelectedIndex = 1
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
         End Select
 
         RefreshPreview()
@@ -211,6 +219,7 @@ Public Class Scrotter
             Dim r6401136 As String = "http://107.imagebam.com/download/RndCBtk9guLnIAXusAaaWQ/23245/232441290/640x1136.png"
             Dim r7201280 As String = "http://102.imagebam.com/download/xeX7cVyvK1Xm0azSM9Oc6g/23245/232441293/720x1280.png"
             Dim r7681280 As String = "http://104.imagebam.com/download/kladtG0tmUNkYB_IyP7NIw/23245/232441298/768x1280.png"
+            Dim r800480 As String = "http://ompldr.org/vaDY4Mg/800x480.png"
             Dim r8001280 As String = "http://104.imagebam.com/download/AMmyrqvT4tRMwJuO186JVA/23245/232443308/800x1280.png"
             Dim r1024768 As String = "http://ompldr.org/vaDQ1eg/1024x768.png"
             Dim r1280800 As String = "http://106.imagebam.com/download/gtT3LsbDEEYKFSzYfEKIoA/23245/232443312/1280x800.png"
@@ -491,7 +500,7 @@ Public Class Scrotter
                 Case "HTC Droid DNA"
                     Image1 = FetchImage("http://ompldr.org/vaDVxcQ/DroidDNA.png")
                     Shadow = FetchImage(r10801920)
-                    Gloss = FetchImage("http://ompldr.org/vaDY3cw/DroidDNA.png)"
+                    Gloss = FetchImage("http://ompldr.org/vaDY3cw/DroidDNA.png")
                     IndexW = 106
                     IndexH = 300
                 Case "HTC Vivid"
@@ -504,6 +513,18 @@ Public Class Scrotter
                     Shadow = FetchImage(r540960)
                     IndexW = 78
                     IndexH = 153
+                Case "HTC Desire Z, T-Mobile G2"
+                    If args.var = "Portrait" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDY4MQ/DesireZPort.png")
+                        Shadow = FetchImage(r480800)
+                        IndexW = 94
+                        IndexH = 162
+                    ElseIf args.var = "Landscape" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDY4MA/DesireZLand.png")
+                        Shadow = FetchImage(r800480)
+                        IndexW = 189
+                        IndexH = 79
+                    End If
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
