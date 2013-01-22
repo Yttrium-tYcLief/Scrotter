@@ -150,7 +150,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -173,6 +173,14 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Portrait", "Landscape"})
                 VariantBox.SelectedIndex = 1
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
+            Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"""
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Model 1", "Model 2"})
+                VariantBox.SelectedIndex = 0
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -531,7 +539,13 @@ Public Class Scrotter
                     IndexW = 136
                     IndexH = 180
                 Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"
-                    Image1 = FetchImage("http://ompldr.org/vaDY4ZQ/DroidCharge.png")
+                    If args.var = "Model 1" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDY4ZQ/DroidCharge.png")
+                        IndexH = 191
+                    ElseIf args.var = "Model 2" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDY4bA/GalaxySAviator.png")
+                        IndexH = 175
+                    End If
                     Shadow = FetchImage(r480800)
                     IndexW = 60
                     IndexH = 115
