@@ -33,8 +33,8 @@ Public Class Scrotter
         Dim openFileDialog1 As New OpenFileDialog()
         openFileDialog1.Title = "Please select your screenshot..."
         openFileDialog1.InitialDirectory = lastfolderopen
-        openFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|GIF Files(*.GIF)|*.GIF"
-        openFileDialog1.FilterIndex = 2
+        openFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|GIF Files(*.GIF)|*.GIF|All Files(*.*)|*.*"
+        openFileDialog1.FilterIndex = 5
         openFileDialog1.RestoreDirectory = True
         If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             LoadImage.Image = My.Resources._301
@@ -56,8 +56,8 @@ Public Class Scrotter
 
     Private Sub Save(sender As Object, e As EventArgs) Handles SaveBtn.Click
         Dim saveFileDialog1 As New SaveFileDialog()
-        saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG" '|GIF Files(*.GIF)|*.GIF"
-        saveFileDialog1.FilterIndex = 3
+        saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|All Files(*.*)|*.*" '|GIF Files(*.GIF)|*.GIF"
+        saveFileDialog1.FilterIndex = 2
         saveFileDialog1.RestoreDirectory = True
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
             SaveStream = saveFileDialog1.OpenFile()
