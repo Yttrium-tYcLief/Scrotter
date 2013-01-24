@@ -27,6 +27,7 @@ Public Class Scrotter
     Public SaveStream As Stream = Nothing
     Public PhoneStream As Stream = Nothing
     Public SaveImg As Image = Nothing
+    Public Image2 As New Bitmap(720, 1280)
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -198,7 +199,6 @@ Public Class Scrotter
                 VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
                 VariantBox.SelectedIndex = 0
         End Select
-
         RefreshPreview()
     End Sub
 
@@ -217,13 +217,12 @@ Public Class Scrotter
     Private Sub BackgroundDownloader_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundDownloader.DoWork
         Dim args As ArgumentType = e.Argument
         If args.type = 1 Then
-			Dim Image2 As New Bitmap(720, 1280)
-			Try
-				If String.IsNullOrEmpty(OpenPath) = False Then Image2 = New Bitmap(OpenPath)
-			Catch ex As Exception
-				MsgBox("Unable to retrieve screenshot. Are the drivers for your device installed, and is your device properly connected?")
-				Exit Sub
-			End Try
+            Try
+                If String.IsNullOrEmpty(OpenPath) = False Then Image2 = New Bitmap(OpenPath)
+            Catch ex As Exception
+                MsgBox("Unable to load screenshot.")
+                Exit Sub
+            End Try
             Dim Image1 As New Bitmap(Image2)
             Dim Shadow As New Bitmap(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData("http://ompldr.org/vaDJmbw/1280x720.png"))))
             Dim Gloss As New Bitmap(720, 1280)
@@ -746,13 +745,8 @@ Public Class Scrotter
     End Sub
 
     Public Shared Sub ADBCapture()
-        OpenPath = (Environment.GetEnvironmentVariable("Temp") & "\capture.png")
-		Scrotter.RefreshLists()
-		Try
-			My.Computer.FileSystem.DeleteFile(Environment.GetEnvironmentVariable("Temp") & "\capture.png")
-		Catch ex As Exception
-			Exit Sub
-		End Try
+        OpenPath = (Environment.GetEnvironmentVariable("temp") & "\capture.png")
+        Scrotter.RefreshLists()
 	End Sub
 
 End Class

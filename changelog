@@ -1,9 +1,11 @@
-master
+0.4
 - yttrium
   Consistency fixes for ACU.
   Driver note added to ACU.
   Improved error handling for the ACU.
   Fixed iPhone 5 overlay (speaker/camera now appears).
+  Fixed the ACU so that ADB may be used multiple times without restarting Scrotter.
+  Enabled wireless ADB support for the ACU, although it is still undocumented.
   New Devices:
 	HTC Droid DNA
 	HTC Vivid

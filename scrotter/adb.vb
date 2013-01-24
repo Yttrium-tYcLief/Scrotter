@@ -1,10 +1,12 @@
-﻿Public Class adb
+﻿Imports System.IO
+
+Public Class adb
 
     Private platformpath As String
 
-	Private Sub CancelBtn_Click(sender As Object, e As EventArgs) Handles CancelBtn.Click
-		Me.Close()
-	End Sub
+    Private Sub CancelBtn_Click(sender As Object, e As EventArgs) Handles CancelBtn.Click
+        Me.Close()
+    End Sub
 
     Public Sub CaptureBtn_Click(sender As Object, e As EventArgs) Handles CaptureBtn.Click
         Dim tempPath As String = Environment.GetEnvironmentVariable("Temp")
@@ -13,24 +15,28 @@
         .FileName = platformpath & "\adb.exe", _
         .Arguments = "shell /system/bin/screencap -p /sdcard/screenshot.png", _
         .WindowStyle = ProcessWindowStyle.Normal}}
-		Try
-			imgcap.Start()
-		Catch ex As Exception
-			MsgBox("Unable to find ADB. Did you select the platform-tools folder?")
-			Exit Sub
-		End Try
+        Try
+            imgcap.Start()
+        Catch ex As Exception
+            MsgBox("Unable to find ADB. Did you select the platform-tools folder?")
+            Exit Sub
+        End Try
         imgcap.WaitForExit()
+        If File.Exists(Environment.GetEnvironmentVariable("temp") & "\capture.png") Then
+            Scrotter.Image2.Dispose()
+            My.Computer.FileSystem.DeleteFile(Environment.GetEnvironmentVariable("temp") & "\capture.png")
+        End If
         Dim imgconv As New Process With {.StartInfo = _
         New ProcessStartInfo With { _
         .FileName = platformpath & "\adb.exe", _
         .Arguments = "pull /sdcard/screenshot.png " & tempPath & "\capture.png", _
         .WindowStyle = ProcessWindowStyle.Normal}}
-		Try
-			imgconv.Start()
-		Catch ex As Exception
-			MsgBox("Unable to retrieve screenshot. Are the drivers for your device installed, and is your device properly connected?")
-			Exit Sub
-		End Try
+        Try
+            imgconv.Start()
+        Catch ex As Exception
+            MsgBox("Unable to retrieve screenshot. Are the drivers for your device installed, and is your device properly connected?")
+            Exit Sub
+        End Try
         imgconv.WaitForExit()
         Scrotter.ADBCapture()
         Me.Close()
@@ -39,8 +45,8 @@
     Private Sub PathFolderBtn_Click(sender As Object, e As EventArgs) Handles PathFolderBtn.Click
         Dim platformpathdialog As New System.Windows.Forms.FolderBrowserDialog
         platformpathdialog.Description = "Select the Folder"
-		platformpathdialog.RootFolder = Environment.SpecialFolder.MyComputer
-		platformpathdialog.SelectedPath = "C:\Users\" & SystemInformation.UserName & "AppData\Local\Android\android-sdk\platform-tools"
+        platformpathdialog.RootFolder = Environment.SpecialFolder.MyComputer
+        platformpathdialog.SelectedPath = "C:\Users\" & SystemInformation.UserName & "AppData\Local\Android\android-sdk\platform-tools"
         Dim dlgResult As DialogResult = platformpathdialog.ShowDialog()
         If dlgResult = Windows.Forms.DialogResult.OK Then
             platformpath = platformpathdialog.SelectedPath
