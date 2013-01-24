@@ -21,7 +21,6 @@ Imports System.Drawing.Imaging
 Imports System.Threading
 
 Public Class Scrotter
-
     Public Shared OpenPath, SavePath As String
     Public OpenStream As Stream = Nothing
     Public SaveStream As Stream = Nothing
@@ -32,13 +31,11 @@ Public Class Scrotter
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         Dim openFileDialog1 As New OpenFileDialog()
-
         openFileDialog1.Title = "Please select your screenshot..."
         openFileDialog1.InitialDirectory = lastfolderopen
         openFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|GIF Files(*.GIF)|*.GIF"
         openFileDialog1.FilterIndex = 2
         openFileDialog1.RestoreDirectory = True
-
         If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             LoadImage.Image = My.Resources._301
             Try
@@ -59,11 +56,9 @@ Public Class Scrotter
 
     Private Sub Save(sender As Object, e As EventArgs) Handles SaveBtn.Click
         Dim saveFileDialog1 As New SaveFileDialog()
-
         saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG" '|GIF Files(*.GIF)|*.GIF"
         saveFileDialog1.FilterIndex = 3
         saveFileDialog1.RestoreDirectory = True
-
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
             SaveStream = saveFileDialog1.OpenFile()
             If (SaveStream IsNot Nothing) Then
@@ -109,7 +104,6 @@ Public Class Scrotter
     End Sub
 
     Private Function GetEncoder(ByVal format As ImageFormat) As ImageCodecInfo
-
         Dim codecs As ImageCodecInfo() = ImageCodecInfo.GetImageDecoders()
 
         Dim codec As ImageCodecInfo
@@ -119,7 +113,6 @@ Public Class Scrotter
             End If
         Next codec
         Return Nothing
-
     End Function
 
 	Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
@@ -756,9 +749,5 @@ Public Class Scrotter
     Public Shared Sub ADBCapture()
         OpenPath = (Environment.GetEnvironmentVariable("temp") & "\capture.png")
         Scrotter.RefreshLists()
-	End Sub
-
-	Private Sub RefreshPreview(sender As Object, e As EventArgs) Handles VariantBox.SelectedValueChanged, UnderShadowCheckbox.CheckedChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged
-
 	End Sub
 End Class
