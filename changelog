@@ -1,12 +1,16 @@
+master
+- yttrium
+   Added image stretching/resizing (to fit phones that the image is not from).
+
 0.4
 - yttrium
-  Consistency fixes for ACU.
-  Driver note added to ACU.
-  Improved error handling for the ACU.
-  Fixed iPhone 5 overlay (speaker/camera now appears).
-  Fixed the ACU so that ADB may be used multiple times without restarting Scrotter.
-  Enabled wireless ADB support for the ACU, although it is still undocumented.
-  New Devices:
+   Consistency fixes for ACU.
+   Driver note added to ACU.
+   Improved error handling for the ACU.
+   Fixed iPhone 5 overlay (speaker/camera now appears).
+   Fixed the ACU so that ADB may be used multiple times without restarting Scrotter.
+   Enabled wireless ADB support for the ACU, although it is still undocumented.
+   New Devices:
 	HTC Droid DNA
 	HTC Vivid
 	HTC Evo 3D
@@ -31,23 +35,23 @@
 
 0.3
 - yttrium
-  Added ADB support for pulling Android screenshots from attached Android 4+ devices.
-  Various UX and performance fixes and touchups.
-  Remove GIF save support (was broken anyway).
-  Fix JPG black background when saving.
-  Shrunk overall window size.
-  Fixed One X height.
-  Added Scrotter and ACU icons.
-  Increased the width of the ACU.
+   Added ADB support for pulling Android screenshots from attached Android 4+ devices.
+   Various UX and performance fixes and touchups.
+   Remove GIF save support (was broken anyway).
+   Fix JPG black background when saving.
+   Shrunk overall window size.
+   Fixed One X height.
+   Added Scrotter and ACU icons.
+   Increased the width of the ACU.
 
 0.2
 - yttrium
-  Added transparent PNG and GIF support.
-  Switch to Select Case instead of If Elseif statements.
-  Changed location of modification checkboxes.
-  Fixed error handling on device selection.
-  Fixed image resizing.
-  New Devices:
+   Added transparent PNG and GIF support.
+   Switch to Select Case instead of If Elseif statements.
+   Changed location of modification checkboxes.
+   Fixed error handling on device selection.
+   Fixed image resizing.
+   New Devices:
 	HP TouchPad
 	HP Veer
 	HTC Google Nexus One
@@ -58,4 +62,4 @@
 
 0.1
 - yttrium
-  First release.
+   First release.

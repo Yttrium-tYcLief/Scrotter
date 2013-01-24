@@ -122,97 +122,98 @@ Public Class Scrotter
 
     End Function
 
-    Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
-        UnderShadowCheckbox.Enabled = True
-        GlossCheckbox.Enabled = True
-        VariantBox.Enabled = False
-        VariantBox.Items.Clear()
-        VariantBox.Text = "Variant"
-        Select Case ModelBox.Text
-            Case "Samsung Galaxy SIII"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"White", "Blue", "Red", "Brown", "Black"})
-                VariantBox.SelectedIndex = 0
-            Case "Google Nexus 7", "Google Nexus 10", "Motorola Xoom"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Portrait", "Landscape"})
-                VariantBox.SelectedIndex = 0
-            Case "HTC One X, HTC One X+"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"White", "Black"})
-                VariantBox.SelectedIndex = 0
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
-            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPad Mini"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Black", "White"})
-                VariantBox.SelectedIndex = 0
-            Case "Samsung Galaxy SII, Epic 4G Touch"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Model 1", "Model 2"})
-                VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C"
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
-            Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA", "Nokia N9"
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
-            Case "Apple iPhone 3G, 3GS"
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-            Case "Sony Ericsson Xperia X10"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Black", "White"})
-                VariantBox.SelectedIndex = 0
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
-            Case "HTC Desire Z, T-Mobile G2", "Samsung Galaxy Tab 10.1"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Portrait", "Landscape"})
-                VariantBox.SelectedIndex = 1
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
-            Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"""
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Model 1", "Model 2"})
-                VariantBox.SelectedIndex = 0
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
-            Case "Nokia Lumia 920"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Red", "Cyan", "Yellow", "Black", "White", "Grey"})
-                VariantBox.SelectedIndex = 0
-            Case "HTC 8X"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Blue", "Lime", "Red", "Black"})
-                VariantBox.SelectedIndex = 0
-            Case "HTC 8S"
-                VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
-                VariantBox.SelectedIndex = 0
-        End Select
-        RefreshPreview()
-    End Sub
+	Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
+		StretchCheckbox.Enabled = True
+		UnderShadowCheckbox.Enabled = True
+		GlossCheckbox.Enabled = True
+		VariantBox.Enabled = False
+		VariantBox.Items.Clear()
+		VariantBox.Text = "Variant"
+		Select Case ModelBox.Text
+			Case "Samsung Galaxy SIII"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"White", "Blue", "Red", "Brown", "Black"})
+				VariantBox.SelectedIndex = 0
+			Case "Google Nexus 7", "Google Nexus 10", "Motorola Xoom"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Portrait", "Landscape"})
+				VariantBox.SelectedIndex = 0
+			Case "HTC One X, HTC One X+"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"White", "Black"})
+				VariantBox.SelectedIndex = 0
+				UnderShadowCheckbox.Enabled = False
+				UnderShadowCheckbox.Checked = False
+			Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPad Mini"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Black", "White"})
+				VariantBox.SelectedIndex = 0
+			Case "Samsung Galaxy SII, Epic 4G Touch"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Model 1", "Model 2"})
+				VariantBox.SelectedIndex = 0
+			Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C"
+				GlossCheckbox.Enabled = False
+				GlossCheckbox.Checked = False
+				UnderShadowCheckbox.Enabled = False
+				UnderShadowCheckbox.Checked = False
+			Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA", "Nokia N9"
+				UnderShadowCheckbox.Enabled = False
+				UnderShadowCheckbox.Checked = False
+			Case "Apple iPhone 3G, 3GS"
+				GlossCheckbox.Enabled = False
+				GlossCheckbox.Checked = False
+			Case "Sony Ericsson Xperia X10"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Black", "White"})
+				VariantBox.SelectedIndex = 0
+				GlossCheckbox.Enabled = False
+				GlossCheckbox.Checked = False
+				UnderShadowCheckbox.Enabled = False
+				UnderShadowCheckbox.Checked = False
+			Case "HTC Desire Z, T-Mobile G2", "Samsung Galaxy Tab 10.1"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Portrait", "Landscape"})
+				VariantBox.SelectedIndex = 1
+				GlossCheckbox.Enabled = False
+				GlossCheckbox.Checked = False
+				UnderShadowCheckbox.Enabled = False
+				UnderShadowCheckbox.Checked = False
+			Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"""
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Model 1", "Model 2"})
+				VariantBox.SelectedIndex = 0
+				GlossCheckbox.Enabled = False
+				GlossCheckbox.Checked = False
+				UnderShadowCheckbox.Enabled = False
+				UnderShadowCheckbox.Checked = False
+			Case "Nokia Lumia 920"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Red", "Cyan", "Yellow", "Black", "White", "Grey"})
+				VariantBox.SelectedIndex = 0
+			Case "HTC 8X"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Blue", "Lime", "Red", "Black"})
+				VariantBox.SelectedIndex = 0
+			Case "HTC 8S"
+				VariantBox.Enabled = True
+				VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
+				VariantBox.SelectedIndex = 0
+		End Select
+		RefreshPreview()
+	End Sub
 
-    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged
-        If BackgroundDownloader.IsBusy = False Then
-            LoadImage.Image = My.Resources._301
-            Dim args As ArgumentType = New ArgumentType()
-            args.type = 1
-            args.var = VariantBox.Text
-            args.model = ModelBox.Text
-            BackgroundDownloader.RunWorkerAsync(args)
-            ShadowCheckbox.Enabled = True
-        End If
-    End Sub
+	Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged
+		If BackgroundDownloader.IsBusy = False Then
+			LoadImage.Image = My.Resources._301
+			Dim args As ArgumentType = New ArgumentType()
+			args.type = 1
+			args.var = VariantBox.Text
+			args.model = ModelBox.Text
+			BackgroundDownloader.RunWorkerAsync(args)
+			ShadowCheckbox.Enabled = True
+		End If
+	End Sub
 
     Private Sub BackgroundDownloader_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundDownloader.DoWork
         Dim args As ArgumentType = e.Argument
@@ -703,7 +704,15 @@ Public Class Scrotter
                     Shadow = FetchImage(r7681024)
                     IndexW = 166
                     IndexH = 232
-            End Select
+			End Select
+			If StretchCheckbox.Checked = True Then
+				Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
+				Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
+					graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+					graphicsHandle.DrawImage(Image2, 0, 0, Shadow.Width, Shadow.Height)
+					Image2 = imgtmp2
+				End Using
+			End If
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
             Dim g As Graphics = Graphics.FromImage(Image3)
@@ -749,4 +758,7 @@ Public Class Scrotter
         Scrotter.RefreshLists()
 	End Sub
 
+	Private Sub RefreshPreview(sender As Object, e As EventArgs) Handles VariantBox.SelectedValueChanged, UnderShadowCheckbox.CheckedChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged
+
+	End Sub
 End Class
