@@ -142,7 +142,7 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5"
+            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPad Mini"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
                 VariantBox.SelectedIndex = 0
@@ -150,7 +150,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -189,6 +189,14 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Red", "Cyan", "Yellow", "Black", "White", "Grey"})
                 VariantBox.SelectedIndex = 0
+            Case "HTC 8X"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Blue", "Lime", "Red", "Black"})
+                VariantBox.SelectedIndex = 0
+            Case "HTC 8S"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
+                VariantBox.SelectedIndex = 0
         End Select
 
         RefreshPreview()
@@ -223,6 +231,7 @@ Public Class Scrotter
             Dim IndexW As Integer = 0
             Dim IndexH As Integer = 0
             Dim Overlay As New Bitmap(720, 1280)
+            Dim r240320 As String = "http://ompldr.org/vaDc2ag/240x320.png"
             Dim r320480 As String = "http://103.imagebam.com/download/fMTlGS2hf2yruDFhmTf4Ng/23245/232441277/320x480.png"
             Dim r480800 As String = "http://106.imagebam.com/download/F9adygThCFRUS6W77QbOpA/23245/232441280/480x800.png"
             Dim r480854 As String = "http://ompldr.org/vaDQzag/854x480.png"
@@ -230,6 +239,7 @@ Public Class Scrotter
             Dim r640960 As String = "http://104.imagebam.com/download/ULwqOUIcom-pbM6ODaij_A/23245/232441284/640x960.png"
             Dim r6401136 As String = "http://107.imagebam.com/download/RndCBtk9guLnIAXusAaaWQ/23245/232441290/640x1136.png"
             Dim r7201280 As String = "http://102.imagebam.com/download/xeX7cVyvK1Xm0azSM9Oc6g/23245/232441293/720x1280.png"
+            Dim r7681024 As String = "http://ompldr.org/vaDc3MA/768x1024.png"
             Dim r7681280 As String = "http://104.imagebam.com/download/kladtG0tmUNkYB_IyP7NIw/23245/232441298/768x1280.png"
             Dim r800480 As String = "http://ompldr.org/vaDY4Mg/800x480.png"
             Dim r8001280 As String = "http://104.imagebam.com/download/AMmyrqvT4tRMwJuO186JVA/23245/232443308/800x1280.png"
@@ -611,8 +621,8 @@ Public Class Scrotter
                 Case "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II"
                     Image1 = FetchImage("http://ompldr.org/vaDY5eA/Nitro.png")
                     Shadow = FetchImage(r7201280)
-                    IndexW = 83
-                    IndexH = 172
+                    IndexW = 113
+                    IndexH = 191
                 Case "Samsung Galaxy Tab 10.1"
                     If args.var = "Portrait" Then
                         Image1 = FetchImage("http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png")
@@ -639,6 +649,61 @@ Public Class Scrotter
                     Shadow = FetchImage(r1280800)
                     IndexW = 165
                     IndexH = 157
+                Case "HTC 8S"
+                    Select Case args.var
+                        Case "Blue"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1ZA/8SBlue.png")
+                        Case "Lime"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1ZQ/8SGreen.png")
+                        Case "Orange"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1Zg/8SOrange.png")
+                        Case "Black"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1Yw/8SBlack.png")
+                    End Select
+                    Gloss = FetchImage("http://ompldr.org/vaDc1dw/8S.png")
+                    Undershadow = FetchImage("http://ompldr.org/vaDc1cA/8S.png")
+                    Shadow = FetchImage(r480800)
+                    IndexW = 130
+                    IndexH = 231
+                Case "HTC 8X"
+                    Select Case args.var
+                        Case "Blue"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1aA/8XBlue.png")
+                        Case "Lime"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1aQ/8XGreen.png")
+                        Case "Red"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1ag/8XRed.png")
+                        Case "Black"
+                            Image1 = FetchImage("http://ompldr.org/vaDc1Zw/8XBlack.png")
+                    End Select
+                    Gloss = FetchImage("http://ompldr.org/vaDc1cg/8X.png")
+                    Undershadow = FetchImage("http://ompldr.org/vaDc1cQ/8X.png")
+                    Shadow = FetchImage(r7201280)
+                    IndexW = 165
+                    IndexH = 347
+                Case "HTC Desire C"
+                    Image1 = FetchImage("http://ompldr.org/vaDc2NQ/DesireC.png")
+                    Shadow = FetchImage(r320480)
+                    IndexW = 52
+                    IndexH = 101
+                Case "HTC Desire C"
+                    Image1 = FetchImage("http://ompldr.org/vaDc2Zw/Wildfire.png")
+                    Shadow = FetchImage(r240320)
+                    IndexW = 43
+                    IndexH = 76
+                Case "Apple iPad Mini"
+                    If args.var = "Black" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDc2cQ/iPadMiniBlack.png")
+                        Overlay = FetchImage("http://ompldr.org/vaDc2cw/iPadMiniBlack.png")
+                    ElseIf args.var = "White" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDc2cA/iPadMiniWhite.png")
+                        Overlay = FetchImage("http://ompldr.org/vaDc2cg/iPadMiniWhite.png")
+                    End If
+                    Gloss = FetchImage("http://ompldr.org/vaDc2dQ/iPadMini.png")
+                    Undershadow = FetchImage("http://ompldr.org/vaDc2dA/iPadMini.png")
+                    Shadow = FetchImage(r7681024)
+                    IndexW = 166
+                    IndexH = 232
             End Select
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
@@ -650,7 +715,7 @@ Public Class Scrotter
             If ShadowCheckbox.Checked = True Then g.DrawImage(Shadow, New Point(IndexW, IndexH))
             g.DrawImage(Image1, New Point(0, 0))
             If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
-            If args.model = "iPhone 5" Then g.DrawImage(Overlay, New Point(0, 0))
+            If (args.model = "Apple iPhone 5") Or (args.model = "Apple iPad Mini") Then g.DrawImage(Overlay, New Point(0, 0))
             g.Dispose()
             g = Nothing
             SaveImg = Image3

@@ -3,6 +3,7 @@ master
   Consistency fixes for ACU.
   Driver note added to ACU.
   Improved error handling for the ACU.
+  Fixed iPhone 5 overlay (speaker/camera now appears).
   New Devices:
 	HTC Droid DNA
 	HTC Vivid
@@ -20,6 +21,11 @@ master
 	HTC Evo 4G LTE
 	Samsung Galaxy SIII Red, Brown, Black
 	ASUS Eee Pad Transformer
+	HTC 8X
+	HTC 8S
+	HTC Desire C
+	HTC Wildfire
+	Apple iPad Mini
 
 0.3
 - yttrium
