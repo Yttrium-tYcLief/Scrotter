@@ -27,6 +27,7 @@ Public Class Scrotter
     Public PhoneStream As Stream = Nothing
     Public SaveImg As Image = Nothing
     Public Image2 As New Bitmap(720, 1280)
+    Public Shared IsMono As Boolean
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -743,12 +744,16 @@ Public Class Scrotter
     End Sub
 
     Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
-        Dim t As Type = Type.[GetType]("Mono.Runtime")
-        If t Is Nothing Then adb.ShowDialog() Else MsgBox("ADB is not supported in Mono.")
+        adb.ShowDialog()
     End Sub
 
     Public Shared Sub ADBCapture()
-        OpenPath = (Environment.GetEnvironmentVariable("temp") & "\capture.png")
+        If Scrotter.IsMono = False Then OpenPath = (Environment.GetEnvironmentVariable("temp") & "\capture.png") Else OpenPath = "/tmp/capture.png"
         Scrotter.RefreshLists()
-	End Sub
+    End Sub
+
+    Private Sub Scrotter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim t As Type = Type.[GetType]("Mono.Runtime")
+        If t Is Nothing Then IsMono = False Else IsMono = True
+    End Sub
 End Class

@@ -2,6 +2,7 @@ master
 - yttrium
    Added image stretching/resizing (to fit phones that the image is not from).
    Allowed selecting files with any fieltype in file dialogs (open, save).
+   Added experimental complete Linux support using Mono.
 
 0.4
 - yttrium

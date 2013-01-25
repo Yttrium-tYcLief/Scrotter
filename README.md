@@ -23,6 +23,16 @@ You can read the changelog [here](https://raw.github.com/Yttrium-tYcLief/Scrotte
 
 You can see what devices are currently supported [here](https://github.com/Yttrium-tYcLief/Scrotter/wiki/Supported-Devices).
 
+##Using Scrotter in Mono (GNU/Linux)
+
+To use Scrotter, you must first install [Mono](http://www.go-mono.com/mono-downloads/download.html).
+
+It may also be required to install the following (or equivalent) packages using your package manager of choice:
+libmono-winforms2.0-cil
+libmono-microsoft-visualbasic10.0-cil
+
+Then, simply run "mono scrotter.exe". All necessary adaptations will be handled by Scrotter.
+
 Development & Contribution
 --------------------------
 
