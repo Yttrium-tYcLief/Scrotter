@@ -28,8 +28,8 @@ You can see what devices are currently supported [here](https://github.com/Yttri
 To use Scrotter, you must first install [Mono](http://www.go-mono.com/mono-downloads/download.html).
 
 It may also be required to install the following (or equivalent) packages using your package manager of choice:
-libmono-winforms2.0-cil
-libmono-microsoft-visualbasic10.0-cil
+* libmono-winforms2.0-cil
+* libmono-microsoft-visualbasic10.0-cil
 
 Then, simply run "mono scrotter.exe". All necessary adaptations will be handled by Scrotter.
 
