@@ -3,7 +3,7 @@ master
    Added image stretching/resizing (to fit phones that the image is not from).
    Allowed selecting files with any fieltype in file dialogs (open, save).
    Added experimental complete Linux support using Mono.
-   Scrotter can now be dynamically resized and will fit the dimensions of the window.
+   Scrotter and the ACU can now be dynamically resized and will fit the dimensions of the window.
 
 0.4
 - yttrium

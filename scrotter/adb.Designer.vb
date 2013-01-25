@@ -38,6 +38,9 @@ Partial Class adb
         '
         'CaptureBtn
         '
+        Me.CaptureBtn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CaptureBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CaptureBtn.Enabled = False
         Me.CaptureBtn.Location = New System.Drawing.Point(93, 217)
         Me.CaptureBtn.Name = "CaptureBtn"
@@ -48,6 +51,8 @@ Partial Class adb
         '
         'CancelBtn
         '
+        Me.CancelBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CancelBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CancelBtn.Location = New System.Drawing.Point(12, 217)
         Me.CancelBtn.Name = "CancelBtn"
         Me.CancelBtn.Size = New System.Drawing.Size(75, 23)
@@ -57,6 +62,8 @@ Partial Class adb
         '
         'PathFolderBtn
         '
+        Me.PathFolderBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.PathFolderBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.PathFolderBtn.Location = New System.Drawing.Point(12, 188)
         Me.PathFolderBtn.Name = "PathFolderBtn"
         Me.PathFolderBtn.Size = New System.Drawing.Size(75, 23)
@@ -66,6 +73,7 @@ Partial Class adb
         '
         'Label2
         '
+        Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label2.Location = New System.Drawing.Point(12, 23)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(281, 25)
@@ -74,6 +82,7 @@ Partial Class adb
         '
         'LinkLabel1
         '
+        Me.LinkLabel1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LinkLabel1.AutoSize = True
         Me.LinkLabel1.Location = New System.Drawing.Point(17, 40)
         Me.LinkLabel1.Name = "LinkLabel1"
@@ -84,6 +93,7 @@ Partial Class adb
         '
         'Label3
         '
+        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label3.Location = New System.Drawing.Point(12, 96)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(281, 43)
@@ -93,6 +103,8 @@ Partial Class adb
         '
         'toolstextbox
         '
+        Me.toolstextbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.toolstextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.toolstextbox.Location = New System.Drawing.Point(93, 190)
         Me.toolstextbox.Name = "toolstextbox"
@@ -103,6 +115,7 @@ Partial Class adb
         '
         'Label1
         '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label1.Location = New System.Drawing.Point(12, 139)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(281, 28)
@@ -112,6 +125,7 @@ Partial Class adb
         '
         'Label4
         '
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label4.Location = New System.Drawing.Point(12, 167)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(281, 18)
@@ -120,6 +134,7 @@ Partial Class adb
         '
         'Label5
         '
+        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label5.Font = New System.Drawing.Font("Ubuntu", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(17, 7)
         Me.Label5.Name = "Label5"
@@ -130,6 +145,7 @@ Partial Class adb
         '
         'LinkLabel2
         '
+        Me.LinkLabel2.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LinkLabel2.Location = New System.Drawing.Point(12, 61)
         Me.LinkLabel2.Name = "LinkLabel2"
         Me.LinkLabel2.Size = New System.Drawing.Size(281, 35)
@@ -154,6 +170,7 @@ Partial Class adb
         Me.Controls.Add(Me.CancelBtn)
         Me.Controls.Add(Me.CaptureBtn)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MinimumSize = New System.Drawing.Size(321, 288)
         Me.Name = "adb"
         Me.Text = "Android Capture Utility"
         Me.ResumeLayout(False)
