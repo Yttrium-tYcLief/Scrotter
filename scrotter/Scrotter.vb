@@ -743,7 +743,8 @@ Public Class Scrotter
     End Sub
 
     Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
-        adb.ShowDialog()
+        Dim t As Type = Type.[GetType]("Mono.Runtime")
+        If t Is Nothing Then adb.ShowDialog() Else MsgBox("ADB is not supported in Mono.")
     End Sub
 
     Public Shared Sub ADBCapture()
