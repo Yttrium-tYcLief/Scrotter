@@ -173,14 +173,14 @@ Public Class Scrotter
 				GlossCheckbox.Checked = False
 				UnderShadowCheckbox.Enabled = False
 				UnderShadowCheckbox.Checked = False
-			Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"""
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Model 1", "Model 2"})
-				VariantBox.SelectedIndex = 0
-				GlossCheckbox.Enabled = False
-				GlossCheckbox.Checked = False
-				UnderShadowCheckbox.Enabled = False
-				UnderShadowCheckbox.Checked = False
+            Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Model 1", "Model 2"})
+                VariantBox.SelectedIndex = 0
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
 			Case "Nokia Lumia 920"
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Red", "Cyan", "Yellow", "Black", "White", "Grey"})
@@ -754,7 +754,7 @@ Public Class Scrotter
 
     Private Sub Scrotter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim t As Type = Type.[GetType]("Mono.Runtime")
-        If t IsNot Nothing Then IsMono = False Else IsMono = True
+        If t Is Nothing Then IsMono = False Else IsMono = True
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
