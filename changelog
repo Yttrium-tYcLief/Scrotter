@@ -4,6 +4,7 @@ master
    Allowed selecting files with any fieltype in file dialogs (open, save).
    Added experimental complete Linux support using Mono.
    Scrotter and the ACU can now be dynamically resized and will fit the dimensions of the window.
+   Implemented wireless ADB support for Windows.
 
 0.4
 - yttrium
