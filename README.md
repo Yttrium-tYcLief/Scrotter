@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="http://i.imgur.com/hOuPLO9.png"/> <img src="http://ompldr.org/vaDU5Zw/westablenow2.png"/>
+  <img src="http://ompldr.org/vaDh0aA/ScrotterLogoShrunk.png"/> <img src="http://ompldr.org/vaDU5Zw/westablenow2.png"/>
 </p>
 
 About Scrotter
