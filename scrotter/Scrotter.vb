@@ -28,6 +28,8 @@ Public Class Scrotter
     Public SaveImg As Image = Nothing
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
+    Public ReadOnly Version As String = "0.5"
+    Public ReadOnly ReleaseDate As String = "2013-01-27"
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -146,11 +148,11 @@ Public Class Scrotter
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Model 1", "Model 2"})
 				VariantBox.SelectedIndex = 0
-			Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C"
-				GlossCheckbox.Enabled = False
-				GlossCheckbox.Checked = False
-				UnderShadowCheckbox.Enabled = False
-				UnderShadowCheckbox.Checked = False
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C", "LG Optimus 2X"
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
 			Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA", "Nokia N9"
 				UnderShadowCheckbox.Enabled = False
 				UnderShadowCheckbox.Checked = False
@@ -165,14 +167,14 @@ Public Class Scrotter
 				GlossCheckbox.Checked = False
 				UnderShadowCheckbox.Enabled = False
 				UnderShadowCheckbox.Checked = False
-			Case "HTC Desire Z, T-Mobile G2", "Samsung Galaxy Tab 10.1"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Portrait", "Landscape"})
-				VariantBox.SelectedIndex = 1
-				GlossCheckbox.Enabled = False
-				GlossCheckbox.Checked = False
-				UnderShadowCheckbox.Enabled = False
-				UnderShadowCheckbox.Checked = False
+            Case "HTC Desire Z, T-Mobile G2", "Samsung Galaxy Tab 10.1", "Motorola Droid 2, Milestone 2"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Portrait", "Landscape"})
+                VariantBox.SelectedIndex = 0
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
             Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
@@ -237,6 +239,7 @@ Public Class Scrotter
             Dim r7681280 As String = "http://104.imagebam.com/download/kladtG0tmUNkYB_IyP7NIw/23245/232441298/768x1280.png"
             Dim r800480 As String = "http://ompldr.org/vaDY4Mg/800x480.png"
             Dim r8001280 As String = "http://104.imagebam.com/download/AMmyrqvT4tRMwJuO186JVA/23245/232443308/800x1280.png"
+            Dim r854480 As String = "http://ompldr.org/vaDhxYQ/854x480.png"
             Dim r1024768 As String = "http://ompldr.org/vaDQ1eg/1024x768.png"
             Dim r1280800 As String = "http://106.imagebam.com/download/gtT3LsbDEEYKFSzYfEKIoA/23245/232443312/1280x800.png"
             Dim r10801920 As String = "http://ompldr.org/vaDVxdA/1080x1920.png"
@@ -698,7 +701,24 @@ Public Class Scrotter
                     Shadow = FetchImage(r7681024)
                     IndexW = 166
                     IndexH = 232
-			End Select
+                Case "Motorola Droid 2, Milestone 2"
+                    If args.var = "Portrait" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDhxYg/Droid2.png")
+                        IndexW = 110
+                        IndexH = 193
+                        Shadow = FetchImage(r480854)
+                    ElseIf args.var = "Landscape" Then
+                        Image1 = FetchImage("http://ompldr.org/vaDhxYw/Droid2Horizontal.png")
+                        IndexW = 198
+                        IndexH = 95
+                        Shadow = FetchImage(r854480)
+                    End If
+                Case "LG Optimus 2X"
+                    Image1 = FetchImage("http://ompldr.org/vaDhxZA/Optimus2x.png")
+                    Shadow = FetchImage(r480800)
+                    IndexW = 93
+                    IndexH = 175
+            End Select
 			If StretchCheckbox.Checked = True Then
 				Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
 				Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)

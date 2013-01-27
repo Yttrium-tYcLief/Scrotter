@@ -226,6 +226,7 @@ Partial Class adb
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MinimumSize = New System.Drawing.Size(321, 320)
         Me.Name = "adb"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Android Capture Utility"
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -1,10 +1,14 @@
-master
+0.5
 - yttrium
    Added image stretching/resizing (to fit phones that the image is not from).
    Allowed selecting files with any fieltype in file dialogs (open, save).
    Added experimental complete Linux support using Mono.
    Scrotter and the ACU can now be dynamically resized and will fit the dimensions of the window.
    Implemented wireless ADB support for Windows.
+   Added an About window.
+   New Devices:
+	Motorola Droid 2, Milestone 2
+	LG Optimus 2X
 
 0.4
 - yttrium

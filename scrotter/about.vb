@@ -2,6 +2,7 @@
 
 
 Public Class about
+
     <Runtime.InteropServices.StructLayout(Runtime.InteropServices.LayoutKind.Sequential)> Public Structure Side
         Public Left As Integer
         Public Right As Integer
@@ -10,7 +11,9 @@ Public Class about
     End Structure
     <Runtime.InteropServices.DllImport("dwmapi.dll")> Public Shared Function DwmExtendFrameIntoClientArea(ByVal hWnd As IntPtr, ByRef pMarinset As Side) As Integer
     End Function
+
     Private Sub about_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = "Scrotter v" & Scrotter.Version & "  (" & Scrotter.ReleaseDate & ")"
         Try
             Me.BackColor = Color.Black 'It must be set to black...
             Dim Side As Side = New Side
@@ -23,23 +26,31 @@ Public Class about
         End Try
     End Sub
 
-    Dim newPoint As New System.Drawing.Point()
-    Dim a As Integer
-    Dim b As Integer
-    Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown
-        a = Me.MousePosition.X - Me.Location.X
-        b = Me.MousePosition.Y - Me.Location.Y
-    End Sub
-    Private Sub Form1_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove
-        If e.Button = MouseButtons.Left Then
-            newPoint = Me.MousePosition
-            newPoint.X = newPoint.X - (a)
-            newPoint.Y = newPoint.Y - (b)
-            Me.Location = newPoint
-        End If
+    Private Const WM_NCLBUTTONDOWN = &HA1
+    Private Const HTCAPTION = 2
+
+    Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
+                 (ByVal hwnd As Integer, ByVal wMsg As Integer, _
+                  ByVal wParam As Integer, ByVal lParam As String) As Integer
+    Private Declare Sub ReleaseCapture Lib "user32" ()
+
+    Private Sub Panel1_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseMove
+        Dim lHwnd As Int32
+        lHwnd = Me.Handle
+        If lHwnd = 0 Then Exit Sub
+        ReleaseCapture()
+        SendMessage(lHwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0&)
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
+    Private Sub GithubBox_Click(sender As Object, e As EventArgs) Handles GithubBox.Click
+        System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter")
+    End Sub
 
+    Private Sub ReportBugBox_Click(sender As Object, e As EventArgs) Handles ReportBugBox.Click
+        System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/issues")
+    End Sub
+
+    Private Sub LicenseBox_Click(sender As Object, e As EventArgs) Handles LicenseBox.Click
+        System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/blob/master/LICENSE.creole")
     End Sub
 End Class
