@@ -2,36 +2,8 @@
   <img src="http://ompldr.org/vaDh0aA/ScrotterLogoShrunk.png"/> <img src="http://ompldr.org/vaDU5Zw/westablenow2.png"/>
 </p>
 
-About Scrotter
---------------
-<img src="http://ompldr.org/vaDU5NQ/scrotter.png"/>
-
-**Scrotter** is an application written in Visual Basic .NET that allows the user to place a screenshot from their Android, iOS, Windows Phone, or WebOS device into a frame of any supported mobile devices, and then export their creation as an image.
-
-The name "Scrotter" is a portmanteau: **SCR**eensh<b>OT</b/> Fram<b>ER</b>.
-
-##Using Scrotter
-
-1. Install Microsoft [.NET Framework 4](http://www.microsoft.com/en-us/download/details.aspx?id=17851).
-2. Download the latest compiled release from our [Downloads](https://www.dropbox.com/sh/uforojjgr491o9a/Yiz3sjfDt5) page.
-3. Open your screenshot, pick your phone model, and select any modifications you want to make to the image (gloss, rotation, variants).
-4. Save the file.
-
-Scrotter supports .BMP, .JPG, .PNG, and .GIF.
-
-You can read the changelog [here](https://raw.github.com/Yttrium-tYcLief/Scrotter/master/changelog).
-
-You can see what devices are currently supported [here](https://github.com/Yttrium-tYcLief/Scrotter/wiki/Supported-Devices).
-
-##Using Scrotter in Mono (GNU/Linux)
-
-To use Scrotter, you must first install [Mono](http://www.go-mono.com/mono-downloads/download.html).
-
-It may also be required to install the following (or equivalent) packages using your package manager of choice:
-* libmono-winforms2.0-cil
-* libmono-microsoft-visualbasic10.0-cil
-
-Then, simply run "mono scrotter.exe". All necessary adaptations will be handled by Scrotter.
+Get Scrotter [Here](http://yttrium-tyclief.github.com/Scrotter/)
+-----------------
 
 Development & Contribution
 --------------------------
