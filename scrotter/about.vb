@@ -53,4 +53,8 @@ Public Class about
     Private Sub LicenseBox_Click(sender As Object, e As EventArgs) Handles LicenseBox.Click
         System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/blob/master/LICENSE.creole")
     End Sub
+
+    Private Sub WebsiteBox_Click(sender As Object, e As EventArgs) Handles WebsiteBox.Click
+        System.Diagnostics.Process.Start("http://yttrium-tyclief.github.com/Scrotter/")
+    End Sub
 End Class

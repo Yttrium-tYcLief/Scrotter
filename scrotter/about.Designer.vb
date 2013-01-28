@@ -22,21 +22,23 @@ Partial Class about
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(about))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LicenseBox = New System.Windows.Forms.PictureBox()
         Me.ReportBugBox = New System.Windows.Forms.PictureBox()
         Me.GithubBox = New System.Windows.Forms.PictureBox()
+        Me.WebsiteBox = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         CType(Me.LicenseBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportBugBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GithubBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WebsiteBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
+        Me.Panel1.BackgroundImage = Global.scrotter.My.Resources.Resources.Scrotter_About
+        Me.Panel1.Controls.Add(Me.WebsiteBox)
         Me.Panel1.Controls.Add(Me.LicenseBox)
         Me.Panel1.Controls.Add(Me.ReportBugBox)
         Me.Panel1.Controls.Add(Me.GithubBox)
@@ -72,6 +74,15 @@ Partial Class about
         Me.GithubBox.TabIndex = 0
         Me.GithubBox.TabStop = False
         '
+        'WebsiteBox
+        '
+        Me.WebsiteBox.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.WebsiteBox.Location = New System.Drawing.Point(223, 300)
+        Me.WebsiteBox.Name = "WebsiteBox"
+        Me.WebsiteBox.Size = New System.Drawing.Size(103, 18)
+        Me.WebsiteBox.TabIndex = 3
+        Me.WebsiteBox.TabStop = False
+        '
         'about
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
@@ -87,6 +98,7 @@ Partial Class about
         CType(Me.LicenseBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportBugBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GithubBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WebsiteBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -94,4 +106,5 @@ Partial Class about
     Friend WithEvents LicenseBox As System.Windows.Forms.PictureBox
     Friend WithEvents ReportBugBox As System.Windows.Forms.PictureBox
     Friend WithEvents GithubBox As System.Windows.Forms.PictureBox
+    Friend WithEvents WebsiteBox As System.Windows.Forms.PictureBox
 End Class

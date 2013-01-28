@@ -169,7 +169,7 @@ Public Class adb
             IPBox4.Visible = True
             LinkLabel2.Text = "2. Install adbWireless from the Play Store."
             LinkLabel2.Links.RemoveAt(0)
-            LinkLabel2.Links.Add(32, 10, "https://play.google.com/store/apps/details?id=siir.es.adbWireless")
+            LinkLabel2.Links.Add(32, 10, "https://play.google.com/store/apps/details?id=com.teamboid.adbwireless")
             Label3.Text = "3. Launch adbWireless and, after connecting to the same network as your computer, enable it."
             Label1.Text = "4. Type in the IP shown on your device below, and then hit Capture."
             Label4.Text = ""
