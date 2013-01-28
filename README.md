@@ -1,9 +1,6 @@
-<p align="center">
-  <img src="http://ompldr.org/vaDh0aA/ScrotterLogoShrunk.png"/> <img src="http://ompldr.org/vaDU5Zw/westablenow2.png"/>
-</p>
-
 Get Scrotter [Here](http://yttrium-tyclief.github.com/Scrotter/)
 -----------------
+
 
 Development & Contribution
 --------------------------
