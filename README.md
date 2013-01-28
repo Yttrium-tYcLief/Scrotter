@@ -16,7 +16,7 @@ Get Scrotter [Here](http://yttrium-tyclief.github.com/Scrotter/)
 
 ### Contributing
 
-- Fork the project and make pull requests to the Scrotter.vb and Scrotter.Designer.vb files.
+- Fork the project and make pull requests to the vb and Designer.vb files.
 
 ### Issues & Suggestions
 
