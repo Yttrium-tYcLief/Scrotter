@@ -28,8 +28,8 @@ Public Class Scrotter
     Public SaveImg As Image = Nothing
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.5"
-    Public ReadOnly ReleaseDate As String = "2013-01-27"
+    Public ReadOnly Version As String = "0.6"
+    Public ReadOnly ReleaseDate As String = "2013-01-28"
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)

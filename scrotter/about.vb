@@ -1,7 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Net
 
-
 Public Class about
 
     <Runtime.InteropServices.StructLayout(Runtime.InteropServices.LayoutKind.Sequential)> Public Structure Side
@@ -63,19 +62,18 @@ Public Class about
         Dim wc As New WebClient
         Dim Version As String
         Dim Updater As Integer
-
-        Version = wc.DownloadString("http://site.com/fileversion.txt")
-
+        Version = wc.DownloadString("https://raw.github.com/Yttrium-tYcLief/Scrotter/master/latest/latest")
         If Version > Scrotter.Version Then
-            Updater = MessageBox.Show("There is a new verison available." & vbNewLine & "Would you like to download the latest update?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Updater = MessageBox.Show("You are currently on v" & Scrotter.Version & ", but the newest version is v" & Version & "." & vbNewLine & "Would you like to download the latest update?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If Updater = vbYes Then
-                System.Diagnostics.Process.Start("http://www.site.com/")
+                System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe")
             Else
                 GoTo final
             End If
         Else
-            MessageBox.Show("Theres no new versions!", "Updater", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("You are on the latest official version.", "Updater", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 final:
     End Sub
+
 End Class
