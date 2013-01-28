@@ -775,6 +775,7 @@ Public Class Scrotter
     Private Sub Scrotter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim t As Type = Type.[GetType]("Mono.Runtime")
         If t Is Nothing Then IsMono = False Else IsMono = True
+        about.CheckForUpdates(False)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

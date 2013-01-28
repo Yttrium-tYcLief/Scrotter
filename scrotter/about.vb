@@ -58,7 +58,11 @@ Public Class about
         System.Diagnostics.Process.Start("http://yttrium-tyclief.github.com/Scrotter/")
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles UpdateButton.Click
+    Private Sub UpdateButton_Click(sender As Object, e As EventArgs) Handles UpdateButton.Click
+        CheckForUpdates(True)
+    End Sub
+
+    Public Shared Sub CheckForUpdates(prompt As Boolean)
         Dim wc As New WebClient
         Dim Version As String
         Dim Updater As Integer
@@ -67,11 +71,16 @@ Public Class about
             Updater = MessageBox.Show("You are currently on v" & Scrotter.Version & ", but the newest version is v" & Version & "." & vbNewLine & "Would you like to download the latest update?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If Updater = vbYes Then
                 System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe")
+                If prompt = False Then
+                    Scrotter.Close()
+                End If
             Else
                 GoTo final
             End If
         Else
-            MessageBox.Show("You are on the latest official version.", "Updater", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If prompt = True Then
+                MessageBox.Show("You are on the latest official version.", "Updater", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
         End If
 final:
     End Sub
