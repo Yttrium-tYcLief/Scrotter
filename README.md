@@ -1,11 +1,9 @@
 Get Scrotter [Here](http://yttrium-tyclief.github.com/Scrotter/)
 -----------------
 
+## Development & Contribution
 
-Development & Contribution
---------------------------
-
-### Get started
+### Getting started
 
 - Clone Scrotter if you haven't already.
 - Locate the project folder on your local filesystem.
