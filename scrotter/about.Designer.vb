@@ -23,21 +23,23 @@ Partial Class about
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.UpdateButton = New System.Windows.Forms.Button()
+        Me.WebsiteBox = New System.Windows.Forms.PictureBox()
         Me.LicenseBox = New System.Windows.Forms.PictureBox()
         Me.ReportBugBox = New System.Windows.Forms.PictureBox()
         Me.GithubBox = New System.Windows.Forms.PictureBox()
-        Me.WebsiteBox = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
+        CType(Me.WebsiteBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LicenseBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReportBugBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GithubBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WebsiteBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.BackgroundImage = Global.scrotter.My.Resources.Resources.Scrotter_About
+        Me.Panel1.Controls.Add(Me.UpdateButton)
         Me.Panel1.Controls.Add(Me.WebsiteBox)
         Me.Panel1.Controls.Add(Me.LicenseBox)
         Me.Panel1.Controls.Add(Me.ReportBugBox)
@@ -46,6 +48,25 @@ Partial Class about
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(640, 335)
         Me.Panel1.TabIndex = 1
+        '
+        'UpdateButton
+        '
+        Me.UpdateButton.Location = New System.Drawing.Point(72, 297)
+        Me.UpdateButton.Name = "UpdateButton"
+        Me.UpdateButton.Size = New System.Drawing.Size(131, 24)
+        Me.UpdateButton.TabIndex = 5
+        Me.UpdateButton.Text = "Check for updates..."
+        Me.UpdateButton.UseCompatibleTextRendering = True
+        Me.UpdateButton.UseVisualStyleBackColor = True
+        '
+        'WebsiteBox
+        '
+        Me.WebsiteBox.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.WebsiteBox.Location = New System.Drawing.Point(223, 300)
+        Me.WebsiteBox.Name = "WebsiteBox"
+        Me.WebsiteBox.Size = New System.Drawing.Size(103, 18)
+        Me.WebsiteBox.TabIndex = 3
+        Me.WebsiteBox.TabStop = False
         '
         'LicenseBox
         '
@@ -74,15 +95,6 @@ Partial Class about
         Me.GithubBox.TabIndex = 0
         Me.GithubBox.TabStop = False
         '
-        'WebsiteBox
-        '
-        Me.WebsiteBox.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.WebsiteBox.Location = New System.Drawing.Point(223, 300)
-        Me.WebsiteBox.Name = "WebsiteBox"
-        Me.WebsiteBox.Size = New System.Drawing.Size(103, 18)
-        Me.WebsiteBox.TabIndex = 3
-        Me.WebsiteBox.TabStop = False
-        '
         'about
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
@@ -95,16 +107,17 @@ Partial Class about
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Scrotter"
         Me.Panel1.ResumeLayout(False)
+        CType(Me.WebsiteBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LicenseBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReportBugBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GithubBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WebsiteBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents WebsiteBox As System.Windows.Forms.PictureBox
     Friend WithEvents LicenseBox As System.Windows.Forms.PictureBox
     Friend WithEvents ReportBugBox As System.Windows.Forms.PictureBox
     Friend WithEvents GithubBox As System.Windows.Forms.PictureBox
-    Friend WithEvents WebsiteBox As System.Windows.Forms.PictureBox
+    Friend WithEvents UpdateButton As System.Windows.Forms.Button
 End Class

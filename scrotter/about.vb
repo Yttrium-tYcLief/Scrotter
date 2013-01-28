@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
+Imports System.Net
 
 
 Public Class about
@@ -56,5 +57,25 @@ Public Class about
 
     Private Sub WebsiteBox_Click(sender As Object, e As EventArgs) Handles WebsiteBox.Click
         System.Diagnostics.Process.Start("http://yttrium-tyclief.github.com/Scrotter/")
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles UpdateButton.Click
+        Dim wc As New WebClient
+        Dim Version As String
+        Dim Updater As Integer
+
+        Version = wc.DownloadString("http://site.com/fileversion.txt")
+
+        If Version > Scrotter.Version Then
+            Updater = MessageBox.Show("There is a new verison available." & vbNewLine & "Would you like to download the latest update?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If Updater = vbYes Then
+                System.Diagnostics.Process.Start("http://www.site.com/")
+            Else
+                GoTo final
+            End If
+        Else
+            MessageBox.Show("Theres no new versions!", "Updater", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+final:
     End Sub
 End Class
