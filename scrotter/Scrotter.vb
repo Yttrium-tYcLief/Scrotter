@@ -574,7 +574,6 @@ Public Class Scrotter
                     End If
                     Shadow = FetchImage(r480800)
                     IndexW = 60
-                    IndexH = 115
                 Case "Samsung Galaxy Ace, Galaxy Cooper"
                     Image1 = FetchImage("http://ompldr.org/vaDY4cA/GalaxyAce.png")
                     Shadow = FetchImage(r320480)
