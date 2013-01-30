@@ -215,6 +215,7 @@ Public Class adb
     Private Sub IPBox1_Refocus(sender As Object, e As EventArgs) Handles IPBox1.TextChanged
         If Len(IPBox1.Text) = 3 Then
             IPBox2.Focus()
+            IPBox2.SelectAll()
             IPBox1_TextChanged(Nothing, Nothing)
         End If
     End Sub
@@ -222,6 +223,7 @@ Public Class adb
     Private Sub IPBox2_Refocus(sender As Object, e As EventArgs) Handles IPBox2.TextChanged
         If Len(IPBox2.Text) = 3 Then
             IPBox3.Focus()
+            IPBox3.SelectAll()
             IPBox2_TextChanged(Nothing, Nothing)
         End If
     End Sub
@@ -229,6 +231,7 @@ Public Class adb
     Private Sub IPBox3_Refocus(sender As Object, e As EventArgs) Handles IPBox3.TextChanged
         If Len(IPBox3.Text) = 3 Then
             IPBox4.Focus()
+            IPBox4.SelectAll()
             IPBox3_TextChanged(Nothing, Nothing)
         End If
     End Sub
