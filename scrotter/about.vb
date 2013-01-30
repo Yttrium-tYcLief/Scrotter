@@ -24,6 +24,7 @@ Public Class about
             Dim result As Integer = DwmExtendFrameIntoClientArea(Me.Handle, Side)
         Catch ex As Exception
         End Try
+        WebsiteBox.TabIndex = 1
     End Sub
 
     Private Const WM_NCLBUTTONDOWN = &HA1

@@ -48,7 +48,7 @@ Partial Class Scrotter
         Me.LoadBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.LoadBtn.Name = "LoadBtn"
         Me.LoadBtn.Size = New System.Drawing.Size(75, 30)
-        Me.LoadBtn.TabIndex = 0
+        Me.LoadBtn.TabIndex = 1
         Me.LoadBtn.Text = "Browse..."
         Me.LoadBtn.UseVisualStyleBackColor = True
         '
@@ -60,7 +60,7 @@ Partial Class Scrotter
         Me.ScreenshotBox.Name = "ScreenshotBox"
         Me.ScreenshotBox.ReadOnly = True
         Me.ScreenshotBox.Size = New System.Drawing.Size(143, 20)
-        Me.ScreenshotBox.TabIndex = 1
+        Me.ScreenshotBox.TabIndex = 0
         Me.ScreenshotBox.Text = "Screenshot"
         '
         'ModelBox
@@ -72,7 +72,7 @@ Partial Class Scrotter
         Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ModelBox.Name = "ModelBox"
         Me.ModelBox.Size = New System.Drawing.Size(224, 24)
-        Me.ModelBox.TabIndex = 2
+        Me.ModelBox.TabIndex = 3
         Me.ModelBox.Text = "Device Model"
         '
         'SaveBtn
@@ -82,7 +82,7 @@ Partial Class Scrotter
         Me.SaveBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.SaveBtn.Name = "SaveBtn"
         Me.SaveBtn.Size = New System.Drawing.Size(75, 33)
-        Me.SaveBtn.TabIndex = 5
+        Me.SaveBtn.TabIndex = 10
         Me.SaveBtn.Text = "Save As..."
         Me.SaveBtn.UseVisualStyleBackColor = True
         '
@@ -109,7 +109,7 @@ Partial Class Scrotter
         Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.VariantBox.Name = "VariantBox"
         Me.VariantBox.Size = New System.Drawing.Size(224, 24)
-        Me.VariantBox.TabIndex = 7
+        Me.VariantBox.TabIndex = 4
         Me.VariantBox.Text = "Variant"
         '
         'ShadowCheckbox
@@ -121,7 +121,7 @@ Partial Class Scrotter
         Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ShadowCheckbox.Name = "ShadowCheckbox"
         Me.ShadowCheckbox.Size = New System.Drawing.Size(91, 20)
-        Me.ShadowCheckbox.TabIndex = 8
+        Me.ShadowCheckbox.TabIndex = 7
         Me.ShadowCheckbox.Text = "Edge Shadow"
         Me.ShadowCheckbox.UseVisualStyleBackColor = True
         '
@@ -134,7 +134,7 @@ Partial Class Scrotter
         Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.GlossCheckbox.Name = "GlossCheckbox"
         Me.GlossCheckbox.Size = New System.Drawing.Size(52, 20)
-        Me.GlossCheckbox.TabIndex = 9
+        Me.GlossCheckbox.TabIndex = 6
         Me.GlossCheckbox.Text = "Gloss"
         Me.GlossCheckbox.UseVisualStyleBackColor = True
         '
@@ -147,7 +147,7 @@ Partial Class Scrotter
         Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
         Me.UnderShadowCheckbox.Size = New System.Drawing.Size(97, 20)
-        Me.UnderShadowCheckbox.TabIndex = 10
+        Me.UnderShadowCheckbox.TabIndex = 8
         Me.UnderShadowCheckbox.Text = "Under Shadow"
         Me.UnderShadowCheckbox.UseVisualStyleBackColor = True
         '
@@ -172,7 +172,7 @@ Partial Class Scrotter
         Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.CaptureBtn.Name = "CaptureBtn"
         Me.CaptureBtn.Size = New System.Drawing.Size(224, 28)
-        Me.CaptureBtn.TabIndex = 12
+        Me.CaptureBtn.TabIndex = 2
         Me.CaptureBtn.Text = "Capture from Android Device"
         Me.CaptureBtn.UseVisualStyleBackColor = True
         '
@@ -185,7 +185,7 @@ Partial Class Scrotter
         Me.StretchCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.StretchCheckbox.Name = "StretchCheckbox"
         Me.StretchCheckbox.Size = New System.Drawing.Size(95, 20)
-        Me.StretchCheckbox.TabIndex = 13
+        Me.StretchCheckbox.TabIndex = 5
         Me.StretchCheckbox.Text = "Stretch Image"
         Me.StretchCheckbox.UseVisualStyleBackColor = True
         '
@@ -196,7 +196,7 @@ Partial Class Scrotter
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(28, 33)
-        Me.Button1.TabIndex = 14
+        Me.Button1.TabIndex = 9
         Me.Button1.Text = "?"
         Me.Button1.UseVisualStyleBackColor = True
         '

@@ -49,7 +49,7 @@ Partial Class adb
         Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.CaptureBtn.Name = "CaptureBtn"
         Me.CaptureBtn.Size = New System.Drawing.Size(139, 28)
-        Me.CaptureBtn.TabIndex = 0
+        Me.CaptureBtn.TabIndex = 8
         Me.CaptureBtn.Text = "Capture"
         Me.CaptureBtn.UseVisualStyleBackColor = True
         '
@@ -61,7 +61,7 @@ Partial Class adb
         Me.CancelBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.CancelBtn.Name = "CancelBtn"
         Me.CancelBtn.Size = New System.Drawing.Size(65, 28)
-        Me.CancelBtn.TabIndex = 2
+        Me.CancelBtn.TabIndex = 6
         Me.CancelBtn.Text = "Cancel"
         Me.CancelBtn.UseVisualStyleBackColor = True
         '
@@ -81,7 +81,7 @@ Partial Class adb
         Me.LinkLabel1.Location = New System.Drawing.Point(17, 49)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(268, 16)
-        Me.LinkLabel1.TabIndex = 8
+        Me.LinkLabel1.TabIndex = 0
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "Android Debug Bridge (~718KB download, one-time)"
         '
@@ -131,7 +131,7 @@ Partial Class adb
         Me.LinkLabel2.Location = New System.Drawing.Point(12, 75)
         Me.LinkLabel2.Name = "LinkLabel2"
         Me.LinkLabel2.Size = New System.Drawing.Size(281, 43)
-        Me.LinkLabel2.TabIndex = 14
+        Me.LinkLabel2.TabIndex = 1
         Me.LinkLabel2.TabStop = True
         Me.LinkLabel2.Text = "2. Install the drivers for your device. (Windows only)"
         '
@@ -143,7 +143,7 @@ Partial Class adb
         Me.ModeToggleBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ModeToggleBtn.Name = "ModeToggleBtn"
         Me.ModeToggleBtn.Size = New System.Drawing.Size(65, 28)
-        Me.ModeToggleBtn.TabIndex = 15
+        Me.ModeToggleBtn.TabIndex = 7
         Me.ModeToggleBtn.Text = "Wireless"
         Me.ModeToggleBtn.UseVisualStyleBackColor = True
         '
@@ -154,7 +154,7 @@ Partial Class adb
         Me.IPBox1.MaxLength = 3
         Me.IPBox1.Name = "IPBox1"
         Me.IPBox1.Size = New System.Drawing.Size(36, 20)
-        Me.IPBox1.TabIndex = 16
+        Me.IPBox1.TabIndex = 2
         Me.IPBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.IPBox1.Visible = False
         '
@@ -176,7 +176,7 @@ Partial Class adb
         Me.IPBox2.MaxLength = 3
         Me.IPBox2.Name = "IPBox2"
         Me.IPBox2.Size = New System.Drawing.Size(36, 20)
-        Me.IPBox2.TabIndex = 18
+        Me.IPBox2.TabIndex = 3
         Me.IPBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.IPBox2.Visible = False
         '
@@ -187,7 +187,7 @@ Partial Class adb
         Me.IPBox3.MaxLength = 3
         Me.IPBox3.Name = "IPBox3"
         Me.IPBox3.Size = New System.Drawing.Size(36, 20)
-        Me.IPBox3.TabIndex = 19
+        Me.IPBox3.TabIndex = 4
         Me.IPBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.IPBox3.Visible = False
         '
@@ -198,7 +198,7 @@ Partial Class adb
         Me.IPBox4.MaxLength = 3
         Me.IPBox4.Name = "IPBox4"
         Me.IPBox4.Size = New System.Drawing.Size(36, 20)
-        Me.IPBox4.TabIndex = 20
+        Me.IPBox4.TabIndex = 5
         Me.IPBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.IPBox4.Visible = False
         '

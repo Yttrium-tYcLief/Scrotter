@@ -54,7 +54,7 @@ Partial Class about
         Me.UpdateButton.Location = New System.Drawing.Point(72, 297)
         Me.UpdateButton.Name = "UpdateButton"
         Me.UpdateButton.Size = New System.Drawing.Size(131, 24)
-        Me.UpdateButton.TabIndex = 5
+        Me.UpdateButton.TabIndex = 0
         Me.UpdateButton.Text = "Check for updates..."
         Me.UpdateButton.UseCompatibleTextRendering = True
         Me.UpdateButton.UseVisualStyleBackColor = True
