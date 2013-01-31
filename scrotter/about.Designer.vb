@@ -40,6 +40,7 @@ Partial Class about
         Me.Panel1.AutoSize = True
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.BackgroundImage = Global.scrotter.My.Resources.Resources.Scrotter_About
+        Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel1.Controls.Add(Me.UpdateButton)
         Me.Panel1.Controls.Add(Me.WebsiteBox)
         Me.Panel1.Controls.Add(Me.LicenseBox)
