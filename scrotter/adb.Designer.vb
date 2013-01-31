@@ -45,10 +45,9 @@ Partial Class adb
         Me.CaptureBtn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CaptureBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.CaptureBtn.Location = New System.Drawing.Point(154, 240)
-        Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CaptureBtn.Location = New System.Drawing.Point(154, 202)
         Me.CaptureBtn.Name = "CaptureBtn"
-        Me.CaptureBtn.Size = New System.Drawing.Size(139, 28)
+        Me.CaptureBtn.Size = New System.Drawing.Size(141, 23)
         Me.CaptureBtn.TabIndex = 8
         Me.CaptureBtn.Text = "Capture"
         Me.CaptureBtn.UseVisualStyleBackColor = True
@@ -57,10 +56,9 @@ Partial Class adb
         '
         Me.CancelBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.CancelBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.CancelBtn.Location = New System.Drawing.Point(12, 240)
-        Me.CancelBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CancelBtn.Location = New System.Drawing.Point(12, 202)
         Me.CancelBtn.Name = "CancelBtn"
-        Me.CancelBtn.Size = New System.Drawing.Size(65, 28)
+        Me.CancelBtn.Size = New System.Drawing.Size(65, 23)
         Me.CancelBtn.TabIndex = 6
         Me.CancelBtn.Text = "Cancel"
         Me.CancelBtn.UseVisualStyleBackColor = True
@@ -68,9 +66,9 @@ Partial Class adb
         'Label2
         '
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label2.Location = New System.Drawing.Point(12, 28)
+        Me.Label2.Location = New System.Drawing.Point(13, 23)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(316, 31)
+        Me.Label2.Size = New System.Drawing.Size(316, 25)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "1. First, click below to download adb."
         '
@@ -78,9 +76,9 @@ Partial Class adb
         '
         Me.LinkLabel1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(17, 49)
+        Me.LinkLabel1.Location = New System.Drawing.Point(18, 40)
         Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(268, 16)
+        Me.LinkLabel1.Size = New System.Drawing.Size(254, 13)
         Me.LinkLabel1.TabIndex = 0
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "Android Debug Bridge (~718KB download, one-time)"
@@ -88,9 +86,9 @@ Partial Class adb
         'Label3
         '
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label3.Location = New System.Drawing.Point(12, 118)
+        Me.Label3.Location = New System.Drawing.Point(13, 96)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(281, 53)
+        Me.Label3.Size = New System.Drawing.Size(281, 43)
         Me.Label3.TabIndex = 9
         Me.Label3.Text = "3. Launch the SDK Manager at the end of setup. Check ""Android SDK platform-tools""" & _
     " and click ""Install 1 package"". Hit ""accept"", and once it finishes, close it." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
@@ -98,9 +96,9 @@ Partial Class adb
         'Label1
         '
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label1.Location = New System.Drawing.Point(12, 171)
+        Me.Label1.Location = New System.Drawing.Point(13, 139)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(281, 34)
+        Me.Label1.Size = New System.Drawing.Size(281, 28)
         Me.Label1.TabIndex = 11
         Me.Label1.Text = "4. Hit ""Browse..."" and find the platform-tools folder created in the SDK Tools di" & _
     "rectory."
@@ -108,9 +106,9 @@ Partial Class adb
         'Label4
         '
         Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.Label4.Location = New System.Drawing.Point(12, 206)
+        Me.Label4.Location = New System.Drawing.Point(13, 167)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(287, 22)
+        Me.Label4.Size = New System.Drawing.Size(287, 18)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "5. Plug in your device, wait a minute, and hit ""Capture""."
         '
@@ -118,9 +116,9 @@ Partial Class adb
         '
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label5.Font = New System.Drawing.Font("Ubuntu", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(17, 9)
+        Me.Label5.Location = New System.Drawing.Point(18, 7)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(276, 16)
+        Me.Label5.Size = New System.Drawing.Size(276, 13)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "YOUR DEVICE MUST RUN ICS OR LATER"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -128,9 +126,9 @@ Partial Class adb
         'LinkLabel2
         '
         Me.LinkLabel2.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.LinkLabel2.Location = New System.Drawing.Point(12, 75)
+        Me.LinkLabel2.Location = New System.Drawing.Point(13, 61)
         Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.Size = New System.Drawing.Size(281, 43)
+        Me.LinkLabel2.Size = New System.Drawing.Size(281, 35)
         Me.LinkLabel2.TabIndex = 1
         Me.LinkLabel2.TabStop = True
         Me.LinkLabel2.Text = "2. Install the drivers for your device. (Windows only)"
@@ -139,10 +137,9 @@ Partial Class adb
         '
         Me.ModeToggleBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ModeToggleBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ModeToggleBtn.Location = New System.Drawing.Point(83, 240)
-        Me.ModeToggleBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ModeToggleBtn.Location = New System.Drawing.Point(83, 202)
         Me.ModeToggleBtn.Name = "ModeToggleBtn"
-        Me.ModeToggleBtn.Size = New System.Drawing.Size(65, 28)
+        Me.ModeToggleBtn.Size = New System.Drawing.Size(65, 23)
         Me.ModeToggleBtn.TabIndex = 7
         Me.ModeToggleBtn.Text = "Wireless"
         Me.ModeToggleBtn.UseVisualStyleBackColor = True
@@ -150,7 +147,8 @@ Partial Class adb
         'IPBox1
         '
         Me.IPBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.IPBox1.Location = New System.Drawing.Point(82, 210)
+        Me.IPBox1.Location = New System.Drawing.Point(83, 178)
+        Me.IPBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.IPBox1.MaxLength = 3
         Me.IPBox1.Name = "IPBox1"
         Me.IPBox1.Size = New System.Drawing.Size(36, 20)
@@ -162,9 +160,9 @@ Partial Class adb
         '
         Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(55, 210)
+        Me.Label6.Location = New System.Drawing.Point(56, 178)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(21, 16)
+        Me.Label6.Size = New System.Drawing.Size(20, 13)
         Me.Label6.TabIndex = 17
         Me.Label6.Text = "IP:"
         Me.Label6.Visible = False
@@ -172,7 +170,8 @@ Partial Class adb
         'IPBox2
         '
         Me.IPBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.IPBox2.Location = New System.Drawing.Point(124, 210)
+        Me.IPBox2.Location = New System.Drawing.Point(125, 178)
+        Me.IPBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.IPBox2.MaxLength = 3
         Me.IPBox2.Name = "IPBox2"
         Me.IPBox2.Size = New System.Drawing.Size(36, 20)
@@ -183,7 +182,8 @@ Partial Class adb
         'IPBox3
         '
         Me.IPBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.IPBox3.Location = New System.Drawing.Point(166, 210)
+        Me.IPBox3.Location = New System.Drawing.Point(167, 178)
+        Me.IPBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.IPBox3.MaxLength = 3
         Me.IPBox3.Name = "IPBox3"
         Me.IPBox3.Size = New System.Drawing.Size(36, 20)
@@ -194,7 +194,8 @@ Partial Class adb
         'IPBox4
         '
         Me.IPBox4.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.IPBox4.Location = New System.Drawing.Point(208, 210)
+        Me.IPBox4.Location = New System.Drawing.Point(209, 178)
+        Me.IPBox4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.IPBox4.MaxLength = 3
         Me.IPBox4.Name = "IPBox4"
         Me.IPBox4.Size = New System.Drawing.Size(36, 20)
@@ -204,9 +205,9 @@ Partial Class adb
         '
         'adb
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(311, 287)
+        Me.ClientSize = New System.Drawing.Size(313, 240)
         Me.Controls.Add(Me.IPBox4)
         Me.Controls.Add(Me.IPBox3)
         Me.Controls.Add(Me.IPBox2)
@@ -223,8 +224,7 @@ Partial Class adb
         Me.Controls.Add(Me.CancelBtn)
         Me.Controls.Add(Me.CaptureBtn)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.MinimumSize = New System.Drawing.Size(321, 320)
+        Me.MinimumSize = New System.Drawing.Size(321, 267)
         Me.Name = "adb"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Android Capture Utility"

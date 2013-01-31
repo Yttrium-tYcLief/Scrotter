@@ -37,6 +37,7 @@ Partial Class about
         '
         'Panel1
         '
+        Me.Panel1.AutoSize = True
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.BackgroundImage = Global.scrotter.My.Resources.Resources.Scrotter_About
         Me.Panel1.Controls.Add(Me.UpdateButton)
@@ -45,15 +46,17 @@ Partial Class about
         Me.Panel1.Controls.Add(Me.ReportBugBox)
         Me.Panel1.Controls.Add(Me.GithubBox)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(640, 335)
         Me.Panel1.TabIndex = 1
         '
         'UpdateButton
         '
-        Me.UpdateButton.Location = New System.Drawing.Point(72, 297)
+        Me.UpdateButton.Location = New System.Drawing.Point(72, 298)
+        Me.UpdateButton.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.UpdateButton.Name = "UpdateButton"
-        Me.UpdateButton.Size = New System.Drawing.Size(131, 24)
+        Me.UpdateButton.Size = New System.Drawing.Size(131, 20)
         Me.UpdateButton.TabIndex = 0
         Me.UpdateButton.Text = "Check for updates..."
         Me.UpdateButton.UseCompatibleTextRendering = True
@@ -62,47 +65,51 @@ Partial Class about
         'WebsiteBox
         '
         Me.WebsiteBox.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.WebsiteBox.Location = New System.Drawing.Point(223, 300)
+        Me.WebsiteBox.Location = New System.Drawing.Point(223, 301)
+        Me.WebsiteBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.WebsiteBox.Name = "WebsiteBox"
-        Me.WebsiteBox.Size = New System.Drawing.Size(103, 18)
+        Me.WebsiteBox.Size = New System.Drawing.Size(103, 15)
         Me.WebsiteBox.TabIndex = 3
         Me.WebsiteBox.TabStop = False
         '
         'LicenseBox
         '
         Me.LicenseBox.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.LicenseBox.Location = New System.Drawing.Point(555, 300)
+        Me.LicenseBox.Location = New System.Drawing.Point(555, 301)
+        Me.LicenseBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.LicenseBox.Name = "LicenseBox"
-        Me.LicenseBox.Size = New System.Drawing.Size(64, 18)
+        Me.LicenseBox.Size = New System.Drawing.Size(64, 15)
         Me.LicenseBox.TabIndex = 2
         Me.LicenseBox.TabStop = False
         '
         'ReportBugBox
         '
         Me.ReportBugBox.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ReportBugBox.Location = New System.Drawing.Point(426, 300)
+        Me.ReportBugBox.Location = New System.Drawing.Point(426, 301)
+        Me.ReportBugBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ReportBugBox.Name = "ReportBugBox"
-        Me.ReportBugBox.Size = New System.Drawing.Size(108, 18)
+        Me.ReportBugBox.Size = New System.Drawing.Size(108, 15)
         Me.ReportBugBox.TabIndex = 1
         Me.ReportBugBox.TabStop = False
         '
         'GithubBox
         '
         Me.GithubBox.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.GithubBox.Location = New System.Drawing.Point(346, 300)
+        Me.GithubBox.Location = New System.Drawing.Point(346, 301)
+        Me.GithubBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GithubBox.Name = "GithubBox"
-        Me.GithubBox.Size = New System.Drawing.Size(61, 18)
+        Me.GithubBox.Size = New System.Drawing.Size(61, 15)
         Me.GithubBox.TabIndex = 0
         Me.GithubBox.TabStop = False
         '
         'about
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(640, 335)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "about"
@@ -114,6 +121,7 @@ Partial Class about
         CType(Me.ReportBugBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GithubBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
