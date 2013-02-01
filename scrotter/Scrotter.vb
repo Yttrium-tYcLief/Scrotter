@@ -148,14 +148,14 @@ Public Class Scrotter
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Model 1", "Model 2"})
 				VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C", "LG Optimus 2X"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C", "LG Optimus 2X", "HTC Wildfire", "HTC Wildfire S"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-			Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA", "Nokia N9"
-				UnderShadowCheckbox.Enabled = False
-				UnderShadowCheckbox.Checked = False
+            Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA"
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
 			Case "Apple iPhone 3G, 3GS"
 				GlossCheckbox.Enabled = False
 				GlossCheckbox.Checked = False
@@ -194,8 +194,12 @@ Public Class Scrotter
 			Case "HTC 8S"
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
-				VariantBox.SelectedIndex = 0
-		End Select
+                VariantBox.SelectedIndex = 0
+            Case "Nokia N9"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Black", "Cyan", "Magenta", "White"})
+                VariantBox.SelectedIndex = 0
+        End Select
 		RefreshPreview()
 	End Sub
 
@@ -605,15 +609,20 @@ Public Class Scrotter
                     IndexW = 75
                     IndexH = 172
                 Case "Nokia N9"
-                    Select Case GlossCheckbox.Checked
-                        Case True
-                            Image1 = FetchImage("http://ompldr.org/vaDY5cw/N9Gloss.png")
-                        Case False
-                            Image1 = FetchImage("http://ompldr.org/vaDY5cQ/N9.png")
+                    Select Case args.var
+                        Case "Black"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGIyeA/N9BlackGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGIydw/N9Black.png")
+                        Case "Cyan"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGIyeg/N9BlueGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGIyeQ/N9Blue.png")
+                        Case "Magenta"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGIzMw/N9PinkGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGIzMA/N9Pink.png")
+                        Case "White"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGIzNQ/N9WhiteGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGIzNA/N9White.png")
                     End Select
                     Shadow = FetchImage(r480854)
+                    Undershadow = FetchImage("http://ompldr.org/vaGIycw/N9.png")
                     IndexW = 83
-                    IndexH = 172
+                    IndexH = 173
                 Case "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II"
                     Image1 = FetchImage("http://ompldr.org/vaDY5eA/Nitro.png")
                     Shadow = FetchImage(r7201280)
@@ -717,6 +726,22 @@ Public Class Scrotter
                     Shadow = FetchImage(r480800)
                     IndexW = 93
                     IndexH = 175
+                Case "HTC Titan"
+                    Image1 = FetchImage("http://ompldr.org/vaGIycg/Titan.png")
+                    Shadow = FetchImage(r480800)
+                    Gloss = FetchImage("http://ompldr.org/vaGIydA/Titan.png")
+                    IndexW = 60
+                    IndexH = 138
+                Case "HTC Wildfire"
+                    Image1 = FetchImage("http://ompldr.org/vaDc2Zw/Wildfire.png")
+                    Shadow = FetchImage(r240320)
+                    IndexW = 43
+                    IndexH = 76
+                Case "HTC Wildfire S"
+                    Image1 = FetchImage("http://ompldr.org/vaGIzNg/WildfireS.png")
+                    Shadow = FetchImage(r320480)
+                    IndexW = 72
+                    IndexH = 123
             End Select
 			If StretchCheckbox.Checked = True Then
 				Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
