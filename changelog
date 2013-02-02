@@ -5,11 +5,15 @@ master
    Changed adbWireless link to a smaller and more efficient app.
    Add automatic and manual updating. Manual is available on the About page.
    Add index tabbing.
+   Reduced minimum window size - now 500x400. Some themes might see overlap.
+   Fixed GSIII color selection.
+   Various optimizations.
    New Devices:
 	HTC Titan
 	Nokia N9 (colors: cyan, magenta, white)
 	HTC Wildfire
 	HTC Wildfire S
+	HTC Sensation
 
 0.5
 - yttrium

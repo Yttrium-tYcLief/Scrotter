@@ -129,7 +129,7 @@ Public Class Scrotter
 			Case "Samsung Galaxy SIII"
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"White", "Blue", "Red", "Brown", "Black"})
-				VariantBox.SelectedIndex = 0
+                VariantBox.SelectedIndex = 0
 			Case "Google Nexus 7", "Google Nexus 10", "Motorola Xoom"
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Portrait", "Landscape"})
@@ -147,7 +147,7 @@ Public Class Scrotter
 			Case "Samsung Galaxy SII, Epic 4G Touch"
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Model 1", "Model 2"})
-				VariantBox.SelectedIndex = 0
+                VariantBox.SelectedIndex = 0
             Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C", "LG Optimus 2X", "HTC Wildfire", "HTC Wildfire S"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
@@ -156,17 +156,17 @@ Public Class Scrotter
             Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA"
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-			Case "Apple iPhone 3G, 3GS"
-				GlossCheckbox.Enabled = False
-				GlossCheckbox.Checked = False
-			Case "Sony Ericsson Xperia X10"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Black", "White"})
-				VariantBox.SelectedIndex = 0
-				GlossCheckbox.Enabled = False
-				GlossCheckbox.Checked = False
-				UnderShadowCheckbox.Enabled = False
-				UnderShadowCheckbox.Checked = False
+            Case "Apple iPhone 3G, 3GS"
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+            Case "Sony Ericsson Xperia X10"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Black", "White"})
+                VariantBox.SelectedIndex = 0
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
             Case "HTC Desire Z, T-Mobile G2", "Samsung Galaxy Tab 10.1", "Motorola Droid 2, Milestone 2"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Portrait", "Landscape"})
@@ -183,37 +183,44 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-			Case "Nokia Lumia 920"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Red", "Cyan", "Yellow", "Black", "White", "Grey"})
-				VariantBox.SelectedIndex = 0
-			Case "HTC 8X"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Blue", "Lime", "Red", "Black"})
-				VariantBox.SelectedIndex = 0
-			Case "HTC 8S"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
+            Case "Nokia Lumia 920"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Red", "Cyan", "Yellow", "Black", "White", "Grey"})
+                VariantBox.SelectedIndex = 0
+            Case "HTC 8X"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Blue", "Lime", "Red", "Black"})
+                VariantBox.SelectedIndex = 0
+            Case "HTC 8S"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
                 VariantBox.SelectedIndex = 0
             Case "Nokia N9"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "Cyan", "Magenta", "White"})
                 VariantBox.SelectedIndex = 0
         End Select
-		RefreshPreview()
+        RefreshPreview()
 	End Sub
 
-	Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged
-		If BackgroundDownloader.IsBusy = False Then
-			LoadImage.Image = My.Resources._301
-			Dim args As ArgumentType = New ArgumentType()
-			args.type = 1
-			args.var = VariantBox.Text
-			args.model = ModelBox.Text
-			BackgroundDownloader.RunWorkerAsync(args)
-			ShadowCheckbox.Enabled = True
-		End If
-	End Sub
+    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged
+        If ModelBox.Text = "Samsung Galaxy SIII" Then
+            Select Case VariantBox.Text
+                Case "Black", "Red", "Brown"
+                    GlossCheckbox.Enabled = False
+                    GlossCheckbox.Checked = False
+            End Select
+        End If
+        If BackgroundDownloader.IsBusy = False Then
+            LoadImage.Image = My.Resources._301
+            Dim args As ArgumentType = New ArgumentType()
+            args.type = 1
+            args.var = VariantBox.Text
+            args.model = ModelBox.Text
+            BackgroundDownloader.RunWorkerAsync(args)
+            ShadowCheckbox.Enabled = True
+        End If
+    End Sub
 
     Private Sub BackgroundDownloader_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundDownloader.DoWork
         Dim args As ArgumentType = e.Argument
@@ -271,29 +278,20 @@ Public Class Scrotter
                     Shadow = FetchImage(r7201280)
                     IndexH = 213
                 Case "Samsung Galaxy SIII"
+                    IndexW = 88
                     If args.var = "Blue" Then
                         Image1 = FetchImage("http://103.imagebam.com/download/eC8ggZEPojCVayfCF43vpQ/23245/232444255/GSIIIBlue.png")
                         Gloss = FetchImage("http://101.imagebam.com/download/XKOkcp-J1pA74-6QrUcinA/23245/232446207/GSIIIBlue.png")
-                        IndexW = 88
                     ElseIf args.var = "White" Then
                         Image1 = FetchImage("http://104.imagebam.com/download/BKXFsSBq3X47fU9nlBVAGA/23245/232444265/GSIIIWhite.png")
                         Gloss = FetchImage("http://101.imagebam.com/download/g_k_BEsUGrFjPRF_VSoTug/23245/232446208/GSIIIWhite.png")
                         IndexW = 84
                     ElseIf args.var = "Black" Then
                         Image1 = FetchImage("http://ompldr.org/vaDZnMg/GSIIIBlack.png")
-                        IndexW = 88
-                        GlossCheckbox.Enabled = False
-                        GlossCheckbox.Checked = False
                     ElseIf args.var = "Red" Then
                         Image1 = FetchImage("http://ompldr.org/vaDZnMA/GSIIIRed.png")
-                        IndexW = 88
-                        GlossCheckbox.Enabled = False
-                        GlossCheckbox.Checked = False
                     ElseIf args.var = "Brown" Then
                         Image1 = FetchImage("http://ompldr.org/vaDZnMQ/GSIIIBrown.png")
-                        IndexW = 88
-                        GlossCheckbox.Enabled = False
-                        GlossCheckbox.Checked = False
                     End If
                     Undershadow = FetchImage("http://104.imagebam.com/download/M8YSsamRuFX-UdmMMGVaRQ/23245/232449429/GSIII.png")
                     Shadow = FetchImage(r7201280)
@@ -742,6 +740,13 @@ Public Class Scrotter
                     Shadow = FetchImage(r320480)
                     IndexW = 72
                     IndexH = 123
+                Case "HTC Sensation"
+                    Image1 = FetchImage("http://ompldr.org/vaGJxcg/Sensation.png")
+                    Shadow = FetchImage(r540960)
+                    Gloss = FetchImage("http://ompldr.org/vaGJxcw/Sensation.png")
+                    Undershadow = FetchImage("http://ompldr.org/vaGJxdA/Sensation.png")
+                    IndexW = 80
+                    IndexH = 148
             End Select
 			If StretchCheckbox.Checked = True Then
 				Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
