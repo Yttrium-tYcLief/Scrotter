@@ -148,7 +148,7 @@ Public Class Scrotter
 				VariantBox.Enabled = True
 				VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C", "LG Optimus 2X", "HTC Wildfire", "HTC Wildfire S"
+            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C", "LG Optimus 2X", "HTC Wildfire", "HTC Wildfire S", "HTC Amaze 4G, Ruby"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -762,6 +762,11 @@ Public Class Scrotter
                     Undershadow = FetchImage("http://ompldr.org/vaGM2cg/Lumia800.png")
                     IndexW = 88
                     IndexH = 166
+                Case "HTC Amaze 4G, Ruby"
+                    Image1 = FetchImage("http://ompldr.org/vaGNiaw/Ruby.png")
+                    Shadow = FetchImage(r540960)
+                    IndexW = 84
+                    IndexH = 157
             End Select
 			If StretchCheckbox.Checked = True Then
 				Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
