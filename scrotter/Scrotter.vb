@@ -195,7 +195,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Blue", "Lime", "Orange", "Black"})
                 VariantBox.SelectedIndex = 0
-            Case "Nokia N9"
+            Case "Nokia N9", "Nokia Lumia 800"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "Cyan", "Magenta", "White"})
                 VariantBox.SelectedIndex = 0
@@ -747,6 +747,21 @@ Public Class Scrotter
                     Undershadow = FetchImage("http://ompldr.org/vaGJxdA/Sensation.png")
                     IndexW = 80
                     IndexH = 148
+                Case "Nokia Lumia 800"
+                    Select Case args.var
+                        Case "Black"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGM2aw/Lumia800BlackGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGM2ag/Lumia800Black.png")
+                        Case "Cyan"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGM2bQ/Lumia800BlueGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGM2bA/Lumia800Blue.png")
+                        Case "Magenta"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGM2bw/Lumia800PinkGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGM2bg/Lumia800Pink.png")
+                        Case "White"
+                            If GlossCheckbox.Checked Then Image1 = FetchImage("http://ompldr.org/vaGM2cQ/Lumia800WhiteGloss.png") Else Image1 = FetchImage("http://ompldr.org/vaGM2cA/Lumia800White.png")
+                    End Select
+                    Shadow = FetchImage(r480800)
+                    Undershadow = FetchImage("http://ompldr.org/vaGM2cg/Lumia800.png")
+                    IndexW = 88
+                    IndexH = 166
             End Select
 			If StretchCheckbox.Checked = True Then
 				Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)

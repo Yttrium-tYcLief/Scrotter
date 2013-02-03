@@ -7,6 +7,8 @@ Public Class adb
     Private adbwinapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\AdbWinApi.dll")
     Private adbwinusbapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\AdbWinUsbApi.dll")
     Private Wireless As Boolean = False
+    Private customgray As Color = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+    Private customteal As Color = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(152, Byte), Integer))
 
     Private Sub CancelBtn()
         Me.Close()
@@ -237,76 +239,76 @@ Public Class adb
     End Sub
 
     Private Sub CancelBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles CancelBtnLabel.MouseDown
-        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
-        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CancelBtnBox.BackColor = customteal
+        CancelBtnLabel.BackColor = customteal
     End Sub
 
     Private Sub CancelBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles CancelBtnLabel.MouseUp
-        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CancelBtnBox.BackColor = customgray
+        CancelBtnLabel.BackColor = customgray
         CancelBtn()
     End Sub
 
     Private Sub CancelBtnBox_MouseDown(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseDown
-        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
-        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CancelBtnBox.BackColor = customteal
+        CancelBtnLabel.BackColor = customteal
     End Sub
 
     Private Sub CancelBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseUp
-        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CancelBtnBox.BackColor = customgray
+        CancelBtnLabel.BackColor = customgray
         CancelBtn()
     End Sub
 
     Private Sub ModeToggleBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles ModeToggleBtnLabel.MouseDown
         If Scrotter.IsMono = False Then
-            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
-            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+            ModeToggleBtnBox.BackColor = customteal
+            ModeToggleBtnLabel.BackColor = customteal
         End If
     End Sub
 
     Private Sub ModeToggleBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles ModeToggleBtnLabel.MouseUp
         If Scrotter.IsMono = False Then
-            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+            ModeToggleBtnBox.BackColor = customgray
+            ModeToggleBtnLabel.BackColor = customgray
             ModeToggleBtn()
         End If
     End Sub
 
     Private Sub ModeToggleBtnBox_MouseDown(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseDown
         If Scrotter.IsMono = False Then
-            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
-            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+            ModeToggleBtnBox.BackColor = customteal
+            ModeToggleBtnLabel.BackColor = customteal
         End If
     End Sub
 
     Private Sub ModeToggleBtnBox_MouseUp(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseUp
         If Scrotter.IsMono = False Then
-            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+            ModeToggleBtnBox.BackColor = customgray
+            ModeToggleBtnLabel.BackColor = customgray
             ModeToggleBtn()
         End If
     End Sub
 
     Private Sub CaptureBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles CaptureBtnLabel.MouseDown
-        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
-        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CaptureBtnBox.BackColor = customteal
+        CaptureBtnLabel.BackColor = customteal
     End Sub
 
     Private Sub CaptureBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles CaptureBtnLabel.MouseUp
-        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CaptureBtnBox.BackColor = customgray
+        CaptureBtnLabel.BackColor = customgray
         CaptureBtn()
     End Sub
 
     Private Sub CaptureBtnBox_MouseDown(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseDown
-        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
-        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CaptureBtnBox.BackColor = customteal
+        CaptureBtnLabel.BackColor = customteal
     End Sub
 
     Private Sub CaptureBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseUp
-        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CaptureBtnBox.BackColor = customgray
+        CaptureBtnLabel.BackColor = customgray
         CaptureBtn()
     End Sub
 
