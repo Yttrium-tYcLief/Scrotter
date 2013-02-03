@@ -239,24 +239,24 @@ Public Class Scrotter
             Dim IndexH As Integer = 0
             Dim Overlay As New Bitmap(720, 1280)
             Dim r240320 As String = "http://ompldr.org/vaDc2ag/240x320.png"
-            Dim r320480 As String = "http://103.imagebam.com/download/fMTlGS2hf2yruDFhmTf4Ng/23245/232441277/320x480.png"
-            Dim r480800 As String = "http://106.imagebam.com/download/F9adygThCFRUS6W77QbOpA/23245/232441280/480x800.png"
+            Dim r320480 As String = "http://ompldr.org/vaGJ2cg/320x480.png"
+            Dim r480800 As String = "http://ompldr.org/vaDJmcQ/800x480.png"
             Dim r480854 As String = "http://ompldr.org/vaDQzag/854x480.png"
-            Dim r540960 As String = "http://107.imagebam.com/download/YhiAJ97ttnBH6Cry3vunsg/23245/232441281/540x960.png"
-            Dim r640960 As String = "http://104.imagebam.com/download/ULwqOUIcom-pbM6ODaij_A/23245/232441284/640x960.png"
-            Dim r6401136 As String = "http://107.imagebam.com/download/RndCBtk9guLnIAXusAaaWQ/23245/232441290/640x1136.png"
-            Dim r7201280 As String = "http://102.imagebam.com/download/xeX7cVyvK1Xm0azSM9Oc6g/23245/232441293/720x1280.png"
+            Dim r540960 As String = "http://ompldr.org/vaGJ2dA/540x960.png"
+            Dim r640960 As String = "http://ompldr.org/vaGJ2dQ/640x960.png"
+            Dim r6401136 As String = "http://ompldr.org/vaGJ2dg/640x1136.png"
+            Dim r7201280 As String = "http://ompldr.org/vaDJmbw/1280x720.png"
             Dim r7681024 As String = "http://ompldr.org/vaDc3MA/768x1024.png"
-            Dim r7681280 As String = "http://104.imagebam.com/download/kladtG0tmUNkYB_IyP7NIw/23245/232441298/768x1280.png"
+            Dim r7681280 As String = "http://ompldr.org/vaGJ2eQ/768x1280.png"
             Dim r800480 As String = "http://ompldr.org/vaDY4Mg/800x480.png"
-            Dim r8001280 As String = "http://104.imagebam.com/download/AMmyrqvT4tRMwJuO186JVA/23245/232443308/800x1280.png"
+            Dim r8001280 As String = "http://ompldr.org/vaGJ2eg/800x1280.png"
             Dim r854480 As String = "http://ompldr.org/vaDhxYQ/854x480.png"
             Dim r1024768 As String = "http://ompldr.org/vaDQ1eg/1024x768.png"
-            Dim r1280800 As String = "http://106.imagebam.com/download/gtT3LsbDEEYKFSzYfEKIoA/23245/232443312/1280x800.png"
+            Dim r1280800 As String = "http://ompldr.org/vaGJ3MA/1280x800.png"
             Dim r10801920 As String = "http://ompldr.org/vaDVxdA/1080x1920.png"
             Select Case args.model
                 Case "Samsung Galaxy SIII Mini"
-                    Image1 = FetchImage("http://103.imagebam.com/download/n6WF-5Igpqn605HhKYbmzQ/23245/232444262/GSIIIMini.png")
+                    Image1 = FetchImage("http://ompldr.org/vaDJmaw/SamsungGSIIIMini.png")
                     Shadow = FetchImage(r480800)
                     IndexW = 78
                     IndexH = 182
@@ -268,11 +268,11 @@ Public Class Scrotter
                 Case "HTC One X, HTC One X+"
                     If args.var = "Black" Then
                         Image1 = FetchImage("http://ompldr.org/vaDU3cQ/OneXBlack.png")
-                        Gloss = FetchImage("http://101.imagebam.com/download/--FEg5N-X5Y6nV-4phRoTg/23245/232446246/OneXBlack.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3Mw/OneXBlack.png")
                         IndexW = 113
                     ElseIf args.var = "White" Then
                         Image1 = FetchImage("http://ompldr.org/vaDU3cg/OneXWhite.png")
-                        Gloss = FetchImage("http://102.imagebam.com/download/wKBWy425OEAiViV-1_L2JQ/23245/232446251/OneXWhite.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3NA/OneXWhite.png")
                         IndexW = 115
                     End If
                     Shadow = FetchImage(r7201280)
@@ -280,11 +280,11 @@ Public Class Scrotter
                 Case "Samsung Galaxy SIII"
                     IndexW = 88
                     If args.var = "Blue" Then
-                        Image1 = FetchImage("http://103.imagebam.com/download/eC8ggZEPojCVayfCF43vpQ/23245/232444255/GSIIIBlue.png")
-                        Gloss = FetchImage("http://101.imagebam.com/download/XKOkcp-J1pA74-6QrUcinA/23245/232446207/GSIIIBlue.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3NQ/GSIIIBlue.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3Ng/GSIIIBlue.png")
                     ElseIf args.var = "White" Then
-                        Image1 = FetchImage("http://104.imagebam.com/download/BKXFsSBq3X47fU9nlBVAGA/23245/232444265/GSIIIWhite.png")
-                        Gloss = FetchImage("http://101.imagebam.com/download/g_k_BEsUGrFjPRF_VSoTug/23245/232446208/GSIIIWhite.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3Nw/GSIIIWhite.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3OQ/GSIIIWhite.png")
                         IndexW = 84
                     ElseIf args.var = "Black" Then
                         Image1 = FetchImage("http://ompldr.org/vaDZnMg/GSIIIBlack.png")
@@ -293,15 +293,15 @@ Public Class Scrotter
                     ElseIf args.var = "Brown" Then
                         Image1 = FetchImage("http://ompldr.org/vaDZnMQ/GSIIIBrown.png")
                     End If
-                    Undershadow = FetchImage("http://104.imagebam.com/download/M8YSsamRuFX-UdmMMGVaRQ/23245/232449429/GSIII.png")
+                    Undershadow = FetchImage("http://ompldr.org/vaGJ3YQ/GSIII.png")
                     Shadow = FetchImage(r7201280)
                     IndexH = 184
                 Case "Google Nexus 10"
                     If args.var = "Portrait" Then
-                        Image1 = FetchImage("http://106.imagebam.com/download/S-JHCUa600fE5YYnbQmOsw/23245/232444321/Nexus10Port.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3Yg/Nexus10Port.png")
                         Shadow = FetchImage(r8001280)
-                        Gloss = FetchImage("http://101.imagebam.com/download/xKa57gweGuSjSQVpSaIN8w/23245/232446233/Nexus10Port.png")
-                        Undershadow = FetchImage("http://102.imagebam.com/download/JnQpNQuQSEpDg50zBafe2Q/23245/232449473/Nexus10Port.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3Yw/Nexus10Port.png")
+                        Undershadow = FetchImage("http://ompldr.org/vaGJ3ZA/Nexus10Port.png")
                         IndexW = 217
                         IndexH = 223
                         Dim imgtmp As New Bitmap(800, 1280)
@@ -311,10 +311,10 @@ Public Class Scrotter
                             Image2 = imgtmp
                         End Using
                     ElseIf args.var = "Landscape" Then
-                        Image1 = FetchImage("http://106.imagebam.com/download/uLF_WIWlWDjLkGyn_FpiVw/23245/232444313/Nexus10Land.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3Zw/Nexus10Land.png")
                         Shadow = FetchImage(r1280800)
-                        Gloss = FetchImage("http://106.imagebam.com/download/fs8uO6QSqDqGIWrWW6hP5w/23245/232446230/Nexus10Land.png")
-                        Undershadow = FetchImage("http://101.imagebam.com/download/5DV_KRipd4et4lCWCxFB7A/23245/232449463/Nexus10Land.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3ZQ/Nexus10Land.png")
+                        Undershadow = FetchImage("http://ompldr.org/vaGJ3Zg/Nexus10Land.png")
                         IndexW = 227
                         IndexH = 217
                         Dim imgtmp As New Bitmap(1280, 800)
@@ -326,30 +326,30 @@ Public Class Scrotter
                     End If
                 Case "Motorola Xoom"
                     If args.var = "Portrait" Then
-                        Image1 = FetchImage("http://106.imagebam.com/download/2MtWzZ_LKUPEuIKjKZKUhg/23245/232444345/XoomPort.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3ag/XoomPort.png")
                         Shadow = FetchImage(r8001280)
-                        Gloss = FetchImage("http://104.imagebam.com/download/_LfYrvNxlAik8ZxSywJ9FA/23245/232446259/XoomPort.png")
-                        Undershadow = FetchImage("http://107.imagebam.com/download/K_IySnbIXPQaOeyJzsjB-Q/23245/232449486/XoomPort.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3aA/XoomPort.png")
+                        Undershadow = FetchImage("http://ompldr.org/vaGJ3aQ/XoomPort.png")
                         IndexW = 199
                         IndexH = 200
                     ElseIf args.var = "Landscape" Then
-                        Image1 = FetchImage("http://108.imagebam.com/download/q6odFolKw9l7-PJUBmyEgg/23245/232444343/XoomLand.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3aw/XoomLand.png")
                         Shadow = FetchImage(r1280800)
-                        Gloss = FetchImage("http://103.imagebam.com/download/n7_eccl5kkDFCmd8Zl2ZjA/23245/232446256/XoomLand.png")
-                        Undershadow = FetchImage("http://106.imagebam.com/download/fl8SMlSz5n7qEu9E9hEzVQ/23245/232449480/XoomLand.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3bA/XoomLand.png")
+                        Undershadow = FetchImage("http://ompldr.org/vaGJ3bQ/XoomLand.png")
                         IndexW = 218
                         IndexH = 191
                     End If
                 Case "Samsung Galaxy SII, Epic 4G Touch"
                     If args.var = "Model 1" Then
-                        Image1 = FetchImage("http://101.imagebam.com/download/Qb0UUK2N4n44-CeJh8dXGQ/23245/232444250/GSII.png")
-                        Gloss = FetchImage("http://102.imagebam.com/download/LyNIHOeIjKmoosD8NSq3WA/23245/232446206/GSII.png")
-                        Undershadow = FetchImage("http://108.imagebam.com/download/mNxjRHrYPTVlyly0qPOzUw/23245/232449422/GSII.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3bg/GSII.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3cA/GSII.png")
+                        Undershadow = FetchImage("http://ompldr.org/vaGJ3cQ/GSII.png")
                         IndexH = 191
                     ElseIf args.var = "Model 2" Then
-                        Image1 = FetchImage("http://101.imagebam.com/download/M3OGwFhyakGp-N6np53tKg/23245/232444234/Epic4GTouch.png")
-                        Gloss = FetchImage("http://101.imagebam.com/download/VWrOhagASv4QAaYZM0wtOw/23245/232446199/Epic4GTouch.png")
-                        Undershadow = FetchImage("http://108.imagebam.com/download/lfePLnspNi_nHn1Lz1o-zw/23245/232449410/Epic4GTouch.png")
+                        Image1 = FetchImage("http://ompldr.org/vaGJ3cg/Epic4GTouch.png")
+                        Gloss = FetchImage("http://ompldr.org/vaGJ3cw/Epic4GTouch.png")
+                        Undershadow = FetchImage("http://ompldr.org/vaGJ3dA/Epic4GTouch.png")
                         IndexH = 175
                     End If
                     Shadow = FetchImage(r480800)

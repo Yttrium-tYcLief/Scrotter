@@ -8,11 +8,11 @@ Public Class adb
     Private adbwinusbapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\AdbWinUsbApi.dll")
     Private Wireless As Boolean = False
 
-    Private Sub CancelBtn_Click(sender As Object, e As EventArgs) Handles CancelBtn.Click
+    Private Sub CancelBtn()
         Me.Close()
     End Sub
 
-    Public Sub CaptureBtn_Click(sender As Object, e As EventArgs) Handles CaptureBtn.Click
+    Public Sub CaptureBtn()
         If Scrotter.IsMono = False Then
             If File.Exists(adbpath) = False Or File.Exists(adbwinapipath) = False Or File.Exists(adbwinusbapipath) = False Then
                 MsgBox("Unable to locate ADB. Did you download it?")
@@ -103,7 +103,7 @@ Public Class adb
             LinkLabel2.Links.RemoveAt(0)
             LinkLabel2.Links.Add(3, 35, "http://developer.android.com/tools/extras/oem-usb.html")
         Else
-            ModeToggleBtn.Enabled = False
+            ModeToggleBtnLabel.Visible = False
             Label2.Text = "1. First, download and extract the Android platform-tools."
             LinkLabel1.Links.RemoveAt(0)
             LinkLabel1.Links.Add(0, 22, "http://esausilva.com/wp-content/plugins/cimy-counter/cc_redirect.php?cc=platform-tools-linux&fn=http://esausilva.com/misc/android/platform-tools-linux.tar.gz")
@@ -144,10 +144,10 @@ Public Class adb
         System.Diagnostics.Process.Start(target)
     End Sub
 
-    Private Sub ModeToggleBtn_Click(sender As Object, e As EventArgs) Handles ModeToggleBtn.Click
+    Private Sub ModeToggleBtn()
         If Wireless = True Then
             Wireless = False
-            ModeToggleBtn.Text = "Wireless"
+            ModeToggleBtnLabel.Text = "Wireless"
             Label6.Visible = False
             IPBox1.Visible = False
             IPBox2.Visible = False
@@ -161,7 +161,7 @@ Public Class adb
             Label4.Text = "5. Plug in your device, wait a minute, and hit ""Capture""."
         Else
             Wireless = True
-            ModeToggleBtn.Text = "Wired"
+            ModeToggleBtnLabel.Text = "Wired"
             Label6.Visible = True
             IPBox1.Visible = True
             IPBox2.Visible = True
@@ -235,4 +235,79 @@ Public Class adb
             IPBox3_TextChanged(Nothing, Nothing)
         End If
     End Sub
+
+    Private Sub CancelBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles CancelBtnLabel.MouseDown
+        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+    End Sub
+
+    Private Sub CancelBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles CancelBtnLabel.MouseUp
+        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CancelBtn()
+    End Sub
+
+    Private Sub CancelBtnBox_MouseDown(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseDown
+        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+    End Sub
+
+    Private Sub CancelBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseUp
+        CancelBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CancelBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CancelBtn()
+    End Sub
+
+    Private Sub ModeToggleBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles ModeToggleBtnLabel.MouseDown
+        If Scrotter.IsMono = False Then
+            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        End If
+    End Sub
+
+    Private Sub ModeToggleBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles ModeToggleBtnLabel.MouseUp
+        If Scrotter.IsMono = False Then
+            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+            ModeToggleBtn()
+        End If
+    End Sub
+
+    Private Sub ModeToggleBtnBox_MouseDown(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseDown
+        If Scrotter.IsMono = False Then
+            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        End If
+    End Sub
+
+    Private Sub ModeToggleBtnBox_MouseUp(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseUp
+        If Scrotter.IsMono = False Then
+            ModeToggleBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+            ModeToggleBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+            ModeToggleBtn()
+        End If
+    End Sub
+
+    Private Sub CaptureBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles CaptureBtnLabel.MouseDown
+        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+    End Sub
+
+    Private Sub CaptureBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles CaptureBtnLabel.MouseUp
+        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CaptureBtn()
+    End Sub
+
+    Private Sub CaptureBtnBox_MouseDown(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseDown
+        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(226, Byte), Integer))
+    End Sub
+
+    Private Sub CaptureBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseUp
+        CaptureBtnBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CaptureBtnLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        CaptureBtn()
+    End Sub
+
 End Class

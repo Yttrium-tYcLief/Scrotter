@@ -8,6 +8,7 @@ master
    Reduced minimum window size - now 500x400. Some themes might see overlap.
    Fixed GSIII color selection.
    Various optimizations.
+   Added an ICS-style theme to the ACU.
    New Devices:
 	HTC Titan
 	Nokia N9 (colors: cyan, magenta, white)
