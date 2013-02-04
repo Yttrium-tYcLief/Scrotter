@@ -30,7 +30,7 @@
 
 <script type="text/javascript">
 
-animatedcollapse.addDiv('jason', fade=1, height=300px)
+animatedcollapse.addDiv('jason', 'fade=1, height=300px')
 
 animatedcollapse.ontoggle=function($, divobj, state){ 
 }
@@ -38,6 +38,8 @@ animatedcollapse.ontoggle=function($, divobj, state){
 animatedcollapse.init()
 
 </script>
+
+
   </head>
 
   <body>
@@ -108,6 +110,7 @@ animatedcollapse.init()
 </ul>
 
 <input type="button" onclick="animatedcollapse.toggle('jason')" value="Show/Hide Credits">
+<a href="javascript:animatedcollapse.toggle('jason')"><img src="http://www.dynamicdrive.com/dynamicindex17/toggle.jpg" border="0" /></a>
 
 <div id="jason" style="width: 768px; display:none">
 <br>• iPhone 5, iPad Mini - Pixeden.com, "All our resources are royalty free for use ... can modify any resources to your liking to fit into your project"
