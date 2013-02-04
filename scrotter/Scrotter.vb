@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex West
-'Version 0.5 Public Beta
+'Version 0.6 Public Beta
 '
 'This program is free software; you can redistribute it and/or
 'modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ Public Class Scrotter
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
     Public ReadOnly Version As String = "0.6"
-    Public ReadOnly ReleaseDate As String = "2013-01-28"
+    Public ReadOnly ReleaseDate As String = "2013-02-03"
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
