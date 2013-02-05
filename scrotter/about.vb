@@ -1,5 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Net
+Imports System.Security.Cryptography.X509Certificates
+Imports System.Net.Security
 
 Public Class about
 
@@ -64,6 +66,7 @@ Public Class about
     End Sub
 
     Public Shared Sub CheckForUpdates(prompt As Boolean)
+        ServicePointManager.ServerCertificateValidationCallback = AddressOf Validator
         Dim wc As New WebClient
         Dim Version As String
         Dim Updater As Integer
@@ -85,5 +88,9 @@ Public Class about
         End If
 final:
     End Sub
+
+    Public Shared Function Validator(sender As Object, certificate As X509Certificate, chain As X509Chain, sslPolicyErrors As SslPolicyErrors) As Boolean
+        Return True
+    End Function
 
 End Class
