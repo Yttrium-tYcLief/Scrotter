@@ -56,8 +56,8 @@ Public Class ArrayPreview
                 g = Nothing
                 SaveImg = Tmpimg
             Case "Load Image"
-                'BackgroundImg = New Bitmap(OpenPath)
-                If String.IsNullOrEmpty(OpenPath) = False Then BackgroundImg = New Bitmap(OpenPath) Else BackgroundImage = New Bitmap(0, 0)
+                Dim BackgroundImg = New Bitmap(0, 0)
+                If String.IsNullOrEmpty(OpenPath) = False Then BackgroundImg = New Bitmap(OpenPath)
                 Dim Tmpimg As New Bitmap(New Bitmap(PhonesImg.Width, PhonesImg.Height, PixelFormat.Format32bppArgb))
                 Dim g As Graphics = Graphics.FromImage(Tmpimg)
                 g.Clear(Color.Transparent)
@@ -166,7 +166,7 @@ Public Class ArrayPreview
                     'g.Dispose()
                     'g = Nothing
                     'Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
-                    ArrayPreview.Close()
+                    Me.Close()
                 End If
             End If
         End If
