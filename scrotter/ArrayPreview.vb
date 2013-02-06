@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing.Imaging
 Imports System.IO
+Imports System.Drawing.Drawing2D
 
 Public Class ArrayPreview
 
@@ -13,14 +14,16 @@ Public Class ArrayPreview
     Private Sub RefreshOptions(sender As Object, e As EventArgs) Handles BackgroundType.TextChanged
         BackgroundLoadBtn.Enabled = False
         ColorPickBtn.Enabled = False
-        BackgroundImageBox.Enabled = False
+        Label2.Enabled = False
+        ImagePatternPicker.Enabled = False
         Select Case BackgroundType.Text
             Case "Transparent"
             Case "Solid Color"
                 ColorPickBtn.Enabled = True
             Case "Load Image"
                 BackgroundLoadBtn.Enabled = True
-                BackgroundImageBox.Enabled = True
+                Label2.Enabled = True
+                ImagePatternPicker.Enabled = True
         End Select
         RefreshPreview()
     End Sub
@@ -57,7 +60,55 @@ Public Class ArrayPreview
                 Dim Tmpimg As New Bitmap(New Bitmap(PhonesImg.Width, PhonesImg.Height, PixelFormat.Format32bppArgb))
                 Dim g As Graphics = Graphics.FromImage(Tmpimg)
                 g.Clear(Color.Transparent)
-                g.DrawImage(BackgroundImg, New Point(0, 0))
+                Select Case ImagePatternPicker.Text
+                    Case "Single"
+                        g.DrawImage(BackgroundImg, New Point(0, 0))
+                    Case "Stretch"
+                        Dim tmpbakgroundimg As New Bitmap(PhonesImg.Width, PhonesImg.Height)
+                        Dim resizedimg As New Bitmap(0, 0)
+                        Using graphicsHandle As Graphics = Graphics.FromImage(tmpbakgroundimg)
+                            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                            graphicsHandle.DrawImage(resizedimg, 0, 0, 1280, 800)
+                            resizedimg = tmpbakgroundimg
+                        End Using
+                        g.DrawImage(resizedimg, New Point(0, 0))
+                    Case "Tile"
+                        Dim TileBrush As New TextureBrush(BackgroundImg)
+                        TileBrush.WrapMode = Drawing2D.WrapMode.Tile
+                        Dim formGraphics As Graphics = Me.CreateGraphics()
+                        formGraphics.FillRectangle(TileBrush, New Rectangle(0, 0, PhonesImg.Width, PhonesImg.Height))
+                    Case "Zoom"
+                        Dim conformtodim As Boolean = False 'False = height, true = width
+                        'Dim toobig As Boolean = False
+                        Dim resizedimg As New Bitmap(0, 0)
+                        If ((BackgroundImg.Width / BackgroundImg.Height) < (PhonesImg.Width / PhonesImg.Height)) Then conformtodim = True
+                        'If BackgroundImg.Width > PhonesImg.Width And BackgroundImg.Height > PhonesImg.Height Then toobig = True
+                        'If toobig = False Then
+                        Dim ratio As New Integer
+                        If conformtodim = False Then
+                            ratio = (PhonesImg.Width / BackgroundImg.Width)
+                            Dim tmpbakgroundimg As New Bitmap(ratio * BackgroundImg.Width, ratio * BackgroundImg.Height)
+                            Using graphicsHandle As Graphics = Graphics.FromImage(tmpbakgroundimg)
+                                graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                                graphicsHandle.DrawImage(resizedimg, 0, 0, (ratio * BackgroundImg.Width), (ratio * BackgroundImg.Height))
+                                resizedimg = tmpbakgroundimg
+                            End Using
+                            g.DrawImage(resizedimg, New Point((0 - ((PhonesImg.Width - resizedimg.Width) / 2)), 0))
+                        Else
+                            ratio = (PhonesImg.Height / BackgroundImg.Height)
+                            Dim tmpbakgroundimg As New Bitmap(ratio * BackgroundImg.Width, ratio * BackgroundImg.Height)
+                            Using graphicsHandle As Graphics = Graphics.FromImage(tmpbakgroundimg)
+                                graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                                graphicsHandle.DrawImage(resizedimg, 0, 0, (ratio * BackgroundImg.Width), (ratio * BackgroundImg.Height))
+                                resizedimg = tmpbakgroundimg
+                            End Using
+                            g.DrawImage(resizedimg, New Point(0, (0 - ((PhonesImg.Height - resizedimg.Height) / 2))))
+                        End If
+                        'Else
+                        'insertpointw = 0 - ((BackgroundImg.Width - PhonesImg.Width) / 2)
+                        'insertpointh = 0 - ((BackgroundImg.Height - PhonesImg.Height) / 2)
+                        'End If
+                End Select
                 g.DrawImage(PhonesImg, New Point(0, 0))
                 g.Dispose()
                 g = Nothing

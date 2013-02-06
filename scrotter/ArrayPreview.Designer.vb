@@ -30,7 +30,8 @@ Partial Class ArrayPreview
         Me.ColorDialog = New System.Windows.Forms.ColorDialog()
         Me.ColorPickBtn = New System.Windows.Forms.Button()
         Me.ColorPreview = New System.Windows.Forms.PictureBox()
-        Me.BackgroundImageBox = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ImagePatternPicker = New System.Windows.Forms.ComboBox()
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ColorPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -52,9 +53,9 @@ Partial Class ArrayPreview
         'SaveButton
         '
         Me.SaveButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SaveButton.Location = New System.Drawing.Point(582, 432)
+        Me.SaveButton.Location = New System.Drawing.Point(593, 432)
         Me.SaveButton.Name = "SaveButton"
-        Me.SaveButton.Size = New System.Drawing.Size(125, 23)
+        Me.SaveButton.Size = New System.Drawing.Size(114, 23)
         Me.SaveButton.TabIndex = 8
         Me.SaveButton.Text = "Save..."
         Me.SaveButton.UseVisualStyleBackColor = True
@@ -112,23 +113,36 @@ Partial Class ArrayPreview
         Me.ColorPreview.TabIndex = 13
         Me.ColorPreview.TabStop = False
         '
-        'BackgroundImageBox
+        'Label2
         '
-        Me.BackgroundImageBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BackgroundImageBox.Location = New System.Drawing.Point(433, 434)
-        Me.BackgroundImageBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.BackgroundImageBox.Name = "BackgroundImageBox"
-        Me.BackgroundImageBox.ReadOnly = True
-        Me.BackgroundImageBox.Size = New System.Drawing.Size(147, 20)
-        Me.BackgroundImageBox.TabIndex = 14
-        Me.BackgroundImageBox.Text = "Background Image"
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Enabled = False
+        Me.Label2.Location = New System.Drawing.Point(436, 435)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(83, 16)
+        Me.Label2.TabIndex = 15
+        Me.Label2.Text = "Image Pattern:"
+        '
+        'ImagePatternPicker
+        '
+        Me.ImagePatternPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ImagePatternPicker.Enabled = False
+        Me.ImagePatternPicker.FormattingEnabled = True
+        Me.ImagePatternPicker.Items.AddRange(New Object() {"Single", "Stretch", "Tile", "Zoom"})
+        Me.ImagePatternPicker.Location = New System.Drawing.Point(525, 432)
+        Me.ImagePatternPicker.Name = "ImagePatternPicker"
+        Me.ImagePatternPicker.Size = New System.Drawing.Size(62, 24)
+        Me.ImagePatternPicker.TabIndex = 14
+        Me.ImagePatternPicker.Text = "Single"
         '
         'ArrayPreview
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(719, 467)
-        Me.Controls.Add(Me.BackgroundImageBox)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.ImagePatternPicker)
         Me.Controls.Add(Me.ColorPreview)
         Me.Controls.Add(Me.ColorPickBtn)
         Me.Controls.Add(Me.BackgroundLoadBtn)
@@ -153,5 +167,6 @@ Partial Class ArrayPreview
     Friend WithEvents ColorDialog As System.Windows.Forms.ColorDialog
     Friend WithEvents ColorPickBtn As System.Windows.Forms.Button
     Friend WithEvents ColorPreview As System.Windows.Forms.PictureBox
-    Friend WithEvents BackgroundImageBox As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents ImagePatternPicker As System.Windows.Forms.ComboBox
 End Class
