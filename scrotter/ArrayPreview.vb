@@ -5,7 +5,6 @@ Imports System.Drawing.Drawing2D
 Public Class ArrayPreview
 
     Public PhonesImg, SaveImg As Image
-    Public BackgroundImg As Bitmap
     Public SaveStream As Stream = Nothing
     Public OpenStream As Stream = Nothing
     Public SavePath, OpenPath As String
@@ -56,9 +55,10 @@ Public Class ArrayPreview
                 g = Nothing
                 SaveImg = Tmpimg
             Case "Load Image"
-                Dim BackgroundImg = New Bitmap(0, 0)
+                Dim BackgroundImg As Bitmap
+                BackgroundImg = New Bitmap(1, 1)
                 If String.IsNullOrEmpty(OpenPath) = False Then BackgroundImg = New Bitmap(OpenPath)
-                Dim Tmpimg As New Bitmap(New Bitmap(PhonesImg.Width, PhonesImg.Height, PixelFormat.Format32bppArgb))
+                Dim Tmpimg As New Bitmap(New Bitmap(PhonesImg.Width, PhonesImg.Height))
                 Dim g As Graphics = Graphics.FromImage(Tmpimg)
                 g.Clear(Color.Transparent)
                 Select Case ImagePatternPicker.Text
