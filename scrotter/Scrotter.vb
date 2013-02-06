@@ -60,66 +60,56 @@ Public Class Scrotter
     End Sub
 
     Private Sub Save(sender As Object, e As EventArgs) Handles SaveBtn.Click
+        If ScreenAmountPicker.Value > 1 Then
+            ArrayPreview.ShowDialog()
+            Exit Sub
+        End If
         Dim saveFileDialog1 As New SaveFileDialog()
         saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|All Files(*.*)|*.*" '|GIF Files(*.GIF)|*.GIF"
         saveFileDialog1.FilterIndex = 2
         saveFileDialog1.RestoreDirectory = True
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
-            If ScreenAmountPicker.Value > 1 Then
-                Dim Tmpimg As New Bitmap(New Bitmap((CanvImg(1).Width * ScreenAmountPicker.Value), CanvImg(1).Height, PixelFormat.Format32bppArgb))
-                Dim g As Graphics = Graphics.FromImage(Tmpimg)
-                g.Clear(Color.Transparent)
-                Dim number As Integer = 1
-                Do While number <= ScreenAmountPicker.Value
-                    g.DrawImage(CanvImg(number), New Point((CanvImg(1).Width * number) - CanvImg(1).Width, 0))
-                    number = number + 1
-                Loop
-                g.Dispose()
-                g = Nothing
-                SaveImg = Tmpimg
-            Else
-                SaveImg = CanvImg(ScreenPicker.Value)
+            SaveImg = CanvImg(1)
+            SaveStream = saveFileDialog1.OpenFile()
+            If (SaveStream IsNot Nothing) Then
+                SavePath = saveFileDialog1.FileName
+                SaveStream.Close()
+                RefreshLists()
+                Dim Filetype As Integer = saveFileDialog1.FilterIndex
+                Dim bm As Bitmap = SaveImg
+                If Filetype = 1 Then
+                    Dim Image3 As New Bitmap(bm.Width, bm.Height)
+                    Dim g As Graphics = Graphics.FromImage(Image3)
+                    g.Clear(Color.White)
+                    g.DrawImage(bm, New Point(0, 0))
+                    g.Dispose()
+                    g = Nothing
+                    Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Bmp)
+                ElseIf Filetype = 2 Then
+                    bm.Save(SavePath, System.Drawing.Imaging.ImageFormat.Png)
+                ElseIf Filetype = 3 Then
+                    Dim jgpEncoder As ImageCodecInfo = GetEncoder(ImageFormat.Jpeg)
+                    Dim myEncoder As System.Drawing.Imaging.Encoder = System.Drawing.Imaging.Encoder.Quality
+                    Dim myEncoderParameters As New EncoderParameters(1)
+                    Dim myEncoderParameter As New EncoderParameter(myEncoder, 98&)
+                    myEncoderParameters.Param(0) = myEncoderParameter
+                    Dim Image3 As New Bitmap(bm.Width, bm.Height)
+                    Dim g As Graphics = Graphics.FromImage(Image3)
+                    g.Clear(Color.White)
+                    g.DrawImage(bm, New Point(0, 0))
+                    g.Dispose()
+                    g = Nothing
+                    Image3.Save(SavePath, jgpEncoder, myEncoderParameters)
+                    'ElseIf Filetype = 2 Then
+                    'Dim Image3 As New Bitmap(bm.Width, bm.Height)
+                    'Dim g As Graphics = Graphics.FromImage(Image3)
+                    'g.Clear(Color.White)
+                    'g.DrawImage(bm, New Point(0, 0))
+                    'g.Dispose()
+                    'g = Nothing
+                    'Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
+                End If
             End If
-        SaveStream = saveFileDialog1.OpenFile()
-        If (SaveStream IsNot Nothing) Then
-            SavePath = saveFileDialog1.FileName
-            SaveStream.Close()
-            RefreshLists()
-            Dim Filetype As Integer = saveFileDialog1.FilterIndex
-            Dim bm As Bitmap = SaveImg
-            If Filetype = 1 Then
-                Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                Dim g As Graphics = Graphics.FromImage(Image3)
-                g.Clear(Color.White)
-                g.DrawImage(bm, New Point(0, 0))
-                g.Dispose()
-                g = Nothing
-                Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Bmp)
-            ElseIf Filetype = 2 Then
-                bm.Save(SavePath, System.Drawing.Imaging.ImageFormat.Png)
-            ElseIf Filetype = 3 Then
-                Dim jgpEncoder As ImageCodecInfo = GetEncoder(ImageFormat.Jpeg)
-                Dim myEncoder As System.Drawing.Imaging.Encoder = System.Drawing.Imaging.Encoder.Quality
-                Dim myEncoderParameters As New EncoderParameters(1)
-                Dim myEncoderParameter As New EncoderParameter(myEncoder, 98&)
-                myEncoderParameters.Param(0) = myEncoderParameter
-                Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                Dim g As Graphics = Graphics.FromImage(Image3)
-                g.Clear(Color.White)
-                g.DrawImage(bm, New Point(0, 0))
-                g.Dispose()
-                g = Nothing
-                Image3.Save(SavePath, jgpEncoder, myEncoderParameters)
-                'ElseIf Filetype = 2 Then
-                'Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                'Dim g As Graphics = Graphics.FromImage(Image3)
-                'g.Clear(Color.White)
-                'g.DrawImage(bm, New Point(0, 0))
-                'g.Dispose()
-                'g = Nothing
-                'Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
-            End If
-        End If
         End If
     End Sub
 
@@ -135,35 +125,35 @@ Public Class Scrotter
         Return Nothing
     End Function
 
-	Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
-		StretchCheckbox.Enabled = True
-		UnderShadowCheckbox.Enabled = True
-		GlossCheckbox.Enabled = True
-		VariantBox.Enabled = False
-		VariantBox.Items.Clear()
-		VariantBox.Text = "Variant"
-		Select Case ModelBox.Text
-			Case "Samsung Galaxy SIII"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"White", "Blue", "Red", "Brown", "Black"})
+    Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
+        StretchCheckbox.Enabled = True
+        UnderShadowCheckbox.Enabled = True
+        GlossCheckbox.Enabled = True
+        VariantBox.Enabled = False
+        VariantBox.Items.Clear()
+        VariantBox.Text = "Variant"
+        Select Case ModelBox.Text
+            Case "Samsung Galaxy SIII"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"White", "Blue", "Red", "Brown", "Black"})
                 VariantBox.SelectedIndex = 0
-			Case "Google Nexus 7", "Google Nexus 10", "Motorola Xoom"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Portrait", "Landscape"})
-				VariantBox.SelectedIndex = 0
-			Case "HTC One X, HTC One X+"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"White", "Black"})
-				VariantBox.SelectedIndex = 0
-				UnderShadowCheckbox.Enabled = False
-				UnderShadowCheckbox.Checked = False
-			Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPad Mini"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Black", "White"})
-				VariantBox.SelectedIndex = 0
-			Case "Samsung Galaxy SII, Epic 4G Touch"
-				VariantBox.Enabled = True
-				VariantBox.Items.AddRange({"Model 1", "Model 2"})
+            Case "Google Nexus 7", "Google Nexus 10", "Motorola Xoom"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Portrait", "Landscape"})
+                VariantBox.SelectedIndex = 0
+            Case "HTC One X, HTC One X+"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"White", "Black"})
+                VariantBox.SelectedIndex = 0
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
+            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPad Mini"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Black", "White"})
+                VariantBox.SelectedIndex = 0
+            Case "Samsung Galaxy SII, Epic 4G Touch"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
             Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "HP TouchPad", "HP Veer", "HTC Evo 3D", "HTC Vivid", "HTC Desire", "Samsung Galaxy Ace, Galaxy Cooper", "Sony Ericsson Xperia J", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "Samsung Galaxy SII Skyrocket", "HTC Evo 4G LTE", "ASUS Eee Pad Transformer", "HTC Desire C", "LG Optimus 2X", "HTC Wildfire", "HTC Wildfire S", "HTC Amaze 4G, Ruby"
                 GlossCheckbox.Enabled = False
@@ -218,7 +208,7 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
         End Select
         RefreshPreview()
-	End Sub
+    End Sub
 
     Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged, ScreenPicker.ValueChanged
         ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
@@ -860,6 +850,11 @@ Public Class Scrotter
             ScreenPicker.Value = 1
             ScreenPicker.Maximum = 1
         End If
+    End Sub
+
+    Private Sub EnableMultipleScreens(sender As Object, e As EventArgs) Handles ModelBox.TextChanged
+        ScreenAmountPicker.Enabled = True
+        ScreenPicker.Enabled = True
     End Sub
 
 End Class

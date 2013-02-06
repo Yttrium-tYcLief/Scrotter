@@ -107,6 +107,12 @@
     <Compile Include="about.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ArrayPreview.Designer.vb">
+      <DependentUpon>ArrayPreview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ArrayPreview.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Scrotter.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="adb.resx">
       <DependentUpon>adb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArrayPreview.resx">
+      <DependentUpon>ArrayPreview.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scrotter.resx">
       <DependentUpon>Scrotter.vb</DependentUpon>

@@ -79,7 +79,7 @@ Partial Class Scrotter
         Me.ModelBox.MaxDropDownItems = 16
         Me.ModelBox.Name = "ModelBox"
         Me.ModelBox.Size = New System.Drawing.Size(224, 24)
-        Me.ModelBox.TabIndex = 3
+        Me.ModelBox.TabIndex = 5
         Me.ModelBox.Text = "Device Model"
         '
         'SaveBtn
@@ -89,7 +89,7 @@ Partial Class Scrotter
         Me.SaveBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.SaveBtn.Name = "SaveBtn"
         Me.SaveBtn.Size = New System.Drawing.Size(75, 33)
-        Me.SaveBtn.TabIndex = 10
+        Me.SaveBtn.TabIndex = 12
         Me.SaveBtn.Text = "Save As..."
         Me.SaveBtn.UseVisualStyleBackColor = True
         '
@@ -116,7 +116,7 @@ Partial Class Scrotter
         Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.VariantBox.Name = "VariantBox"
         Me.VariantBox.Size = New System.Drawing.Size(224, 24)
-        Me.VariantBox.TabIndex = 4
+        Me.VariantBox.TabIndex = 6
         Me.VariantBox.Text = "Variant"
         '
         'ShadowCheckbox
@@ -128,7 +128,7 @@ Partial Class Scrotter
         Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ShadowCheckbox.Name = "ShadowCheckbox"
         Me.ShadowCheckbox.Size = New System.Drawing.Size(91, 20)
-        Me.ShadowCheckbox.TabIndex = 7
+        Me.ShadowCheckbox.TabIndex = 9
         Me.ShadowCheckbox.Text = "Edge Shadow"
         Me.ShadowCheckbox.UseVisualStyleBackColor = True
         '
@@ -141,7 +141,7 @@ Partial Class Scrotter
         Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.GlossCheckbox.Name = "GlossCheckbox"
         Me.GlossCheckbox.Size = New System.Drawing.Size(52, 20)
-        Me.GlossCheckbox.TabIndex = 6
+        Me.GlossCheckbox.TabIndex = 8
         Me.GlossCheckbox.Text = "Gloss"
         Me.GlossCheckbox.UseVisualStyleBackColor = True
         '
@@ -154,7 +154,7 @@ Partial Class Scrotter
         Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
         Me.UnderShadowCheckbox.Size = New System.Drawing.Size(97, 20)
-        Me.UnderShadowCheckbox.TabIndex = 8
+        Me.UnderShadowCheckbox.TabIndex = 10
         Me.UnderShadowCheckbox.Text = "Under Shadow"
         Me.UnderShadowCheckbox.UseVisualStyleBackColor = True
         '
@@ -168,7 +168,7 @@ Partial Class Scrotter
         Me.LoadImage.Location = New System.Drawing.Point(396, 315)
         Me.LoadImage.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.LoadImage.Name = "LoadImage"
-        Me.LoadImage.Size = New System.Drawing.Size(64, 94)
+        Me.LoadImage.Size = New System.Drawing.Size(64, 64)
         Me.LoadImage.TabIndex = 11
         Me.LoadImage.TabStop = False
         '
@@ -188,11 +188,11 @@ Partial Class Scrotter
         Me.StretchCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.StretchCheckbox.AutoSize = True
         Me.StretchCheckbox.Enabled = False
-        Me.StretchCheckbox.Location = New System.Drawing.Point(315, 519)
+        Me.StretchCheckbox.Location = New System.Drawing.Point(314, 519)
         Me.StretchCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.StretchCheckbox.Name = "StretchCheckbox"
         Me.StretchCheckbox.Size = New System.Drawing.Size(95, 20)
-        Me.StretchCheckbox.TabIndex = 5
+        Me.StretchCheckbox.TabIndex = 7
         Me.StretchCheckbox.Text = "Stretch Image"
         Me.StretchCheckbox.UseVisualStyleBackColor = True
         '
@@ -203,32 +203,37 @@ Partial Class Scrotter
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(28, 33)
-        Me.Button1.TabIndex = 9
+        Me.Button1.TabIndex = 11
         Me.Button1.Text = "?"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'ScreenAmountPicker
         '
+        Me.ScreenAmountPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ScreenAmountPicker.Enabled = False
         Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 82)
         Me.ScreenAmountPicker.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
         Me.ScreenAmountPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenAmountPicker.Name = "ScreenAmountPicker"
         Me.ScreenAmountPicker.Size = New System.Drawing.Size(36, 20)
-        Me.ScreenAmountPicker.TabIndex = 12
+        Me.ScreenAmountPicker.TabIndex = 3
         Me.ScreenAmountPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ScreenPicker
         '
+        Me.ScreenPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ScreenPicker.Enabled = False
         Me.ScreenPicker.Location = New System.Drawing.Point(505, 104)
         Me.ScreenPicker.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenPicker.Name = "ScreenPicker"
         Me.ScreenPicker.Size = New System.Drawing.Size(36, 20)
-        Me.ScreenPicker.TabIndex = 13
+        Me.ScreenPicker.TabIndex = 4
         Me.ScreenPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'Label1
         '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(398, 84)
         Me.Label1.Name = "Label1"
@@ -238,6 +243,7 @@ Partial Class Scrotter
         '
         'Label2
         '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(417, 106)
         Me.Label2.Name = "Label2"
