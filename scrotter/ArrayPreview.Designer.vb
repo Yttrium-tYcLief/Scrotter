@@ -43,9 +43,9 @@ Partial Class ArrayPreview
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Preview.InitialImage = Nothing
         Me.Preview.Location = New System.Drawing.Point(0, 0)
-        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Preview.Name = "Preview"
-        Me.Preview.Size = New System.Drawing.Size(719, 424)
+        Me.Preview.Size = New System.Drawing.Size(719, 344)
         Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Preview.TabIndex = 7
         Me.Preview.TabStop = False
@@ -53,9 +53,10 @@ Partial Class ArrayPreview
         'SaveButton
         '
         Me.SaveButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SaveButton.Location = New System.Drawing.Point(593, 432)
+        Me.SaveButton.Location = New System.Drawing.Point(593, 351)
+        Me.SaveButton.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.SaveButton.Name = "SaveButton"
-        Me.SaveButton.Size = New System.Drawing.Size(114, 23)
+        Me.SaveButton.Size = New System.Drawing.Size(114, 19)
         Me.SaveButton.TabIndex = 8
         Me.SaveButton.Text = "Save..."
         Me.SaveButton.UseVisualStyleBackColor = True
@@ -65,9 +66,10 @@ Partial Class ArrayPreview
         Me.BackgroundType.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BackgroundType.FormattingEnabled = True
         Me.BackgroundType.Items.AddRange(New Object() {"Transparent", "Solid Color", "Load Image"})
-        Me.BackgroundType.Location = New System.Drawing.Point(112, 432)
+        Me.BackgroundType.Location = New System.Drawing.Point(112, 351)
+        Me.BackgroundType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BackgroundType.Name = "BackgroundType"
-        Me.BackgroundType.Size = New System.Drawing.Size(91, 24)
+        Me.BackgroundType.Size = New System.Drawing.Size(91, 21)
         Me.BackgroundType.TabIndex = 9
         Me.BackgroundType.Text = "Transparent"
         '
@@ -75,9 +77,9 @@ Partial Class ArrayPreview
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 435)
+        Me.Label1.Location = New System.Drawing.Point(12, 353)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(94, 16)
+        Me.Label1.Size = New System.Drawing.Size(95, 13)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "Background Type:"
         '
@@ -85,9 +87,10 @@ Partial Class ArrayPreview
         '
         Me.BackgroundLoadBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BackgroundLoadBtn.Enabled = False
-        Me.BackgroundLoadBtn.Location = New System.Drawing.Point(313, 432)
+        Me.BackgroundLoadBtn.Location = New System.Drawing.Point(313, 351)
+        Me.BackgroundLoadBtn.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BackgroundLoadBtn.Name = "BackgroundLoadBtn"
-        Me.BackgroundLoadBtn.Size = New System.Drawing.Size(117, 23)
+        Me.BackgroundLoadBtn.Size = New System.Drawing.Size(117, 19)
         Me.BackgroundLoadBtn.TabIndex = 11
         Me.BackgroundLoadBtn.Text = "Load Background..."
         Me.BackgroundLoadBtn.UseVisualStyleBackColor = True
@@ -96,9 +99,10 @@ Partial Class ArrayPreview
         '
         Me.ColorPickBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ColorPickBtn.Enabled = False
-        Me.ColorPickBtn.Location = New System.Drawing.Point(209, 432)
+        Me.ColorPickBtn.Location = New System.Drawing.Point(209, 351)
+        Me.ColorPickBtn.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ColorPickBtn.Name = "ColorPickBtn"
-        Me.ColorPickBtn.Size = New System.Drawing.Size(75, 23)
+        Me.ColorPickBtn.Size = New System.Drawing.Size(75, 19)
         Me.ColorPickBtn.TabIndex = 12
         Me.ColorPickBtn.Text = "Pick Color..."
         Me.ColorPickBtn.UseVisualStyleBackColor = True
@@ -107,9 +111,10 @@ Partial Class ArrayPreview
         '
         Me.ColorPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ColorPreview.BackColor = System.Drawing.Color.Transparent
-        Me.ColorPreview.Location = New System.Drawing.Point(284, 432)
+        Me.ColorPreview.Location = New System.Drawing.Point(284, 351)
+        Me.ColorPreview.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ColorPreview.Name = "ColorPreview"
-        Me.ColorPreview.Size = New System.Drawing.Size(23, 23)
+        Me.ColorPreview.Size = New System.Drawing.Size(23, 19)
         Me.ColorPreview.TabIndex = 13
         Me.ColorPreview.TabStop = False
         '
@@ -118,9 +123,9 @@ Partial Class ArrayPreview
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Enabled = False
-        Me.Label2.Location = New System.Drawing.Point(436, 435)
+        Me.Label2.Location = New System.Drawing.Point(436, 353)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(83, 16)
+        Me.Label2.Size = New System.Drawing.Size(76, 13)
         Me.Label2.TabIndex = 15
         Me.Label2.Text = "Image Pattern:"
         '
@@ -129,18 +134,19 @@ Partial Class ArrayPreview
         Me.ImagePatternPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ImagePatternPicker.Enabled = False
         Me.ImagePatternPicker.FormattingEnabled = True
-        Me.ImagePatternPicker.Items.AddRange(New Object() {"Single", "Stretch", "Tile", "Zoom"})
-        Me.ImagePatternPicker.Location = New System.Drawing.Point(525, 432)
+        Me.ImagePatternPicker.Items.AddRange(New Object() {"Single", "Stretch", "Tile"})
+        Me.ImagePatternPicker.Location = New System.Drawing.Point(525, 351)
+        Me.ImagePatternPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ImagePatternPicker.Name = "ImagePatternPicker"
-        Me.ImagePatternPicker.Size = New System.Drawing.Size(62, 24)
+        Me.ImagePatternPicker.Size = New System.Drawing.Size(62, 21)
         Me.ImagePatternPicker.TabIndex = 14
         Me.ImagePatternPicker.Text = "Single"
         '
         'ArrayPreview
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(719, 467)
+        Me.ClientSize = New System.Drawing.Size(719, 379)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ImagePatternPicker)
         Me.Controls.Add(Me.ColorPreview)
@@ -150,7 +156,8 @@ Partial Class ArrayPreview
         Me.Controls.Add(Me.BackgroundType)
         Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.Preview)
-        Me.MinimumSize = New System.Drawing.Size(729, 250)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MinimumSize = New System.Drawing.Size(729, 210)
         Me.Name = "ArrayPreview"
         Me.Text = "Multi-Screen Editor"
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).EndInit()

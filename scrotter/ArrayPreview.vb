@@ -43,7 +43,7 @@ Public Class ArrayPreview
         RefreshPreview()
     End Sub
 
-    Private Sub RefreshPreview()
+    Private Sub RefreshPreview() Handles ImagePatternPicker.TextChanged
         Select Case BackgroundType.Text
             Case "Transparent"
                 SaveImg = PhonesImg
@@ -56,7 +56,8 @@ Public Class ArrayPreview
                 g = Nothing
                 SaveImg = Tmpimg
             Case "Load Image"
-                BackgroundImg = New Bitmap(OpenPath)
+                'BackgroundImg = New Bitmap(OpenPath)
+                If String.IsNullOrEmpty(OpenPath) = False Then BackgroundImg = New Bitmap(OpenPath) Else BackgroundImage = New Bitmap(0, 0)
                 Dim Tmpimg As New Bitmap(New Bitmap(PhonesImg.Width, PhonesImg.Height, PixelFormat.Format32bppArgb))
                 Dim g As Graphics = Graphics.FromImage(Tmpimg)
                 g.Clear(Color.Transparent)
@@ -64,19 +65,24 @@ Public Class ArrayPreview
                     Case "Single"
                         g.DrawImage(BackgroundImg, New Point(0, 0))
                     Case "Stretch"
-                        Dim tmpbakgroundimg As New Bitmap(PhonesImg.Width, PhonesImg.Height)
-                        Dim resizedimg As New Bitmap(0, 0)
-                        Using graphicsHandle As Graphics = Graphics.FromImage(tmpbakgroundimg)
+                        Dim tmpbackgroundimg As New Bitmap(PhonesImg.Width, PhonesImg.Height)
+                        Dim resizedimg As New Bitmap(BackgroundImg.Width, BackgroundImg.Height)
+                        Using graphicsHandle As Graphics = Graphics.FromImage(tmpbackgroundimg)
                             graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                            graphicsHandle.DrawImage(resizedimg, 0, 0, 1280, 800)
-                            resizedimg = tmpbakgroundimg
+                            graphicsHandle.DrawImage(BackgroundImg, 0, 0, PhonesImg.Width, PhonesImg.Height)
+                            resizedimg = tmpbackgroundimg
+                            g.DrawImage(resizedimg, New Point(0, 0))
                         End Using
-                        g.DrawImage(resizedimg, New Point(0, 0))
                     Case "Tile"
                         Dim TileBrush As New TextureBrush(BackgroundImg)
                         TileBrush.WrapMode = Drawing2D.WrapMode.Tile
-                        Dim formGraphics As Graphics = Me.CreateGraphics()
-                        formGraphics.FillRectangle(TileBrush, New Rectangle(0, 0, PhonesImg.Width, PhonesImg.Height))
+                        Dim tmpbackgroundimg As New Bitmap(PhonesImg.Width, PhonesImg.Height)
+                        Dim tiledimg As New Bitmap(PhonesImg.Width, PhonesImg.Height)
+                        Using formgraphics As Graphics = Graphics.FromImage(tmpbackgroundimg)
+                            formgraphics.FillRectangle(TileBrush, New Rectangle(0, 0, PhonesImg.Width, PhonesImg.Height))
+                            tiledimg = tmpbackgroundimg
+                            g.DrawImage(tiledimg, New Point(0, 0))
+                        End Using
                     Case "Zoom"
                         Dim conformtodim As Boolean = False 'False = height, true = width
                         'Dim toobig As Boolean = False
@@ -87,20 +93,20 @@ Public Class ArrayPreview
                         Dim ratio As New Integer
                         If conformtodim = False Then
                             ratio = (PhonesImg.Width / BackgroundImg.Width)
-                            Dim tmpbakgroundimg As New Bitmap(ratio * BackgroundImg.Width, ratio * BackgroundImg.Height)
-                            Using graphicsHandle As Graphics = Graphics.FromImage(tmpbakgroundimg)
+                            Dim tmpbackgroundimg As New Bitmap(ratio * BackgroundImg.Width, ratio * BackgroundImg.Height)
+                            Using graphicsHandle As Graphics = Graphics.FromImage(tmpbackgroundimg)
                                 graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
                                 graphicsHandle.DrawImage(resizedimg, 0, 0, (ratio * BackgroundImg.Width), (ratio * BackgroundImg.Height))
-                                resizedimg = tmpbakgroundimg
+                                resizedimg = tmpbackgroundimg
                             End Using
                             g.DrawImage(resizedimg, New Point((0 - ((PhonesImg.Width - resizedimg.Width) / 2)), 0))
                         Else
                             ratio = (PhonesImg.Height / BackgroundImg.Height)
-                            Dim tmpbakgroundimg As New Bitmap(ratio * BackgroundImg.Width, ratio * BackgroundImg.Height)
-                            Using graphicsHandle As Graphics = Graphics.FromImage(tmpbakgroundimg)
+                            Dim tmpbackgroundimg As New Bitmap(ratio * BackgroundImg.Width, ratio * BackgroundImg.Height)
+                            Using graphicsHandle As Graphics = Graphics.FromImage(tmpbackgroundimg)
                                 graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
                                 graphicsHandle.DrawImage(resizedimg, 0, 0, (ratio * BackgroundImg.Width), (ratio * BackgroundImg.Height))
-                                resizedimg = tmpbakgroundimg
+                                resizedimg = tmpbackgroundimg
                             End Using
                             g.DrawImage(resizedimg, New Point(0, (0 - ((PhonesImg.Height - resizedimg.Height) / 2))))
                         End If
@@ -160,6 +166,7 @@ Public Class ArrayPreview
                     'g.Dispose()
                     'g = Nothing
                     'Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
+                    ArrayPreview.Close()
                 End If
             End If
         End If
@@ -186,7 +193,7 @@ Public Class ArrayPreview
         End If
     End Sub
 
-    Private Sub BackgroundLoadBtn_Click(sender As Object, e As EventArgs)
+    Private Sub BackgroundLoadBtn_Click(sender As Object, e As EventArgs) Handles BackgroundLoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         Dim openFileDialog1 As New OpenFileDialog()
         openFileDialog1.Title = "Please select your background..."
@@ -199,7 +206,6 @@ Public Class ArrayPreview
                 OpenStream = openFileDialog1.OpenFile()
                 If (OpenStream IsNot Nothing) Then
                     OpenPath = openFileDialog1.FileName
-                    BackgroundImageBox.Text = OpenPath
                     RefreshPreview()
                 End If
             Catch Ex As Exception
@@ -210,4 +216,5 @@ Public Class ArrayPreview
             End Try
         End If
     End Sub
+
 End Class
