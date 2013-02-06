@@ -21,15 +21,17 @@ Imports System.Drawing.Imaging
 Imports System.Threading
 
 Public Class Scrotter
-    Public Shared OpenPath, SavePath As String
+    Public Shared OpenPath(7), SavePath As String
     Public OpenStream As Stream = Nothing
     Public SaveStream As Stream = Nothing
     Public PhoneStream As Stream = Nothing
-    Public SaveImg As Image = Nothing
+    Public SaveImg As Image
+    Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.6.1"
-    Public ReadOnly ReleaseDate As String = "2013-02-05"
+    Public ReadOnly Version As String = "0.7"
+    Public ReadOnly ReleaseDate As String = "2013-02-06"
+    Private Image(7) As String
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -44,8 +46,8 @@ Public Class Scrotter
             Try
                 OpenStream = openFileDialog1.OpenFile()
                 If (OpenStream IsNot Nothing) Then
-                    OpenPath = openFileDialog1.FileName
-                    ScreenshotBox.Text = OpenPath
+                    OpenPath(ScreenPicker.Value) = openFileDialog1.FileName
+                    ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
                     RefreshLists()
                 End If
             Catch Ex As Exception
@@ -63,46 +65,61 @@ Public Class Scrotter
         saveFileDialog1.FilterIndex = 2
         saveFileDialog1.RestoreDirectory = True
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
-            SaveStream = saveFileDialog1.OpenFile()
-            If (SaveStream IsNot Nothing) Then
-                SavePath = saveFileDialog1.FileName
-                SaveStream.Close()
-                RefreshLists()
-                Dim Filetype As Integer = saveFileDialog1.FilterIndex
-                Dim bm As Bitmap = SaveImg
-                If Filetype = 1 Then
-                    Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                    Dim g As Graphics = Graphics.FromImage(Image3)
-                    g.Clear(Color.White)
-                    g.DrawImage(bm, New Point(0, 0))
-                    g.Dispose()
-                    g = Nothing
-                    Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Bmp)
-                ElseIf Filetype = 2 Then
-                    bm.Save(SavePath, System.Drawing.Imaging.ImageFormat.Png)
-                ElseIf Filetype = 3 Then
-                    Dim jgpEncoder As ImageCodecInfo = GetEncoder(ImageFormat.Jpeg)
-                    Dim myEncoder As System.Drawing.Imaging.Encoder = System.Drawing.Imaging.Encoder.Quality
-                    Dim myEncoderParameters As New EncoderParameters(1)
-                    Dim myEncoderParameter As New EncoderParameter(myEncoder, 98&)
-                    myEncoderParameters.Param(0) = myEncoderParameter
-                    Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                    Dim g As Graphics = Graphics.FromImage(Image3)
-                    g.Clear(Color.White)
-                    g.DrawImage(bm, New Point(0, 0))
-                    g.Dispose()
-                    g = Nothing
-                    Image3.Save(SavePath, jgpEncoder, myEncoderParameters)
-                    'ElseIf Filetype = 2 Then
-                    'Dim Image3 As New Bitmap(bm.Width, bm.Height)
-                    'Dim g As Graphics = Graphics.FromImage(Image3)
-                    'g.Clear(Color.White)
-                    'g.DrawImage(bm, New Point(0, 0))
-                    'g.Dispose()
-                    'g = Nothing
-                    'Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
-                End If
+            If ScreenAmountPicker.Value > 1 Then
+                Dim Tmpimg As New Bitmap(New Bitmap((CanvImg(1).Width * ScreenAmountPicker.Value), CanvImg(1).Height, PixelFormat.Format32bppArgb))
+                Dim g As Graphics = Graphics.FromImage(Tmpimg)
+                g.Clear(Color.Transparent)
+                Dim number As Integer = 1
+                Do While number <= ScreenAmountPicker.Value
+                    g.DrawImage(CanvImg(number), New Point((CanvImg(1).Width * number) - CanvImg(1).Width, 0))
+                    number = number + 1
+                Loop
+                g.Dispose()
+                g = Nothing
+                SaveImg = Tmpimg
+            Else
+                SaveImg = CanvImg(ScreenPicker.Value)
             End If
+        SaveStream = saveFileDialog1.OpenFile()
+        If (SaveStream IsNot Nothing) Then
+            SavePath = saveFileDialog1.FileName
+            SaveStream.Close()
+            RefreshLists()
+            Dim Filetype As Integer = saveFileDialog1.FilterIndex
+            Dim bm As Bitmap = SaveImg
+            If Filetype = 1 Then
+                Dim Image3 As New Bitmap(bm.Width, bm.Height)
+                Dim g As Graphics = Graphics.FromImage(Image3)
+                g.Clear(Color.White)
+                g.DrawImage(bm, New Point(0, 0))
+                g.Dispose()
+                g = Nothing
+                Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Bmp)
+            ElseIf Filetype = 2 Then
+                bm.Save(SavePath, System.Drawing.Imaging.ImageFormat.Png)
+            ElseIf Filetype = 3 Then
+                Dim jgpEncoder As ImageCodecInfo = GetEncoder(ImageFormat.Jpeg)
+                Dim myEncoder As System.Drawing.Imaging.Encoder = System.Drawing.Imaging.Encoder.Quality
+                Dim myEncoderParameters As New EncoderParameters(1)
+                Dim myEncoderParameter As New EncoderParameter(myEncoder, 98&)
+                myEncoderParameters.Param(0) = myEncoderParameter
+                Dim Image3 As New Bitmap(bm.Width, bm.Height)
+                Dim g As Graphics = Graphics.FromImage(Image3)
+                g.Clear(Color.White)
+                g.DrawImage(bm, New Point(0, 0))
+                g.Dispose()
+                g = Nothing
+                Image3.Save(SavePath, jgpEncoder, myEncoderParameters)
+                'ElseIf Filetype = 2 Then
+                'Dim Image3 As New Bitmap(bm.Width, bm.Height)
+                'Dim g As Graphics = Graphics.FromImage(Image3)
+                'g.Clear(Color.White)
+                'g.DrawImage(bm, New Point(0, 0))
+                'g.Dispose()
+                'g = Nothing
+                'Image3.Save(SavePath, System.Drawing.Imaging.ImageFormat.Gif)
+            End If
+        End If
         End If
     End Sub
 
@@ -203,7 +220,8 @@ Public Class Scrotter
         RefreshPreview()
 	End Sub
 
-    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged
+    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged, ScreenPicker.ValueChanged
+        ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
         If ModelBox.Text = "Samsung Galaxy SIII" Then
             Select Case VariantBox.Text
                 Case "Black", "Red", "Brown"
@@ -225,13 +243,17 @@ Public Class Scrotter
     Private Sub BackgroundDownloader_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundDownloader.DoWork
         Dim args As ArgumentType = e.Argument
         If args.type = 1 Then
+            Dim ScreenCapBitmap As New Bitmap(720, 1280)
             Try
-                If String.IsNullOrEmpty(OpenPath) = False Then Image2 = New Bitmap(OpenPath)
+                If String.IsNullOrEmpty(OpenPath(ScreenPicker.Value)) = False Then
+                    Image(ScreenPicker.Value) = (OpenPath(ScreenPicker.Value))
+                    ScreenCapBitmap = New Bitmap(Image(ScreenPicker.Value))
+                End If
             Catch ex As Exception
                 MsgBox("Unable to load screenshot.")
                 Exit Sub
             End Try
-            Dim Image1 As New Bitmap(Image2)
+            Dim Image1 As New Bitmap(720, 1280)
             Dim Shadow As New Bitmap(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData("http://ompldr.org/vaDJmbw/1280x720.png"))))
             Dim Gloss As New Bitmap(720, 1280)
             Dim Undershadow As New Bitmap(720, 1280)
@@ -307,8 +329,8 @@ Public Class Scrotter
                         Dim imgtmp As New Bitmap(800, 1280)
                         Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
                             graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                            graphicsHandle.DrawImage(Image2, 0, 0, 800, 1280)
-                            Image2 = imgtmp
+                            graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 800, 1280)
+                            ScreenCapBitmap = imgtmp
                         End Using
                     ElseIf args.var = "Landscape" Then
                         Image1 = FetchImage("http://ompldr.org/vaGJ3Zw/Nexus10Land.png")
@@ -320,8 +342,8 @@ Public Class Scrotter
                         Dim imgtmp As New Bitmap(1280, 800)
                         Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
                             graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                            graphicsHandle.DrawImage(Image2, 0, 0, 1280, 800)
-                            Image2 = imgtmp
+                            graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 1280, 800)
+                            ScreenCapBitmap = imgtmp
                         End Using
                     End If
                 Case "Motorola Xoom"
@@ -502,8 +524,8 @@ Public Class Scrotter
                     Dim imgtmp As New Bitmap(212, 316)
                     Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
                         graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                        graphicsHandle.DrawImage(Image2, 0, 0, 212, 316)
-                        Image2 = imgtmp
+                        graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 212, 316)
+                        ScreenCapBitmap = imgtmp
                     End Using
                     Dim shdtmp As New Bitmap(212, 316)
                     Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
@@ -524,8 +546,8 @@ Public Class Scrotter
                     Dim imgtmp As New Bitmap(219, 271)
                     Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
                         graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                        graphicsHandle.DrawImage(Image2, 0, 0, 219, 271)
-                        Image2 = imgtmp
+                        graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 219, 271)
+                        ScreenCapBitmap = imgtmp
                     End Using
                     Dim shdtmp As New Bitmap(219, 271)
                     Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
@@ -768,28 +790,28 @@ Public Class Scrotter
                     IndexW = 84
                     IndexH = 157
             End Select
-			If StretchCheckbox.Checked = True Then
-				Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
-				Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
-					graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-					graphicsHandle.DrawImage(Image2, 0, 0, Shadow.Width, Shadow.Height)
-					Image2 = imgtmp2
-				End Using
-			End If
+            If StretchCheckbox.Checked = True Then
+                Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
+                Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
+                    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                    graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
+                    ScreenCapBitmap = imgtmp2
+                End Using
+            End If
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
             Dim g As Graphics = Graphics.FromImage(Image3)
             g.Clear(Color.Transparent)
             g.DrawImage(Background, New Point(0, 0))
             If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
-            g.DrawImage(Image2, New Point(IndexW, IndexH))
+            g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
             If ShadowCheckbox.Checked = True Then g.DrawImage(Shadow, New Point(IndexW, IndexH))
             g.DrawImage(Image1, New Point(0, 0))
             If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
             If (args.model = "Apple iPhone 5") Or (args.model = "Apple iPad Mini") Then g.DrawImage(Overlay, New Point(0, 0))
             g.Dispose()
             g = Nothing
-            SaveImg = Image3
+            CanvImg(ScreenPicker.Value) = Image3
         End If
     End Sub
 
@@ -808,7 +830,7 @@ Public Class Scrotter
     End Function
 
     Private Sub BackgroundDownloader_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundDownloader.RunWorkerCompleted
-        Preview.Image = SaveImg
+        Preview.Image = CanvImg(ScreenPicker.Value)
         LoadImage.Image = Nothing
     End Sub
 
@@ -817,7 +839,7 @@ Public Class Scrotter
     End Sub
 
     Public Shared Sub ADBCapture()
-        If Scrotter.IsMono = False Then OpenPath = (Environment.GetEnvironmentVariable("temp") & "\capture.png") Else OpenPath = "/tmp/capture.png"
+        If Scrotter.IsMono = False Then OpenPath(Scrotter.ScreenPicker.Value) = (Environment.GetEnvironmentVariable("temp") & "\capture.png") Else OpenPath(Scrotter.ScreenPicker.Value) = "/tmp/capture.png"
         Scrotter.RefreshLists()
     End Sub
 
@@ -830,4 +852,14 @@ Public Class Scrotter
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         about.ShowDialog()
     End Sub
+
+    Private Sub ScreenAmountPicker_ValueChanged(sender As Object, e As EventArgs) Handles ScreenAmountPicker.ValueChanged
+        If ScreenAmountPicker.Value > 1 Then
+            ScreenPicker.Maximum = ScreenAmountPicker.Value
+        Else
+            ScreenPicker.Value = 1
+            ScreenPicker.Maximum = 1
+        End If
+    End Sub
+
 End Class

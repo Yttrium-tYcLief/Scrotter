@@ -37,8 +37,14 @@ Partial Class Scrotter
         Me.CaptureBtn = New System.Windows.Forms.Button()
         Me.StretchCheckbox = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ScreenAmountPicker = New System.Windows.Forms.NumericUpDown()
+        Me.ScreenPicker = New System.Windows.Forms.NumericUpDown()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoadImage, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LoadBtn
@@ -55,7 +61,7 @@ Partial Class Scrotter
         'ScreenshotBox
         '
         Me.ScreenshotBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ScreenshotBox.Location = New System.Drawing.Point(317, 17)
+        Me.ScreenshotBox.Location = New System.Drawing.Point(317, 22)
         Me.ScreenshotBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ScreenshotBox.Name = "ScreenshotBox"
         Me.ScreenshotBox.ReadOnly = True
@@ -68,7 +74,7 @@ Partial Class Scrotter
         Me.ModelBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ModelBox.FormattingEnabled = True
         Me.ModelBox.Items.AddRange(New Object() {"Apple iPad Mini", "Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "ASUS Eee Pad Transformer", "Google Nexus 4", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HP TouchPad", "HP Veer", "HTC 8S", "HTC 8X", "HTC Amaze 4G, Ruby", "HTC Desire", "HTC Desire C", "HTC Desire HD, HTC Inspire 4G", "HTC Desire Z, T-Mobile G2", "HTC Droid DNA", "HTC Evo 3D", "HTC Evo 4G LTE", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "HTC Sensation", "HTC Titan", "HTC Vivid", "HTC Wildfire", "HTC Wildfire S", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "LG Optimus 2X", "Motorola Droid 2, Milestone 2", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Nokia Lumia 800", "Nokia Lumia 920", "Nokia N9", "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G", "Samsung Galaxy Ace, Galaxy Cooper", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SII Skyrocket", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy Tab 10.1", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia J", "Sony Ericsson Xperia X10"})
-        Me.ModelBox.Location = New System.Drawing.Point(317, 114)
+        Me.ModelBox.Location = New System.Drawing.Point(317, 126)
         Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ModelBox.MaxDropDownItems = 16
         Me.ModelBox.Name = "ModelBox"
@@ -201,11 +207,53 @@ Partial Class Scrotter
         Me.Button1.Text = "?"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'ScreenAmountPicker
+        '
+        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 82)
+        Me.ScreenAmountPicker.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
+        Me.ScreenAmountPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenAmountPicker.Name = "ScreenAmountPicker"
+        Me.ScreenAmountPicker.Size = New System.Drawing.Size(36, 20)
+        Me.ScreenAmountPicker.TabIndex = 12
+        Me.ScreenAmountPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'ScreenPicker
+        '
+        Me.ScreenPicker.Location = New System.Drawing.Point(505, 104)
+        Me.ScreenPicker.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenPicker.Name = "ScreenPicker"
+        Me.ScreenPicker.Size = New System.Drawing.Size(36, 20)
+        Me.ScreenPicker.TabIndex = 13
+        Me.ScreenPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(398, 84)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(101, 16)
+        Me.Label1.TabIndex = 14
+        Me.Label1.Text = "Number of Screens"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(417, 106)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(82, 16)
+        Me.Label2.TabIndex = 15
+        Me.Label2.Text = "Current Screen"
+        '
         'Scrotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(559, 619)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ScreenPicker)
+        Me.Controls.Add(Me.ScreenAmountPicker)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.StretchCheckbox)
         Me.Controls.Add(Me.CaptureBtn)
@@ -228,6 +276,8 @@ Partial Class Scrotter
         Me.Text = "Scrotter"
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoadImage, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -243,8 +293,12 @@ Partial Class Scrotter
     Friend WithEvents UnderShadowCheckbox As System.Windows.Forms.CheckBox
     Friend WithEvents BackgroundDownloader As System.ComponentModel.BackgroundWorker
     Friend WithEvents LoadImage As System.Windows.Forms.PictureBox
-	Friend WithEvents CaptureBtn As System.Windows.Forms.Button
+    Friend WithEvents CaptureBtn As System.Windows.Forms.Button
     Friend WithEvents StretchCheckbox As System.Windows.Forms.CheckBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ScreenAmountPicker As System.Windows.Forms.NumericUpDown
+    Friend WithEvents ScreenPicker As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
 
 End Class

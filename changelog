@@ -1,3 +1,7 @@
+master
+- yttrium
+   Added support for multiple screen output in an array.
+
 0.6.1
 - yttrium
    Fixed a fatal crash on GNU/Linux related to SSL validation.
