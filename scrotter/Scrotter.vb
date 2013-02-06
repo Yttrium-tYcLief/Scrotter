@@ -129,6 +129,7 @@ Public Class Scrotter
         StretchCheckbox.Enabled = True
         UnderShadowCheckbox.Enabled = True
         GlossCheckbox.Enabled = True
+        ShadowCheckbox.Enabled = True
         VariantBox.Enabled = False
         VariantBox.Items.Clear()
         VariantBox.Text = "Variant"
@@ -226,7 +227,6 @@ Public Class Scrotter
             args.var = VariantBox.Text
             args.model = ModelBox.Text
             BackgroundDownloader.RunWorkerAsync(args)
-            ShadowCheckbox.Enabled = True
         End If
     End Sub
 
@@ -846,9 +846,11 @@ Public Class Scrotter
     Private Sub ScreenAmountPicker_ValueChanged(sender As Object, e As EventArgs) Handles ScreenAmountPicker.ValueChanged
         If ScreenAmountPicker.Value > 1 Then
             ScreenPicker.Maximum = ScreenAmountPicker.Value
+            SaveBtn.Text = "Save Multiple Screens As..."
         Else
             ScreenPicker.Value = 1
             ScreenPicker.Maximum = 1
+            SaveBtn.Text = "Save As..."
         End If
     End Sub
 
