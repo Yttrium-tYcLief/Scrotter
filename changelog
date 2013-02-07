@@ -1,3 +1,7 @@
+0.7.2
+- yttrium
+   Fix ADB capture not opening.
+
 0.7.1
 - yttrium
    Fixed crash with blank images when saving multiple screens.

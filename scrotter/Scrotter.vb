@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex West
-'Version 0.7.1 Public Beta
+'Version 0.7.2 Public Beta
 '
 'This program is free software; you can redistribute it and/or
 'modify it under the terms of the GNU General Public License
@@ -29,8 +29,8 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.7.1"
-    Public ReadOnly ReleaseDate As String = "2013-02-06"
+    Public ReadOnly Version As String = "0.7.2"
+    Public ReadOnly ReleaseDate As String = "2013-02-07"
     Private Image(7) As String
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
@@ -829,7 +829,7 @@ Public Class Scrotter
         LoadImage.Image = Nothing
     End Sub
 
-    Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
         adb.ShowDialog()
     End Sub
 
