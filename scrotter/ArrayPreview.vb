@@ -158,7 +158,7 @@ Public Class ArrayPreview
                     g.Dispose()
                     g = Nothing
                     Image3.Save(SavePath, jgpEncoder, myEncoderParameters)
-                    'ElseIf Filetype = 2 Then
+                ElseIf Filetype = 2 Then
                     'Dim Image3 As New Bitmap(bm.Width, bm.Height)
                     'Dim g As Graphics = Graphics.FromImage(Image3)
                     'g.Clear(Color.White)

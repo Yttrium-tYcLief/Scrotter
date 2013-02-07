@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex West
-'Version 0.6 Public Beta
+'Version 0.7 Public Beta
 '
 'This program is free software; you can redistribute it and/or
 'modify it under the terms of the GNU General Public License
@@ -824,7 +824,7 @@ Public Class Scrotter
         LoadImage.Image = Nothing
     End Sub
 
-    Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
+    Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         adb.ShowDialog()
     End Sub
 
@@ -855,8 +855,13 @@ Public Class Scrotter
     End Sub
 
     Private Sub EnableMultipleScreens(sender As Object, e As EventArgs) Handles ModelBox.TextChanged
-        ScreenAmountPicker.Enabled = True
-        ScreenPicker.Enabled = True
+        If Scrotter.IsMono = False Then
+            ScreenAmountPicker.Enabled = True
+            ScreenPicker.Enabled = True
+        End If
     End Sub
 
+    Private Sub RefreshPreview(sender As Object, e As EventArgs) Handles VariantBox.SelectedValueChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, ScreenPicker.ValueChanged
+
+    End Sub
 End Class

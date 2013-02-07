@@ -34,17 +34,17 @@ Partial Class Scrotter
         Me.UnderShadowCheckbox = New System.Windows.Forms.CheckBox()
         Me.BackgroundDownloader = New System.ComponentModel.BackgroundWorker()
         Me.LoadImage = New System.Windows.Forms.PictureBox()
-        Me.CaptureBtn = New System.Windows.Forms.Button()
         Me.StretchCheckbox = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ScreenAmountPicker = New System.Windows.Forms.NumericUpDown()
-        Me.ScreenPicker = New System.Windows.Forms.NumericUpDown()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.CaptureBtn = New System.Windows.Forms.Button()
+        Me.ScreenPicker = New System.Windows.Forms.NumericUpDown()
+        Me.ScreenAmountPicker = New System.Windows.Forms.NumericUpDown()
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoadImage, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LoadBtn
@@ -172,17 +172,6 @@ Partial Class Scrotter
         Me.LoadImage.TabIndex = 11
         Me.LoadImage.TabStop = False
         '
-        'CaptureBtn
-        '
-        Me.CaptureBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CaptureBtn.Location = New System.Drawing.Point(317, 50)
-        Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.CaptureBtn.Name = "CaptureBtn"
-        Me.CaptureBtn.Size = New System.Drawing.Size(224, 28)
-        Me.CaptureBtn.TabIndex = 2
-        Me.CaptureBtn.Text = "Capture from Android Device"
-        Me.CaptureBtn.UseVisualStyleBackColor = True
-        '
         'StretchCheckbox
         '
         Me.StretchCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -207,30 +196,6 @@ Partial Class Scrotter
         Me.Button1.Text = "?"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'ScreenAmountPicker
-        '
-        Me.ScreenAmountPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ScreenAmountPicker.Enabled = False
-        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 82)
-        Me.ScreenAmountPicker.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
-        Me.ScreenAmountPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ScreenAmountPicker.Name = "ScreenAmountPicker"
-        Me.ScreenAmountPicker.Size = New System.Drawing.Size(36, 20)
-        Me.ScreenAmountPicker.TabIndex = 3
-        Me.ScreenAmountPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'ScreenPicker
-        '
-        Me.ScreenPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ScreenPicker.Enabled = False
-        Me.ScreenPicker.Location = New System.Drawing.Point(505, 106)
-        Me.ScreenPicker.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ScreenPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ScreenPicker.Name = "ScreenPicker"
-        Me.ScreenPicker.Size = New System.Drawing.Size(36, 20)
-        Me.ScreenPicker.TabIndex = 4
-        Me.ScreenPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'Label1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -251,18 +216,53 @@ Partial Class Scrotter
         Me.Label2.TabIndex = 15
         Me.Label2.Text = "Current Screen"
         '
+        'CaptureBtn
+        '
+        Me.CaptureBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CaptureBtn.Location = New System.Drawing.Point(317, 50)
+        Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CaptureBtn.Name = "CaptureBtn"
+        Me.CaptureBtn.Size = New System.Drawing.Size(224, 28)
+        Me.CaptureBtn.TabIndex = 2
+        Me.CaptureBtn.Text = "Capture from Android Device"
+        Me.CaptureBtn.UseVisualStyleBackColor = True
+        '
+        'ScreenPicker
+        '
+        Me.ScreenPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ScreenPicker.Enabled = False
+        Me.ScreenPicker.Location = New System.Drawing.Point(505, 106)
+        Me.ScreenPicker.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenPicker.Name = "ScreenPicker"
+        Me.ScreenPicker.Size = New System.Drawing.Size(36, 20)
+        Me.ScreenPicker.TabIndex = 4
+        Me.ScreenPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'ScreenAmountPicker
+        '
+        Me.ScreenAmountPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ScreenAmountPicker.Enabled = False
+        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 82)
+        Me.ScreenAmountPicker.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
+        Me.ScreenAmountPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenAmountPicker.Name = "ScreenAmountPicker"
+        Me.ScreenAmountPicker.Size = New System.Drawing.Size(36, 20)
+        Me.ScreenAmountPicker.TabIndex = 3
+        Me.ScreenAmountPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'Scrotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(559, 619)
+        Me.Controls.Add(Me.CaptureBtn)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ScreenPicker)
         Me.Controls.Add(Me.ScreenAmountPicker)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.StretchCheckbox)
-        Me.Controls.Add(Me.CaptureBtn)
         Me.Controls.Add(Me.LoadImage)
         Me.Controls.Add(Me.UnderShadowCheckbox)
         Me.Controls.Add(Me.GlossCheckbox)
@@ -282,8 +282,8 @@ Partial Class Scrotter
         Me.Text = "Scrotter"
         CType(Me.Preview, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoadImage, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -299,12 +299,12 @@ Partial Class Scrotter
     Friend WithEvents UnderShadowCheckbox As System.Windows.Forms.CheckBox
     Friend WithEvents BackgroundDownloader As System.ComponentModel.BackgroundWorker
     Friend WithEvents LoadImage As System.Windows.Forms.PictureBox
-    Friend WithEvents CaptureBtn As System.Windows.Forms.Button
     Friend WithEvents StretchCheckbox As System.Windows.Forms.CheckBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents ScreenAmountPicker As System.Windows.Forms.NumericUpDown
-    Friend WithEvents ScreenPicker As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents CaptureBtn As System.Windows.Forms.Button
+    Friend WithEvents ScreenPicker As System.Windows.Forms.NumericUpDown
+    Friend WithEvents ScreenAmountPicker As System.Windows.Forms.NumericUpDown
 
 End Class
