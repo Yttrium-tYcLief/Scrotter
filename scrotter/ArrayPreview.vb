@@ -188,7 +188,8 @@ Public Class ArrayPreview
         Dim result As DialogResult = ColorDialog.ShowDialog()
         If result = DialogResult.OK Then
             ImgBackgroundColor = ColorDialog.Color
-            ColorPreview.BackColor = ImgBackgroundColor
+            ColorPickBtn.BackColor = ImgBackgroundColor
+            ColorPickBtn.ForeColor = Color.FromArgb(255 - ImgBackgroundColor.R, 255 - ImgBackgroundColor.G, 255 - ImgBackgroundColor.B)
             RefreshPreview()
         End If
     End Sub

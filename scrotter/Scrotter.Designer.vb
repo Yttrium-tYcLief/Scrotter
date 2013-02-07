@@ -50,19 +50,21 @@ Partial Class Scrotter
         'LoadBtn
         '
         Me.LoadBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LoadBtn.Location = New System.Drawing.Point(466, 17)
-        Me.LoadBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.LoadBtn.BackColor = System.Drawing.Color.Transparent
+        Me.LoadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.LoadBtn.Location = New System.Drawing.Point(466, 14)
+        Me.LoadBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.LoadBtn.Name = "LoadBtn"
-        Me.LoadBtn.Size = New System.Drawing.Size(75, 30)
+        Me.LoadBtn.Size = New System.Drawing.Size(75, 24)
         Me.LoadBtn.TabIndex = 1
         Me.LoadBtn.Text = "Browse..."
-        Me.LoadBtn.UseVisualStyleBackColor = True
+        Me.LoadBtn.UseVisualStyleBackColor = False
         '
         'ScreenshotBox
         '
         Me.ScreenshotBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ScreenshotBox.Location = New System.Drawing.Point(317, 22)
-        Me.ScreenshotBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.ScreenshotBox.Location = New System.Drawing.Point(317, 18)
+        Me.ScreenshotBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ScreenshotBox.Name = "ScreenshotBox"
         Me.ScreenshotBox.ReadOnly = True
         Me.ScreenshotBox.Size = New System.Drawing.Size(143, 20)
@@ -72,23 +74,25 @@ Partial Class Scrotter
         'ModelBox
         '
         Me.ModelBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ModelBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ModelBox.FormattingEnabled = True
         Me.ModelBox.Items.AddRange(New Object() {"Apple iPad Mini", "Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "ASUS Eee Pad Transformer", "Google Nexus 4", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HP TouchPad", "HP Veer", "HTC 8S", "HTC 8X", "HTC Amaze 4G, Ruby", "HTC Desire", "HTC Desire C", "HTC Desire HD, HTC Inspire 4G", "HTC Desire Z, T-Mobile G2", "HTC Droid DNA", "HTC Evo 3D", "HTC Evo 4G LTE", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "HTC Sensation", "HTC Titan", "HTC Vivid", "HTC Wildfire", "HTC Wildfire S", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "LG Optimus 2X", "Motorola Droid 2, Milestone 2", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Nokia Lumia 800", "Nokia Lumia 920", "Nokia N9", "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G", "Samsung Galaxy Ace, Galaxy Cooper", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SII Skyrocket", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy Tab 10.1", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia J", "Sony Ericsson Xperia X10"})
-        Me.ModelBox.Location = New System.Drawing.Point(317, 130)
-        Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.ModelBox.Location = New System.Drawing.Point(317, 106)
+        Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ModelBox.MaxDropDownItems = 16
         Me.ModelBox.Name = "ModelBox"
-        Me.ModelBox.Size = New System.Drawing.Size(224, 24)
+        Me.ModelBox.Size = New System.Drawing.Size(224, 21)
         Me.ModelBox.TabIndex = 5
         Me.ModelBox.Text = "Device Model"
         '
         'SaveBtn
         '
         Me.SaveBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SaveBtn.Location = New System.Drawing.Point(361, 573)
-        Me.SaveBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SaveBtn.Location = New System.Drawing.Point(361, 466)
+        Me.SaveBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.SaveBtn.Name = "SaveBtn"
-        Me.SaveBtn.Size = New System.Drawing.Size(186, 33)
+        Me.SaveBtn.Size = New System.Drawing.Size(186, 27)
         Me.SaveBtn.TabIndex = 12
         Me.SaveBtn.Text = "Save As..."
         Me.SaveBtn.UseVisualStyleBackColor = True
@@ -100,9 +104,9 @@ Partial Class Scrotter
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Preview.InitialImage = Nothing
         Me.Preview.Location = New System.Drawing.Point(0, 0)
-        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Preview.Name = "Preview"
-        Me.Preview.Size = New System.Drawing.Size(302, 619)
+        Me.Preview.Size = New System.Drawing.Size(302, 503)
         Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Preview.TabIndex = 6
         Me.Preview.TabStop = False
@@ -111,11 +115,12 @@ Partial Class Scrotter
         '
         Me.VariantBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.VariantBox.Enabled = False
+        Me.VariantBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.VariantBox.FormattingEnabled = True
-        Me.VariantBox.Location = New System.Drawing.Point(317, 156)
-        Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.VariantBox.Location = New System.Drawing.Point(317, 127)
+        Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.VariantBox.Name = "VariantBox"
-        Me.VariantBox.Size = New System.Drawing.Size(224, 24)
+        Me.VariantBox.Size = New System.Drawing.Size(224, 21)
         Me.VariantBox.TabIndex = 6
         Me.VariantBox.Text = "Variant"
         '
@@ -124,10 +129,11 @@ Partial Class Scrotter
         Me.ShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ShadowCheckbox.AutoSize = True
         Me.ShadowCheckbox.Enabled = False
-        Me.ShadowCheckbox.Location = New System.Drawing.Point(317, 544)
-        Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.ShadowCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ShadowCheckbox.Location = New System.Drawing.Point(317, 442)
+        Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ShadowCheckbox.Name = "ShadowCheckbox"
-        Me.ShadowCheckbox.Size = New System.Drawing.Size(91, 20)
+        Me.ShadowCheckbox.Size = New System.Drawing.Size(90, 17)
         Me.ShadowCheckbox.TabIndex = 9
         Me.ShadowCheckbox.Text = "Edge Shadow"
         Me.ShadowCheckbox.UseVisualStyleBackColor = True
@@ -137,10 +143,11 @@ Partial Class Scrotter
         Me.GlossCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GlossCheckbox.AutoSize = True
         Me.GlossCheckbox.Enabled = False
-        Me.GlossCheckbox.Location = New System.Drawing.Point(414, 525)
-        Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.GlossCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.GlossCheckbox.Location = New System.Drawing.Point(413, 425)
+        Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GlossCheckbox.Name = "GlossCheckbox"
-        Me.GlossCheckbox.Size = New System.Drawing.Size(52, 20)
+        Me.GlossCheckbox.Size = New System.Drawing.Size(49, 17)
         Me.GlossCheckbox.TabIndex = 8
         Me.GlossCheckbox.Text = "Gloss"
         Me.GlossCheckbox.UseVisualStyleBackColor = True
@@ -150,10 +157,11 @@ Partial Class Scrotter
         Me.UnderShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UnderShadowCheckbox.AutoSize = True
         Me.UnderShadowCheckbox.Enabled = False
-        Me.UnderShadowCheckbox.Location = New System.Drawing.Point(414, 544)
-        Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.UnderShadowCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.UnderShadowCheckbox.Location = New System.Drawing.Point(413, 442)
+        Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
-        Me.UnderShadowCheckbox.Size = New System.Drawing.Size(97, 20)
+        Me.UnderShadowCheckbox.Size = New System.Drawing.Size(94, 17)
         Me.UnderShadowCheckbox.TabIndex = 10
         Me.UnderShadowCheckbox.Text = "Under Shadow"
         Me.UnderShadowCheckbox.UseVisualStyleBackColor = True
@@ -165,10 +173,10 @@ Partial Class Scrotter
         '
         Me.LoadImage.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.LoadImage.InitialImage = Nothing
-        Me.LoadImage.Location = New System.Drawing.Point(396, 320)
-        Me.LoadImage.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.LoadImage.Location = New System.Drawing.Point(396, 260)
+        Me.LoadImage.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.LoadImage.Name = "LoadImage"
-        Me.LoadImage.Size = New System.Drawing.Size(64, 64)
+        Me.LoadImage.Size = New System.Drawing.Size(64, 52)
         Me.LoadImage.TabIndex = 11
         Me.LoadImage.TabStop = False
         '
@@ -177,10 +185,11 @@ Partial Class Scrotter
         Me.StretchCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.StretchCheckbox.AutoSize = True
         Me.StretchCheckbox.Enabled = False
-        Me.StretchCheckbox.Location = New System.Drawing.Point(317, 525)
-        Me.StretchCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.StretchCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.StretchCheckbox.Location = New System.Drawing.Point(317, 425)
+        Me.StretchCheckbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.StretchCheckbox.Name = "StretchCheckbox"
-        Me.StretchCheckbox.Size = New System.Drawing.Size(95, 20)
+        Me.StretchCheckbox.Size = New System.Drawing.Size(89, 17)
         Me.StretchCheckbox.TabIndex = 7
         Me.StretchCheckbox.Text = "Stretch Image"
         Me.StretchCheckbox.UseVisualStyleBackColor = True
@@ -188,10 +197,10 @@ Partial Class Scrotter
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(317, 573)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(317, 466)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(38, 33)
+        Me.Button1.Size = New System.Drawing.Size(38, 27)
         Me.Button1.TabIndex = 11
         Me.Button1.Text = "?"
         Me.Button1.UseVisualStyleBackColor = True
@@ -200,9 +209,9 @@ Partial Class Scrotter
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(398, 84)
+        Me.Label1.Location = New System.Drawing.Point(398, 68)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(101, 16)
+        Me.Label1.Size = New System.Drawing.Size(98, 13)
         Me.Label1.TabIndex = 14
         Me.Label1.Text = "Number of Screens"
         '
@@ -210,19 +219,19 @@ Partial Class Scrotter
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(417, 108)
+        Me.Label2.Location = New System.Drawing.Point(417, 88)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 16)
+        Me.Label2.Size = New System.Drawing.Size(78, 13)
         Me.Label2.TabIndex = 15
         Me.Label2.Text = "Current Screen"
         '
         'CaptureBtn
         '
         Me.CaptureBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CaptureBtn.Location = New System.Drawing.Point(317, 50)
-        Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CaptureBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CaptureBtn.Location = New System.Drawing.Point(317, 41)
         Me.CaptureBtn.Name = "CaptureBtn"
-        Me.CaptureBtn.Size = New System.Drawing.Size(224, 28)
+        Me.CaptureBtn.Size = New System.Drawing.Size(224, 23)
         Me.CaptureBtn.TabIndex = 2
         Me.CaptureBtn.Text = "Capture from Android Device"
         Me.CaptureBtn.UseVisualStyleBackColor = True
@@ -231,7 +240,8 @@ Partial Class Scrotter
         '
         Me.ScreenPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ScreenPicker.Enabled = False
-        Me.ScreenPicker.Location = New System.Drawing.Point(505, 106)
+        Me.ScreenPicker.Location = New System.Drawing.Point(505, 86)
+        Me.ScreenPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ScreenPicker.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenPicker.Name = "ScreenPicker"
@@ -243,7 +253,8 @@ Partial Class Scrotter
         '
         Me.ScreenAmountPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ScreenAmountPicker.Enabled = False
-        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 82)
+        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 67)
+        Me.ScreenAmountPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ScreenAmountPicker.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
         Me.ScreenAmountPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenAmountPicker.Name = "ScreenAmountPicker"
@@ -253,9 +264,9 @@ Partial Class Scrotter
         '
         'Scrotter
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(559, 619)
+        Me.ClientSize = New System.Drawing.Size(559, 503)
         Me.Controls.Add(Me.CaptureBtn)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -274,8 +285,8 @@ Partial Class Scrotter
         Me.Controls.Add(Me.ScreenshotBox)
         Me.Controls.Add(Me.LoadBtn)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.MinimumSize = New System.Drawing.Size(500, 400)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(500, 332)
         Me.Name = "Scrotter"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
