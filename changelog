@@ -1,3 +1,8 @@
+0.7.1
+- yttrium
+   Fixed crash with blank images when saving multiple screens.
+   Enabled Linux support which I wrongly believed was broken.
+
 0.7
 - yttrium
    Added support for multiple screen output in an array. [Windows-only]

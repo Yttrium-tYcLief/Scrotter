@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex West
-'Version 0.7 Public Beta
+'Version 0.7.1 Public Beta
 '
 'This program is free software; you can redistribute it and/or
 'modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.7"
+    Public ReadOnly Version As String = "0.7.1"
     Public ReadOnly ReleaseDate As String = "2013-02-06"
     Private Image(7) As String
 
@@ -61,6 +61,11 @@ Public Class Scrotter
 
     Private Sub Save(sender As Object, e As EventArgs) Handles SaveBtn.Click
         If ScreenAmountPicker.Value > 1 Then
+            Dim number As Integer = 1
+            Do While number <= ScreenAmountPicker.Value
+                If CanvImg(number) Is Nothing Then CanvImg(number) = New Bitmap(CanvImg(1).Width, CanvImg(1).Height)
+                number = number + 1
+            Loop
             ArrayPreview.ShowDialog()
             Exit Sub
         End If
@@ -855,13 +860,8 @@ Public Class Scrotter
     End Sub
 
     Private Sub EnableMultipleScreens(sender As Object, e As EventArgs) Handles ModelBox.TextChanged
-        If Scrotter.IsMono = False Then
-            ScreenAmountPicker.Enabled = True
-            ScreenPicker.Enabled = True
-        End If
+        ScreenAmountPicker.Enabled = True
+        ScreenPicker.Enabled = True
     End Sub
 
-    Private Sub RefreshPreview(sender As Object, e As EventArgs) Handles VariantBox.SelectedValueChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, ScreenPicker.ValueChanged
-
-    End Sub
 End Class
