@@ -60,30 +60,33 @@ animatedcollapse.init()
 
 <p>The name "Scrotter" is a portmanteau: SCReenshOT framER.</p>
 
-<h2>Using Scrotter</h2>
+<h2>Installing Scrotter</h2>
+<h3>On Windows</h3>
 
 <ol>
 <li>Install Microsoft <a href="http://www.microsoft.com/en-us/download/details.aspx?id=17851">.NET Framework 4</a>.</li>
 <li>Download the latest compiled release by clicking the button to the right, or download any version from our <a href="https://www.dropbox.com/sh/uforojjgr491o9a/Yiz3sjfDt5">archive</a>.</li>
-<li>Open your screenshot, pick your phone model, and select any modifications you want to make to the image (gloss, rotation, variants).</li>
-<li>Save the file.</li>
 </ol><p>Scrotter supports .BMP, .JPG, .PNG, and .GIF.</p>
 
 <p>You can read the changelog <a href="https://raw.github.com/Yttrium-tYcLief/Scrotter/master/changelog">here</a>.</p>
 
 <p>You can see what devices are currently supported <a href="https://github.com/Yttrium-tYcLief/Scrotter/wiki/Supported-Devices">here</a>.</p>
 
-<h2>Using Scrotter in Mono (GNU/Linux)</h2>
+<h3>On GNU/Linux or OS X with Mono</h3>
 
-<p>To use Scrotter, you must first install <a href="http://www.go-mono.com/mono-downloads/download.html">Mono</a>.</p>
-
-<p>It may also be required to install the following (or equivalent) packages using your package manager of choice:</p>
-
-<ul>
-<li>libmono-winforms2.0-cil</li>
-<li>libmono-microsoft-visualbasic10.0-cil</li>
-</ul><p>Then, simply run "mono scrotter.exe". All necessary adaptations will be handled by Scrotter.</p>
+<ol>
+<li>&nbsp;Install <a href="http://www.go-mono.com/mono-downloads/download.html">Mono</a>.</li>
+    <li>Install the packages <code>libmono-winforms2.0-cil</code> and <code>libmono-microsoft-visualbasic10.0-cil</code> through your package manager of choice.</li>
+    <li>Run <code>mono scrotter.exe</code>.</li>
+</ol>
             <p>Please note: GNU/Linux is supported, but is not always tested. Scrotter may entirely fail to run under a Mono environment and, if that is the case, please submit an issue report. Please be sure to also try reverting to an older version of Scrotter, in order to check for possible environment issues.</p>
+<h3>On GNU/Linux or OS X with Wine</h3>
+
+<ol>
+<li>&nbsp;Install <a href="http://www.winehq.org/download/">Wine</a> and <a href="http://wiki.winehq.org/winetricks">winetricks</a>.</li>
+    <li>Execute <code>winetricks dotnet40 gdiplus</code> and install the package <code>lib32-libxml2</code> through your package manager of choice.</li>
+    <li>Run <code>wine scrotter.exe</code>.</li>
+</ol>
 
 <h2>Development &amp; Contribution</h2>
 
