@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex West
-'Version 0.7.2 Public Beta
+'Version 0.8 Public Beta
 '
 'This program is free software; you can redistribute it and/or
 'modify it under the terms of the GNU General Public License
@@ -29,8 +29,8 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.7.2"
-    Public ReadOnly ReleaseDate As String = "2013-02-07"
+    Public ReadOnly Version As String = "0.8"
+    Public ReadOnly ReleaseDate As String = "2013-02-10"
     Private Image(7) As String
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
@@ -70,6 +70,7 @@ Public Class Scrotter
             Exit Sub
         End If
         Dim saveFileDialog1 As New SaveFileDialog()
+        saveFileDialog1.FileName = "Scrotter_" & DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") & ".png"
         saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|All Files(*.*)|*.*" '|GIF Files(*.GIF)|*.GIF"
         saveFileDialog1.FilterIndex = 2
         saveFileDialog1.RestoreDirectory = True
