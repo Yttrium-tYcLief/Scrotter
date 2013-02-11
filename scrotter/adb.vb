@@ -3,9 +3,9 @@ Imports System.Net
 
 Public Class adb
 
-    Private adbpath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\adb.exe")
-    Private adbwinapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\AdbWinApi.dll")
-    Private adbwinusbapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\AdbWinUsbApi.dll")
+    Private adbpath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter" & Path.DirectorySeparatorChar & "adb.exe")
+    Private adbwinapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter" & Path.DirectorySeparatorChar & "AdbWinApi.dll")
+    Private adbwinusbapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter" & Path.DirectorySeparatorChar & "AdbWinUsbApi.dll")
     Private Wireless As Boolean = False
     Private customgray As Color = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
     Private customteal As Color = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(152, Byte), Integer))
@@ -38,7 +38,7 @@ Public Class adb
             Dim imgcap As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = adbpath, _
-            .Arguments = "shell /system/bin/screencap -p /sdcard/screenshot.png", _
+            .Arguments = "shell " & Path.DirectorySeparatorChar & "system" & Path.DirectorySeparatorChar & "bin" & Path.DirectorySeparatorChar & "screencap -p " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgcap.Start()
@@ -47,14 +47,14 @@ Public Class adb
                 Exit Sub
             End Try
             imgcap.WaitForExit()
-            If File.Exists(Environment.GetEnvironmentVariable("temp") & "\capture.png") Then
+            If File.Exists(Environment.GetEnvironmentVariable("temp") & Path.DirectorySeparatorChar & "capture.png") Then
                 Scrotter.Image2.Dispose()
-                My.Computer.FileSystem.DeleteFile(Environment.GetEnvironmentVariable("temp") & "\capture.png")
+                My.Computer.FileSystem.DeleteFile(Environment.GetEnvironmentVariable("temp") & Path.DirectorySeparatorChar & "capture.png")
             End If
             Dim imgconv As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = adbpath, _
-            .Arguments = "pull /sdcard/screenshot.png " & tempPath & "\capture.png", _
+            .Arguments = "pull " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png " & tempPath & Path.DirectorySeparatorChar & "capture.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgconv.Start()
@@ -64,11 +64,11 @@ Public Class adb
             End Try
             imgconv.WaitForExit()
         Else
-            Dim tempPath As String = "/tmp/"
+            Dim tempPath As String = Path.DirectorySeparatorChar & "tmp" & Path.DirectorySeparatorChar
             Dim imgcap As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = "adb", _
-            .Arguments = "shell /system/bin/screencap -p /sdcard/screenshot.png", _
+            .Arguments = "shell " & Path.DirectorySeparatorChar & "system" & Path.DirectorySeparatorChar & "bin" & Path.DirectorySeparatorChar & "screencap -p " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgcap.Start()
@@ -84,7 +84,7 @@ Public Class adb
             Dim imgconv As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = "adb", _
-            .Arguments = "pull /sdcard/screenshot.png " & tempPath & "capture.png", _
+            .Arguments = "pull " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png " & tempPath & "capture.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgconv.Start()
@@ -122,21 +122,19 @@ Public Class adb
     Private Sub linkLabel1_LinkClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Me.LinkLabel1.Links(LinkLabel1.Links.IndexOf(e.Link)).Visited = True
         If Scrotter.IsMono = False Then
-            If (System.IO.Directory.Exists((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter"))) = False Then
-                System.IO.Directory.CreateDirectory((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\"))
-            End If
-            Using webClient = New WebClient()
-                Dim bytes = webClient.DownloadData("https://dl.dropbox.com/s/x2jx44l3h3a4t5e/adb.exe")
-                File.WriteAllBytes((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\adb.exe"), bytes)
-                bytes = webClient.DownloadData("https://dl.dropbox.com/s/xuc6r4fjhl2ye60/AdbWinApi.dll")
-                File.WriteAllBytes((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\AdbWinApi.dll"), bytes)
-                bytes = webClient.DownloadData("https://dl.dropbox.com/s/db2f6ha8waca2fm/AdbWinUsbApi.dll")
-                File.WriteAllBytes((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\Scrotter\AdbWinUsbApi.dll"), bytes)
-            End Using
-            MsgBox("Download complete.")
+            If (System.IO.Directory.Exists((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter"))) = False Then System.IO.Directory.CreateDirectory((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter"))
+        Using webClient = New WebClient()
+            Dim bytes = webClient.DownloadData("https://dl.dropbox.com/s/x2jx44l3h3a4t5e/adb.exe")
+            File.WriteAllBytes((adbpath), bytes)
+            bytes = webClient.DownloadData("https://dl.dropbox.com/s/xuc6r4fjhl2ye60/AdbWinApi.dll")
+            File.WriteAllBytes((adbwinapipath), bytes)
+            bytes = webClient.DownloadData("https://dl.dropbox.com/s/db2f6ha8waca2fm/AdbWinUsbApi.dll")
+            File.WriteAllBytes((adbwinusbapipath), bytes)
+        End Using
+        MsgBox("Download complete.")
         Else
-            Dim target As String = CType(e.Link.LinkData, String)
-            System.Diagnostics.Process.Start(target)
+        Dim target As String = CType(e.Link.LinkData, String)
+        System.Diagnostics.Process.Start(target)
         End If
     End Sub
 
@@ -238,36 +236,25 @@ Public Class adb
         End If
     End Sub
 
-    Private Sub CancelBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles CancelBtnLabel.MouseDown
+    Private Sub CancelBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseDown, CancelBtnLabel.MouseDown
         CancelBtnBox.BackColor = customteal
         CancelBtnLabel.BackColor = customteal
     End Sub
 
-    Private Sub CancelBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles CancelBtnLabel.MouseUp
+    Private Sub CancelBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseUp, CancelBtnLabel.MouseUp
         CancelBtnBox.BackColor = customgray
         CancelBtnLabel.BackColor = customgray
         CancelBtn()
     End Sub
 
-    Private Sub CancelBtnBox_MouseDown(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseDown
-        CancelBtnBox.BackColor = customteal
-        CancelBtnLabel.BackColor = customteal
-    End Sub
-
-    Private Sub CancelBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CancelBtnBox.MouseUp
-        CancelBtnBox.BackColor = customgray
-        CancelBtnLabel.BackColor = customgray
-        CancelBtn()
-    End Sub
-
-    Private Sub ModeToggleBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles ModeToggleBtnLabel.MouseDown
+    Private Sub ModeToggleBtnBox_MouseDown(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseDown, ModeToggleBtnLabel.MouseDown
         If Scrotter.IsMono = False Then
             ModeToggleBtnBox.BackColor = customteal
             ModeToggleBtnLabel.BackColor = customteal
         End If
     End Sub
 
-    Private Sub ModeToggleBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles ModeToggleBtnLabel.MouseUp
+    Private Sub ModeToggleBtnBox_MouseUp(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseUp, ModeToggleBtnLabel.MouseUp
         If Scrotter.IsMono = False Then
             ModeToggleBtnBox.BackColor = customgray
             ModeToggleBtnLabel.BackColor = customgray
@@ -275,38 +262,12 @@ Public Class adb
         End If
     End Sub
 
-    Private Sub ModeToggleBtnBox_MouseDown(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseDown
-        If Scrotter.IsMono = False Then
-            ModeToggleBtnBox.BackColor = customteal
-            ModeToggleBtnLabel.BackColor = customteal
-        End If
-    End Sub
-
-    Private Sub ModeToggleBtnBox_MouseUp(sender As Object, e As EventArgs) Handles ModeToggleBtnBox.MouseUp
-        If Scrotter.IsMono = False Then
-            ModeToggleBtnBox.BackColor = customgray
-            ModeToggleBtnLabel.BackColor = customgray
-            ModeToggleBtn()
-        End If
-    End Sub
-
-    Private Sub CaptureBtnLabel_MouseDown(sender As Object, e As EventArgs) Handles CaptureBtnLabel.MouseDown
+    Private Sub CaptureBtnBox_MouseDown(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseDown, CaptureBtnLabel.MouseDown
         CaptureBtnBox.BackColor = customteal
         CaptureBtnLabel.BackColor = customteal
     End Sub
 
-    Private Sub CaptureBtnLabel_MouseUp(sender As Object, e As EventArgs) Handles CaptureBtnLabel.MouseUp
-        CaptureBtnBox.BackColor = customgray
-        CaptureBtnLabel.BackColor = customgray
-        CaptureBtn()
-    End Sub
-
-    Private Sub CaptureBtnBox_MouseDown(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseDown
-        CaptureBtnBox.BackColor = customteal
-        CaptureBtnLabel.BackColor = customteal
-    End Sub
-
-    Private Sub CaptureBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseUp
+    Private Sub CaptureBtnBox_MouseUp(sender As Object, e As EventArgs) Handles CaptureBtnBox.MouseUp, CaptureBtnLabel.MouseUp
         CaptureBtnBox.BackColor = customgray
         CaptureBtnLabel.BackColor = customgray
         CaptureBtn()

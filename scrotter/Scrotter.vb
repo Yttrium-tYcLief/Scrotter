@@ -835,7 +835,7 @@ Public Class Scrotter
     End Sub
 
     Public Shared Sub ADBCapture()
-        If Scrotter.IsMono = False Then OpenPath(Scrotter.ScreenPicker.Value) = (Environment.GetEnvironmentVariable("temp") & "\capture.png") Else OpenPath(Scrotter.ScreenPicker.Value) = "/tmp/capture.png"
+        If Scrotter.IsMono = False Then OpenPath(Scrotter.ScreenPicker.Value) = (Environment.GetEnvironmentVariable("temp") & Path.DirectorySeparatorChar & "capture.png") Else OpenPath(Scrotter.ScreenPicker.Value) = Path.DirectorySeparatorChar & "tmp" & Path.DirectorySeparatorChar & "capture.png"
         Scrotter.RefreshLists()
     End Sub
 
