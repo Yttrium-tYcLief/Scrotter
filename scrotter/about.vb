@@ -1,9 +1,36 @@
-﻿Imports System.Runtime.InteropServices
+﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
+'Copyright (C) 2013 Alex West
+'Version 0.8 Public Beta
+'
+'This program is free software; you can redistribute it and/or
+'modify it under the terms of the GNU General Public License
+'as published by the Free Software Foundation; either version 2
+'of the License, or (at your option) any later version.
+'
+'This program is distributed in the hope that it will be useful,
+'but WITHOUT ANY WARRANTY; without even the implied warranty of
+'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'GNU General Public License for more details.
+'
+'The GNU General Public License may be read at http://www.gnu.org/licenses/gpl-2.0.html.
+
+Imports System.Runtime.InteropServices
 Imports System.Net
 Imports System.Security.Cryptography.X509Certificates
 Imports System.Net.Security
 
 Public Class about
+
+    Dim l As String
+
+    Private Sub frm_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyUp
+        Dim i As String = "UpUpDownDownLeftRightLeftRightBA"
+        If (e.KeyCode.ToString = "Up") And (l <> "Up") Then l = ""
+        l = l & e.KeyCode.ToString
+        If l = i Then UpdateButton.Text = "install gentoo"
+        If e.KeyCode.ToString = "Return" Then l = ""
+        If l.Length > 60 Then l = ""
+    End Sub
 
     <Runtime.InteropServices.StructLayout(Runtime.InteropServices.LayoutKind.Sequential)> Public Structure Side
         Public Left As Integer
@@ -62,7 +89,7 @@ Public Class about
     End Sub
 
     Private Sub UpdateButton_Click(sender As Object, e As EventArgs) Handles UpdateButton.Click
-        CheckForUpdates(True)
+        If UpdateButton.Text = "install gentoo" Then System.Diagnostics.Process.Start("http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=1") Else CheckForUpdates(True)
     End Sub
 
     Public Shared Sub CheckForUpdates(prompt As Boolean)
@@ -92,5 +119,9 @@ final:
     Public Shared Function Validator(sender As Object, certificate As X509Certificate, chain As X509Chain, sslPolicyErrors As SslPolicyErrors) As Boolean
         Return True
     End Function
+
+    Private Sub about_closing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        UpdateButton.Text = "Check for updates..."
+    End Sub
 
 End Class

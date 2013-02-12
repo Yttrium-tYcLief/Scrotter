@@ -30,7 +30,7 @@ Public Class Scrotter
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
     Public ReadOnly Version As String = "0.8"
-    Public ReadOnly ReleaseDate As String = "2013-02-10"
+    Public ReadOnly ReleaseDate As String = "2013-02-12"
     Private Image(7) As String
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click

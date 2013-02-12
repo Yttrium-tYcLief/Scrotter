@@ -2,7 +2,7 @@ master
 - yttrium
    Experimental UI changes.
    Added default filename when saving: Scrotter_yyyy-MM-dd_HH:mm:ss.png
-   Extreme code cleanup.
+   Extreme code cleanup, tidying, and optimizations.
 
 0.7.2
 - yttrium

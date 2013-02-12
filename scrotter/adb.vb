@@ -1,11 +1,28 @@
-﻿Imports System.IO
+﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
+'Copyright (C) 2013 Alex West
+'Version 0.8 Public Beta
+'
+'This program is free software; you can redistribute it and/or
+'modify it under the terms of the GNU General Public License
+'as published by the Free Software Foundation; either version 2
+'of the License, or (at your option) any later version.
+'
+'This program is distributed in the hope that it will be useful,
+'but WITHOUT ANY WARRANTY; without even the implied warranty of
+'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'GNU General Public License for more details.
+'
+'The GNU General Public License may be read at http://www.gnu.org/licenses/gpl-2.0.html.
+
+Imports System.IO
 Imports System.Net
 
 Public Class adb
 
-    Private adbpath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter" & Path.DirectorySeparatorChar & "adb.exe")
-    Private adbwinapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter" & Path.DirectorySeparatorChar & "AdbWinApi.dll")
-    Private adbwinusbapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter" & Path.DirectorySeparatorChar & "AdbWinUsbApi.dll")
+    Private sep As String = Path.DirectorySeparatorChar
+    Private adbpath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & sep & "Scrotter" & sep & "adb.exe")
+    Private adbwinapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & sep & "Scrotter" & sep & "AdbWinApi.dll")
+    Private adbwinusbapipath As String = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & sep & "Scrotter" & sep & "AdbWinUsbApi.dll")
     Private Wireless As Boolean = False
     Private customgray As Color = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
     Private customteal As Color = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(152, Byte), Integer))
@@ -38,7 +55,7 @@ Public Class adb
             Dim imgcap As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = adbpath, _
-            .Arguments = "shell " & Path.DirectorySeparatorChar & "system" & Path.DirectorySeparatorChar & "bin" & Path.DirectorySeparatorChar & "screencap -p " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png", _
+            .Arguments = "shell " & sep & "system" & sep & "bin" & sep & "screencap -p " & sep & "sdcard" & sep & "screenshot.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgcap.Start()
@@ -47,14 +64,14 @@ Public Class adb
                 Exit Sub
             End Try
             imgcap.WaitForExit()
-            If File.Exists(Environment.GetEnvironmentVariable("temp") & Path.DirectorySeparatorChar & "capture.png") Then
+            If File.Exists(tempPath & sep & "capture.png") Then
                 Scrotter.Image2.Dispose()
-                My.Computer.FileSystem.DeleteFile(Environment.GetEnvironmentVariable("temp") & Path.DirectorySeparatorChar & "capture.png")
+                My.Computer.FileSystem.DeleteFile(tempPath & sep & "capture.png")
             End If
             Dim imgconv As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = adbpath, _
-            .Arguments = "pull " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png " & tempPath & Path.DirectorySeparatorChar & "capture.png", _
+            .Arguments = "pull " & sep & "sdcard" & sep & "screenshot.png " & tempPath & sep & "capture.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgconv.Start()
@@ -64,11 +81,11 @@ Public Class adb
             End Try
             imgconv.WaitForExit()
         Else
-            Dim tempPath As String = Path.DirectorySeparatorChar & "tmp" & Path.DirectorySeparatorChar
+            Dim tempPath As String = sep & "tmp" & sep
             Dim imgcap As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = "adb", _
-            .Arguments = "shell " & Path.DirectorySeparatorChar & "system" & Path.DirectorySeparatorChar & "bin" & Path.DirectorySeparatorChar & "screencap -p " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png", _
+            .Arguments = "shell " & sep & "system" & sep & "bin" & sep & "screencap -p " & sep & "sdcard" & sep & "screenshot.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgcap.Start()
@@ -84,7 +101,7 @@ Public Class adb
             Dim imgconv As New Process With {.StartInfo = _
             New ProcessStartInfo With { _
             .FileName = "adb", _
-            .Arguments = "pull " & Path.DirectorySeparatorChar & "sdcard" & Path.DirectorySeparatorChar & "screenshot.png " & tempPath & "capture.png", _
+            .Arguments = "pull " & sep & "sdcard" & sep & "screenshot.png " & tempPath & "capture.png", _
             .WindowStyle = ProcessWindowStyle.Hidden}}
             Try
                 imgconv.Start()
@@ -122,19 +139,19 @@ Public Class adb
     Private Sub linkLabel1_LinkClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Me.LinkLabel1.Links(LinkLabel1.Links.IndexOf(e.Link)).Visited = True
         If Scrotter.IsMono = False Then
-            If (System.IO.Directory.Exists((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter"))) = False Then System.IO.Directory.CreateDirectory((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "Scrotter"))
-        Using webClient = New WebClient()
-            Dim bytes = webClient.DownloadData("https://dl.dropbox.com/s/x2jx44l3h3a4t5e/adb.exe")
-            File.WriteAllBytes((adbpath), bytes)
-            bytes = webClient.DownloadData("https://dl.dropbox.com/s/xuc6r4fjhl2ye60/AdbWinApi.dll")
-            File.WriteAllBytes((adbwinapipath), bytes)
-            bytes = webClient.DownloadData("https://dl.dropbox.com/s/db2f6ha8waca2fm/AdbWinUsbApi.dll")
-            File.WriteAllBytes((adbwinusbapipath), bytes)
-        End Using
-        MsgBox("Download complete.")
+            If (System.IO.Directory.Exists((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & sep & "Scrotter"))) = False Then System.IO.Directory.CreateDirectory((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & sep & "Scrotter"))
+            Using webClient = New WebClient()
+                Dim bytes = webClient.DownloadData("https://dl.dropbox.com/s/x2jx44l3h3a4t5e/adb.exe")
+                File.WriteAllBytes((adbpath), bytes)
+                bytes = webClient.DownloadData("https://dl.dropbox.com/s/xuc6r4fjhl2ye60/AdbWinApi.dll")
+                File.WriteAllBytes((adbwinapipath), bytes)
+                bytes = webClient.DownloadData("https://dl.dropbox.com/s/db2f6ha8waca2fm/AdbWinUsbApi.dll")
+                File.WriteAllBytes((adbwinusbapipath), bytes)
+            End Using
+            MsgBox("Download complete.")
         Else
-        Dim target As String = CType(e.Link.LinkData, String)
-        System.Diagnostics.Process.Start(target)
+            Dim target As String = CType(e.Link.LinkData, String)
+            System.Diagnostics.Process.Start(target)
         End If
     End Sub
 
