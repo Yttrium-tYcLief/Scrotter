@@ -189,8 +189,10 @@ Public Class ArrayPreview
         Dim result As DialogResult = ColorDialog.ShowDialog()
         If result = DialogResult.OK Then
             ImgBackgroundColor = ColorDialog.Color
+            Dim invertcolor As Color = Color.FromArgb(255 - ImgBackgroundColor.R, 255 - ImgBackgroundColor.G, 255 - ImgBackgroundColor.B)
+            Dim luma As Integer = CInt(invertcolor.R * 0.3 + invertcolor.G * 0.59 + invertcolor.B * 0.11)
             ColorPickBtn.BackColor = ImgBackgroundColor
-            ColorPickBtn.ForeColor = Color.FromArgb(255 - ImgBackgroundColor.R, 255 - ImgBackgroundColor.G, 255 - ImgBackgroundColor.B)
+            ColorPickBtn.ForeColor = Color.FromArgb(luma, luma, luma)
             RefreshPreview()
         End If
     End Sub
