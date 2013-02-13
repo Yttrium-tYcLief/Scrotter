@@ -64,7 +64,7 @@ animatedcollapse.init()
 <h3>On Windows</h3>
 
 <ol>
-<li>Install Microsoft <a href="http://www.microsoft.com/en-us/download/details.aspx?id=17851">.NET Framework 4</a>.</li>
+<li>Install Microsoft <a href="http://www.microsoft.com/en-us/download/details.aspx?id=17851">.NET Framework 4</a>. This is not required for Scrotter v0.8+.</li>
 <li>Download the latest compiled release by clicking the button to the right, or download any version from our <a href="https://www.dropbox.com/sh/uforojjgr491o9a/Yiz3sjfDt5">archive</a>.</li>
 </ol><p>Scrotter supports .BMP, .JPG, .PNG, and .GIF.</p>
 
@@ -102,6 +102,7 @@ animatedcollapse.init()
 <ul>
 <li>Feel free to compile locally. The standard Build &gt; Build Solution option in Visual Studio 2012 is used for official builds.</li>
 <li>Builds are NOT released for the master branch - builds will only be compiled and published for each version. The master branch is extremely experimental, and only those that know how to compile should test it.</li>
+    <li>Official builds are also NGEN&#39;d for performance improvements. This is done with <code>ngen install scrotter.exe</code> at the VS2012 command line.</li>
 </ul><h3>Contributing</h3>
 
 <ul>
