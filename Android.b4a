@@ -1,0 +1,79 @@
+﻿Version=2.5
+IconFile=
+NumberOfModules=0
+Package=yttrium.scrotter
+DoNotOverwriteManifest=False
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="14"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+UserTypesHint=
+NumberOfFiles=2
+File1=Main.bal
+File2=Options.bal
+NumberOfLibraries=1
+Library1=core
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: B4A Example
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: True
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+
+	Dim GlossCheckbox As CheckBox
+	Dim ModelBox As Spinner
+	Dim ShadowCheckbox As CheckBox
+	Dim StretchCheckbox As CheckBox
+	Dim UnderShadowCheckbox As CheckBox
+	Dim VariantBox As Spinner
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	'Activity.LoadLayout("Layout1")
+	Msgbox("Welcome to Basic4android!", "")
+	Activity.LoadLayout("Main")
+End Sub
+
+Sub VariantBox_ItemClick (Position As Int, Value As Object)
+	
+End Sub
+Sub UnderShadowCheckbox_CheckedChange(Checked As Boolean)
+	
+End Sub
+Sub TabSwitcher_TabChanged
+	
+End Sub
+Sub StretchCheckbox_CheckedChange(Checked As Boolean)
+	
+End Sub
+Sub ShadowCheckbox_CheckedChange(Checked As Boolean)
+	
+End Sub
+Sub ModelBox_ItemClick (Position As Int, Value As Object)
+	
+End Sub
+Sub GlossCheckbox_CheckedChange(Checked As Boolean)
+	
+End Sub
+Sub SaveBtn_Click
+	
+End Sub
+Sub Loadbtn_Click
+	
+End Sub
