@@ -229,34 +229,31 @@ public anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper _shado
 public anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper _stretchcheckbox = null;
 public anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper _undershadowcheckbox = null;
 public anywheresoftware.b4a.objects.SpinnerWrapper _variantbox = null;
+public anywheresoftware.b4a.objects.TabHostWrapper _tabswitcher = null;
+public anywheresoftware.b4a.objects.ButtonWrapper _loadbtn = null;
+public anywheresoftware.b4a.objects.ButtonWrapper _savebtn = null;
+public anywheresoftware.b4a.objects.PanelWrapper _preview = null;
+public anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _image3 = null;
 public static String  _activity_create(boolean _firsttime) throws Exception{
-		Debug.PushSubsStack("Activity_Create (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("FirstTime", _firsttime);
- BA.debugLineNum = 33;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
-Debug.ShouldStop(1);
- BA.debugLineNum = 36;BA.debugLine="Msgbox(\"Welcome to Basic4android!\", \"\")";
-Debug.ShouldStop(8);
-anywheresoftware.b4a.keywords.Common.Msgbox("Welcome to Basic4android!","",mostCurrent.activityBA);
- BA.debugLineNum = 37;BA.debugLine="Activity.LoadLayout(\"Main\")";
-Debug.ShouldStop(16);
+ //BA.debugLineNum = 51;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+ //BA.debugLineNum = 54;BA.debugLine="Activity.LoadLayout(\"Main\")";
 mostCurrent._activity.LoadLayout("Main",mostCurrent.activityBA);
- BA.debugLineNum = 38;BA.debugLine="End Sub";
-Debug.ShouldStop(32);
+ //BA.debugLineNum = 56;BA.debugLine="TabSwitcher.AddTab(\"Preview\", \"preview.bal\")";
+mostCurrent._tabswitcher.AddTab(mostCurrent.activityBA,"Preview","preview.bal");
+ //BA.debugLineNum = 57;BA.debugLine="TabSwitcher.AddTab(\"Options\", \"options.bal\")";
+mostCurrent._tabswitcher.AddTab(mostCurrent.activityBA,"Options","options.bal");
+ //BA.debugLineNum = 58;BA.debugLine="ModelBox.AddAll(Array As String(\"ASUS Eee Pad Transformer\", \"Google Nexus 4\", \"Google Nexus 7\", \"Google Nexus 10\", \"Google Nexus S\", \"HTC 8S\", \"HTC 8X\", \"HTC Amaze 4G, Ruby\", \"HTC Desire\", \"HTC Desire C\", \"HTC Desire HD, HTC Inspire 4G\", \"HTC Desire Z, T-Mobile G2\", \"HTC Droid DNA\", \"HTC Evo 3D\", \"HTC Evo 4G LTE\", \"HTC Google Nexus One\", \"HTC Hero\", \"HTC Legend\", \"HTC One S\", \"HTC One V\", \"HTC One X, HTC One X+\", \"HTC Sensation\", \"HTC Titan\", \"HTC Vivid\", \"HTC Wildfire\", \"HTC Wildfire S\", \"LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II\", \"LG Optimus 2X\", \"Motorola Droid 2, Milestone 2\", \"Motorola Droid RAZR\", \"Motorola Droid RAZR M\", \"Motorola Xoom\", \"Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G\", \"Samsung Galaxy Ace, Galaxy Cooper\", \"Samsung Galaxy Note II\", \"Samsung Galaxy SII, Epic 4G Touch\", \"Samsung Galaxy SII Skyrocket\", \"Samsung Galaxy SIII\", \"Samsung Galaxy SIII Mini\", \"Samsung Galaxy TAB 10.1\", \"Samsung Google Galaxy Nexus\", \"Sony Ericsson Xperia J\", \"Sony Ericsson Xperia X10\"))";
+mostCurrent._modelbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"ASUS Eee Pad Transformer","Google Nexus 4","Google Nexus 7","Google Nexus 10","Google Nexus S","HTC 8S","HTC 8X","HTC Amaze 4G, Ruby","HTC Desire","HTC Desire C","HTC Desire HD, HTC Inspire 4G","HTC Desire Z, T-Mobile G2","HTC Droid DNA","HTC Evo 3D","HTC Evo 4G LTE","HTC Google Nexus One","HTC Hero","HTC Legend","HTC One S","HTC One V","HTC One X, HTC One X+","HTC Sensation","HTC Titan","HTC Vivid","HTC Wildfire","HTC Wildfire S","LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II","LG Optimus 2X","Motorola Droid 2, Milestone 2","Motorola Droid RAZR","Motorola Droid RAZR M","Motorola Xoom","Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G","Samsung Galaxy Ace, Galaxy Cooper","Samsung Galaxy Note II","Samsung Galaxy SII, Epic 4G Touch","Samsung Galaxy SII Skyrocket","Samsung Galaxy SIII","Samsung Galaxy SIII Mini","Samsung Galaxy TAB 10.1","Samsung Google Galaxy Nexus","Sony Ericsson Xperia J","Sony Ericsson Xperia X10"}));
+ //BA.debugLineNum = 59;BA.debugLine="ModelBox.SelectedIndex = 1";
+mostCurrent._modelbox.setSelectedIndex((int)(1));
+ //BA.debugLineNum = 60;BA.debugLine="Msgbox(File.DirAssets & \"/Shadow\", \"test\")";
+anywheresoftware.b4a.keywords.Common.Msgbox(anywheresoftware.b4a.keywords.Common.File.getDirAssets()+"/Shadow","test",mostCurrent.activityBA);
+ //BA.debugLineNum = 61;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 
 public static void initializeProcessGlobals() {
-    if (mostCurrent != null && mostCurrent.activityBA != null) {
-Debug.StartDebugging(mostCurrent.activityBA, 13588, new int[] {3}, "836a619c-49e5-4b92-9d2d-12e850c028e1");}
-
+    
     if (processGlobalsRun == false) {
 	    processGlobalsRun = true;
 		try {
@@ -272,191 +269,113 @@ public static boolean isAnyActivityVisible() {
     boolean vis = false;
 vis = vis | (main.mostCurrent != null);
 return vis;}
-
-public static void killProgram() {
-    
-            if (main.previousOne != null) {
-				Activity a = main.previousOne.get();
-				if (a != null)
-					a.finish();
-			}
-
-}
 public static String  _globals() throws Exception{
- //BA.debugLineNum = 21;BA.debugLine="Sub Globals";
- //BA.debugLineNum = 25;BA.debugLine="Dim GlossCheckbox As CheckBox";
+ //BA.debugLineNum = 23;BA.debugLine="Sub Globals";
+ //BA.debugLineNum = 26;BA.debugLine="Dim GlossCheckbox As CheckBox";
 mostCurrent._glosscheckbox = new anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper();
- //BA.debugLineNum = 26;BA.debugLine="Dim ModelBox As Spinner";
+ //BA.debugLineNum = 27;BA.debugLine="Dim ModelBox As Spinner";
 mostCurrent._modelbox = new anywheresoftware.b4a.objects.SpinnerWrapper();
- //BA.debugLineNum = 27;BA.debugLine="Dim ShadowCheckbox As CheckBox";
+ //BA.debugLineNum = 28;BA.debugLine="Dim ShadowCheckbox As CheckBox";
 mostCurrent._shadowcheckbox = new anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper();
- //BA.debugLineNum = 28;BA.debugLine="Dim StretchCheckbox As CheckBox";
+ //BA.debugLineNum = 29;BA.debugLine="Dim StretchCheckbox As CheckBox";
 mostCurrent._stretchcheckbox = new anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper();
- //BA.debugLineNum = 29;BA.debugLine="Dim UnderShadowCheckbox As CheckBox";
+ //BA.debugLineNum = 30;BA.debugLine="Dim UnderShadowCheckbox As CheckBox";
 mostCurrent._undershadowcheckbox = new anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper();
- //BA.debugLineNum = 30;BA.debugLine="Dim VariantBox As Spinner";
+ //BA.debugLineNum = 31;BA.debugLine="Dim VariantBox As Spinner";
 mostCurrent._variantbox = new anywheresoftware.b4a.objects.SpinnerWrapper();
- //BA.debugLineNum = 31;BA.debugLine="End Sub";
+ //BA.debugLineNum = 32;BA.debugLine="Dim TabSwitcher As TabHost";
+mostCurrent._tabswitcher = new anywheresoftware.b4a.objects.TabHostWrapper();
+ //BA.debugLineNum = 33;BA.debugLine="Dim Loadbtn As Button";
+mostCurrent._loadbtn = new anywheresoftware.b4a.objects.ButtonWrapper();
+ //BA.debugLineNum = 34;BA.debugLine="Dim SaveBtn As Button";
+mostCurrent._savebtn = new anywheresoftware.b4a.objects.ButtonWrapper();
+ //BA.debugLineNum = 35;BA.debugLine="Dim Preview As Panel";
+mostCurrent._preview = new anywheresoftware.b4a.objects.PanelWrapper();
+ //BA.debugLineNum = 36;BA.debugLine="Dim Image3 As Bitmap";
+mostCurrent._image3 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 49;BA.debugLine="End Sub";
 return "";
 }
-public static String  _glosscheckbox_checkedchange(boolean _checked) throws Exception{
-		Debug.PushSubsStack("GlossCheckbox_CheckedChange (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("Checked", _checked);
- BA.debugLineNum = 58;BA.debugLine="Sub GlossCheckbox_CheckedChange(Checked As Boolean)";
-Debug.ShouldStop(33554432);
- BA.debugLineNum = 60;BA.debugLine="End Sub";
-Debug.ShouldStop(134217728);
-return "";
-}
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _loadbtn_click() throws Exception{
-		Debug.PushSubsStack("Loadbtn_Click (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 64;BA.debugLine="Sub Loadbtn_Click";
-Debug.ShouldStop(-2147483648);
- BA.debugLineNum = 66;BA.debugLine="End Sub";
-Debug.ShouldStop(2);
+ //BA.debugLineNum = 79;BA.debugLine="Sub Loadbtn_Click";
+ //BA.debugLineNum = 81;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _modelbox_itemclick(int _position,Object _value) throws Exception{
-		Debug.PushSubsStack("ModelBox_ItemClick (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("Position", _position);
-Debug.locals.put("Value", _value);
- BA.debugLineNum = 55;BA.debugLine="Sub ModelBox_ItemClick (Position As Int, Value As Object)";
-Debug.ShouldStop(4194304);
- BA.debugLineNum = 57;BA.debugLine="End Sub";
-Debug.ShouldStop(16777216);
+ //BA.debugLineNum = 71;BA.debugLine="Sub ModelBox_ItemClick (Position As Int, Value As Object)";
+ //BA.debugLineNum = 73;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _process_globals() throws Exception{
- //BA.debugLineNum = 15;BA.debugLine="Sub Process_Globals";
- //BA.debugLineNum = 19;BA.debugLine="End Sub";
+ //BA.debugLineNum = 17;BA.debugLine="Sub Process_Globals";
+ //BA.debugLineNum = 21;BA.debugLine="End Sub";
+return "";
+}
+public static String  _refreshpreview() throws Exception{
+anywheresoftware.b4a.objects.drawable.CanvasWrapper _mycanvas = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _image1 = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _gloss = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _shadow = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _undershadow = null;
+int _indexh = 0;
+int _indexw = 0;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _image2 = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.RectWrapper _destrect = null;
+anywheresoftware.b4a.objects.ConcreteViewWrapper _previewview = null;
+ //BA.debugLineNum = 83;BA.debugLine="Sub RefreshPreview";
+ //BA.debugLineNum = 84;BA.debugLine="Dim MyCanvas As Canvas";
+_mycanvas = new anywheresoftware.b4a.objects.drawable.CanvasWrapper();
+ //BA.debugLineNum = 85;BA.debugLine="Dim Image1 As Bitmap";
+_image1 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 86;BA.debugLine="Dim Gloss As Bitmap";
+_gloss = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 87;BA.debugLine="Dim Shadow As Bitmap";
+_shadow = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 88;BA.debugLine="Dim Undershadow As Bitmap";
+_undershadow = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 89;BA.debugLine="Dim IndexH As Int";
+_indexh = 0;
+ //BA.debugLineNum = 90;BA.debugLine="Dim IndexW As Int";
+_indexw = 0;
+ //BA.debugLineNum = 99;BA.debugLine="Image1.Initialize(File.DirAssets, \"\") 'THIS IS WHERE DEVICE INITS BEGIN";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"");
+ //BA.debugLineNum = 102;BA.debugLine="Dim Image2 As Bitmap";
+_image2 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 103;BA.debugLine="Image2.InitializeMutable(Image1.Width, Image1.Height)";
+_image2.InitializeMutable(_image1.getWidth(),_image1.getHeight());
+ //BA.debugLineNum = 104;BA.debugLine="Dim DestRect As Rect";
+_destrect = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.RectWrapper();
+ //BA.debugLineNum = 105;BA.debugLine="DestRect.Initialize(0dip, 0dip, Image2.Width, Image2.Height)";
+_destrect.Initialize(anywheresoftware.b4a.keywords.Common.DipToCurrent((int)(0)),anywheresoftware.b4a.keywords.Common.DipToCurrent((int)(0)),_image2.getWidth(),_image2.getHeight());
+ //BA.debugLineNum = 106;BA.debugLine="Dim previewview As View";
+_previewview = new anywheresoftware.b4a.objects.ConcreteViewWrapper();
+ //BA.debugLineNum = 107;BA.debugLine="previewview.Initialize(\"lol\")";
+_previewview.Initialize(mostCurrent.activityBA,"lol");
+ //BA.debugLineNum = 108;BA.debugLine="MyCanvas.Initialize(previewview)";
+_mycanvas.Initialize((android.view.View)(_previewview.getObject()));
+ //BA.debugLineNum = 109;BA.debugLine="MyCanvas.DrawBitmap(Image2, Null, DestRect)";
+_mycanvas.DrawBitmap((android.graphics.Bitmap)(_image2.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_destrect.getObject()));
+ //BA.debugLineNum = 110;BA.debugLine="Preview.SetBackgroundImage(Image3)";
+mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(mostCurrent._image3.getObject()));
+ //BA.debugLineNum = 111;BA.debugLine="End Sub";
 return "";
 }
 public static String  _savebtn_click() throws Exception{
-		Debug.PushSubsStack("SaveBtn_Click (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 61;BA.debugLine="Sub SaveBtn_Click";
-Debug.ShouldStop(268435456);
- BA.debugLineNum = 63;BA.debugLine="End Sub";
-Debug.ShouldStop(1073741824);
+ //BA.debugLineNum = 75;BA.debugLine="Sub SaveBtn_Click";
+ //BA.debugLineNum = 77;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
-public static String  _shadowcheckbox_checkedchange(boolean _checked) throws Exception{
-		Debug.PushSubsStack("ShadowCheckbox_CheckedChange (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("Checked", _checked);
- BA.debugLineNum = 52;BA.debugLine="Sub ShadowCheckbox_CheckedChange(Checked As Boolean)";
-Debug.ShouldStop(524288);
- BA.debugLineNum = 54;BA.debugLine="End Sub";
-Debug.ShouldStop(2097152);
-return "";
-}
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
-public static String  _stretchcheckbox_checkedchange(boolean _checked) throws Exception{
-		Debug.PushSubsStack("StretchCheckbox_CheckedChange (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("Checked", _checked);
- BA.debugLineNum = 49;BA.debugLine="Sub StretchCheckbox_CheckedChange(Checked As Boolean)";
-Debug.ShouldStop(65536);
- BA.debugLineNum = 51;BA.debugLine="End Sub";
-Debug.ShouldStop(262144);
-return "";
-}
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _tabswitcher_tabchanged() throws Exception{
-		Debug.PushSubsStack("TabSwitcher_TabChanged (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 46;BA.debugLine="Sub TabSwitcher_TabChanged";
-Debug.ShouldStop(8192);
- BA.debugLineNum = 48;BA.debugLine="End Sub";
-Debug.ShouldStop(32768);
+ //BA.debugLineNum = 63;BA.debugLine="Sub TabSwitcher_TabChanged";
+ //BA.debugLineNum = 64;BA.debugLine="If TabSwitcher.CurrentTab = 0 Then RefreshPreview";
+if (mostCurrent._tabswitcher.getCurrentTab()==0) { 
+_refreshpreview();};
+ //BA.debugLineNum = 65;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
-public static String  _undershadowcheckbox_checkedchange(boolean _checked) throws Exception{
-		Debug.PushSubsStack("UnderShadowCheckbox_CheckedChange (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("Checked", _checked);
- BA.debugLineNum = 43;BA.debugLine="Sub UnderShadowCheckbox_CheckedChange(Checked As Boolean)";
-Debug.ShouldStop(1024);
- BA.debugLineNum = 45;BA.debugLine="End Sub";
-Debug.ShouldStop(4096);
-return "";
-}
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _variantbox_itemclick(int _position,Object _value) throws Exception{
-		Debug.PushSubsStack("VariantBox_ItemClick (main) ","main",0,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("Position", _position);
-Debug.locals.put("Value", _value);
- BA.debugLineNum = 40;BA.debugLine="Sub VariantBox_ItemClick (Position As Int, Value As Object)";
-Debug.ShouldStop(128);
- BA.debugLineNum = 42;BA.debugLine="End Sub";
-Debug.ShouldStop(512);
+ //BA.debugLineNum = 67;BA.debugLine="Sub VariantBox_ItemClick (Position As Int, Value As Object)";
+ //BA.debugLineNum = 69;BA.debugLine="End Sub";
 return "";
-}
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
-  public Object[] GetGlobals() {
-		return new Object[] {"Activity",_activity,"GlossCheckbox",_glosscheckbox,"ModelBox",_modelbox,"ShadowCheckbox",_shadowcheckbox,"StretchCheckbox",_stretchcheckbox,"UnderShadowCheckbox",_undershadowcheckbox,"VariantBox",_variantbox};
 }
 }
