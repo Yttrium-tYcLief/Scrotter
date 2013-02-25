@@ -1,6 +1,7 @@
-﻿# Build and Object Folders
+# Build and Object Folders
 bin/
 obj/
+*.apk
 
 #User Specific Files
 *.user
