@@ -14,8 +14,8 @@ Library1=core
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
-	#VersionCode: 1
-	#VersionName: 
+	#VersionCode: 01
+	#VersionName: 0.1
 	'SupportedOrientations possible values: unspecified, landscape or portrait.
 	#SupportedOrientations: portrait
 	#CanInstallToExternalStorage: True
@@ -23,7 +23,7 @@ Library1=core
 
 #Region  Activity Attributes 
 	#FullScreen: False
-	#IncludeTitle: True
+	#IncludeTitle: False
 #End Region
 
 
@@ -116,23 +116,23 @@ Sub RefreshPreview
 	'end of start inits
 	Select Case ModelBox.SelectedItem
 		Case "Samsung Galaxy SIII Mini"
-                    Image1 = "SamsungGSIIIMini.png"
+                    Image1.Initialize(File.DirAssets & "/Device", "SamsungGSIIIMini.png"
                     Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
                     IndexW = 78
                     IndexH = 182
         Case "HTC Desire HD, HTC Inspire 4G"
-                    Image1 = FetchImage("DesireHD.png")
+                    Image1.Initialize(File.DirAssets & "/Device", "DesireHD.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
                     IndexW = 104
                     IndexH = 169
                 Case "HTC One X, HTC One X+"
                     If VariantBox.SelectedItem = "Black" Then
-                        Image1 = FetchImage("OneXBlack.png")
-                        Gloss = FetchImage("OneXBlack.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "OneXBlack.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "OneXBlack.png")
                         IndexW = 113
                     ElseIf VariantBox.SelectedItem = "White" Then
-                        Image1 = FetchImage("OneXWhite.png")
-                        Gloss = FetchImage("OneXWhite.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "OneXWhite.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "OneXWhite.png")
                         IndexW = 115
                     End If
                     Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
@@ -140,18 +140,18 @@ Sub RefreshPreview
                 Case "Samsung Galaxy SIII"
                     IndexW = 88
                     If VariantBox.SelectedItem = "Blue" Then
-                        Image1 = FetchImage("GSIIIBlue.png")
-                        Gloss = FetchImage("GSIIIBlue.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "GSIIIBlue.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "GSIIIBlue.png")
                     ElseIf VariantBox.SelectedItem = "White" Then
-                        Image1 = FetchImage("GSIIIWhite.png")
-                        Gloss = FetchImage("GSIIIWhite.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "GSIIIWhite.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "GSIIIWhite.png")
                         IndexW = 84
                     ElseIf VariantBox.SelectedItem = "Black" Then
-                        Image1 = FetchImage("GSIIIBlack.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "GSIIIBlack.png")
                     ElseIf VariantBox.SelectedItem = "Red" Then
-                        Image1 = FetchImage("GSIIIRed.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "GSIIIRed.png")
                     ElseIf VariantBox.SelectedItem = "Brown" Then
-                        Image1 = FetchImage("GSIIIBrown.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "GSIIIBrown.png")
                     End If
                     Undershadow.Initialize(File.DirAssets & "/Undershadow", "GSIII.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
@@ -186,64 +186,64 @@ Sub RefreshPreview
                 '    End If
                 Case "Motorola Xoom"
                     If VariantBox.SelectedItem = "Portrait" Then
-                        Image1 = FetchImage("XoomPort.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "XoomPort.png")
                         Shadow.Initialize(File.DirAssets & "/Shadow", r8001280)
-                        Gloss = FetchImage("XoomPort.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "XoomPort.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "XoomPort.png")
                         IndexW = 199
                         IndexH = 200
                     ElseIf VariantBox.SelectedItem = "Landscape" Then
-                        Image1 = FetchImage("XoomLand.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "XoomLand.png")
                         Shadow.Initialize(File.DirAssets & "/Shadow", r1280800)
-                        Gloss = FetchImage("XoomLand.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "XoomLand.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "XoomLand.png")
                         IndexW = 218
                         IndexH = 191
                     End If
                 Case "Samsung Galaxy SII, Epic 4G Touch"
                     If VariantBox.SelectedItem = "Model 1" Then
-                        Image1 = FetchImage("GSII.png")
-                        Gloss = FetchImage("GSII.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "GSII.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "GSII.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "GSII.png")
                         IndexH = 191
                     ElseIf VariantBox.SelectedItem = "Model 2" Then
-                        Image1 = FetchImage("Epic4GTouch.png")
-                        Gloss = FetchImage("Epic4GTouch.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "Epic4GTouch.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "Epic4GTouch.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "Epic4GTouch.png")
                         IndexH = 175
                     End If
                     Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
                     IndexW = 132
                 Case "Samsung Google Galaxy Nexus"
-                    Image1 = FetchImage("GalaxyNexus.png")
+                    Image1.Initialize(File.DirAssets & "/Device", "GalaxyNexus.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
-                    Gloss = FetchImage("GalaxyNexus.png")
+                    Gloss.Initialize(File.DirAssets & "/Gloss", "GalaxyNexus.png")
                     Undershadow.Initialize(File.DirAssets & "/Undershadow", "GalaxyNexus.png")
                     IndexW = 155
                     IndexH = 263
                 Case "Samsung Galaxy Note II"
-                    Image1 = FetchImage("GalaxyNoteII.png")
+                    Image1.Initialize(File.DirAssets & "/Device", "GalaxyNoteII.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
-                    Gloss = FetchImage("GalaxyNoteII.png")
+                    Gloss.Initialize(File.DirAssets & "/Gloss", "GalaxyNoteII.png")
                     IndexW = 49
                     IndexH = 140
                 Case "Motorola Droid RAZR"
-                    Image1 = FetchImage("DroidRAZR.png")
+                    Image1.Initialize(File.DirAssets & "/Device", "DroidRAZR.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
                     IndexW = 150
                     IndexH = 206
                 Case "Google Nexus 7"
                     If VariantBox.SelectedItem = "Portrait" Then
-                        Image1 = FetchImage("Nexus7Port.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "Nexus7Port.png")
                         Shadow.Initialize(File.DirAssets & "/Shadow", r8001280)
-                        Gloss = FetchImage("Nexus7Port.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "Nexus7Port.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "Nexus7Port.png")
                         IndexW = 264
                         IndexH = 311
                     ElseIf VariantBox.SelectedItem = "Landscape" Then
-                        Image1 = FetchImage("Nexus7Land.png")
+                        Image1.Initialize(File.DirAssets & "/Device", "Nexus7Land.png")
                         Shadow.Initialize(File.DirAssets & "/Shadow", r1280800)
-                        Gloss = FetchImage("Nexus7Land.png")
+                        Gloss.Initialize(File.DirAssets & "/Gloss", "Nexus7Land.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "Nexus7Land.png")
                         IndexW = 315
                         IndexH = 270
@@ -298,7 +298,7 @@ Sub RefreshPreview
                     Image1 = FetchImage("http://ompldr.org/vaDQzZg/HTCHero.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r320480)
                     Gloss = FetchImage("http://ompldr.org/vaDQzYQ/HTCHero.png")
-                    Undershadow.Initialize(File.DirAssets & "/Undershadow", "http://ompldr.org/vaDQzYw/HTCHero.png")
+                    Undershadow.Initialize(File.DirAssets & "/Undershadow", "HTCHero.png")
                     IndexW = 67
                     IndexH = 131
                 Case "HTC Legend"
@@ -472,7 +472,7 @@ Sub RefreshPreview
                     Image1 = FetchImage("http://ompldr.org/vaGJxcg/Sensation.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
                     Gloss = FetchImage("http://ompldr.org/vaGJxcw/Sensation.png")
-                    Undershadow.Initialize(File.DirAssets & "/Undershadow", "http://ompldr.org/vaGJxdA/Sensation.png")
+                    Undershadow.Initialize(File.DirAssets & "/Undershadow", "Sensation.png")
                     IndexW = 80
                     IndexH = 148
                 Case "HTC Amaze 4G, Ruby"
