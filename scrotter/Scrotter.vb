@@ -32,6 +32,7 @@ Public Class Scrotter
     Public ReadOnly Version As String = "0.8"
     Public ReadOnly ReleaseDate As String = "2013-02-12"
     Private Image(7) As String
+    Public AppData As String
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -787,7 +788,7 @@ Public Class Scrotter
                     IndexW = 84
                     IndexH = 157
             End Select
-            Image1 = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Device/" & DeviceName & ".png")
+            Image1 = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Device/", DeviceName)
             If StretchCheckbox.Checked = True Then
                 Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
                 Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
@@ -819,7 +820,7 @@ Public Class Scrotter
         Public model As String
     End Class
 
-    Private Function FetchImage(ByVal url As String)
+    Private Function FetchImage(ByVal url As String, ByVal device As String)
         Try
             Return New Bitmap(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(url))))
         Catch ex As Exception
@@ -845,6 +846,8 @@ Public Class Scrotter
         Dim t As Type = Type.[GetType]("Mono.Runtime")
         If t Is Nothing Then IsMono = False Else IsMono = True
         about.CheckForUpdates(False)
+        If IsMono = False Then AppData = System.IO.Directory.Exists(SpecialFolder.ApplicationData & ".scrotter/") Else System.IO.Directory.Exists(SpecialFolder.Personal & ".scrotter/") 'Per-platform specifics are not usually good as code should be consistent, but this is okay for directory structures
+        System.IO.Directory.CreateDirectory(AppData)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
