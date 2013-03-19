@@ -3,7 +3,7 @@ IconFile=
 NumberOfModules=0
 Package=yttrium.scrotter
 DoNotOverwriteManifest=False
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddReceiverText(ReceiveImage,~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	 <category android:name="android.intent.category.DEFAULT" />~\n~	<data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~~\n~
 UserTypesHint=
 NumberOfFiles=3
 File1=Main.bal
@@ -116,6 +116,7 @@ Sub RefreshPreview
 	'end of start inits
 	Select Case ModelBox.SelectedItem
 		Case "Samsung Galaxy SIII Mini"
+<<<<<<< HEAD
                     Image1.Initialize(File.DirAssets & "/Device", "SamsungGSIIIMini.png"
                     Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
                     IndexW = 78
@@ -123,23 +124,42 @@ Sub RefreshPreview
         Case "HTC Desire HD, HTC Inspire 4G"
                     Image1.Initialize(File.DirAssets & "/Device", "DesireHD.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
+=======
+                    Image1.Initialize(File.DirAssets, "device/" & "SamsungGSIIIMini.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+                    IndexW = 78
+                    IndexH = 182
+        Case "HTC Desire HD, HTC Inspire 4G"
+                    Image1.Initialize(File.DirAssets, "device/" & "desirehd.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+>>>>>>> Lots of work, new icon.
                     IndexW = 104
                     IndexH = 169
-                Case "HTC One X, HTC One X+"
+        Case "HTC One X, HTC One X+"
                     If VariantBox.SelectedItem = "Black" Then
+<<<<<<< HEAD
                         Image1.Initialize(File.DirAssets & "/Device", "OneXBlack.png")
                         Gloss.Initialize(File.DirAssets & "/Gloss", "OneXBlack.png")
                         IndexW = 113
                     ElseIf VariantBox.SelectedItem = "White" Then
                         Image1.Initialize(File.DirAssets & "/Device", "OneXWhite.png")
                         Gloss.Initialize(File.DirAssets & "/Gloss", "OneXWhite.png")
+=======
+                        Image1.Initialize(File.DirAssets, "device/" & "OneXBlack.png")
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "OneXBlack.png")
+                        IndexW = 113
+                    Else If VariantBox.SelectedItem = "White" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "OneXWhite.png")
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "OneXWhite.png")
+>>>>>>> Lots of work, new icon.
                         IndexW = 115
                     End If
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
                     IndexH = 213
-                Case "Samsung Galaxy SIII"
+    	Case "Samsung Galaxy SIII"
                     IndexW = 88
                     If VariantBox.SelectedItem = "Blue" Then
+<<<<<<< HEAD
                         Image1.Initialize(File.DirAssets & "/Device", "GSIIIBlue.png")
                         Gloss.Initialize(File.DirAssets & "/Gloss", "GSIIIBlue.png")
                     ElseIf VariantBox.SelectedItem = "White" Then
@@ -152,16 +172,30 @@ Sub RefreshPreview
                         Image1.Initialize(File.DirAssets & "/Device", "GSIIIRed.png")
                     ElseIf VariantBox.SelectedItem = "Brown" Then
                         Image1.Initialize(File.DirAssets & "/Device", "GSIIIBrown.png")
+=======
+                        Image1.Initialize(File.DirAssets, "device/" & "GSIIIBlue.png")
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "GSIIIBlue.png")
+                    Else If VariantBox.SelectedItem = "White" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "GSIIIWhite.png")
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "GSIIIWhite.png")
+                        IndexW = 84
+                    Else If VariantBox.SelectedItem = "Black" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "GSIIIBlack.png")
+                    Else If VariantBox.SelectedItem = "Red" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "GSIIIRed.png")
+                    Else If VariantBox.SelectedItem = "Brown" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "GSIIIBrown.png")
+>>>>>>> Lots of work, new icon.
                     End If
-                    Undershadow.Initialize(File.DirAssets & "/Undershadow", "GSIII.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
+                    Undershadow.Initialize(File.DirAssets, "undershadow/" & "GSIII.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
                     IndexH = 184
                 'Case "Google Nexus 10"
                 '    If VariantBox.SelectedItem = "Portrait" Then
-                '        Image1 = FetchImage("http://ompldr.org/vaGJ3Yg/Nexus10Port.png")
-                '        Shadow.Initialize(File.DirAssets & "/Shadow", r8001280)
-                '        Gloss = FetchImage("http://ompldr.org/vaGJ3Yw/Nexus10Port.png")
-                '        Undershadow.Initialize(File.DirAssets & "/Undershadow", "http://ompldr.org/vaGJ3ZA/Nexus10Port.png")
+                '        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaGJ3Yg/Nexus10Port.png")
+                '        Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
+                '        Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaGJ3Yw/Nexus10Port.png")
+                '        Undershadow.Initialize(File.DirAssets, "undershadow/" & "http://ompldr.org/vaGJ3ZA/Nexus10Port.png")
                 '        IndexW = 217
                 '        IndexH = 223
                 '        Dim imgtmp As New Bitmap(800, 1280)
@@ -171,10 +205,10 @@ Sub RefreshPreview
                 '            ScreenCapBitmap = imgtmp
                 '        End Using
                 '    ElseIf VariantBox.SelectedItem = "Landscape" Then
-                '        Image1 = FetchImage("http://ompldr.org/vaGJ3Zw/Nexus10Land.png")
-                '        Shadow.Initialize(File.DirAssets & "/Shadow", r1280800)
-                '        Gloss = FetchImage("http://ompldr.org/vaGJ3ZQ/Nexus10Land.png")
-                '        Undershadow.Initialize(File.DirAssets & "/Undershadow", "http://ompldr.org/vaGJ3Zg/Nexus10Land.png")
+                '        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaGJ3Zw/Nexus10Land.png")
+                '        Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
+                '        Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaGJ3ZQ/Nexus10Land.png")
+                '        Undershadow.Initialize(File.DirAssets, "undershadow/" & "http://ompldr.org/vaGJ3Zg/Nexus10Land.png")
                 '        IndexW = 227
                 '        IndexH = 217
                 '        Dim imgtmp As New Bitmap(1280, 800)
@@ -186,6 +220,7 @@ Sub RefreshPreview
                 '    End If
                 Case "Motorola Xoom"
                     If VariantBox.SelectedItem = "Portrait" Then
+<<<<<<< HEAD
                         Image1.Initialize(File.DirAssets & "/Device", "XoomPort.png")
                         Shadow.Initialize(File.DirAssets & "/Shadow", r8001280)
                         Gloss.Initialize(File.DirAssets & "/Gloss", "XoomPort.png")
@@ -197,11 +232,25 @@ Sub RefreshPreview
                         Shadow.Initialize(File.DirAssets & "/Shadow", r1280800)
                         Gloss.Initialize(File.DirAssets & "/Gloss", "XoomLand.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "XoomLand.png")
+=======
+                        Image1.Initialize(File.DirAssets, "device/" & "XoomPort.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "XoomPort.png")
+                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "XoomPort.png")
+                        IndexW = 199
+                        IndexH = 200
+                    Else If VariantBox.SelectedItem = "Landscape" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "XoomLand.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "XoomLand.png")
+                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "XoomLand.png")
+>>>>>>> Lots of work, new icon.
                         IndexW = 218
                         IndexH = 191
                     End If
                 Case "Samsung Galaxy SII, Epic 4G Touch"
                     If VariantBox.SelectedItem = "Model 1" Then
+<<<<<<< HEAD
                         Image1.Initialize(File.DirAssets & "/Device", "GSII.png")
                         Gloss.Initialize(File.DirAssets & "/Gloss", "GSII.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "GSII.png")
@@ -210,11 +259,22 @@ Sub RefreshPreview
                         Image1.Initialize(File.DirAssets & "/Device", "Epic4GTouch.png")
                         Gloss.Initialize(File.DirAssets & "/Gloss", "Epic4GTouch.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "Epic4GTouch.png")
+=======
+                        Image1.Initialize(File.DirAssets, "device/" & "GSII.png")
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "GSII.png")
+                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "GSII.png")
+                        IndexH = 191
+                    Else If VariantBox.SelectedItem = "Model 2" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "Epic4GTouch.png")
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "Epic4GTouch.png")
+                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "Epic4GTouch.png")
+>>>>>>> Lots of work, new icon.
                         IndexH = 175
                     End If
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
                     IndexW = 132
                 Case "Samsung Google Galaxy Nexus"
+<<<<<<< HEAD
                     Image1.Initialize(File.DirAssets & "/Device", "GalaxyNexus.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
                     Gloss.Initialize(File.DirAssets & "/Gloss", "GalaxyNexus.png")
@@ -230,10 +290,28 @@ Sub RefreshPreview
                 Case "Motorola Droid RAZR"
                     Image1.Initialize(File.DirAssets & "/Device", "DroidRAZR.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
+=======
+                    Image1.Initialize(File.DirAssets, "device/" & "GalaxyNexus.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "GalaxyNexus.png")
+                    Undershadow.Initialize(File.DirAssets, "undershadow/" & "GalaxyNexus.png")
+                    IndexW = 155
+                    IndexH = 263
+                Case "Samsung Galaxy Note II"
+                    Image1.Initialize(File.DirAssets, "device/" & "GalaxyNoteII.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "GalaxyNoteII.png")
+                    IndexW = 49
+                    IndexH = 140
+                Case "Motorola Droid RAZR"
+                    Image1.Initialize(File.DirAssets, "device/" & "DroidRAZR.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
+>>>>>>> Lots of work, new icon.
                     IndexW = 150
                     IndexH = 206
                 Case "Google Nexus 7"
                     If VariantBox.SelectedItem = "Portrait" Then
+<<<<<<< HEAD
                         Image1.Initialize(File.DirAssets & "/Device", "Nexus7Port.png")
                         Shadow.Initialize(File.DirAssets & "/Shadow", r8001280)
                         Gloss.Initialize(File.DirAssets & "/Gloss", "Nexus7Port.png")
@@ -245,256 +323,273 @@ Sub RefreshPreview
                         Shadow.Initialize(File.DirAssets & "/Shadow", r1280800)
                         Gloss.Initialize(File.DirAssets & "/Gloss", "Nexus7Land.png")
                         Undershadow.Initialize(File.DirAssets & "/Undershadow", "Nexus7Land.png")
+=======
+                        Image1.Initialize(File.DirAssets, "device/" & "Nexus7Port.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "Nexus7Port.png")
+                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "Nexus7Port.png")
+                        IndexW = 264
+                        IndexH = 311
+                    Else If VariantBox.SelectedItem = "Landscape" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "Nexus7Land.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
+                        Gloss.Initialize(File.DirAssets, "gloss/" & "Nexus7Land.png")
+                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "Nexus7Land.png")
+>>>>>>> Lots of work, new icon.
                         IndexW = 315
                         IndexH = 270
                     End If
                 Case "HTC One S"
-                    Image1 = FetchImage("http://103.imagebam.com/download/pES86Mk-oX3FwKg72ullsg/23245/232444328/OneS.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
-                    Gloss = FetchImage("http://102.imagebam.com/download/2YpfhldGjShokr_7vTVvrA/23245/232446240/OneS.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://103.imagebam.com/download/pES86Mk-oX3FwKg72ullsg/23245/232444328/OneS.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://102.imagebam.com/download/2YpfhldGjShokr_7vTVvrA/23245/232446240/OneS.png")
                     IndexW = 106
                     IndexH = 228
                 Case "HTC One V"
-                    Image1 = FetchImage("http://103.imagebam.com/download/d78I9T94gLuErZL59eWi6Q/23245/232444333/OneV.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
-                    Gloss = FetchImage("http://101.imagebam.com/download/XztYn-E4j2XfLl8co66zCQ/23245/232446244/OneV.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://103.imagebam.com/download/d78I9T94gLuErZL59eWi6Q/23245/232444333/OneV.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://101.imagebam.com/download/XztYn-E4j2XfLl8co66zCQ/23245/232446244/OneV.png")
                     IndexW = 85
                     IndexH = 165
                 Case "Google Nexus S"
-                    Image1 = FetchImage("http://106.imagebam.com/download/qnwpbb1HFBzATLlQr7yD7g/23245/232444325/NexusS.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
-                    Gloss = FetchImage("http://108.imagebam.com/download/tu5BzK46n3ka_WydBl0pPQ/23245/232446237/NexusS.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://106.imagebam.com/download/qnwpbb1HFBzATLlQr7yD7g/23245/232444325/NexusS.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://108.imagebam.com/download/tu5BzK46n3ka_WydBl0pPQ/23245/232446237/NexusS.png")
                     IndexW = 45
                     IndexH = 165
                 Case "Google Nexus 4"
-                    Image1 = FetchImage("http://101.imagebam.com/download/fiW5-5yoR6LRtY20rwQmnw/23245/232444302/Nexus4.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r7681280)
-                    Gloss = FetchImage("http://104.imagebam.com/download/M_vkC9maazTeEad9DTvD9g/23245/232446224/Nexus4-G.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://101.imagebam.com/download/fiW5-5yoR6LRtY20rwQmnw/23245/232444302/Nexus4.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r7681280)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://104.imagebam.com/download/M_vkC9maazTeEad9DTvD9g/23245/232446224/Nexus4-G.png")
                     IndexW = 45
                     IndexH = 193
                 Case "Motorola Droid RAZR M"
-                    Image1 = FetchImage("http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
                     IndexW = 49
                     IndexH = 129
                 Case "Sony Ericsson Xperia X10"
                     If VariantBox.SelectedItem = "Black" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDQzaA/SonyEricssonXperia10Black.png")
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDQzaA/SonyEricssonXperia10Black.png")
                         IndexW = 235
                         IndexH = 191
-                    ElseIf VariantBox.SelectedItem = "White" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDQzaQ/SonyEricssonXperia10White.png")
+                    Else If VariantBox.SelectedItem = "White" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDQzaQ/SonyEricssonXperia10White.png")
                         IndexW = 255
                         IndexH = 205
                     End If
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480854)
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480854)
                 Case "HTC Google Nexus One"
-                    Image1 = FetchImage("http://ompldr.org/vaDQzZQ/HTCGoogleNexusOne.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
-                    Gloss = FetchImage("http://ompldr.org/vaDQzOQ/HTCGoogleNexusOne.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDQzZQ/HTCGoogleNexusOne.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaDQzOQ/HTCGoogleNexusOne.png")
                     IndexW = 165
                     IndexH = 168
                 Case "HTC Hero"
+<<<<<<< HEAD
                     Image1 = FetchImage("http://ompldr.org/vaDQzZg/HTCHero.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r320480)
                     Gloss = FetchImage("http://ompldr.org/vaDQzYQ/HTCHero.png")
                     Undershadow.Initialize(File.DirAssets & "/Undershadow", "HTCHero.png")
+=======
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDQzZg/HTCHero.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r320480)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaDQzYQ/HTCHero.png")
+                    Undershadow.Initialize(File.DirAssets, "undershadow/" & "http://ompldr.org/vaDQzYw/HTCHero.png")
+>>>>>>> Lots of work, new icon.
                     IndexW = 67
                     IndexH = 131
                 Case "HTC Legend"
-                    Image1 = FetchImage("http://ompldr.org/vaDQzZw/HTCLegend.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r320480)
-                    Gloss = FetchImage("http://ompldr.org/vaDQzYg/HTCLegend.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDQzZw/HTCLegend.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r320480)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaDQzYg/HTCLegend.png")
                     IndexW = 67
                     IndexH = 131
-                    Dim imgtmp As New Bitmap(212, 316)
-                    Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
-                        graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                        graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 212, 316)
-                        ScreenCapBitmap = imgtmp
-                    End Using
-                    Dim shdtmp As New Bitmap(212, 316)
-                    Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
-                        graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                        graphicsHandle.DrawImage(Shadow, 0, 0, 212, 316)
-                        Shadow = shdtmp
-                    End Using
-                Case "HP TouchPad"
-                    Image1 = FetchImage("http://ompldr.org/vaDQ1eQ/HPTouchPad.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r1024768)
-                    IndexW = 188
-                    IndexH = 170
-                Case "HP Veer"
-                    Image1 = FetchImage("http://ompldr.org/vaDQ2NQ/HPVeer.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", "http://ompldr.org/vaDQ2Ng/320x400.png")
-                    IndexW = 54
-                    IndexH = 77
-                    Dim imgtmp As New Bitmap(219, 271)
-                    Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
-                        graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                        graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 219, 271)
-                        ScreenCapBitmap = imgtmp
-                    End Using
-                    Dim shdtmp As New Bitmap(219, 271)
-                    Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
-                        graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                        graphicsHandle.DrawImage(Shadow, 0, 0, 219, 271)
-                        Shadow = shdtmp
-                    End Using
+                    'Dim imgtmp As New Bitmap(212, 316)
+                    'Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
+                    '    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                    '    graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 212, 316)
+                    '    ScreenCapBitmap = imgtmp
+                    'End Using
+                    'Dim shdtmp As New Bitmap(212, 316)
+                    'Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
+                    '    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                    '    graphicsHandle.DrawImage(Shadow, 0, 0, 212, 316)
+                    '    Shadow = shdtmp
+                    'End Using
+                    'Dim imgtmp As New Bitmap(219, 271)
+                    'Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
+                    '    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                    '    graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 219, 271)
+                    '    ScreenCapBitmap = imgtmp
+                    'End Using
+                    'Dim shdtmp As New Bitmap(219, 271)
+                    'Using graphicsHandle As Graphics = Graphics.FromImage(shdtmp)
+                    '    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                    '    graphicsHandle.DrawImage(Shadow, 0, 0, 219, 271)
+                    '    Shadow = shdtmp
+                    'End Using
                 Case "HTC Droid DNA"
-                    Image1 = FetchImage("http://ompldr.org/vaDVxcQ/DroidDNA.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r10801920)
-                    Gloss = FetchImage("http://ompldr.org/vaDY3cw/DroidDNA.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDVxcQ/DroidDNA.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r10801920)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaDY3cw/DroidDNA.png")
                     IndexW = 106
                     IndexH = 300
                 Case "HTC Vivid"
-                    Image1 = FetchImage("http://ompldr.org/vaDVxcA/Vivid.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDVxcA/Vivid.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
                     IndexW = 66
                     IndexH = 125
                 Case "HTC Evo 3D"
-                    Image1 = FetchImage("http://ompldr.org/vaDY3dA/Evo3D.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY3dA/Evo3D.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
                     IndexW = 78
                     IndexH = 153
                 Case "HTC Desire Z, T-Mobile G2"
                     If VariantBox.SelectedItem = "Portrait" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDY4MQ/DesireZPort.png")
-                        Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY4MQ/DesireZPort.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
                         IndexW = 94
                         IndexH = 162
-                    ElseIf VariantBox.SelectedItem = "Landscape" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDY4MA/DesireZLand.png")
-                        Shadow.Initialize(File.DirAssets & "/Shadow", r800480)
+                    Else If VariantBox.SelectedItem = "Landscape" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY4MA/DesireZLand.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r800480)
                         IndexW = 189
                         IndexH = 79
                     End If
                 Case "HTC Desire"
-                    Image1 = FetchImage("http://ompldr.org/vaDY4Yw/Desire.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY4Yw/Desire.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
                     IndexW = 136
                     IndexH = 180
                 Case "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G"
                     If VariantBox.SelectedItem = "Model 1" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDY4ZQ/DroidCharge.png")
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY4ZQ/DroidCharge.png")
                         IndexH = 191
-                    ElseIf VariantBox.SelectedItem = "Model 2" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDY4bA/GalaxySAviator.png")
+                    Else If VariantBox.SelectedItem = "Model 2" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY4bA/GalaxySAviator.png")
                         IndexH = 175
                     End If
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
                     IndexW = 60
                 Case "Samsung Galaxy Ace, Galaxy Cooper"
-                    Image1 = FetchImage("http://ompldr.org/vaDY4cA/GalaxyAce.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r320480)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY4cA/GalaxyAce.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r320480)
                     IndexW = 87
                     IndexH = 179
                 Case "Sony Ericsson Xperia J"
-                    Image1 = FetchImage("http://ompldr.org/vaDY5aQ/XperiaJ.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480854)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY5aQ/XperiaJ.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480854)
                     IndexW = 75
                     IndexH = 172
                 Case "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II"
-                    Image1 = FetchImage("http://ompldr.org/vaDY5eA/Nitro.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDY5eA/Nitro.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
                     IndexW = 113
                     IndexH = 191
                 Case "Samsung Galaxy Tab 10.1"
                     If VariantBox.SelectedItem = "Portrait" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png")
-                        Shadow.Initialize(File.DirAssets & "/Shadow", r8001280)
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
                         IndexW = 129
-                    ElseIf VariantBox.SelectedItem = "Landscape" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDZhMg/GalaxyTab10.1Land.png")
-                        Shadow.Initialize(File.DirAssets & "/Shadow", r1280800)
+                    Else If VariantBox.SelectedItem = "Landscape" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDZhMg/GalaxyTab10.1Land.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
                         IndexW = 135
                     End If
                     IndexH = 135
                 Case "Samsung Galaxy SII Skyrocket"
-                    Image1 = FetchImage("http://ompldr.org/vaDZhYw/GSII%20Skyrocket.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDZhYw/GSII%20Skyrocket.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
                     IndexW = 86
                     IndexH = 148
                 Case "HTC Evo 4G LTE"
-                    Image1 = FetchImage("http://ompldr.org/vaDZoYw/EVO4GLTE.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r7201280)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDZoYw/EVO4GLTE.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
                     IndexW = 88
                     IndexH = 199
                 Case "ASUS Eee Pad Transformer"
-                    Image1 = FetchImage("http://ompldr.org/vaDZrdw/EeePadTransformer.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r1280800)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDZrdw/EeePadTransformer.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
                     IndexW = 165
                     IndexH = 157
                 Case "HTC Desire C"
-                    Image1 = FetchImage("http://ompldr.org/vaDc2NQ/DesireC.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r320480)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDc2NQ/DesireC.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r320480)
                     IndexW = 52
                     IndexH = 101
                 Case "HTC Desire C"
-                    Image1 = FetchImage("http://ompldr.org/vaDc2Zw/Wildfire.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r240320)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDc2Zw/Wildfire.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r240320)
                     IndexW = 43
                     IndexH = 76
                 Case "Motorola Droid 2, Milestone 2"
                     If VariantBox.SelectedItem = "Portrait" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDhxYg/Droid2.png")
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDhxYg/Droid2.png")
                         IndexW = 110
                         IndexH = 193
-                        Shadow.Initialize(File.DirAssets & "/Shadow", r480854)
-                    ElseIf VariantBox.SelectedItem = "Landscape" Then
-                        Image1 = FetchImage("http://ompldr.org/vaDhxYw/Droid2Horizontal.png")
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r480854)
+                    Else If VariantBox.SelectedItem = "Landscape" Then
+                        Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDhxYw/Droid2Horizontal.png")
                         IndexW = 198
                         IndexH = 95
-                        Shadow.Initialize(File.DirAssets & "/Shadow", r854480)
+                        Shadow.Initialize(File.DirAssets, "shadow/" & r854480)
                     End If
                 Case "LG Optimus 2X"
-                    Image1 = FetchImage("http://ompldr.org/vaDhxZA/Optimus2x.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDhxZA/Optimus2x.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
                     IndexW = 93
                     IndexH = 175
                 Case "HTC Titan"
-                    Image1 = FetchImage("http://ompldr.org/vaGIycg/Titan.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r480800)
-                    Gloss = FetchImage("http://ompldr.org/vaGIydA/Titan.png")
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaGIycg/Titan.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaGIydA/Titan.png")
                     IndexW = 60
                     IndexH = 138
                 Case "HTC Wildfire"
-                    Image1 = FetchImage("http://ompldr.org/vaDc2Zw/Wildfire.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r240320)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaDc2Zw/Wildfire.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r240320)
                     IndexW = 43
                     IndexH = 76
                 Case "HTC Wildfire S"
-                    Image1 = FetchImage("http://ompldr.org/vaGIzNg/WildfireS.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r320480)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaGIzNg/WildfireS.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r320480)
                     IndexW = 72
                     IndexH = 123
                 Case "HTC Sensation"
+<<<<<<< HEAD
                     Image1 = FetchImage("http://ompldr.org/vaGJxcg/Sensation.png")
                     Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
                     Gloss = FetchImage("http://ompldr.org/vaGJxcw/Sensation.png")
                     Undershadow.Initialize(File.DirAssets & "/Undershadow", "Sensation.png")
+=======
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaGJxcg/Sensation.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
+                    Gloss.Initialize(File.DirAssets, "gloss/" & "http://ompldr.org/vaGJxcw/Sensation.png")
+                    Undershadow.Initialize(File.DirAssets, "undershadow/" & "http://ompldr.org/vaGJxdA/Sensation.png")
+>>>>>>> Lots of work, new icon.
                     IndexW = 80
                     IndexH = 148
                 Case "HTC Amaze 4G, Ruby"
-                    Image1 = FetchImage("http://ompldr.org/vaGNiaw/Ruby.png")
-                    Shadow.Initialize(File.DirAssets & "/Shadow", r540960)
+                    Image1.Initialize(File.DirAssets, "device/" & "http://ompldr.org/vaGNiaw/Ruby.png")
+                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
                     IndexW = 84
                     IndexH = 157
             End Select
 	
 	
-	Shadow.Initialize(File.DirAssets & "/Shadow, "") 'THIS IS WHERE DEVICE INITS BEGIN
+	'Shadow.Initialize(File.DirAssets, "shadow/" & "") 'THIS IS WHERE DEVICE INITS BEGIN
 	
 	'this is the beginning of end code
-	Dim Image2 As Bitmap
-	Image2.InitializeMutable(Image1.Width, Image1.Height)
-	Dim DestRect As Rect
-	DestRect.Initialize(0dip, 0dip, Image2.Width, Image2.Height)
-	Dim previewview As View
-	previewview.Initialize("lol")
-	MyCanvas.Initialize(previewview)
-	MyCanvas.DrawBitmap(Image2, Null, DestRect)
-	Preview.SetBackgroundImage(Image3)
+	'Dim Image2 As Bitmap
+	'Image2.InitializeMutable(Image1.Width, Image1.Height)
+	'Dim DestRect As Rect
+	'DestRect.Initialize(0dip, 0dip, Image2.Width, Image2.Height)
+	'Dim previewview As View
+	'previewview.Initialize("lol")
+	'MyCanvas.Initialize(previewview)
+	'MyCanvas.DrawBitmap(Image2, Null, DestRect)
+	Preview.SetBackgroundImage(Image1)
 End Sub
 
 'Sub BackgroundDownloader_RunWorkerCompleted(Sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundDownloader.RunWorkerCompleted

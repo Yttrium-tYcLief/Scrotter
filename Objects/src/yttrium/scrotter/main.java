@@ -24,7 +24,7 @@ public class main extends Activity implements B4AActivity{
     ActivityWrapper _activity;
     java.util.ArrayList<B4AMenuItem> menuItems;
 	private static final boolean fullScreen = false;
-	private static final boolean includeTitle = true;
+	private static final boolean includeTitle = false;
     public static WeakReference<Activity> previousOne;
 
 	@Override
@@ -62,6 +62,8 @@ public class main extends Activity implements B4AActivity{
 		public void run() {
 			if (afterFirstLayout)
 				return;
+			if (mostCurrent == null)
+				return;
 			if (mostCurrent.layout.getWidth() == 0) {
 				BA.handler.postDelayed(this, 5);
 				return;
@@ -73,6 +75,8 @@ public class main extends Activity implements B4AActivity{
 		}
 	}
 	private void afterFirstLayout() {
+        if (this != mostCurrent)
+			return;
 		activityBA = new BA(this, layout, processBA, "yttrium.scrotter", "yttrium.scrotter.main");
         processBA.sharedProcessBA.activityBA = new java.lang.ref.WeakReference<BA>(activityBA);
         anywheresoftware.b4a.objects.ViewWrapper.lastId = 0;
@@ -84,7 +88,7 @@ public class main extends Activity implements B4AActivity{
         anywheresoftware.b4a.keywords.Common.Log("** Activity (main) Create, isFirst = " + isFirst + " **");
         processBA.raiseEvent2(null, true, "activity_create", false, isFirst);
 		isFirst = false;
-		if (mostCurrent == null || mostCurrent != this)
+		if (this != mostCurrent)
 			return;
         processBA.setActivityPaused(false);
         anywheresoftware.b4a.keywords.Common.Log("** Activity (main) Resume **");
@@ -242,13 +246,11 @@ mostCurrent._activity.LoadLayout("Main",mostCurrent.activityBA);
 mostCurrent._tabswitcher.AddTab(mostCurrent.activityBA,"Preview","preview.bal");
  //BA.debugLineNum = 57;BA.debugLine="TabSwitcher.AddTab(\"Options\", \"options.bal\")";
 mostCurrent._tabswitcher.AddTab(mostCurrent.activityBA,"Options","options.bal");
- //BA.debugLineNum = 58;BA.debugLine="ModelBox.AddAll(Array As String(\"ASUS Eee Pad Transformer\", \"Google Nexus 4\", \"Google Nexus 7\", \"Google Nexus 10\", \"Google Nexus S\", \"HTC 8S\", \"HTC 8X\", \"HTC Amaze 4G, Ruby\", \"HTC Desire\", \"HTC Desire C\", \"HTC Desire HD, HTC Inspire 4G\", \"HTC Desire Z, T-Mobile G2\", \"HTC Droid DNA\", \"HTC Evo 3D\", \"HTC Evo 4G LTE\", \"HTC Google Nexus One\", \"HTC Hero\", \"HTC Legend\", \"HTC One S\", \"HTC One V\", \"HTC One X, HTC One X+\", \"HTC Sensation\", \"HTC Titan\", \"HTC Vivid\", \"HTC Wildfire\", \"HTC Wildfire S\", \"LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II\", \"LG Optimus 2X\", \"Motorola Droid 2, Milestone 2\", \"Motorola Droid RAZR\", \"Motorola Droid RAZR M\", \"Motorola Xoom\", \"Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G\", \"Samsung Galaxy Ace, Galaxy Cooper\", \"Samsung Galaxy Note II\", \"Samsung Galaxy SII, Epic 4G Touch\", \"Samsung Galaxy SII Skyrocket\", \"Samsung Galaxy SIII\", \"Samsung Galaxy SIII Mini\", \"Samsung Galaxy TAB 10.1\", \"Samsung Google Galaxy Nexus\", \"Sony Ericsson Xperia J\", \"Sony Ericsson Xperia X10\"))";
-mostCurrent._modelbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"ASUS Eee Pad Transformer","Google Nexus 4","Google Nexus 7","Google Nexus 10","Google Nexus S","HTC 8S","HTC 8X","HTC Amaze 4G, Ruby","HTC Desire","HTC Desire C","HTC Desire HD, HTC Inspire 4G","HTC Desire Z, T-Mobile G2","HTC Droid DNA","HTC Evo 3D","HTC Evo 4G LTE","HTC Google Nexus One","HTC Hero","HTC Legend","HTC One S","HTC One V","HTC One X, HTC One X+","HTC Sensation","HTC Titan","HTC Vivid","HTC Wildfire","HTC Wildfire S","LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II","LG Optimus 2X","Motorola Droid 2, Milestone 2","Motorola Droid RAZR","Motorola Droid RAZR M","Motorola Xoom","Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G","Samsung Galaxy Ace, Galaxy Cooper","Samsung Galaxy Note II","Samsung Galaxy SII, Epic 4G Touch","Samsung Galaxy SII Skyrocket","Samsung Galaxy SIII","Samsung Galaxy SIII Mini","Samsung Galaxy TAB 10.1","Samsung Google Galaxy Nexus","Sony Ericsson Xperia J","Sony Ericsson Xperia X10"}));
+ //BA.debugLineNum = 58;BA.debugLine="ModelBox.AddAll(Array As String(\"ASUS Eee Pad Transformer\", \"Google Nexus 4\", \"Google Nexus 7\", \"Google Nexus S\", \"HTC Amaze 4G, Ruby\", \"HTC Desire\", \"HTC Desire C\", \"HTC Desire HD, HTC Inspire 4G\", \"HTC Desire Z, T-Mobile G2\", \"HTC Droid DNA\", \"HTC Evo 3D\", \"HTC Evo 4G LTE\", \"HTC Google Nexus One\", \"HTC Hero\", \"HTC Legend\", \"HTC One S\", \"HTC One V\", \"HTC One X, HTC One X+\", \"HTC Sensation\", \"HTC Titan\", \"HTC Vivid\", \"HTC Wildfire\", \"HTC Wildfire S\", \"LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II\", \"LG Optimus 2X\", \"Motorola Droid 2, Milestone 2\", \"Motorola Droid RAZR\", \"Motorola Droid RAZR M\", \"Motorola Xoom\", \"Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G\", \"Samsung Galaxy Ace, Galaxy Cooper\", \"Samsung Galaxy Note II\", \"Samsung Galaxy SII, Epic 4G Touch\", \"Samsung Galaxy SII Skyrocket\", \"Samsung Galaxy SIII\", \"Samsung Galaxy SIII Mini\", \"Samsung Galaxy TAB 10.1\", \"Samsung Google Galaxy Nexus\", \"Sony Ericsson Xperia J\", \"Sony Ericsson Xperia X10\"))";
+mostCurrent._modelbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"ASUS Eee Pad Transformer","Google Nexus 4","Google Nexus 7","Google Nexus S","HTC Amaze 4G, Ruby","HTC Desire","HTC Desire C","HTC Desire HD, HTC Inspire 4G","HTC Desire Z, T-Mobile G2","HTC Droid DNA","HTC Evo 3D","HTC Evo 4G LTE","HTC Google Nexus One","HTC Hero","HTC Legend","HTC One S","HTC One V","HTC One X, HTC One X+","HTC Sensation","HTC Titan","HTC Vivid","HTC Wildfire","HTC Wildfire S","LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II","LG Optimus 2X","Motorola Droid 2, Milestone 2","Motorola Droid RAZR","Motorola Droid RAZR M","Motorola Xoom","Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G","Samsung Galaxy Ace, Galaxy Cooper","Samsung Galaxy Note II","Samsung Galaxy SII, Epic 4G Touch","Samsung Galaxy SII Skyrocket","Samsung Galaxy SIII","Samsung Galaxy SIII Mini","Samsung Galaxy TAB 10.1","Samsung Google Galaxy Nexus","Sony Ericsson Xperia J","Sony Ericsson Xperia X10"}));
  //BA.debugLineNum = 59;BA.debugLine="ModelBox.SelectedIndex = 1";
 mostCurrent._modelbox.setSelectedIndex((int)(1));
- //BA.debugLineNum = 60;BA.debugLine="Msgbox(File.DirAssets & \"/Shadow\", \"test\")";
-anywheresoftware.b4a.keywords.Common.Msgbox(anywheresoftware.b4a.keywords.Common.File.getDirAssets()+"/Shadow","test",mostCurrent.activityBA);
- //BA.debugLineNum = 61;BA.debugLine="End Sub";
+ //BA.debugLineNum = 60;BA.debugLine="End Sub";
 return "";
 }
 
@@ -297,13 +299,13 @@ mostCurrent._image3 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.Bi
 return "";
 }
 public static String  _loadbtn_click() throws Exception{
- //BA.debugLineNum = 79;BA.debugLine="Sub Loadbtn_Click";
- //BA.debugLineNum = 81;BA.debugLine="End Sub";
+ //BA.debugLineNum = 78;BA.debugLine="Sub Loadbtn_Click";
+ //BA.debugLineNum = 80;BA.debugLine="End Sub";
 return "";
 }
 public static String  _modelbox_itemclick(int _position,Object _value) throws Exception{
- //BA.debugLineNum = 71;BA.debugLine="Sub ModelBox_ItemClick (Position As Int, Value As Object)";
- //BA.debugLineNum = 73;BA.debugLine="End Sub";
+ //BA.debugLineNum = 70;BA.debugLine="Sub ModelBox_ItemClick (Position As Int, Value As Object)";
+ //BA.debugLineNum = 72;BA.debugLine="End Sub";
 return "";
 }
 public static String  _process_globals() throws Exception{
@@ -319,63 +321,665 @@ anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _shadow = null
 anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _undershadow = null;
 int _indexh = 0;
 int _indexw = 0;
-anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _image2 = null;
-anywheresoftware.b4a.objects.drawable.CanvasWrapper.RectWrapper _destrect = null;
-anywheresoftware.b4a.objects.ConcreteViewWrapper _previewview = null;
- //BA.debugLineNum = 83;BA.debugLine="Sub RefreshPreview";
- //BA.debugLineNum = 84;BA.debugLine="Dim MyCanvas As Canvas";
+String _r240320 = "";
+String _r320480 = "";
+String _r480800 = "";
+String _r480854 = "";
+String _r540960 = "";
+String _r7201280 = "";
+String _r7681280 = "";
+String _r800480 = "";
+String _r8001280 = "";
+String _r854480 = "";
+String _r10801920 = "";
+String _r1280800 = "";
+ //BA.debugLineNum = 82;BA.debugLine="Sub RefreshPreview";
+ //BA.debugLineNum = 83;BA.debugLine="Dim MyCanvas As Canvas";
 _mycanvas = new anywheresoftware.b4a.objects.drawable.CanvasWrapper();
- //BA.debugLineNum = 85;BA.debugLine="Dim Image1 As Bitmap";
+ //BA.debugLineNum = 84;BA.debugLine="Dim Image1 As Bitmap";
 _image1 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 86;BA.debugLine="Dim Gloss As Bitmap";
+ //BA.debugLineNum = 85;BA.debugLine="Dim Gloss As Bitmap";
 _gloss = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 87;BA.debugLine="Dim Shadow As Bitmap";
+ //BA.debugLineNum = 86;BA.debugLine="Dim Shadow As Bitmap";
 _shadow = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 88;BA.debugLine="Dim Undershadow As Bitmap";
+ //BA.debugLineNum = 87;BA.debugLine="Dim Undershadow As Bitmap";
 _undershadow = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 89;BA.debugLine="Dim IndexH As Int";
+ //BA.debugLineNum = 88;BA.debugLine="Dim IndexH As Int";
 _indexh = 0;
- //BA.debugLineNum = 90;BA.debugLine="Dim IndexW As Int";
+ //BA.debugLineNum = 89;BA.debugLine="Dim IndexW As Int";
 _indexw = 0;
- //BA.debugLineNum = 99;BA.debugLine="Image1.Initialize(File.DirAssets, \"\") 'THIS IS WHERE DEVICE INITS BEGIN";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"");
- //BA.debugLineNum = 102;BA.debugLine="Dim Image2 As Bitmap";
-_image2 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 103;BA.debugLine="Image2.InitializeMutable(Image1.Width, Image1.Height)";
-_image2.InitializeMutable(_image1.getWidth(),_image1.getHeight());
- //BA.debugLineNum = 104;BA.debugLine="Dim DestRect As Rect";
-_destrect = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.RectWrapper();
- //BA.debugLineNum = 105;BA.debugLine="DestRect.Initialize(0dip, 0dip, Image2.Width, Image2.Height)";
-_destrect.Initialize(anywheresoftware.b4a.keywords.Common.DipToCurrent((int)(0)),anywheresoftware.b4a.keywords.Common.DipToCurrent((int)(0)),_image2.getWidth(),_image2.getHeight());
- //BA.debugLineNum = 106;BA.debugLine="Dim previewview As View";
-_previewview = new anywheresoftware.b4a.objects.ConcreteViewWrapper();
- //BA.debugLineNum = 107;BA.debugLine="previewview.Initialize(\"lol\")";
-_previewview.Initialize(mostCurrent.activityBA,"lol");
- //BA.debugLineNum = 108;BA.debugLine="MyCanvas.Initialize(previewview)";
-_mycanvas.Initialize((android.view.View)(_previewview.getObject()));
- //BA.debugLineNum = 109;BA.debugLine="MyCanvas.DrawBitmap(Image2, Null, DestRect)";
-_mycanvas.DrawBitmap((android.graphics.Bitmap)(_image2.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_destrect.getObject()));
- //BA.debugLineNum = 110;BA.debugLine="Preview.SetBackgroundImage(Image3)";
-mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(mostCurrent._image3.getObject()));
- //BA.debugLineNum = 111;BA.debugLine="End Sub";
+ //BA.debugLineNum = 90;BA.debugLine="Dim r240320 As String = \"240x320.png\"";
+_r240320 = "240x320.png";
+ //BA.debugLineNum = 91;BA.debugLine="Dim r320480 As String = \"320x480.png\"";
+_r320480 = "320x480.png";
+ //BA.debugLineNum = 92;BA.debugLine="Dim r480800 As String = \"480x800.png\"";
+_r480800 = "480x800.png";
+ //BA.debugLineNum = 93;BA.debugLine="Dim r480854 As String = \"480x854.png\"";
+_r480854 = "480x854.png";
+ //BA.debugLineNum = 94;BA.debugLine="Dim r540960 As String = \"540x960.png\"";
+_r540960 = "540x960.png";
+ //BA.debugLineNum = 95;BA.debugLine="Dim r7201280 As String = \"720x1280.png\"";
+_r7201280 = "720x1280.png";
+ //BA.debugLineNum = 96;BA.debugLine="Dim r7681280 As String = \"768x1280.png\"";
+_r7681280 = "768x1280.png";
+ //BA.debugLineNum = 97;BA.debugLine="Dim r800480 As String = \"800x480.png\"";
+_r800480 = "800x480.png";
+ //BA.debugLineNum = 98;BA.debugLine="Dim r8001280 As String = \"800x1280.png\"";
+_r8001280 = "800x1280.png";
+ //BA.debugLineNum = 99;BA.debugLine="Dim r854480 As String = \"854x480.png\"";
+_r854480 = "854x480.png";
+ //BA.debugLineNum = 100;BA.debugLine="Dim r10801920 As String = \"1080x1920.png\"";
+_r10801920 = "1080x1920.png";
+ //BA.debugLineNum = 101;BA.debugLine="Dim r1280800 As String = \"1280x800.png\"";
+_r1280800 = "1280x800.png";
+ //BA.debugLineNum = 103;BA.debugLine="Select Case ModelBox.SelectedItem";
+switch (BA.switchObjectToInt(mostCurrent._modelbox.getSelectedItem(),"Samsung Galaxy SIII Mini","HTC Desire HD, HTC Inspire 4G","HTC One X, HTC One X+","Samsung Galaxy SIII","Motorola Xoom","Samsung Galaxy SII, Epic 4G Touch","Samsung Google Galaxy Nexus","Samsung Galaxy Note II","Motorola Droid RAZR","Google Nexus 7","HTC One S","HTC One V","Google Nexus S","Google Nexus 4","Motorola Droid RAZR M","Sony Ericsson Xperia X10","HTC Google Nexus One","HTC Hero","HTC Legend","HTC Droid DNA","HTC Vivid","HTC Evo 3D","HTC Desire Z, T-Mobile G2","HTC Desire","Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G","Samsung Galaxy Ace, Galaxy Cooper","Sony Ericsson Xperia J","LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II","Samsung Galaxy Tab 10.1","Samsung Galaxy SII Skyrocket","HTC Evo 4G LTE","ASUS Eee Pad Transformer","HTC Desire C","HTC Desire C","Motorola Droid 2, Milestone 2","LG Optimus 2X","HTC Titan","HTC Wildfire","HTC Wildfire S","HTC Sensation","HTC Amaze 4G, Ruby")) {
+case 0:
+ //BA.debugLineNum = 105;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"SamsungGSIIIMini.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"SamsungGSIIIMini.png");
+ //BA.debugLineNum = 106;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 107;BA.debugLine="IndexW = 78";
+_indexw = (int)(78);
+ //BA.debugLineNum = 108;BA.debugLine="IndexH = 182";
+_indexh = (int)(182);
+ break;
+case 1:
+ //BA.debugLineNum = 110;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"desirehd.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"desirehd.png");
+ //BA.debugLineNum = 111;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 112;BA.debugLine="IndexW = 104";
+_indexw = (int)(104);
+ //BA.debugLineNum = 113;BA.debugLine="IndexH = 169";
+_indexh = (int)(169);
+ break;
+case 2:
+ //BA.debugLineNum = 115;BA.debugLine="If VariantBox.SelectedItem = \"Black\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Black")) { 
+ //BA.debugLineNum = 116;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"OneXBlack.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"OneXBlack.png");
+ //BA.debugLineNum = 117;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"OneXBlack.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"OneXBlack.png");
+ //BA.debugLineNum = 118;BA.debugLine="IndexW = 113";
+_indexw = (int)(113);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("White")) { 
+ //BA.debugLineNum = 120;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"OneXWhite.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"OneXWhite.png");
+ //BA.debugLineNum = 121;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"OneXWhite.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"OneXWhite.png");
+ //BA.debugLineNum = 122;BA.debugLine="IndexW = 115";
+_indexw = (int)(115);
+ };
+ //BA.debugLineNum = 124;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
+ //BA.debugLineNum = 125;BA.debugLine="IndexH = 213";
+_indexh = (int)(213);
+ break;
+case 3:
+ //BA.debugLineNum = 127;BA.debugLine="IndexW = 88";
+_indexw = (int)(88);
+ //BA.debugLineNum = 128;BA.debugLine="If VariantBox.SelectedItem = \"Blue\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Blue")) { 
+ //BA.debugLineNum = 129;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GSIIIBlue.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GSIIIBlue.png");
+ //BA.debugLineNum = 130;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"GSIIIBlue.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"GSIIIBlue.png");
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("White")) { 
+ //BA.debugLineNum = 132;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GSIIIWhite.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GSIIIWhite.png");
+ //BA.debugLineNum = 133;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"GSIIIWhite.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"GSIIIWhite.png");
+ //BA.debugLineNum = 134;BA.debugLine="IndexW = 84";
+_indexw = (int)(84);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Black")) { 
+ //BA.debugLineNum = 136;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GSIIIBlack.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GSIIIBlack.png");
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Red")) { 
+ //BA.debugLineNum = 138;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GSIIIRed.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GSIIIRed.png");
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Brown")) { 
+ //BA.debugLineNum = 140;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GSIIIBrown.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GSIIIBrown.png");
+ };
+ //BA.debugLineNum = 142;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"GSIII.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"GSIII.png");
+ //BA.debugLineNum = 143;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
+ //BA.debugLineNum = 144;BA.debugLine="IndexH = 184";
+_indexh = (int)(184);
+ break;
+case 4:
+ //BA.debugLineNum = 174;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
+ //BA.debugLineNum = 175;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"XoomPort.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"XoomPort.png");
+ //BA.debugLineNum = 176;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r8001280);
+ //BA.debugLineNum = 177;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"XoomPort.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"XoomPort.png");
+ //BA.debugLineNum = 178;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"XoomPort.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"XoomPort.png");
+ //BA.debugLineNum = 179;BA.debugLine="IndexW = 199";
+_indexw = (int)(199);
+ //BA.debugLineNum = 180;BA.debugLine="IndexH = 200";
+_indexh = (int)(200);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
+ //BA.debugLineNum = 182;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"XoomLand.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"XoomLand.png");
+ //BA.debugLineNum = 183;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
+ //BA.debugLineNum = 184;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"XoomLand.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"XoomLand.png");
+ //BA.debugLineNum = 185;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"XoomLand.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"XoomLand.png");
+ //BA.debugLineNum = 186;BA.debugLine="IndexW = 218";
+_indexw = (int)(218);
+ //BA.debugLineNum = 187;BA.debugLine="IndexH = 191";
+_indexh = (int)(191);
+ };
+ break;
+case 5:
+ //BA.debugLineNum = 190;BA.debugLine="If VariantBox.SelectedItem = \"Model 1\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Model 1")) { 
+ //BA.debugLineNum = 191;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GSII.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GSII.png");
+ //BA.debugLineNum = 192;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"GSII.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"GSII.png");
+ //BA.debugLineNum = 193;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"GSII.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"GSII.png");
+ //BA.debugLineNum = 194;BA.debugLine="IndexH = 191";
+_indexh = (int)(191);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Model 2")) { 
+ //BA.debugLineNum = 196;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"Epic4GTouch.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"Epic4GTouch.png");
+ //BA.debugLineNum = 197;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"Epic4GTouch.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"Epic4GTouch.png");
+ //BA.debugLineNum = 198;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"Epic4GTouch.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"Epic4GTouch.png");
+ //BA.debugLineNum = 199;BA.debugLine="IndexH = 175";
+_indexh = (int)(175);
+ };
+ //BA.debugLineNum = 201;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 202;BA.debugLine="IndexW = 132";
+_indexw = (int)(132);
+ break;
+case 6:
+ //BA.debugLineNum = 204;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GalaxyNexus.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GalaxyNexus.png");
+ //BA.debugLineNum = 205;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
+ //BA.debugLineNum = 206;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"GalaxyNexus.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"GalaxyNexus.png");
+ //BA.debugLineNum = 207;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"GalaxyNexus.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"GalaxyNexus.png");
+ //BA.debugLineNum = 208;BA.debugLine="IndexW = 155";
+_indexw = (int)(155);
+ //BA.debugLineNum = 209;BA.debugLine="IndexH = 263";
+_indexh = (int)(263);
+ break;
+case 7:
+ //BA.debugLineNum = 211;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GalaxyNoteII.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GalaxyNoteII.png");
+ //BA.debugLineNum = 212;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
+ //BA.debugLineNum = 213;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"GalaxyNoteII.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"GalaxyNoteII.png");
+ //BA.debugLineNum = 214;BA.debugLine="IndexW = 49";
+_indexw = (int)(49);
+ //BA.debugLineNum = 215;BA.debugLine="IndexH = 140";
+_indexh = (int)(140);
+ break;
+case 8:
+ //BA.debugLineNum = 217;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"DroidRAZR.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"DroidRAZR.png");
+ //BA.debugLineNum = 218;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
+ //BA.debugLineNum = 219;BA.debugLine="IndexW = 150";
+_indexw = (int)(150);
+ //BA.debugLineNum = 220;BA.debugLine="IndexH = 206";
+_indexh = (int)(206);
+ break;
+case 9:
+ //BA.debugLineNum = 222;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
+ //BA.debugLineNum = 223;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"Nexus7Port.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"Nexus7Port.png");
+ //BA.debugLineNum = 224;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r8001280);
+ //BA.debugLineNum = 225;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"Nexus7Port.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"Nexus7Port.png");
+ //BA.debugLineNum = 226;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"Nexus7Port.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"Nexus7Port.png");
+ //BA.debugLineNum = 227;BA.debugLine="IndexW = 264";
+_indexw = (int)(264);
+ //BA.debugLineNum = 228;BA.debugLine="IndexH = 311";
+_indexh = (int)(311);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
+ //BA.debugLineNum = 230;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"Nexus7Land.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"Nexus7Land.png");
+ //BA.debugLineNum = 231;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
+ //BA.debugLineNum = 232;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"Nexus7Land.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"Nexus7Land.png");
+ //BA.debugLineNum = 233;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"Nexus7Land.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"Nexus7Land.png");
+ //BA.debugLineNum = 234;BA.debugLine="IndexW = 315";
+_indexw = (int)(315);
+ //BA.debugLineNum = 235;BA.debugLine="IndexH = 270";
+_indexh = (int)(270);
+ };
+ break;
+case 10:
+ //BA.debugLineNum = 238;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://103.imagebam.com/download/pES86Mk-oX3FwKg72ullsg/23245/232444328/OneS.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://103.imagebam.com/download/pES86Mk-oX3FwKg72ullsg/23245/232444328/OneS.png");
+ //BA.debugLineNum = 239;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
+ //BA.debugLineNum = 240;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://102.imagebam.com/download/2YpfhldGjShokr_7vTVvrA/23245/232446240/OneS.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://102.imagebam.com/download/2YpfhldGjShokr_7vTVvrA/23245/232446240/OneS.png");
+ //BA.debugLineNum = 241;BA.debugLine="IndexW = 106";
+_indexw = (int)(106);
+ //BA.debugLineNum = 242;BA.debugLine="IndexH = 228";
+_indexh = (int)(228);
+ break;
+case 11:
+ //BA.debugLineNum = 244;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://103.imagebam.com/download/d78I9T94gLuErZL59eWi6Q/23245/232444333/OneV.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://103.imagebam.com/download/d78I9T94gLuErZL59eWi6Q/23245/232444333/OneV.png");
+ //BA.debugLineNum = 245;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 246;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://101.imagebam.com/download/XztYn-E4j2XfLl8co66zCQ/23245/232446244/OneV.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://101.imagebam.com/download/XztYn-E4j2XfLl8co66zCQ/23245/232446244/OneV.png");
+ //BA.debugLineNum = 247;BA.debugLine="IndexW = 85";
+_indexw = (int)(85);
+ //BA.debugLineNum = 248;BA.debugLine="IndexH = 165";
+_indexh = (int)(165);
+ break;
+case 12:
+ //BA.debugLineNum = 250;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://106.imagebam.com/download/qnwpbb1HFBzATLlQr7yD7g/23245/232444325/NexusS.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://106.imagebam.com/download/qnwpbb1HFBzATLlQr7yD7g/23245/232444325/NexusS.png");
+ //BA.debugLineNum = 251;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 252;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://108.imagebam.com/download/tu5BzK46n3ka_WydBl0pPQ/23245/232446237/NexusS.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://108.imagebam.com/download/tu5BzK46n3ka_WydBl0pPQ/23245/232446237/NexusS.png");
+ //BA.debugLineNum = 253;BA.debugLine="IndexW = 45";
+_indexw = (int)(45);
+ //BA.debugLineNum = 254;BA.debugLine="IndexH = 165";
+_indexh = (int)(165);
+ break;
+case 13:
+ //BA.debugLineNum = 256;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://101.imagebam.com/download/fiW5-5yoR6LRtY20rwQmnw/23245/232444302/Nexus4.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://101.imagebam.com/download/fiW5-5yoR6LRtY20rwQmnw/23245/232444302/Nexus4.png");
+ //BA.debugLineNum = 257;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7681280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7681280);
+ //BA.debugLineNum = 258;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://104.imagebam.com/download/M_vkC9maazTeEad9DTvD9g/23245/232446224/Nexus4-G.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://104.imagebam.com/download/M_vkC9maazTeEad9DTvD9g/23245/232446224/Nexus4-G.png");
+ //BA.debugLineNum = 259;BA.debugLine="IndexW = 45";
+_indexw = (int)(45);
+ //BA.debugLineNum = 260;BA.debugLine="IndexH = 193";
+_indexh = (int)(193);
+ break;
+case 14:
+ //BA.debugLineNum = 262;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png");
+ //BA.debugLineNum = 263;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
+ //BA.debugLineNum = 264;BA.debugLine="IndexW = 49";
+_indexw = (int)(49);
+ //BA.debugLineNum = 265;BA.debugLine="IndexH = 129";
+_indexh = (int)(129);
+ break;
+case 15:
+ //BA.debugLineNum = 267;BA.debugLine="If VariantBox.SelectedItem = \"Black\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Black")) { 
+ //BA.debugLineNum = 268;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzaA/SonyEricssonXperia10Black.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzaA/SonyEricssonXperia10Black.png");
+ //BA.debugLineNum = 269;BA.debugLine="IndexW = 235";
+_indexw = (int)(235);
+ //BA.debugLineNum = 270;BA.debugLine="IndexH = 191";
+_indexh = (int)(191);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("White")) { 
+ //BA.debugLineNum = 272;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzaQ/SonyEricssonXperia10White.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzaQ/SonyEricssonXperia10White.png");
+ //BA.debugLineNum = 273;BA.debugLine="IndexW = 255";
+_indexw = (int)(255);
+ //BA.debugLineNum = 274;BA.debugLine="IndexH = 205";
+_indexh = (int)(205);
+ };
+ //BA.debugLineNum = 276;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480854)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480854);
+ break;
+case 16:
+ //BA.debugLineNum = 278;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzZQ/HTCGoogleNexusOne.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzZQ/HTCGoogleNexusOne.png");
+ //BA.debugLineNum = 279;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 280;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDQzOQ/HTCGoogleNexusOne.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDQzOQ/HTCGoogleNexusOne.png");
+ //BA.debugLineNum = 281;BA.debugLine="IndexW = 165";
+_indexw = (int)(165);
+ //BA.debugLineNum = 282;BA.debugLine="IndexH = 168";
+_indexh = (int)(168);
+ break;
+case 17:
+ //BA.debugLineNum = 284;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzZg/HTCHero.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzZg/HTCHero.png");
+ //BA.debugLineNum = 285;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
+ //BA.debugLineNum = 286;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDQzYQ/HTCHero.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDQzYQ/HTCHero.png");
+ //BA.debugLineNum = 287;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"http://ompldr.org/vaDQzYw/HTCHero.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"http://ompldr.org/vaDQzYw/HTCHero.png");
+ //BA.debugLineNum = 288;BA.debugLine="IndexW = 67";
+_indexw = (int)(67);
+ //BA.debugLineNum = 289;BA.debugLine="IndexH = 131";
+_indexh = (int)(131);
+ break;
+case 18:
+ //BA.debugLineNum = 291;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzZw/HTCLegend.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzZw/HTCLegend.png");
+ //BA.debugLineNum = 292;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
+ //BA.debugLineNum = 293;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDQzYg/HTCLegend.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDQzYg/HTCLegend.png");
+ //BA.debugLineNum = 294;BA.debugLine="IndexW = 67";
+_indexw = (int)(67);
+ //BA.debugLineNum = 295;BA.debugLine="IndexH = 131";
+_indexh = (int)(131);
+ break;
+case 19:
+ //BA.debugLineNum = 321;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDVxcQ/DroidDNA.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDVxcQ/DroidDNA.png");
+ //BA.debugLineNum = 322;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r10801920)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r10801920);
+ //BA.debugLineNum = 323;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDY3cw/DroidDNA.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDY3cw/DroidDNA.png");
+ //BA.debugLineNum = 324;BA.debugLine="IndexW = 106";
+_indexw = (int)(106);
+ //BA.debugLineNum = 325;BA.debugLine="IndexH = 300";
+_indexh = (int)(300);
+ break;
+case 20:
+ //BA.debugLineNum = 327;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDVxcA/Vivid.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDVxcA/Vivid.png");
+ //BA.debugLineNum = 328;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
+ //BA.debugLineNum = 329;BA.debugLine="IndexW = 66";
+_indexw = (int)(66);
+ //BA.debugLineNum = 330;BA.debugLine="IndexH = 125";
+_indexh = (int)(125);
+ break;
+case 21:
+ //BA.debugLineNum = 332;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY3dA/Evo3D.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY3dA/Evo3D.png");
+ //BA.debugLineNum = 333;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
+ //BA.debugLineNum = 334;BA.debugLine="IndexW = 78";
+_indexw = (int)(78);
+ //BA.debugLineNum = 335;BA.debugLine="IndexH = 153";
+_indexh = (int)(153);
+ break;
+case 22:
+ //BA.debugLineNum = 337;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
+ //BA.debugLineNum = 338;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4MQ/DesireZPort.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4MQ/DesireZPort.png");
+ //BA.debugLineNum = 339;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 340;BA.debugLine="IndexW = 94";
+_indexw = (int)(94);
+ //BA.debugLineNum = 341;BA.debugLine="IndexH = 162";
+_indexh = (int)(162);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
+ //BA.debugLineNum = 343;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4MA/DesireZLand.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4MA/DesireZLand.png");
+ //BA.debugLineNum = 344;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r800480)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r800480);
+ //BA.debugLineNum = 345;BA.debugLine="IndexW = 189";
+_indexw = (int)(189);
+ //BA.debugLineNum = 346;BA.debugLine="IndexH = 79";
+_indexh = (int)(79);
+ };
+ break;
+case 23:
+ //BA.debugLineNum = 349;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4Yw/Desire.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4Yw/Desire.png");
+ //BA.debugLineNum = 350;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 351;BA.debugLine="IndexW = 136";
+_indexw = (int)(136);
+ //BA.debugLineNum = 352;BA.debugLine="IndexH = 180";
+_indexh = (int)(180);
+ break;
+case 24:
+ //BA.debugLineNum = 354;BA.debugLine="If VariantBox.SelectedItem = \"Model 1\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Model 1")) { 
+ //BA.debugLineNum = 355;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4ZQ/DroidCharge.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4ZQ/DroidCharge.png");
+ //BA.debugLineNum = 356;BA.debugLine="IndexH = 191";
+_indexh = (int)(191);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Model 2")) { 
+ //BA.debugLineNum = 358;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4bA/GalaxySAviator.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4bA/GalaxySAviator.png");
+ //BA.debugLineNum = 359;BA.debugLine="IndexH = 175";
+_indexh = (int)(175);
+ };
+ //BA.debugLineNum = 361;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 362;BA.debugLine="IndexW = 60";
+_indexw = (int)(60);
+ break;
+case 25:
+ //BA.debugLineNum = 364;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4cA/GalaxyAce.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4cA/GalaxyAce.png");
+ //BA.debugLineNum = 365;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
+ //BA.debugLineNum = 366;BA.debugLine="IndexW = 87";
+_indexw = (int)(87);
+ //BA.debugLineNum = 367;BA.debugLine="IndexH = 179";
+_indexh = (int)(179);
+ break;
+case 26:
+ //BA.debugLineNum = 369;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY5aQ/XperiaJ.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY5aQ/XperiaJ.png");
+ //BA.debugLineNum = 370;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480854)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480854);
+ //BA.debugLineNum = 371;BA.debugLine="IndexW = 75";
+_indexw = (int)(75);
+ //BA.debugLineNum = 372;BA.debugLine="IndexH = 172";
+_indexh = (int)(172);
+ break;
+case 27:
+ //BA.debugLineNum = 374;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY5eA/Nitro.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY5eA/Nitro.png");
+ //BA.debugLineNum = 375;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
+ //BA.debugLineNum = 376;BA.debugLine="IndexW = 113";
+_indexw = (int)(113);
+ //BA.debugLineNum = 377;BA.debugLine="IndexH = 191";
+_indexh = (int)(191);
+ break;
+case 28:
+ //BA.debugLineNum = 379;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
+ //BA.debugLineNum = 380;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png");
+ //BA.debugLineNum = 381;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r8001280);
+ //BA.debugLineNum = 382;BA.debugLine="IndexW = 129";
+_indexw = (int)(129);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
+ //BA.debugLineNum = 384;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZhMg/GalaxyTab10.1Land.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZhMg/GalaxyTab10.1Land.png");
+ //BA.debugLineNum = 385;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
+ //BA.debugLineNum = 386;BA.debugLine="IndexW = 135";
+_indexw = (int)(135);
+ };
+ //BA.debugLineNum = 388;BA.debugLine="IndexH = 135";
+_indexh = (int)(135);
+ break;
+case 29:
+ //BA.debugLineNum = 390;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZhYw/GSII%20Skyrocket.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZhYw/GSII%20Skyrocket.png");
+ //BA.debugLineNum = 391;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 392;BA.debugLine="IndexW = 86";
+_indexw = (int)(86);
+ //BA.debugLineNum = 393;BA.debugLine="IndexH = 148";
+_indexh = (int)(148);
+ break;
+case 30:
+ //BA.debugLineNum = 395;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZoYw/EVO4GLTE.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZoYw/EVO4GLTE.png");
+ //BA.debugLineNum = 396;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
+ //BA.debugLineNum = 397;BA.debugLine="IndexW = 88";
+_indexw = (int)(88);
+ //BA.debugLineNum = 398;BA.debugLine="IndexH = 199";
+_indexh = (int)(199);
+ break;
+case 31:
+ //BA.debugLineNum = 400;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZrdw/EeePadTransformer.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZrdw/EeePadTransformer.png");
+ //BA.debugLineNum = 401;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
+ //BA.debugLineNum = 402;BA.debugLine="IndexW = 165";
+_indexw = (int)(165);
+ //BA.debugLineNum = 403;BA.debugLine="IndexH = 157";
+_indexh = (int)(157);
+ break;
+case 32:
+ //BA.debugLineNum = 405;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDc2NQ/DesireC.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDc2NQ/DesireC.png");
+ //BA.debugLineNum = 406;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
+ //BA.debugLineNum = 407;BA.debugLine="IndexW = 52";
+_indexw = (int)(52);
+ //BA.debugLineNum = 408;BA.debugLine="IndexH = 101";
+_indexh = (int)(101);
+ break;
+case 33:
+ //BA.debugLineNum = 410;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDc2Zw/Wildfire.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDc2Zw/Wildfire.png");
+ //BA.debugLineNum = 411;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r240320)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r240320);
+ //BA.debugLineNum = 412;BA.debugLine="IndexW = 43";
+_indexw = (int)(43);
+ //BA.debugLineNum = 413;BA.debugLine="IndexH = 76";
+_indexh = (int)(76);
+ break;
+case 34:
+ //BA.debugLineNum = 415;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
+if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
+ //BA.debugLineNum = 416;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDhxYg/Droid2.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDhxYg/Droid2.png");
+ //BA.debugLineNum = 417;BA.debugLine="IndexW = 110";
+_indexw = (int)(110);
+ //BA.debugLineNum = 418;BA.debugLine="IndexH = 193";
+_indexh = (int)(193);
+ //BA.debugLineNum = 419;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480854)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480854);
+ }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
+ //BA.debugLineNum = 421;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDhxYw/Droid2Horizontal.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDhxYw/Droid2Horizontal.png");
+ //BA.debugLineNum = 422;BA.debugLine="IndexW = 198";
+_indexw = (int)(198);
+ //BA.debugLineNum = 423;BA.debugLine="IndexH = 95";
+_indexh = (int)(95);
+ //BA.debugLineNum = 424;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r854480)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r854480);
+ };
+ break;
+case 35:
+ //BA.debugLineNum = 427;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDhxZA/Optimus2x.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDhxZA/Optimus2x.png");
+ //BA.debugLineNum = 428;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 429;BA.debugLine="IndexW = 93";
+_indexw = (int)(93);
+ //BA.debugLineNum = 430;BA.debugLine="IndexH = 175";
+_indexh = (int)(175);
+ break;
+case 36:
+ //BA.debugLineNum = 432;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGIycg/Titan.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGIycg/Titan.png");
+ //BA.debugLineNum = 433;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
+ //BA.debugLineNum = 434;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaGIydA/Titan.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaGIydA/Titan.png");
+ //BA.debugLineNum = 435;BA.debugLine="IndexW = 60";
+_indexw = (int)(60);
+ //BA.debugLineNum = 436;BA.debugLine="IndexH = 138";
+_indexh = (int)(138);
+ break;
+case 37:
+ //BA.debugLineNum = 438;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDc2Zw/Wildfire.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDc2Zw/Wildfire.png");
+ //BA.debugLineNum = 439;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r240320)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r240320);
+ //BA.debugLineNum = 440;BA.debugLine="IndexW = 43";
+_indexw = (int)(43);
+ //BA.debugLineNum = 441;BA.debugLine="IndexH = 76";
+_indexh = (int)(76);
+ break;
+case 38:
+ //BA.debugLineNum = 443;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGIzNg/WildfireS.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGIzNg/WildfireS.png");
+ //BA.debugLineNum = 444;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
+ //BA.debugLineNum = 445;BA.debugLine="IndexW = 72";
+_indexw = (int)(72);
+ //BA.debugLineNum = 446;BA.debugLine="IndexH = 123";
+_indexh = (int)(123);
+ break;
+case 39:
+ //BA.debugLineNum = 448;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGJxcg/Sensation.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGJxcg/Sensation.png");
+ //BA.debugLineNum = 449;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
+ //BA.debugLineNum = 450;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaGJxcw/Sensation.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaGJxcw/Sensation.png");
+ //BA.debugLineNum = 451;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"http://ompldr.org/vaGJxdA/Sensation.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"http://ompldr.org/vaGJxdA/Sensation.png");
+ //BA.debugLineNum = 452;BA.debugLine="IndexW = 80";
+_indexw = (int)(80);
+ //BA.debugLineNum = 453;BA.debugLine="IndexH = 148";
+_indexh = (int)(148);
+ break;
+case 40:
+ //BA.debugLineNum = 455;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGNiaw/Ruby.png\")";
+_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGNiaw/Ruby.png");
+ //BA.debugLineNum = 456;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
+ //BA.debugLineNum = 457;BA.debugLine="IndexW = 84";
+_indexw = (int)(84);
+ //BA.debugLineNum = 458;BA.debugLine="IndexH = 157";
+_indexh = (int)(157);
+ break;
+}
+;
+ //BA.debugLineNum = 473;BA.debugLine="Preview.SetBackgroundImage(Image1)";
+mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(_image1.getObject()));
+ //BA.debugLineNum = 474;BA.debugLine="End Sub";
 return "";
 }
 public static String  _savebtn_click() throws Exception{
- //BA.debugLineNum = 75;BA.debugLine="Sub SaveBtn_Click";
- //BA.debugLineNum = 77;BA.debugLine="End Sub";
+ //BA.debugLineNum = 74;BA.debugLine="Sub SaveBtn_Click";
+ //BA.debugLineNum = 76;BA.debugLine="End Sub";
 return "";
 }
 public static String  _tabswitcher_tabchanged() throws Exception{
- //BA.debugLineNum = 63;BA.debugLine="Sub TabSwitcher_TabChanged";
- //BA.debugLineNum = 64;BA.debugLine="If TabSwitcher.CurrentTab = 0 Then RefreshPreview";
+ //BA.debugLineNum = 62;BA.debugLine="Sub TabSwitcher_TabChanged";
+ //BA.debugLineNum = 63;BA.debugLine="If TabSwitcher.CurrentTab = 0 Then RefreshPreview";
 if (mostCurrent._tabswitcher.getCurrentTab()==0) { 
 _refreshpreview();};
- //BA.debugLineNum = 65;BA.debugLine="End Sub";
+ //BA.debugLineNum = 64;BA.debugLine="End Sub";
 return "";
 }
 public static String  _variantbox_itemclick(int _position,Object _value) throws Exception{
- //BA.debugLineNum = 67;BA.debugLine="Sub VariantBox_ItemClick (Position As Int, Value As Object)";
- //BA.debugLineNum = 69;BA.debugLine="End Sub";
+ //BA.debugLineNum = 66;BA.debugLine="Sub VariantBox_ItemClick (Position As Int, Value As Object)";
+ //BA.debugLineNum = 68;BA.debugLine="End Sub";
 return "";
 }
 }
