@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="yttrium.scrotter"
 	android:versionCode="1"
-	android:versionName=""
+	android:versionName="0.1"
 	android:installLocation="preferExternal">
 	
 	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>
@@ -11,6 +11,8 @@
 	    android:normalScreens="true" 
 	    android:smallScreens="true" 
 	    android:anyDensity="true"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<application
 		android:icon="@drawable/icon"
 		android:label="Scrotter">
