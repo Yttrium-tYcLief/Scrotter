@@ -168,15 +168,23 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "HTC One S", "HTC One V", "Samsung Galaxy Note II", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA"
+            Case "HTC One S", "HTC One V", "Google Nexus 4", "HTC Google Nexus One", "HTC Legend", "HTC Droid DNA"
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
             Case "Apple iPhone 3G, 3GS"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
-            Case "Sony Ericsson Xperia X10"
+            Case "Sony Ericsson Xperia X10", "Blackberry Z10"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
+                VariantBox.SelectedIndex = 0
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
+            Case "Samsung Galaxy Note II"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"White", "Gray"})
                 VariantBox.SelectedIndex = 0
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
@@ -274,46 +282,47 @@ Public Class Scrotter
             Dim r1280800 As String = "http://ompldr.org/vaGJ3MA/1280x800.png"
             Dim r10801920 As String = "http://ompldr.org/vaDVxdA/1080x1920.png"
             Dim DeviceName As String = ""
+            Dim GlossUsed As Boolean = False
+            Dim UndershadowUsed As Boolean = False
             Select Case args.model
                 Case "Samsung Galaxy SIII Mini"
-                    DeviceName = FetchImage("http://ompldr.org/vaDJmaw/SamsungGSIIIMini.png")
+                    DeviceName = "SamsungGSIIIMini.png"
                     Shadow = FetchImage(r480800)
                     IndexW = 78
                     IndexH = 182
                 Case "HTC Desire HD, HTC Inspire 4G"
-                    DeviceName = FetchImage("http://103.imagebam.com/download/Y3UBuWo3KwUIk12J9nWzhw/23245/232444224/DesireHD.png")
+                    DeviceName = "DesireHD.png"
                     Shadow = FetchImage(r480800)
                     IndexW = 104
                     IndexH = 169
                 Case "HTC One X, HTC One X+"
                     If args.var = "Black" Then
-                        DeviceName = FetchImage("http://ompldr.org/vaDU3cQ/OneXBlack.png")
-                        Gloss = FetchImage("http://ompldr.org/vaGJ3Mw/OneXBlack.png")
+                        DeviceName = "OneXBlack.png"
                         IndexW = 113
                     ElseIf args.var = "White" Then
-                        DeviceName = FetchImage("http://ompldr.org/vaDU3cg/OneXWhite.png")
-                        Gloss = FetchImage("http://ompldr.org/vaGJ3NA/OneXWhite.png")
+                        DeviceName = "OneXWhite.png"
                         IndexW = 115
                     End If
+                    UndershadowUsed = True
                     Shadow = FetchImage(r7201280)
                     IndexH = 213
                 Case "Samsung Galaxy SIII"
                     IndexW = 88
                     If args.var = "Blue" Then
-                        DeviceName = FetchImage("http://ompldr.org/vaGJ3NQ/GSIIIBlue.png")
-                        Gloss = FetchImage("http://ompldr.org/vaGJ3Ng/GSIIIBlue.png")
+                        DeviceName = "GSIIIBlue.png"
+                        GlossUsed = True
                     ElseIf args.var = "White" Then
-                        DeviceName = FetchImage("http://ompldr.org/vaGJ3Nw/GSIIIWhite.png")
-                        Gloss = FetchImage("http://ompldr.org/vaGJ3OQ/GSIIIWhite.png")
+                        DeviceName = "GSIIIWhite.png"
+                        GlossUsed = True
                         IndexW = 84
                     ElseIf args.var = "Black" Then
-                        DeviceName = FetchImage("http://ompldr.org/vaDZnMg/GSIIIBlack.png")
+                        DeviceName = "GSIIIBlack.png"
                     ElseIf args.var = "Red" Then
-                        DeviceName = FetchImage("http://ompldr.org/vaDZnMA/GSIIIRed.png")
+                        DeviceName = "GSIIIRed.png"
                     ElseIf args.var = "Brown" Then
-                        DeviceName = FetchImage("http://ompldr.org/vaDZnMQ/GSIIIBrown.png")
+                        DeviceName = "GSIIIBrown.png"
                     End If
-                    Undershadow = FetchImage("http://ompldr.org/vaGJ3YQ/GSIII.png")
+                    UndershadowUsed = True
                     Shadow = FetchImage(r7201280)
                     IndexH = 184
                 Case "Google Nexus 10"
@@ -434,11 +443,14 @@ Public Class Scrotter
                     IndexW = 155
                     IndexH = 263
                 Case "Samsung Galaxy Note II"
-                    DeviceName = FetchImage("http://103.imagebam.com/download/AHVkOBxWhRpEJXxwP1KiLw/23245/232444244/GalaxyNoteII.png")
-                    Shadow = FetchImage(r7201280)
-                    Gloss = FetchImage("http://104.imagebam.com/download/m_P6Sfcc3mCGd7IQZwVOTw/23245/232446202/GalaxyNoteII.png")
+                    If args.var = "White" Then
+                        DeviceName = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Device/GalaxyNoteII.png")
+                    ElseIf args.var = "Gray" Then
+                        DeviceName = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Device/GalaxyNoteIIGray.png")
+                    End If
                     IndexW = 49
                     IndexH = 140
+                    Shadow = FetchImage(r7201280)
                 Case "Motorola Droid RAZR"
                     DeviceName = FetchImage("http://106.imagebam.com/download/hM310SZGxmzR2wxM1IlEOQ/23245/232444231/DroidRAZR.png")
                     Shadow = FetchImage(r540960)
@@ -788,7 +800,9 @@ Public Class Scrotter
                     IndexW = 84
                     IndexH = 157
             End Select
-            Image1 = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Device/", DeviceName)
+            Image1 = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Device/" & DeviceName & ".png")
+            If UndershadowUsed = True Then Undershadow = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Undershadow/" & DeviceName & ".png")
+            If GlossUsed = True Then Gloss = FetchImage("https://raw.github.com/Yttrium-tYcLief/Scrotter/database/Gloss/" & DeviceName & ".png")
             If StretchCheckbox.Checked = True Then
                 Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
                 Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
@@ -820,7 +834,7 @@ Public Class Scrotter
         Public model As String
     End Class
 
-    Private Function FetchImage(ByVal url As String, ByVal device As String)
+    Private Function FetchImage(ByVal url As String)
         Try
             Return New Bitmap(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(url))))
         Catch ex As Exception
