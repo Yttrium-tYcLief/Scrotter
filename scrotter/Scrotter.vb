@@ -19,6 +19,7 @@ Imports System.IO
 Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.Threading
+Imports System.Environment
 
 Public Class Scrotter
     Public Shared OpenPath(7), SavePath As String
