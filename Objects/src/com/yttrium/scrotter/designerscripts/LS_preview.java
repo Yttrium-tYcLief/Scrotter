@@ -1,4 +1,4 @@
-package yttrium.scrotter.designerscripts;
+package com.yttrium.scrotter.designerscripts;
 import anywheresoftware.b4a.objects.TextViewWrapper;
 import anywheresoftware.b4a.objects.ImageViewWrapper;
 import anywheresoftware.b4a.BA;

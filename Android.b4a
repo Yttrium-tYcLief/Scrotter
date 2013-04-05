@@ -4,19 +4,20 @@ NumberOfModules=0
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~'AddReceiverText(ReceiveImage,~\n~'<intent-filter>~\n~'    <action android:name="android.intent.action.SEND" />~\n~'	 <category android:name="android.intent.category.DEFAULT" />~\n~'	<data android:mimeType="image/*" />~\n~'</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~~\n~
-UserTypesHint=
-NumberOfFiles=3
+UserTypesHint=PanelInfo
+NumberOfFiles=4
 File1=Main.bal
 File2=Options.bal
 File3=Preview.bal
-NumberOfLibraries=1
-Library1=core
+File4=Settings.bal
+NumberOfLibraries=2
+Library1=ahviewpager
+Library2=core
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
 	#VersionCode: 01
 	#VersionName: 0.1
-	'SupportedOrientations possible values: unspecified, landscape or portrait.
 	#SupportedOrientations: portrait
 	#CanInstallToExternalStorage: True
 #End Region
@@ -26,17 +27,24 @@ Library1=core
 	#IncludeTitle: False
 #End Region
 
-
-
 Sub Process_Globals
 	'These global variables will be declared once when the application starts.
 	'These variables can be accessed from all modules.
-
+	Dim TYPE_SETTINGS As Int : TYPE_SETTINGS = 1
+	Dim TYPE_PREVIEW As Int : TYPE_PREVIEW = 2
+	Dim TYPE_OPTIONS As Int : TYPE_OPTIONS = 3
+	Dim FILL_PARENT As Int : FILL_PARENT = -1
+	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
+	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
+	Dim CurrentPage As Int : CurrentPage = 0
 End Sub
 
 Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
+	Dim container As AHPageContainer
+	Dim pager As AHViewPager
+	Dim tabs As AHViewPagerTabs
 	Dim GlossCheckbox As CheckBox
 	Dim ModelBox As Spinner
 	Dim ShadowCheckbox As CheckBox
@@ -64,17 +72,82 @@ End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
-	'Activity.LoadLayout("Layout1")
-	Activity.LoadLayout("Main")
-	'TabSwitcher.Width = DipToCurrent(100)
-	TabSwitcher.AddTab("Preview", "preview.bal")
-	TabSwitcher.AddTab("Options", "options.bal")
-	ModelBox.AddAll(Array As String("ASUS Eee Pad Transformer", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Amaze 4G, Ruby", "HTC Desire", "HTC Desire C", "HTC Desire HD, HTC Inspire 4G", "HTC Desire Z, T-Mobile G2", "HTC Droid DNA", "HTC Evo 3D", "HTC Evo 4G LTE", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "HTC Sensation", "HTC Titan", "HTC Vivid", "HTC Wildfire", "HTC Wildfire S", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "LG Optimus 2X", "Motorola Droid 2, Milestone 2", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G", "Samsung Galaxy Ace, Galaxy Cooper", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SII Skyrocket", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy TAB 10.1", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia J", "Sony Ericsson Xperia X10"))
-	ModelBox.SelectedIndex = 1
+	container.Initialize
+	Dim pan As Panel
+	pan = CreatePanel(TYPE_SETTINGS, "Settings")
+	container.AddPage(pan,"Settings")
+	pan = CreatePanel(TYPE_PREVIEW, "Preview")
+	container.AddPage(pan,"Preview")
+	pan = CreatePanel(TYPE_OPTIONS, "Options")
+	container.AddPage(pan,"Options")
+	pager.Initialize(container, "Pager")
+	tabs.Initialize(pager)
+	tabs.LineHeight = 5dip
+	tabs.UpperCaseTitle = True
+	Activity.AddView(tabs, 0, 0, FILL_PARENT, WRAP_CONTENT)
+	Activity.AddView(pager, 0, 29dip, Activity.Width, Activity.Height-29dip)
+	pager.GotoPage(2, False)
+	tabs.Color = Colors.White
+	tabs.BackgroundColorPressed = Colors.Blue
+	tabs.LineColorCenter = Colors.DarkGray
+	tabs.TextColor = Colors.LightGray
+	tabs.TextColorCenter = Colors.DarkGray
+End Sub
+
+Sub Activity_Resume
+	pager.GotoPage(CurrentPage, False)
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub CreatePanel(PanelType As Int, Title As String) As Panel
+	Dim pan As Panel
+	Dim pi As PanelInfo
+	pi.Initialize
+	pi.LayoutLoaded = False
+	pi.PanelType = PanelType
+	pan.Initialize("")
+	pan.Tag = pi
+	Return pan
+End Sub
+
+Sub Pager_PageCreated (Position As Int, Page As Object)
+	Log ("Page created " & Position)
+	Dim pan As Panel
+	Dim pi As PanelInfo
+	pan = Page
+	pi = pan.Tag
+	Select pi.PanelType
+		Case TYPE_SETTINGS
+			If Not(pi.LayoutLoaded) Then
+				pan.LoadLayout("Settings")
+				pi.LayoutLoaded = True
+			End If
+		Case TYPE_PREVIEW
+			If Not(pi.LayoutLoaded) Then
+				pan.LoadLayout("Preview")
+				pi.LayoutLoaded = True
+			End If
+		Case TYPE_OPTIONS
+			If Not(pi.LayoutLoaded) Then
+				pan.LoadLayout("Options")
+				pi.LayoutLoaded = True
+				ModelBox.TextColor = Colors.DarkGray
+				ModelBox.AddAll(Array As String("ASUS Eee Pad Transformer", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Amaze 4G, Ruby", "HTC Desire", "HTC Desire C", "HTC Desire HD, HTC Inspire 4G", "HTC Desire Z, T-Mobile G2", "HTC Droid DNA", "HTC Evo 3D", "HTC Evo 4G LTE", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "HTC Sensation", "HTC Titan", "HTC Vivid", "HTC Wildfire", "HTC Wildfire S", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "LG Optimus 2X", "Motorola Droid 2, Milestone 2", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G", "Samsung Galaxy Ace, Galaxy Cooper", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SII Skyrocket", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy TAB 10.1", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia J", "Sony Ericsson Xperia X10"))
+				ModelBox.SelectedIndex = 1
+				Dim tv As View
+			End If
+	End Select		
 End Sub
 
 Sub TabSwitcher_TabChanged
 	If TabSwitcher.CurrentTab = 0 Then RefreshPreview
+End Sub
+
+Sub Pager_PageChanged (Position As Int)
+	CurrentPage = Position
 End Sub
 
 Sub ModelBox_itemClick (Position As Int, Value As Object)

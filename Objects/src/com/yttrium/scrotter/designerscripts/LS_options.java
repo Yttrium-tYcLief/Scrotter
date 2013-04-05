@@ -1,4 +1,4 @@
-package yttrium.scrotter.designerscripts;
+package com.yttrium.scrotter.designerscripts;
 import anywheresoftware.b4a.objects.TextViewWrapper;
 import anywheresoftware.b4a.objects.ImageViewWrapper;
 import anywheresoftware.b4a.BA;
@@ -8,6 +8,7 @@ public class LS_options{
 
 public static void LS_general(java.util.HashMap<String, anywheresoftware.b4a.objects.ViewWrapper<?>> views, int width, int height, float scale) {
 anywheresoftware.b4a.keywords.LayoutBuilder.setScaleRate(0.3);
+//BA.debugLineNum = 3;BA.debugLine="ModelBox.Width = 100%x - 6%x"[options/General script]
 views.get("modelbox").setWidth((int)((100d / 100 * width)-(6d / 100 * width)));
 //BA.debugLineNum = 4;BA.debugLine="VariantBox.Width = 100%x - 6%x"[options/General script]
 views.get("variantbox").setWidth((int)((100d / 100 * width)-(6d / 100 * width)));

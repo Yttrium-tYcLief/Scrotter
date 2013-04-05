@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package yttrium.scrotter;
+package com.yttrium.scrotter;
 
 public final class R {
     public static final class attr {
