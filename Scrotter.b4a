@@ -67,6 +67,7 @@ Sub Globals
     'Public ReadOnly Version As String = "0.8"
     'Public ReadOnly ReleaseDate As String = "2013-02-12"
     'Private Image(7) As String
+	Dim CurrentPage As Int
 	
 End Sub
 
@@ -74,19 +75,15 @@ Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
 	container.Initialize
 	Dim pan As Panel
-	pan = CreatePanel(TYPE_SETTINGS, "Settings")
-	container.AddPage(pan,"Settings")
-	pan = CreatePanel(TYPE_PREVIEW, "Preview")
-	container.AddPage(pan,"Preview")
-	pan = CreatePanel(TYPE_OPTIONS, "Options")
-	container.AddPage(pan,"Options")
+	container.AddPage(CreatePanel(TYPE_SETTINGS, "Settings"),"Settings")
+	container.AddPage(CreatePanel(TYPE_PREVIEW, "Preview"),"Preview")
+	container.AddPage(CreatePanel(TYPE_OPTIONS, "Options"),"Options")
 	pager.Initialize(container, "Pager")
 	tabs.Initialize(pager)
 	tabs.LineHeight = 5dip
 	tabs.UpperCaseTitle = True
 	Activity.AddView(tabs, 0, 0, FILL_PARENT, WRAP_CONTENT)
 	Activity.AddView(pager, 0, 29dip, Activity.Width, Activity.Height-29dip)
-	pager.GotoPage(2, False)
 	tabs.Color = Colors.White
 	tabs.BackgroundColorPressed = Colors.Blue
 	tabs.LineColorCenter = Colors.DarkGray
@@ -99,7 +96,7 @@ Sub Activity_Resume
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
-
+	CurrentPage = pager.CurrentPage
 End Sub
 
 Sub CreatePanel(PanelType As Int, Title As String) As Panel
