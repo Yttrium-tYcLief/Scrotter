@@ -3,7 +3,7 @@ IconFile=
 NumberOfModules=0
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~'AddReceiverText(ReceiveImage,~\n~'<intent-filter>~\n~'    <action android:name="android.intent.action.SEND" />~\n~'	 <category android:name="android.intent.category.DEFAULT" />~\n~'	<data android:mimeType="image/*" />~\n~'</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~~\n~
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~    <category android:name="android.intent.category.DEFAULT" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:hardwareAccelerated, "true")~\n~~\n~
 UserTypesHint=PanelInfo
 NumberOfFiles=4
 File1=Main.bal
@@ -139,12 +139,9 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 	End Select		
 End Sub
 
-Sub TabSwitcher_TabChanged
-	If TabSwitcher.CurrentTab = 0 Then RefreshPreview
-End Sub
-
 Sub Pager_PageChanged (Position As Int)
 	CurrentPage = Position
+	'If pager.CurrentPage = 1 Then RefreshPreview
 End Sub
 
 Sub ModelBox_itemClick (Position As Int, Value As Object)
@@ -159,6 +156,7 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 		Case "Samsung Galaxy SII, Epic 4G Touch"
 			VariantBox.AddAll(Array As String("Galaxy SII", "Epic 4G Touch"))
 	End Select
+	RefreshPreview
 End Sub
 
 Sub SaveBtn_Click
@@ -572,15 +570,19 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
         scale = TargetX / original.Width
     End If
     
-    Dim c As Canvas
+    Dim C As Canvas
     Dim b As Bitmap
     b.InitializeMutable(TargetX, TargetY)
-    c.Initialize2(b)
+    C.Initialize2(b)
     'set the background
-    c.DrawColor(Colors.Transparent)
+    C.DrawColor(Colors.Transparent)
     Dim r As Rect
     Dim w = original.Width * scale, h = original.Height * scale As Int
     r.Initialize(TargetX / 2 - w / 2, TargetY / 2 - h / 2, TargetX / 2 + w / 2, TargetY / 2+ h / 2)
-    c.DrawBitmap(original, Null, r)
+    C.DrawBitmap(original, Null, r)
     Return b
+End Sub
+
+Sub VariantBox_ItemClick (Position As Int, Value As Object)
+	RefreshPreview
 End Sub

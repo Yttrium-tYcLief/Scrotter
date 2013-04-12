@@ -15,7 +15,13 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<application
 		android:icon="@drawable/icon"
-		android:label="Scrotter">
+		android:label="Scrotter"
+		android:hardwareAccelerated="true">
+		
+		<intent-filter>
+		    <action android:name="android.intent.action.SEND" />
+		    <category android:name="android.intent.category.DEFAULT" />
+		</intent-filter>
 		<activity
 			android:windowSoftInputMode="stateHidden"
 			android:launchMode="singleTop"
