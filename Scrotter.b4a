@@ -3,7 +3,7 @@ IconFile=
 NumberOfModules=0
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~    <category android:name="android.intent.category.DEFAULT" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:hardwareAccelerated, "true")~\n~~\n~
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~'AddActivityText(~\n~'<intent-filter>~\n~'    <action android:name="android.intent.action.SEND" />~\n~'    <category android:name="android.intent.category.DEFAULT" />~\n~'</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~~\n~
 UserTypesHint=PanelInfo
 NumberOfFiles=4
 File1=Main.bal
@@ -52,6 +52,7 @@ Sub Globals
 	Dim UnderShadowCheckbox As CheckBox
 	Dim VariantBox As Spinner
 	Dim TabSwitcher As TabHost
+	Dim Loading As ProgressBar
 	Dim Loadbtn As Button
 	Dim SaveBtn As Button
 	Dim Preview As Panel
@@ -168,6 +169,7 @@ Sub Loadbtn_Click
 End Sub
 
 Sub RefreshPreview
+	Loading.Visible(True)
 	Dim MyCanvas As Canvas
 	Dim Image1 As Bitmap
 	Dim Gloss As Bitmap
@@ -557,6 +559,7 @@ Sub RefreshPreview
 	'MyCanvas.Initialize(previewview)
 	'MyCanvas.DrawBitmap(Image2, Null, DestRect)
 	Preview.SetBackgroundImage(ResizeImage(Image1, Preview.Width, Preview.Height))
+	Loading.Visible(False)
 End Sub
 
 Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap

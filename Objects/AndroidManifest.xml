@@ -9,19 +9,14 @@
 	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>
 	<supports-screens android:largeScreens="true" 
 	    android:normalScreens="true" 
-	    android:smallScreens="true" 
+	    android:smallScreens="true"
+		android:hardwareAccelerated="true"
 	    android:anyDensity="true"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<application
 		android:icon="@drawable/icon"
-		android:label="Scrotter"
-		android:hardwareAccelerated="true">
-		
-		<intent-filter>
-		    <action android:name="android.intent.action.SEND" />
-		    <category android:name="android.intent.category.DEFAULT" />
-		</intent-filter>
+		android:label="Scrotter">
 		<activity
 			android:windowSoftInputMode="stateHidden"
 			android:launchMode="singleTop"
