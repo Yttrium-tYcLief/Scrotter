@@ -3,16 +3,20 @@ IconFile=
 NumberOfModules=0
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~'AddActivityText(~\n~'<intent-filter>~\n~'    <action android:name="android.intent.action.SEND" />~\n~'    <category android:name="android.intent.category.DEFAULT" />~\n~'</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~~\n~
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(Main, ~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	<category android:name="android.intent.category.DEFAULT" />~\n~    <data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~~\n~
 UserTypesHint=PanelInfo
 NumberOfFiles=4
 File1=Main.bal
 File2=Options.bal
 File3=Preview.bal
 File4=Settings.bal
-NumberOfLibraries=2
+NumberOfLibraries=6
 Library1=ahviewpager
 Library2=core
+Library3=phone
+Library4=reflection
+Library5=sql
+Library6=threading
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
@@ -69,7 +73,10 @@ Sub Globals
     'Public ReadOnly ReleaseDate As String = "2013-02-12"
     'Private Image(7) As String
 	Dim CurrentPage As Int
-	
+	Dim BackgroundThread As Thread
+	Dim PreviewImage As Bitmap
+	Dim Waiting As Boolean = False
+	Dim cc As ContentChooser
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -90,10 +97,59 @@ Sub Activity_Create(FirstTime As Boolean)
 	tabs.LineColorCenter = Colors.DarkGray
 	tabs.TextColor = Colors.LightGray
 	tabs.TextColorCenter = Colors.DarkGray
+	BackgroundThread.Initialise("ImageThread")
+	cc.Initialize("cc")
+End Sub
+
+Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
+	Image3.Initialize3(LoadBitmap("", GetPathFromContentResult(FileName)))
+	Preview.SetBackgroundImage(Image3)
+End Sub
+
+Sub GetPathFromContentResult(UriString As String) As String
+    If UriString.StartsWith("/") Then Return UriString 'If the user used a file manager to choose the image
+    Dim Proj() As String
+    Proj = Array As String("_data")
+	Dim c As Cursor
+    Dim r As Reflector
+    Dim Uri As Object
+    Uri = r.RunStaticMethod("android.net.Uri", "parse", _
+        Array As Object(UriString), _
+        Array As String("java.lang.String"))
+    r.Target = r.GetContext
+    r.Target = r.RunMethod("getContentResolver")
+    c = r.RunMethod4("query", _
+    Array As Object(Uri, Proj, Null, Null, Null), _
+    Array As String("android.net.Uri", _
+        "[Ljava.lang.String;", "java.lang.String", _
+        "[Ljava.lang.String;", "java.lang.String"))
+    
+    c.Position = 0
+    Dim res As String
+    res = c.GetString("_data")
+    c.Close
+    Return res
 End Sub
 
 Sub Activity_Resume
 	pager.GotoPage(CurrentPage, False)
+	Dim In As Intent 
+    In = Activity.GetStartingIntent 
+    
+    If In.ExtrasToString.Contains("no extras") Then
+               'No Data
+    Else
+		'Dim UriString As String
+		'UriString = In.GetExtra("android.intent.extra.STREAM")
+		'Preview.SetBackgroundImage(LoadBitmap("", GetPathFromContentResult(UriString)))
+		Log(In.ExtrasToString)
+	Dim MyUriString As String 
+	MyUriString = In.ExtrasToString
+	MyUriString = MyUriString.SubString2(MyUriString.IndexOf("=")+1,MyUriString.IndexOf(","))
+	Log(MyUriString)
+	Activity.SetBackgroundImage (LoadBitmap("", GetPathFromContentResult(MyUriString )))
+		pager.GotoPage(2, False)
+    End If
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
@@ -142,7 +198,6 @@ End Sub
 
 Sub Pager_PageChanged (Position As Int)
 	CurrentPage = Position
-	'If pager.CurrentPage = 1 Then RefreshPreview
 End Sub
 
 Sub ModelBox_itemClick (Position As Int, Value As Object)
@@ -157,7 +212,12 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 		Case "Samsung Galaxy SII, Epic 4G Touch"
 			VariantBox.AddAll(Array As String("Galaxy SII", "Epic 4G Touch"))
 	End Select
-	RefreshPreview
+	Loading.Visible = True
+	If BackgroundThread.Running = True Then
+		BackgroundThread.Interrupt
+	End If
+	BackgroundThread.Start(Me, "ImageProcess", Null)
+	pager.PagingEnabled = False
 End Sub
 
 Sub SaveBtn_Click
@@ -165,13 +225,12 @@ Sub SaveBtn_Click
 End Sub
 
 Sub Loadbtn_Click
-	
+	cc.Show("Image/*", "")
 End Sub
 
-Sub RefreshPreview
-	Loading.Visible(True)
-	Dim MyCanvas As Canvas
+Sub ImageProcess
 	Dim Image1 As Bitmap
+	Dim MyCanvas As Canvas
 	Dim Gloss As Bitmap
 	Dim Shadow As Bitmap
 	Dim Undershadow As Bitmap
@@ -558,8 +617,14 @@ Sub RefreshPreview
 	'previewview.Initialize("lol")
 	'MyCanvas.Initialize(previewview)
 	'MyCanvas.DrawBitmap(Image2, Null, DestRect)
-	Preview.SetBackgroundImage(ResizeImage(Image1, Preview.Width, Preview.Height))
-	Loading.Visible(False)
+	PreviewImage.Initialize3(ResizeImage(Image1, Preview.Width, Preview.Height))
+	BackgroundThread.RunOnGuiThread("EndLoading", Null)
+End Sub
+
+Sub EndLoading
+	Loading.Visible = False
+	Preview.SetBackgroundImage(PreviewImage)
+	pager.PagingEnabled = True
 End Sub
 
 Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
@@ -579,13 +644,18 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
     C.Initialize2(b)
     'set the background
     C.DrawColor(Colors.Transparent)
-    Dim r As Rect
+    Dim R As Rect
     Dim w = original.Width * scale, h = original.Height * scale As Int
-    r.Initialize(TargetX / 2 - w / 2, TargetY / 2 - h / 2, TargetX / 2 + w / 2, TargetY / 2+ h / 2)
-    C.DrawBitmap(original, Null, r)
+    R.Initialize(TargetX / 2 - w / 2, TargetY / 2 - h / 2, TargetX / 2 + w / 2, TargetY / 2+ h / 2)
+    C.DrawBitmap(original, Null, R)
     Return b
 End Sub
 
 Sub VariantBox_ItemClick (Position As Int, Value As Object)
-	RefreshPreview
+	Loading.Visible = True
+	If BackgroundThread.Running = True Then
+		BackgroundThread.Interrupt
+	End If
+	BackgroundThread.Start(Me, "ImageProcess", Null)
+	pager.PagingEnabled = False
 End Sub
