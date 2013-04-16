@@ -77,6 +77,7 @@ Sub Globals
 	Dim PreviewImage As Bitmap
 	Dim Waiting As Boolean = False
 	Dim cc As ContentChooser
+	Dim Ringtone As RingtoneManager
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -102,33 +103,8 @@ Sub Activity_Create(FirstTime As Boolean)
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
-	Image3.Initialize3(LoadBitmap("", GetPathFromContentResult(FileName)))
-	Preview.SetBackgroundImage(Image3)
-End Sub
-
-Sub GetPathFromContentResult(UriString As String) As String
-    If UriString.StartsWith("/") Then Return UriString 'If the user used a file manager to choose the image
-    Dim Proj() As String
-    Proj = Array As String("_data")
-	Dim c As Cursor
-    Dim r As Reflector
-    Dim Uri As Object
-    Uri = r.RunStaticMethod("android.net.Uri", "parse", _
-        Array As Object(UriString), _
-        Array As String("java.lang.String"))
-    r.Target = r.GetContext
-    r.Target = r.RunMethod("getContentResolver")
-    c = r.RunMethod4("query", _
-    Array As Object(Uri, Proj, Null, Null, Null), _
-    Array As String("android.net.Uri", _
-        "[Ljava.lang.String;", "java.lang.String", _
-        "[Ljava.lang.String;", "java.lang.String"))
-    
-    c.Position = 0
-    Dim res As String
-    res = c.GetString("_data")
-    c.Close
-    Return res
+	Image3.Initialize3(LoadBitmap(Ringtone.GetContentDir, FileName))
+	Preview.SetBackgroundImage(ResizeImage(Image3, Preview.Width, Preview.Height))
 End Sub
 
 Sub Activity_Resume
@@ -139,16 +115,17 @@ Sub Activity_Resume
     If In.ExtrasToString.Contains("no extras") Then
                'No Data
     Else
-		'Dim UriString As String
-		'UriString = In.GetExtra("android.intent.extra.STREAM")
-		'Preview.SetBackgroundImage(LoadBitmap("", GetPathFromContentResult(UriString)))
 		Log(In.ExtrasToString)
-	Dim MyUriString As String 
-	MyUriString = In.ExtrasToString
-	MyUriString = MyUriString.SubString2(MyUriString.IndexOf("=")+1,MyUriString.IndexOf(","))
-	Log(MyUriString)
-	Activity.SetBackgroundImage (LoadBitmap("", GetPathFromContentResult(MyUriString )))
-		pager.GotoPage(2, False)
+		Dim UriString As String 
+		UriString = In.ExtrasToString
+		UriString = UriString.SubString2(UriString.IndexOf("STREAM=")+7,UriString.IndexOf("}"))
+		If UriString.Contains(",") Then
+			UriString = UriString.SubString2(0,UriString.IndexOf(","))
+		End If
+		Log(UriString)
+		Image3.Initialize3(LoadBitmap(Ringtone.GetContentDir, UriString))
+		Preview.SetBackgroundImage(ResizeImage(Image3, Preview.Width, Preview.Height))
+		pager.GotoPage(1, False)
     End If
 End Sub
 
@@ -646,9 +623,9 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
     C.DrawColor(Colors.Transparent)
     Dim R As Rect
     Dim w = original.Width * scale, h = original.Height * scale As Int
-    R.Initialize(TargetX / 2 - w / 2, TargetY / 2 - h / 2, TargetX / 2 + w / 2, TargetY / 2+ h / 2)
+    R.Initialize(TargetX/2-w/2, TargetY/2-h/2, TargetX/2+w/2, TargetY/2+h/2)
     C.DrawBitmap(original, Null, R)
-    Return b
+	Return b
 End Sub
 
 Sub VariantBox_ItemClick (Position As Int, Value As Object)
