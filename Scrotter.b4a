@@ -10,13 +10,14 @@ File1=Main.bal
 File2=Options.bal
 File3=Preview.bal
 File4=Settings.bal
-NumberOfLibraries=6
-Library1=ahviewpager
-Library2=core
-Library3=phone
-Library4=reflection
-Library5=sql
-Library6=threading
+NumberOfLibraries=7
+Library1=abextdrawing
+Library2=ahviewpager
+Library3=core
+Library4=phone
+Library5=reflection
+Library6=sql
+Library7=threading
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
@@ -82,6 +83,7 @@ End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
+	Msgbox("This version of Scrotter is a developer preview only. Many basic functions do not work, and are not yet implemented. Do not treat this version as final!", "Warning")
 	container.Initialize
 	Dim pan As Panel
 	container.AddPage(CreatePanel(TYPE_SETTINGS, "Settings"),"Settings")
@@ -202,7 +204,10 @@ Sub SaveBtn_Click
 End Sub
 
 Sub Loadbtn_Click
-	cc.Show("Image/*", "")
+	Try
+		cc.Show("image/*", "")
+	Catch
+	End Try
 End Sub
 
 Sub ImageProcess
@@ -608,23 +613,25 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
     Dim origRatio As Float = original.Width / original.Height
     Dim targetRatio As Float = TargetX / TargetY
     Dim scale As Float
-    
     If targetRatio > origRatio Then
         scale = TargetY / original.Height
     Else
         scale = TargetX / original.Width
     End If
-    
     Dim C As Canvas
     Dim b As Bitmap
     b.InitializeMutable(TargetX, TargetY)
     C.Initialize2(b)
-    'set the background
     C.DrawColor(Colors.Transparent)
     Dim R As Rect
     Dim w = original.Width * scale, h = original.Height * scale As Int
     R.Initialize(TargetX/2-w/2, TargetY/2-h/2, TargetX/2+w/2, TargetY/2+h/2)
-    C.DrawBitmap(original, Null, R)
+	Dim ExtDraw As ABExtDrawing
+	Dim paint As ABPaint
+	paint.Initialize()
+	paint.setFilterBitmap(True)
+	paint.SetAntiAlias(True)
+	ExtDraw.drawBitmap(C, original, Null, R, paint)
 	Return b
 End Sub
 
