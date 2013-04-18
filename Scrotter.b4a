@@ -4,7 +4,7 @@ NumberOfModules=0
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(Main, ~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	<category android:name="android.intent.category.DEFAULT" />~\n~    <data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~~\n~
-UserTypesHint=PanelInfo
+UserTypesHint=
 NumberOfFiles=4
 File1=Main.bal
 File2=Options.bal
@@ -79,6 +79,7 @@ Sub Globals
 	Dim Waiting As Boolean = False
 	Dim cc As ContentChooser
 	Dim Ringtone As RingtoneManager
+	Dim SettingsList As ScrollView
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -102,11 +103,25 @@ Sub Activity_Create(FirstTime As Boolean)
 	tabs.TextColorCenter = Colors.DarkGray
 	BackgroundThread.Initialise("ImageThread")
 	cc.Initialize("cc")
+	pager.GotoPage(1, 0)
+	CreateList
+End Sub
+
+Sub CreateList
+	SettingsList.Panel.Height = 40dip * 20
+    For i = 1 To 20
+        Dim chk As CheckBox
+        chk.Initialize("")
+        chk.Text = "CheckBox" & i
+        SettingsList.Panel.AddView(chk, 0, 40dip * (i-1), SettingsList.Width, 40dip - 2dip)
+    Next
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
-	Image3.Initialize3(LoadBitmap(Ringtone.GetContentDir, FileName))
-	Preview.SetBackgroundImage(ResizeImage(Image3, Preview.Width, Preview.Height))
+	If Success = True Then
+		Image3.Initialize3(LoadBitmap(Ringtone.GetContentDir, FileName))
+		Preview.SetBackgroundImage(ResizeImage(Image3, Preview.Width, Preview.Height))
+	End If
 End Sub
 
 Sub Activity_Resume
