@@ -18,6 +18,8 @@
 	<application
 		android:icon="@drawable/icon"
 		android:label="Scrotter">
+		
+		<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>
 		<activity
 			android:windowSoftInputMode="stateHidden"
 			android:launchMode="singleTop"

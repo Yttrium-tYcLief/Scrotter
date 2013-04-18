@@ -3,8 +3,8 @@ IconFile=
 NumberOfModules=0
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(Main, ~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	<category android:name="android.intent.category.DEFAULT" />~\n~    <data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~~\n~
-UserTypesHint=
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(Main, ~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	<category android:name="android.intent.category.DEFAULT" />~\n~    <data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~
+UserTypesHint=PanelInfo
 NumberOfFiles=4
 File1=Main.bal
 File2=Options.bal
@@ -42,11 +42,18 @@ Sub Process_Globals
 	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int : CurrentPage = 0
+	Dim version As String = "0.1"
+	Dim releasedate As String = "4/18/2013"
+	Dim theme As String = "light"
+	Dim Loaded(4) As Boolean
 End Sub
 
 Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
+	Dim settingspage As Panel
+	Dim optionspage As Panel
+	Dim previewpage As Panel
 	Dim container As AHPageContainer
 	Dim pager As AHViewPager
 	Dim tabs As AHViewPagerTabs
@@ -79,42 +86,85 @@ Sub Globals
 	Dim Waiting As Boolean = False
 	Dim cc As ContentChooser
 	Dim Ringtone As RingtoneManager
-	Dim SettingsList As ScrollView
+	Dim ScrotterTitle As Label
+	Dim IconView As ImageView
+	Dim ScrotterVers As Label
+	Dim themebtn As Button
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
-	'Do not forget to load the layout file created with the visual designer. For example:
 	Msgbox("This version of Scrotter is a developer preview only. Many basic functions do not work, and are not yet implemented. Do not treat this version as final!", "Warning")
 	container.Initialize
-	Dim pan As Panel
-	container.AddPage(CreatePanel(TYPE_SETTINGS, "Settings"),"Settings")
-	container.AddPage(CreatePanel(TYPE_PREVIEW, "Preview"),"Preview")
-	container.AddPage(CreatePanel(TYPE_OPTIONS, "Options"),"Options")
+	settingspage = CreatePanel(TYPE_SETTINGS, "Settings")
+	container.AddPage(settingspage,"Settings")
+	previewpage = CreatePanel(TYPE_PREVIEW, "Preview")
+	container.AddPage(previewpage,"Preview")
+	optionspage = CreatePanel(TYPE_OPTIONS, "Options")
+	container.AddPage(optionspage,"Options")
 	pager.Initialize(container, "Pager")
 	tabs.Initialize(pager)
 	tabs.LineHeight = 5dip
 	tabs.UpperCaseTitle = True
 	Activity.AddView(tabs, 0, 0, FILL_PARENT, WRAP_CONTENT)
 	Activity.AddView(pager, 0, 29dip, Activity.Width, Activity.Height-29dip)
+	BackgroundThread.Initialise("ImageThread")
+	cc.Initialize("cc")
 	tabs.Color = Colors.White
-	tabs.BackgroundColorPressed = Colors.Blue
+	tabs.BackgroundColorPressed = Colors.DarkGray
 	tabs.LineColorCenter = Colors.DarkGray
 	tabs.TextColor = Colors.LightGray
 	tabs.TextColorCenter = Colors.DarkGray
-	BackgroundThread.Initialise("ImageThread")
-	cc.Initialize("cc")
-	pager.GotoPage(1, 0)
-	CreateList
 End Sub
 
-Sub CreateList
-	SettingsList.Panel.Height = 40dip * 20
-    For i = 1 To 20
-        Dim chk As CheckBox
-        chk.Initialize("")
-        chk.Text = "CheckBox" & i
-        SettingsList.Panel.AddView(chk, 0, 40dip * (i-1), SettingsList.Width, 40dip - 2dip)
-    Next
+Sub RefreshTheme
+	Select theme
+		Case "light"
+			tabs.Color = Colors.White
+			tabs.BackgroundColorPressed = Colors.DarkGray
+			tabs.LineColorCenter = Colors.DarkGray
+			tabs.TextColor = Colors.LightGray
+			tabs.TextColorCenter = Colors.DarkGray
+			If Loaded(1) = True Then
+				settingspage.Color = Colors.White
+				ScrotterTitle.TextColor = Colors.DarkGray
+				ScrotterVers.TextColor = Colors.Gray
+			End If
+			If Loaded(2) = True Then previewpage.Color = Colors.White
+			If Loaded(3) = True Then
+				optionspage.Color = Colors.White
+				ModelBox.TextColor = Colors.DarkGray
+				VariantBox.TextColor = Colors.DarkGray
+				StretchCheckbox.TextColor = Colors.DarkGray
+				GlossCheckbox.TextColor = Colors.DarkGray
+				ShadowCheckbox.TextColor = Colors.DarkGray
+				UnderShadowCheckbox.TextColor = Colors.DarkGray
+				ModelBox.Enabled = False
+				ModelBox.Enabled = True
+			End If
+		Case "dark"
+			tabs.Color = Colors.RGB(50, 50, 50)
+			tabs.BackgroundColorPressed = Colors.White
+			tabs.LineColorCenter = Colors.LightGray
+			tabs.TextColor = Colors.Gray
+			tabs.TextColorCenter = Colors.LightGray
+			If Loaded(1) = True Then
+				settingspage.Color = Colors.RGB(50, 50, 50)
+				ScrotterTitle.TextColor = Colors.LightGray
+				ScrotterVers.TextColor = Colors.Gray
+			End If
+			If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)
+			If Loaded(3) = True Then
+				optionspage.Color = Colors.RGB(50, 50, 50)
+				ModelBox.TextColor = Colors.LightGray
+				VariantBox.TextColor = Colors.LightGray
+				StretchCheckbox.TextColor = Colors.LightGray
+				GlossCheckbox.TextColor = Colors.LightGray
+				ShadowCheckbox.TextColor = Colors.LightGray
+				UnderShadowCheckbox.TextColor = Colors.LightGray
+				ModelBox.Enabled = False
+				ModelBox.Enabled = True
+			End If
+	End Select
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
@@ -172,21 +222,62 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Settings")
 				pi.LayoutLoaded = True
+				ScrotterTitle.Text = "Scrotter"
+				ScrotterTitle.TextSize = ScrotterTitle.Height * 800/1000dip
+				ScrotterVers.Text = "v" & version & " (" & releasedate & ")"
+				ScrotterVers.TextSize = ScrotterVers.Height * 500/1000dip
+				Select theme
+					Case "light"
+						settingspage.Color = Colors.White
+						ScrotterTitle.TextColor = Colors.DarkGray
+						ScrotterVers.TextColor = Colors.Gray
+					Case "dark"
+						settingspage.Color = Colors.RGB(50, 50, 50)
+						ScrotterTitle.TextColor = Colors.LightGray
+						ScrotterVers.TextColor = Colors.Gray
+				End Select
 			End If
+			Loaded(1) = True
 		Case TYPE_PREVIEW
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Preview")
 				pi.LayoutLoaded = True
+				Select theme
+					Case "light"
+						previewpage.Color = Colors.White
+					Case "dark"
+						previewpage.Color = Colors.RGB(50, 50, 50)
+				End Select
 			End If
+			Loaded(2) = True
 		Case TYPE_OPTIONS
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Options")
 				pi.LayoutLoaded = True
-				ModelBox.TextColor = Colors.DarkGray
 				ModelBox.AddAll(Array As String("ASUS Eee Pad Transformer", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Amaze 4G, Ruby", "HTC Desire", "HTC Desire C", "HTC Desire HD, HTC Inspire 4G", "HTC Desire Z, T-Mobile G2", "HTC Droid DNA", "HTC Evo 3D", "HTC Evo 4G LTE", "HTC Google Nexus One", "HTC Hero", "HTC Legend", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "HTC Sensation", "HTC Titan", "HTC Vivid", "HTC Wildfire", "HTC Wildfire S", "LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II", "LG Optimus 2X", "Motorola Droid 2, Milestone 2", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G", "Samsung Galaxy Ace, Galaxy Cooper", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SII Skyrocket", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy TAB 10.1", "Samsung Google Galaxy Nexus", "Sony Ericsson Xperia J", "Sony Ericsson Xperia X10"))
 				ModelBox.SelectedIndex = 1
-				Dim tv As View
+				Select theme
+					Case "light"
+						optionspage.Color = Colors.White
+						ModelBox.TextColor = Colors.DarkGray
+						VariantBox.TextColor = Colors.DarkGray
+						StretchCheckbox.TextColor = Colors.DarkGray
+						GlossCheckbox.TextColor = Colors.DarkGray
+						ShadowCheckbox.TextColor = Colors.DarkGray
+						UnderShadowCheckbox.TextColor = Colors.DarkGray
+					Case "dark"
+						optionspage.Color = Colors.RGB(50, 50, 50)
+						ModelBox.TextColor = Colors.LightGray
+						VariantBox.TextColor = Colors.LightGray
+						StretchCheckbox.TextColor = Colors.LightGray
+						GlossCheckbox.TextColor = Colors.LightGray
+						ShadowCheckbox.TextColor = Colors.LightGray
+						UnderShadowCheckbox.TextColor = Colors.LightGray
+				End Select
+				ModelBox.Enabled = False
+				ModelBox.Enabled = True
 			End If
+			Loaded(3) = True
 	End Select		
 End Sub
 
@@ -657,4 +748,22 @@ Sub VariantBox_ItemClick (Position As Int, Value As Object)
 	End If
 	BackgroundThread.Start(Me, "ImageProcess", Null)
 	pager.PagingEnabled = False
+End Sub
+
+Sub themebtn_Click
+	If theme = "light" Then
+		theme = "dark"
+	Else
+		theme = "light"
+	End If
+	RefreshTheme
+End Sub
+
+Sub activity_KeyPress (KeyCode As Int) As Boolean
+	If KeyCode = KeyCodes.KEYCODE_BACK Then
+		If (pager.CurrentPage = 1) = False Then
+			pager.GotoPage(1, True)
+			Return True
+		End If
+	End If
 End Sub
