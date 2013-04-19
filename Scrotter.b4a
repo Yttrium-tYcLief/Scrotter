@@ -138,8 +138,6 @@ Sub RefreshTheme
 				GlossCheckbox.TextColor = Colors.DarkGray
 				ShadowCheckbox.TextColor = Colors.DarkGray
 				UnderShadowCheckbox.TextColor = Colors.DarkGray
-				ModelBox.Enabled = False
-				ModelBox.Enabled = True
 			End If
 		Case "dark"
 			tabs.Color = Colors.RGB(50, 50, 50)
@@ -161,10 +159,9 @@ Sub RefreshTheme
 				GlossCheckbox.TextColor = Colors.LightGray
 				ShadowCheckbox.TextColor = Colors.LightGray
 				UnderShadowCheckbox.TextColor = Colors.LightGray
-				ModelBox.Enabled = False
-				ModelBox.Enabled = True
 			End If
 	End Select
+	DoEvents
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
@@ -274,8 +271,7 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 						ShadowCheckbox.TextColor = Colors.LightGray
 						UnderShadowCheckbox.TextColor = Colors.LightGray
 				End Select
-				ModelBox.Enabled = False
-				ModelBox.Enabled = True
+				DoEvents
 			End If
 			Loaded(3) = True
 	End Select		
@@ -306,7 +302,16 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 End Sub
 
 Sub SaveBtn_Click
-	
+	Dim now As Long
+	Dim dt As String
+	DateTime.DateFormat = "yyyy-MM-dd_HH:mm:ss"
+	Dim filename As String = "Scrotter4A_" & DateTime.Date(now)
+	Dim result As Int
+	result = Msgbox2("Save file to sdcard?", "Save Image", "Save", "Cancel", "", Null)
+	If result = DialogResponse.POSITIVE Then
+		'Save
+		ToastMessageShow ("File " & Chr(34) & filename & Chr(34) & " saved to the sdcard.", True)
+	End If
 End Sub
 
 Sub Loadbtn_Click
