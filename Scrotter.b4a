@@ -161,7 +161,13 @@ Sub RefreshTheme
 				UnderShadowCheckbox.TextColor = Colors.LightGray
 			End If
 	End Select
-	DoEvents
+	Dim mnum, vnum As Int
+	mnum = ModelBox.SelectedIndex
+	vnum = VariantBox.SelectedIndex
+	ModelBox.SelectedIndex = 0
+	ModelBox.SelectedIndex = mnum
+	VariantBox.SelectedIndex = 0
+	VariantBox.SelectedIndex = vnum
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
@@ -271,7 +277,8 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 						ShadowCheckbox.TextColor = Colors.LightGray
 						UnderShadowCheckbox.TextColor = Colors.LightGray
 				End Select
-				DoEvents
+				ModelBox.Invalidate
+				VariantBox.Invalidate
 			End If
 			Loaded(3) = True
 	End Select		
@@ -304,14 +311,17 @@ End Sub
 Sub SaveBtn_Click
 	Dim now As Long
 	Dim dt As String
-	DateTime.DateFormat = "yyyy-MM-dd_HH:mm:ss"
-	Dim filename As String = "Scrotter4A_" & DateTime.Date(now)
+	DateTime.DateFormat = "yyyyMMdd_HHmmss"
 	Dim result As Int
-	result = Msgbox2("Save file to sdcard?", "Save Image", "Save", "Cancel", "", Null)
-	If result = DialogResponse.POSITIVE Then
-		'Save
-		ToastMessageShow ("File " & Chr(34) & filename & Chr(34) & " saved to the sdcard.", True)
-	End If
+	result = Msgbox2("Save file as what format?", "Save Image", "PNG", "Cancel", "JPG", Null)
+	Select Case result
+		Case DialogResponse.POSITIVE
+			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".png"
+			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
+		Case DialogResponse.NEGATIVE
+			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
+			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
+	End Select
 End Sub
 
 Sub Loadbtn_Click
