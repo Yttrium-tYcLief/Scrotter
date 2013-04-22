@@ -90,6 +90,7 @@ Sub Globals
 	Dim IconView As ImageView
 	Dim ScrotterVers As Label
 	Dim themebtn As Button
+	Dim FinalBitmap As Bitmap
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -114,8 +115,6 @@ Sub Activity_Create(FirstTime As Boolean)
 	tabs.LineColorCenter = Colors.DarkGray
 	tabs.TextColor = Colors.LightGray
 	tabs.TextColorCenter = Colors.DarkGray
-	DoEvents
-	pager.GotoPage(1, False)
 End Sub
 
 Sub RefreshTheme
@@ -175,7 +174,7 @@ End Sub
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
 	If Success = True Then
 		LoadedImage.Initialize3(LoadBitmap(Ringtone.GetContentDir, FileName))
-		Preview.SetBackgroundImage(ResizeImage(LoadedImage, Preview.Width, Preview.Height))
+		ImageProcess
 	End If
 End Sub
 
@@ -260,7 +259,6 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 				pan.LoadLayout("Options")
 				pi.LayoutLoaded = True
 				ModelBox.AddAll(Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"))
-				ModelBox.SelectedIndex = 1
 				Select theme
 					Case "light"
 						optionspage.Color = Colors.White
@@ -313,17 +311,21 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 End Sub
 
 Sub SaveBtn_Click
-	Dim now As Long
-	Dim dt As String
 	DateTime.DateFormat = "yyyyMMdd_HHmmss"
 	Dim result As Int
 	result = Msgbox2("Save file as what format?", "Save Image", "PNG", "Cancel", "JPG", Null)
 	Select Case result
 		Case DialogResponse.POSITIVE
 			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".png"
+			Dim Out As OutputStream
+			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
+			FinalBitmap.WriteToStream(Out, 100, "PNG")
 			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
 		Case DialogResponse.NEGATIVE
 			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
+			Dim Out As OutputStream
+			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
+			FinalBitmap.WriteToStream(Out, 95, "JPEG")
 			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
 	End Select
 End Sub
@@ -491,14 +493,16 @@ Sub ImageProcess
 	r.Initialize(0, 0, Device.Width, Device.Height)
 	WorkingBitmap.InitializeMutable(Device.Width, Device.Height)
 	WorkingCanvas.Initialize2(WorkingBitmap)
+	Paint.Initialize()
 	If Undershadow.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Undershadow, Null, r, Paint)
-	r.Initialize(IndexW, IndexH, IndexW + LoadedImage.Width, IndexH + LoadedImage.Height)
-	If LoadedImage.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, LoadedImage, Null, r, Paint)
-	r.Initialize(0, 0, Device.Width, Device.Height)
-	If Shadow.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Shadow, Null, r, Paint)
+	Dim r2 As Rect
+	r2.Initialize(IndexW, IndexH, IndexW + Shadow.Width, IndexH + Shadow.Height)
+	If LoadedImage.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, LoadedImage, Null, r2, Paint)
+	If Shadow.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Shadow, Null, r2, Paint)
 	If Device.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Device, Null, r, Paint)
 	If Gloss.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Gloss, Null, r, Paint) 'end of drawing
 	PreviewImage.Initialize3(ResizeImage(WorkingBitmap, Preview.Width, Preview.Height))
+	FinalBitmap.Initialize3(WorkingBitmap)
 	BackgroundThread.RunOnGuiThread("EndLoading", Null)
 End Sub
 
@@ -554,7 +558,7 @@ End Sub
 
 Sub activity_KeyPress (KeyCode As Int) As Boolean
 	If KeyCode = KeyCodes.KEYCODE_BACK Then
-		If (pager.CurrentPage = 1) = False Then
+		If (pager.CurrentPage = 1) = False AND pager.PagingEnabled = True Then
 			pager.GotoPage(1, True)
 			Return True
 		End If
