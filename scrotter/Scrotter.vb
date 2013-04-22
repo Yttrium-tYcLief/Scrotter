@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex West
-'Version 0.8 Beta
+'Version 0.8.1 Beta
 '
 'This program is free software; you can redistribute it and/or
 'modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.8"
+    Public ReadOnly Version As String = "0.8.1"
     Public ReadOnly ReleaseDate As String = "2013-4-22"
     Private Image(7) As String
     Public AppData As String
@@ -138,6 +138,7 @@ Public Class Scrotter
         UnderShadowCheckbox.Enabled = True
         GlossCheckbox.Enabled = True
         ShadowCheckbox.Enabled = True
+        GlossCheckbox.Checked = False
         VariantBox.Enabled = False
         VariantBox.Items.Clear()
         VariantBox.Text = "Variant"
@@ -164,7 +165,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC Desire HD, HTC Inspire 4G", "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M"
+            Case "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -191,6 +192,9 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
+            Case "HTC Desire HD, HTC Inspire 4G"
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = True
         End Select
         RefreshPreview()
     End Sub
@@ -248,8 +252,9 @@ Public Class Scrotter
                 Case "HTC Desire HD, HTC Inspire 4G"
                     DeviceName = "DesireHD"
                     ShadowRes = "480x800"
-                    IndexW = 104
-                    IndexH = 169
+                    IndexW = 86
+                    IndexH = 130
+                    UndershadowUsed = True
                 Case "HTC One X, HTC One X+"
                     If args.var = "Black" Then
                         DeviceName = "OneXBlack"
