@@ -267,7 +267,7 @@ public anywheresoftware.b4a.objects.ProgressBarWrapper _loading = null;
 public anywheresoftware.b4a.objects.ButtonWrapper _loadbtn = null;
 public anywheresoftware.b4a.objects.ButtonWrapper _savebtn = null;
 public anywheresoftware.b4a.objects.PanelWrapper _preview = null;
-public anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _image3 = null;
+public anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _loadedimage = null;
 public anywheresoftware.b4a.agraham.threading.Threading _backgroundthread = null;
 public anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _previewimage = null;
 public static boolean _waiting = false;
@@ -321,113 +321,117 @@ mostCurrent._tabs.setLineColorCenter(anywheresoftware.b4a.keywords.Common.Colors
 mostCurrent._tabs.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
  //BA.debugLineNum = 95;BA.debugLine="tabs.TextColorCenter = Colors.DarkGray";
 mostCurrent._tabs.setTextColorCenter(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 96;BA.debugLine="End Sub";
+ //BA.debugLineNum = 96;BA.debugLine="DoEvents";
+anywheresoftware.b4a.keywords.Common.DoEvents();
+ //BA.debugLineNum = 97;BA.debugLine="pager.GotoPage(1, False)";
+mostCurrent._pager.GotoPage((int)(1),anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 98;BA.debugLine="End Sub";
 return "";
 }
 public static boolean  _activity_keypress(int _keycode) throws Exception{
- //BA.debugLineNum = 756;BA.debugLine="Sub activity_KeyPress (KeyCode As Int) As Boolean";
- //BA.debugLineNum = 757;BA.debugLine="If KeyCode = KeyCodes.KEYCODE_BACK Then";
+ //BA.debugLineNum = 534;BA.debugLine="Sub activity_KeyPress (KeyCode As Int) As Boolean";
+ //BA.debugLineNum = 535;BA.debugLine="If KeyCode = KeyCodes.KEYCODE_BACK Then";
 if (_keycode==anywheresoftware.b4a.keywords.Common.KeyCodes.KEYCODE_BACK) { 
- //BA.debugLineNum = 758;BA.debugLine="If (pager.CurrentPage = 1) = False Then";
+ //BA.debugLineNum = 536;BA.debugLine="If (pager.CurrentPage = 1) = False Then";
 if ((mostCurrent._pager.getCurrentPage()==1)==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 759;BA.debugLine="pager.GotoPage(1, True)";
+ //BA.debugLineNum = 537;BA.debugLine="pager.GotoPage(1, True)";
 mostCurrent._pager.GotoPage((int)(1),anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 760;BA.debugLine="Return True";
+ //BA.debugLineNum = 538;BA.debugLine="Return True";
 if (true) return anywheresoftware.b4a.keywords.Common.True;
  };
  };
- //BA.debugLineNum = 763;BA.debugLine="End Sub";
+ //BA.debugLineNum = 541;BA.debugLine="End Sub";
 return false;
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 181;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 182;BA.debugLine="CurrentPage = pager.CurrentPage";
+ //BA.debugLineNum = 183;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+ //BA.debugLineNum = 184;BA.debugLine="CurrentPage = pager.CurrentPage";
 _currentpage = mostCurrent._pager.getCurrentPage();
- //BA.debugLineNum = 183;BA.debugLine="End Sub";
+ //BA.debugLineNum = 185;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
 anywheresoftware.b4a.objects.IntentWrapper _in = null;
 String _uristring = "";
- //BA.debugLineNum = 159;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 160;BA.debugLine="pager.GotoPage(CurrentPage, False)";
+ //BA.debugLineNum = 161;BA.debugLine="Sub Activity_Resume";
+ //BA.debugLineNum = 162;BA.debugLine="pager.GotoPage(CurrentPage, False)";
 mostCurrent._pager.GotoPage(_currentpage,anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 161;BA.debugLine="Dim In As Intent";
+ //BA.debugLineNum = 163;BA.debugLine="Dim In As Intent";
 _in = new anywheresoftware.b4a.objects.IntentWrapper();
- //BA.debugLineNum = 162;BA.debugLine="In = Activity.GetStartingIntent";
+ //BA.debugLineNum = 164;BA.debugLine="In = Activity.GetStartingIntent";
 _in = mostCurrent._activity.GetStartingIntent();
- //BA.debugLineNum = 164;BA.debugLine="If In.ExtrasToString.Contains(\"no extras\") Then";
+ //BA.debugLineNum = 166;BA.debugLine="If In.ExtrasToString.Contains(\"no extras\") Then";
 if (_in.ExtrasToString().contains("no extras")) { 
  }else {
- //BA.debugLineNum = 167;BA.debugLine="Log(In.ExtrasToString)";
+ //BA.debugLineNum = 169;BA.debugLine="Log(In.ExtrasToString)";
 anywheresoftware.b4a.keywords.Common.Log(_in.ExtrasToString());
- //BA.debugLineNum = 168;BA.debugLine="Dim UriString As String";
+ //BA.debugLineNum = 170;BA.debugLine="Dim UriString As String";
 _uristring = "";
- //BA.debugLineNum = 169;BA.debugLine="UriString = In.ExtrasToString";
+ //BA.debugLineNum = 171;BA.debugLine="UriString = In.ExtrasToString";
 _uristring = _in.ExtrasToString();
- //BA.debugLineNum = 170;BA.debugLine="UriString = UriString.SubString2(UriString.IndexOf(\"STREAM=\")+7,UriString.IndexOf(\"}\"))";
+ //BA.debugLineNum = 172;BA.debugLine="UriString = UriString.SubString2(UriString.IndexOf(\"STREAM=\")+7,UriString.IndexOf(\"}\"))";
 _uristring = _uristring.substring((int)(_uristring.indexOf("STREAM=")+7),_uristring.indexOf("}"));
- //BA.debugLineNum = 171;BA.debugLine="If UriString.Contains(\",\") Then";
+ //BA.debugLineNum = 173;BA.debugLine="If UriString.Contains(\",\") Then";
 if (_uristring.contains(",")) { 
- //BA.debugLineNum = 172;BA.debugLine="UriString = UriString.SubString2(0,UriString.IndexOf(\",\"))";
+ //BA.debugLineNum = 174;BA.debugLine="UriString = UriString.SubString2(0,UriString.IndexOf(\",\"))";
 _uristring = _uristring.substring((int)(0),_uristring.indexOf(","));
  };
- //BA.debugLineNum = 174;BA.debugLine="Log(UriString)";
+ //BA.debugLineNum = 176;BA.debugLine="Log(UriString)";
 anywheresoftware.b4a.keywords.Common.Log(_uristring);
- //BA.debugLineNum = 175;BA.debugLine="Image3.Initialize3(LoadBitmap(Ringtone.GetContentDir, UriString))";
-mostCurrent._image3.Initialize3((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmap(mostCurrent._ringtone.GetContentDir(),_uristring).getObject()));
- //BA.debugLineNum = 176;BA.debugLine="Preview.SetBackgroundImage(ResizeImage(Image3, Preview.Width, Preview.Height))";
-mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(_resizeimage(mostCurrent._image3,mostCurrent._preview.getWidth(),mostCurrent._preview.getHeight()).getObject()));
- //BA.debugLineNum = 177;BA.debugLine="pager.GotoPage(1, False)";
+ //BA.debugLineNum = 177;BA.debugLine="LoadedImage.Initialize3(LoadBitmap(Ringtone.GetContentDir, UriString))";
+mostCurrent._loadedimage.Initialize3((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmap(mostCurrent._ringtone.GetContentDir(),_uristring).getObject()));
+ //BA.debugLineNum = 178;BA.debugLine="Preview.SetBackgroundImage(ResizeImage(LoadedImage, Preview.Width, Preview.Height))";
+mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(_resizeimage(mostCurrent._loadedimage,mostCurrent._preview.getWidth(),mostCurrent._preview.getHeight()).getObject()));
+ //BA.debugLineNum = 179;BA.debugLine="pager.GotoPage(1, False)";
 mostCurrent._pager.GotoPage((int)(1),anywheresoftware.b4a.keywords.Common.False);
  };
- //BA.debugLineNum = 179;BA.debugLine="End Sub";
+ //BA.debugLineNum = 181;BA.debugLine="End Sub";
 return "";
 }
 public static String  _cc_result(boolean _success,String _dir,String _filename) throws Exception{
- //BA.debugLineNum = 152;BA.debugLine="Sub CC_Result (Success As Boolean, Dir As String, FileName As String)";
- //BA.debugLineNum = 153;BA.debugLine="If Success = True Then";
+ //BA.debugLineNum = 154;BA.debugLine="Sub CC_Result (Success As Boolean, Dir As String, FileName As String)";
+ //BA.debugLineNum = 155;BA.debugLine="If Success = True Then";
 if (_success==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 154;BA.debugLine="Image3.Initialize3(LoadBitmap(Ringtone.GetContentDir, FileName))";
-mostCurrent._image3.Initialize3((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmap(mostCurrent._ringtone.GetContentDir(),_filename).getObject()));
- //BA.debugLineNum = 155;BA.debugLine="Preview.SetBackgroundImage(ResizeImage(Image3, Preview.Width, Preview.Height))";
-mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(_resizeimage(mostCurrent._image3,mostCurrent._preview.getWidth(),mostCurrent._preview.getHeight()).getObject()));
+ //BA.debugLineNum = 156;BA.debugLine="LoadedImage.Initialize3(LoadBitmap(Ringtone.GetContentDir, FileName))";
+mostCurrent._loadedimage.Initialize3((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmap(mostCurrent._ringtone.GetContentDir(),_filename).getObject()));
+ //BA.debugLineNum = 157;BA.debugLine="Preview.SetBackgroundImage(ResizeImage(LoadedImage, Preview.Width, Preview.Height))";
+mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(_resizeimage(mostCurrent._loadedimage,mostCurrent._preview.getWidth(),mostCurrent._preview.getHeight()).getObject()));
  };
- //BA.debugLineNum = 157;BA.debugLine="End Sub";
+ //BA.debugLineNum = 159;BA.debugLine="End Sub";
 return "";
 }
 public static anywheresoftware.b4a.objects.PanelWrapper  _createpanel(int _paneltype,String _title) throws Exception{
 anywheresoftware.b4a.objects.PanelWrapper _pan = null;
 com.yttrium.scrotter.main._panelinfo _pi = null;
- //BA.debugLineNum = 185;BA.debugLine="Sub CreatePanel(PanelType As Int, Title As String) As Panel";
- //BA.debugLineNum = 186;BA.debugLine="Dim pan As Panel";
+ //BA.debugLineNum = 187;BA.debugLine="Sub CreatePanel(PanelType As Int, Title As String) As Panel";
+ //BA.debugLineNum = 188;BA.debugLine="Dim pan As Panel";
 _pan = new anywheresoftware.b4a.objects.PanelWrapper();
- //BA.debugLineNum = 187;BA.debugLine="Dim pi As PanelInfo";
+ //BA.debugLineNum = 189;BA.debugLine="Dim pi As PanelInfo";
 _pi = new com.yttrium.scrotter.main._panelinfo();
- //BA.debugLineNum = 188;BA.debugLine="pi.Initialize";
+ //BA.debugLineNum = 190;BA.debugLine="pi.Initialize";
 _pi.Initialize();
- //BA.debugLineNum = 189;BA.debugLine="pi.LayoutLoaded = False";
+ //BA.debugLineNum = 191;BA.debugLine="pi.LayoutLoaded = False";
 _pi.LayoutLoaded = anywheresoftware.b4a.keywords.Common.False;
- //BA.debugLineNum = 190;BA.debugLine="pi.PanelType = PanelType";
+ //BA.debugLineNum = 192;BA.debugLine="pi.PanelType = PanelType";
 _pi.PanelType = _paneltype;
- //BA.debugLineNum = 191;BA.debugLine="pan.Initialize(\"\")";
+ //BA.debugLineNum = 193;BA.debugLine="pan.Initialize(\"\")";
 _pan.Initialize(mostCurrent.activityBA,"");
- //BA.debugLineNum = 192;BA.debugLine="pan.Tag = pi";
+ //BA.debugLineNum = 194;BA.debugLine="pan.Tag = pi";
 _pan.setTag((Object)(_pi));
- //BA.debugLineNum = 193;BA.debugLine="Return pan";
+ //BA.debugLineNum = 195;BA.debugLine="Return pan";
 if (true) return _pan;
- //BA.debugLineNum = 194;BA.debugLine="End Sub";
+ //BA.debugLineNum = 196;BA.debugLine="End Sub";
 return null;
 }
 public static String  _endloading() throws Exception{
- //BA.debugLineNum = 706;BA.debugLine="Sub EndLoading";
- //BA.debugLineNum = 707;BA.debugLine="Loading.Visible = False";
+ //BA.debugLineNum = 484;BA.debugLine="Sub EndLoading";
+ //BA.debugLineNum = 485;BA.debugLine="Loading.Visible = False";
 mostCurrent._loading.setVisible(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 708;BA.debugLine="Preview.SetBackgroundImage(PreviewImage)";
+ //BA.debugLineNum = 486;BA.debugLine="Preview.SetBackgroundImage(PreviewImage)";
 mostCurrent._preview.SetBackgroundImage((android.graphics.Bitmap)(mostCurrent._previewimage.getObject()));
- //BA.debugLineNum = 709;BA.debugLine="pager.PagingEnabled = True";
+ //BA.debugLineNum = 487;BA.debugLine="pager.PagingEnabled = True";
 mostCurrent._pager.setPagingEnabled(anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 710;BA.debugLine="End Sub";
+ //BA.debugLineNum = 488;BA.debugLine="End Sub";
 return "";
 }
 
@@ -484,8 +488,8 @@ mostCurrent._loadbtn = new anywheresoftware.b4a.objects.ButtonWrapper();
 mostCurrent._savebtn = new anywheresoftware.b4a.objects.ButtonWrapper();
  //BA.debugLineNum = 49;BA.debugLine="Dim Preview As Panel";
 mostCurrent._preview = new anywheresoftware.b4a.objects.PanelWrapper();
- //BA.debugLineNum = 50;BA.debugLine="Dim Image3 As Bitmap";
-mostCurrent._image3 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 50;BA.debugLine="Dim LoadedImage As Bitmap";
+mostCurrent._loadedimage = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
  //BA.debugLineNum = 62;BA.debugLine="Dim CurrentPage As Int";
 _currentpage = 0;
  //BA.debugLineNum = 63;BA.debugLine="Dim BackgroundThread As Thread";
@@ -510,846 +514,541 @@ mostCurrent._themebtn = new anywheresoftware.b4a.objects.ButtonWrapper();
 return "";
 }
 public static String  _imageprocess() throws Exception{
-anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _image1 = null;
-anywheresoftware.b4a.objects.drawable.CanvasWrapper _mycanvas = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _device = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper _workingcanvas = null;
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _workingbitmap = null;
 anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _gloss = null;
 anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _shadow = null;
 anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _undershadow = null;
 int _indexh = 0;
 int _indexw = 0;
-String _r240320 = "";
-String _r320480 = "";
+com.AB.ABExtDrawing.ABExtDrawing _extdraw = null;
+com.AB.ABExtDrawing.ABExtDrawing.ABPaint _paint = null;
 String _r480800 = "";
-String _r480854 = "";
 String _r540960 = "";
 String _r7201280 = "";
 String _r7681280 = "";
-String _r800480 = "";
 String _r8001280 = "";
-String _r854480 = "";
-String _r10801920 = "";
 String _r1280800 = "";
- //BA.debugLineNum = 313;BA.debugLine="Sub ImageProcess";
- //BA.debugLineNum = 314;BA.debugLine="Dim Image1 As Bitmap";
-_image1 = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 315;BA.debugLine="Dim MyCanvas As Canvas";
-_mycanvas = new anywheresoftware.b4a.objects.drawable.CanvasWrapper();
- //BA.debugLineNum = 316;BA.debugLine="Dim Gloss As Bitmap";
+anywheresoftware.b4a.objects.drawable.CanvasWrapper.RectWrapper _r = null;
+ //BA.debugLineNum = 317;BA.debugLine="Sub ImageProcess";
+ //BA.debugLineNum = 318;BA.debugLine="Dim Device As Bitmap";
+_device = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 319;BA.debugLine="Dim WorkingCanvas As Canvas";
+_workingcanvas = new anywheresoftware.b4a.objects.drawable.CanvasWrapper();
+ //BA.debugLineNum = 320;BA.debugLine="Dim WorkingBitmap As Bitmap";
+_workingbitmap = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
+ //BA.debugLineNum = 321;BA.debugLine="Dim Gloss As Bitmap";
 _gloss = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 317;BA.debugLine="Dim Shadow As Bitmap";
+ //BA.debugLineNum = 322;BA.debugLine="Dim Shadow As Bitmap";
 _shadow = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 318;BA.debugLine="Dim Undershadow As Bitmap";
+ //BA.debugLineNum = 323;BA.debugLine="Dim Undershadow As Bitmap";
 _undershadow = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 319;BA.debugLine="Dim IndexH As Int";
+ //BA.debugLineNum = 324;BA.debugLine="Dim IndexH As Int";
 _indexh = 0;
- //BA.debugLineNum = 320;BA.debugLine="Dim IndexW As Int";
+ //BA.debugLineNum = 325;BA.debugLine="Dim IndexW As Int";
 _indexw = 0;
- //BA.debugLineNum = 321;BA.debugLine="Dim r240320 As String = \"240x320.png\"";
-_r240320 = "240x320.png";
- //BA.debugLineNum = 322;BA.debugLine="Dim r320480 As String = \"320x480.png\"";
-_r320480 = "320x480.png";
- //BA.debugLineNum = 323;BA.debugLine="Dim r480800 As String = \"480x800.png\"";
+ //BA.debugLineNum = 326;BA.debugLine="Dim ExtDraw As ABExtDrawing";
+_extdraw = new com.AB.ABExtDrawing.ABExtDrawing();
+ //BA.debugLineNum = 327;BA.debugLine="Dim Paint As ABPaint";
+_paint = new com.AB.ABExtDrawing.ABExtDrawing.ABPaint();
+ //BA.debugLineNum = 328;BA.debugLine="Dim r480800 As String = \"480x800.png\"";
 _r480800 = "480x800.png";
- //BA.debugLineNum = 324;BA.debugLine="Dim r480854 As String = \"480x854.png\"";
-_r480854 = "480x854.png";
- //BA.debugLineNum = 325;BA.debugLine="Dim r540960 As String = \"540x960.png\"";
+ //BA.debugLineNum = 329;BA.debugLine="Dim r540960 As String = \"540x960.png\"";
 _r540960 = "540x960.png";
- //BA.debugLineNum = 326;BA.debugLine="Dim r7201280 As String = \"720x1280.png\"";
+ //BA.debugLineNum = 330;BA.debugLine="Dim r7201280 As String = \"720x1280.png\"";
 _r7201280 = "720x1280.png";
- //BA.debugLineNum = 327;BA.debugLine="Dim r7681280 As String = \"768x1280.png\"";
+ //BA.debugLineNum = 331;BA.debugLine="Dim r7681280 As String = \"768x1280.png\"";
 _r7681280 = "768x1280.png";
- //BA.debugLineNum = 328;BA.debugLine="Dim r800480 As String = \"800x480.png\"";
-_r800480 = "800x480.png";
- //BA.debugLineNum = 329;BA.debugLine="Dim r8001280 As String = \"800x1280.png\"";
+ //BA.debugLineNum = 332;BA.debugLine="Dim r8001280 As String = \"800x1280.png\"";
 _r8001280 = "800x1280.png";
- //BA.debugLineNum = 330;BA.debugLine="Dim r854480 As String = \"854x480.png\"";
-_r854480 = "854x480.png";
- //BA.debugLineNum = 331;BA.debugLine="Dim r10801920 As String = \"1080x1920.png\"";
-_r10801920 = "1080x1920.png";
- //BA.debugLineNum = 332;BA.debugLine="Dim r1280800 As String = \"1280x800.png\"";
+ //BA.debugLineNum = 333;BA.debugLine="Dim r1280800 As String = \"1280x800.png\"";
 _r1280800 = "1280x800.png";
- //BA.debugLineNum = 334;BA.debugLine="Select Case ModelBox.SelectedItem";
-switch (BA.switchObjectToInt(mostCurrent._modelbox.getSelectedItem(),"Samsung Galaxy SIII Mini","HTC Desire HD, HTC Inspire 4G","HTC One X, HTC One X+","Samsung Galaxy SIII","Motorola Xoom","Samsung Galaxy SII, Epic 4G Touch","Samsung Google Galaxy Nexus","Samsung Galaxy Note II","Motorola Droid RAZR","Google Nexus 7","HTC One S","HTC One V","Google Nexus S","Google Nexus 4","Motorola Droid RAZR M","Sony Ericsson Xperia X10","HTC Google Nexus One","HTC Hero","HTC Legend","HTC Droid DNA","HTC Vivid","HTC Evo 3D","HTC Desire Z, T-Mobile G2","HTC Desire","Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G","Samsung Galaxy Ace, Galaxy Cooper","Sony Ericsson Xperia J","LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II","Samsung Galaxy Tab 10.1","Samsung Galaxy SII Skyrocket","HTC Evo 4G LTE","ASUS Eee Pad Transformer","HTC Desire C","HTC Desire C","Motorola Droid 2, Milestone 2","LG Optimus 2X","HTC Titan","HTC Wildfire","HTC Wildfire S","HTC Sensation","HTC Amaze 4G, Ruby")) {
+ //BA.debugLineNum = 335;BA.debugLine="Select Case ModelBox.SelectedItem";
+switch (BA.switchObjectToInt(mostCurrent._modelbox.getSelectedItem(),"Samsung Galaxy SIII Mini","HTC Desire HD, HTC Inspire 4G","HTC One X, HTC One X+","Samsung Galaxy SIII","Motorola Xoom","Samsung Galaxy SII, Epic 4G Touch","Samsung Google Galaxy Nexus","Samsung Galaxy Note II","Motorola Droid RAZR","Google Nexus 7","HTC One S","HTC One V","Google Nexus S","Google Nexus 4","Motorola Droid RAZR M")) {
 case 0:
- //BA.debugLineNum = 336;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"samsunggsiiimini.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"samsunggsiiimini.png");
- //BA.debugLineNum = 337;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+ //BA.debugLineNum = 337;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"samsunggsiiimini.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"samsunggsiiimini.png");
+ //BA.debugLineNum = 338;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 338;BA.debugLine="IndexW = 78";
+ //BA.debugLineNum = 339;BA.debugLine="IndexW = 78";
 _indexw = (int)(78);
- //BA.debugLineNum = 339;BA.debugLine="IndexH = 182";
+ //BA.debugLineNum = 340;BA.debugLine="IndexH = 182";
 _indexh = (int)(182);
  break;
 case 1:
- //BA.debugLineNum = 341;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"desirehd.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"desirehd.png");
- //BA.debugLineNum = 342;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+ //BA.debugLineNum = 342;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"desirehd.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"desirehd.png");
+ //BA.debugLineNum = 343;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 343;BA.debugLine="IndexW = 104";
-_indexw = (int)(104);
- //BA.debugLineNum = 344;BA.debugLine="IndexH = 169";
-_indexh = (int)(169);
+ //BA.debugLineNum = 344;BA.debugLine="IndexW = 86";
+_indexw = (int)(86);
+ //BA.debugLineNum = 345;BA.debugLine="IndexH = 130";
+_indexh = (int)(130);
  break;
 case 2:
- //BA.debugLineNum = 346;BA.debugLine="If VariantBox.SelectedItem = \"Black\" Then";
+ //BA.debugLineNum = 347;BA.debugLine="If VariantBox.SelectedItem = \"Black\" Then";
 if ((mostCurrent._variantbox.getSelectedItem()).equals("Black")) { 
- //BA.debugLineNum = 347;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"onexblack.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"onexblack.png");
- //BA.debugLineNum = 348;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"onexblack.png\")";
+ //BA.debugLineNum = 348;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"onexblack.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"onexblack.png");
+ //BA.debugLineNum = 349;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"onexblack.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"onexblack.png");
- //BA.debugLineNum = 349;BA.debugLine="IndexW = 113";
+ //BA.debugLineNum = 350;BA.debugLine="IndexW = 113";
 _indexw = (int)(113);
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("White")) { 
- //BA.debugLineNum = 351;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"onexwhite.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"onexwhite.png");
- //BA.debugLineNum = 352;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"onexwhite.png\")";
+ //BA.debugLineNum = 352;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"onexwhite.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"onexwhite.png");
+ //BA.debugLineNum = 353;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"onexwhite.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"onexwhite.png");
- //BA.debugLineNum = 353;BA.debugLine="IndexW = 115";
+ //BA.debugLineNum = 354;BA.debugLine="IndexW = 115";
 _indexw = (int)(115);
  };
- //BA.debugLineNum = 355;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+ //BA.debugLineNum = 356;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
- //BA.debugLineNum = 356;BA.debugLine="IndexH = 213";
+ //BA.debugLineNum = 357;BA.debugLine="IndexH = 213";
 _indexh = (int)(213);
  break;
 case 3:
- //BA.debugLineNum = 358;BA.debugLine="IndexW = 88";
+ //BA.debugLineNum = 359;BA.debugLine="IndexW = 88";
 _indexw = (int)(88);
- //BA.debugLineNum = 359;BA.debugLine="If VariantBox.SelectedItem = \"Blue\" Then";
+ //BA.debugLineNum = 360;BA.debugLine="If VariantBox.SelectedItem = \"Blue\" Then";
 if ((mostCurrent._variantbox.getSelectedItem()).equals("Blue")) { 
- //BA.debugLineNum = 360;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"gsiiiblue.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiiblue.png");
- //BA.debugLineNum = 361;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"gsiiiblue.png\")";
+ //BA.debugLineNum = 361;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"gsiiiblue.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiiblue.png");
+ //BA.debugLineNum = 362;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"gsiiiblue.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"gsiiiblue.png");
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("White")) { 
- //BA.debugLineNum = 363;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"gsiiiwhite.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiiwhite.png");
- //BA.debugLineNum = 364;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"gsiiiwhite.png\")";
+ //BA.debugLineNum = 364;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"gsiiiwhite.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiiwhite.png");
+ //BA.debugLineNum = 365;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"gsiiiwhite.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"gsiiiwhite.png");
- //BA.debugLineNum = 365;BA.debugLine="IndexW = 84";
+ //BA.debugLineNum = 366;BA.debugLine="IndexW = 84";
 _indexw = (int)(84);
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("Black")) { 
- //BA.debugLineNum = 367;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"gsiiiblack.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiiblack.png");
+ //BA.debugLineNum = 368;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"gsiiiblack.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiiblack.png");
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("Red")) { 
- //BA.debugLineNum = 369;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"gsiiired.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiired.png");
+ //BA.debugLineNum = 370;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"gsiiired.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiired.png");
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("Brown")) { 
- //BA.debugLineNum = 371;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"gsiiibrown.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiibrown.png");
+ //BA.debugLineNum = 372;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"gsiiibrown.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsiiibrown.png");
  };
- //BA.debugLineNum = 373;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"gsiii.png\")";
+ //BA.debugLineNum = 374;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"gsiii.png\")";
 _undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"gsiii.png");
- //BA.debugLineNum = 374;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+ //BA.debugLineNum = 375;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
- //BA.debugLineNum = 375;BA.debugLine="IndexH = 184";
+ //BA.debugLineNum = 376;BA.debugLine="IndexH = 184";
 _indexh = (int)(184);
  break;
 case 4:
- //BA.debugLineNum = 405;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
+ //BA.debugLineNum = 378;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
 if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
- //BA.debugLineNum = 406;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"xoomport.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"xoomport.png");
- //BA.debugLineNum = 407;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
+ //BA.debugLineNum = 379;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"xoomport.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"xoomport.png");
+ //BA.debugLineNum = 380;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r8001280);
- //BA.debugLineNum = 408;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"xoomport.png\")";
+ //BA.debugLineNum = 381;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"xoomport.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"xoomport.png");
- //BA.debugLineNum = 409;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"xoomport.png\")";
+ //BA.debugLineNum = 382;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"xoomport.png\")";
 _undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"xoomport.png");
- //BA.debugLineNum = 410;BA.debugLine="IndexW = 199";
+ //BA.debugLineNum = 383;BA.debugLine="IndexW = 199";
 _indexw = (int)(199);
- //BA.debugLineNum = 411;BA.debugLine="IndexH = 200";
+ //BA.debugLineNum = 384;BA.debugLine="IndexH = 200";
 _indexh = (int)(200);
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
- //BA.debugLineNum = 413;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"xoomland.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"xoomland.png");
- //BA.debugLineNum = 414;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
+ //BA.debugLineNum = 386;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"xoomland.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"xoomland.png");
+ //BA.debugLineNum = 387;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
- //BA.debugLineNum = 415;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"xoomland.png\")";
+ //BA.debugLineNum = 388;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"xoomland.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"xoomland.png");
- //BA.debugLineNum = 416;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"xoomland.png\")";
+ //BA.debugLineNum = 389;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"xoomland.png\")";
 _undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"xoomland.png");
- //BA.debugLineNum = 417;BA.debugLine="IndexW = 218";
+ //BA.debugLineNum = 390;BA.debugLine="IndexW = 218";
 _indexw = (int)(218);
- //BA.debugLineNum = 418;BA.debugLine="IndexH = 191";
+ //BA.debugLineNum = 391;BA.debugLine="IndexH = 191";
 _indexh = (int)(191);
  };
  break;
 case 5:
- //BA.debugLineNum = 421;BA.debugLine="If VariantBox.SelectedItem = \"Galaxy SII\" Then";
+ //BA.debugLineNum = 394;BA.debugLine="If VariantBox.SelectedItem = \"Galaxy SII\" Then";
 if ((mostCurrent._variantbox.getSelectedItem()).equals("Galaxy SII")) { 
- //BA.debugLineNum = 422;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"gsii.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsii.png");
- //BA.debugLineNum = 423;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"gsii.png\")";
+ //BA.debugLineNum = 395;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"gsii.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"gsii.png");
+ //BA.debugLineNum = 396;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"gsii.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"gsii.png");
- //BA.debugLineNum = 424;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"gsii.png\")";
+ //BA.debugLineNum = 397;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"gsii.png\")";
 _undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"gsii.png");
- //BA.debugLineNum = 425;BA.debugLine="IndexH = 191";
+ //BA.debugLineNum = 398;BA.debugLine="IndexH = 191";
 _indexh = (int)(191);
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("Epic 4G Touch")) { 
- //BA.debugLineNum = 427;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"epic4gtouch.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"epic4gtouch.png");
- //BA.debugLineNum = 428;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"epic4gtouch.png\")";
+ //BA.debugLineNum = 400;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"epic4gtouch.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"epic4gtouch.png");
+ //BA.debugLineNum = 401;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"epic4gtouch.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"epic4gtouch.png");
- //BA.debugLineNum = 429;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"epic4gtouch\")";
+ //BA.debugLineNum = 402;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"epic4gtouch\")";
 _undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"epic4gtouch");
  };
- //BA.debugLineNum = 431;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+ //BA.debugLineNum = 404;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 432;BA.debugLine="IndexW = 132";
+ //BA.debugLineNum = 405;BA.debugLine="IndexW = 132";
 _indexw = (int)(132);
  break;
 case 6:
- //BA.debugLineNum = 434;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"galaxynexus.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"galaxynexus.png");
- //BA.debugLineNum = 435;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+ //BA.debugLineNum = 407;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"galaxynexus.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"galaxynexus.png");
+ //BA.debugLineNum = 408;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
- //BA.debugLineNum = 436;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"galaxynexus.png\")";
+ //BA.debugLineNum = 409;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"galaxynexus.png\")";
 _gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"galaxynexus.png");
- //BA.debugLineNum = 437;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"galaxynexus.png\")";
+ //BA.debugLineNum = 410;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"galaxynexus.png\")";
 _undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"galaxynexus.png");
- //BA.debugLineNum = 438;BA.debugLine="IndexW = 155";
+ //BA.debugLineNum = 411;BA.debugLine="IndexW = 155";
 _indexw = (int)(155);
- //BA.debugLineNum = 439;BA.debugLine="IndexH = 263";
+ //BA.debugLineNum = 412;BA.debugLine="IndexH = 263";
 _indexh = (int)(263);
  break;
 case 7:
- //BA.debugLineNum = 441;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"GalaxyNoteII.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"GalaxyNoteII.png");
- //BA.debugLineNum = 442;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
+ //BA.debugLineNum = 414;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"galaxynoteii.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"galaxynoteii.png");
+ //BA.debugLineNum = 415;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
- //BA.debugLineNum = 443;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"GalaxyNoteII.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"GalaxyNoteII.png");
- //BA.debugLineNum = 444;BA.debugLine="IndexW = 49";
+ //BA.debugLineNum = 416;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"galaxynoteii.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"galaxynoteii.png");
+ //BA.debugLineNum = 417;BA.debugLine="IndexW = 49";
 _indexw = (int)(49);
- //BA.debugLineNum = 445;BA.debugLine="IndexH = 140";
+ //BA.debugLineNum = 418;BA.debugLine="IndexH = 140";
 _indexh = (int)(140);
  break;
 case 8:
- //BA.debugLineNum = 447;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"DroidRAZR.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"DroidRAZR.png");
- //BA.debugLineNum = 448;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+ //BA.debugLineNum = 420;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"droidrazr.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"droidrazr.png");
+ //BA.debugLineNum = 421;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
- //BA.debugLineNum = 449;BA.debugLine="IndexW = 150";
+ //BA.debugLineNum = 422;BA.debugLine="IndexW = 150";
 _indexw = (int)(150);
- //BA.debugLineNum = 450;BA.debugLine="IndexH = 206";
+ //BA.debugLineNum = 423;BA.debugLine="IndexH = 206";
 _indexh = (int)(206);
  break;
 case 9:
- //BA.debugLineNum = 452;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
+ //BA.debugLineNum = 425;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
 if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
- //BA.debugLineNum = 453;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"Nexus7Port.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"Nexus7Port.png");
- //BA.debugLineNum = 454;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
+ //BA.debugLineNum = 426;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"nexus7port.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"nexus7port.png");
+ //BA.debugLineNum = 427;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r8001280);
- //BA.debugLineNum = 455;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"Nexus7Port.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"Nexus7Port.png");
- //BA.debugLineNum = 456;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"Nexus7Port.png\")";
-_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"Nexus7Port.png");
- //BA.debugLineNum = 457;BA.debugLine="IndexW = 264";
+ //BA.debugLineNum = 428;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"nexus7port.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"nexus7port.png");
+ //BA.debugLineNum = 429;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"nexus7port.png\")";
+_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"nexus7port.png");
+ //BA.debugLineNum = 430;BA.debugLine="IndexW = 264";
 _indexw = (int)(264);
- //BA.debugLineNum = 458;BA.debugLine="IndexH = 311";
+ //BA.debugLineNum = 431;BA.debugLine="IndexH = 311";
 _indexh = (int)(311);
  }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
- //BA.debugLineNum = 460;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"Nexus7Land.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"Nexus7Land.png");
- //BA.debugLineNum = 461;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
+ //BA.debugLineNum = 433;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"nexus7land.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"nexus7land.png");
+ //BA.debugLineNum = 434;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
- //BA.debugLineNum = 462;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"Nexus7Land.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"Nexus7Land.png");
- //BA.debugLineNum = 463;BA.debugLine="IndexW = 315";
+ //BA.debugLineNum = 435;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"nexus7land.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"nexus7land.png");
+ //BA.debugLineNum = 436;BA.debugLine="IndexW = 315";
 _indexw = (int)(315);
- //BA.debugLineNum = 464;BA.debugLine="IndexH = 270";
+ //BA.debugLineNum = 437;BA.debugLine="IndexH = 270";
 _indexh = (int)(270);
  };
  break;
 case 10:
- //BA.debugLineNum = 467;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://103.imagebam.com/download/pES86Mk-oX3FwKg72ullsg/23245/232444328/OneS.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://103.imagebam.com/download/pES86Mk-oX3FwKg72ullsg/23245/232444328/OneS.png");
- //BA.debugLineNum = 468;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+ //BA.debugLineNum = 440;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"ones.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"ones.png");
+ //BA.debugLineNum = 441;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
- //BA.debugLineNum = 469;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://102.imagebam.com/download/2YpfhldGjShokr_7vTVvrA/23245/232446240/OneS.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://102.imagebam.com/download/2YpfhldGjShokr_7vTVvrA/23245/232446240/OneS.png");
- //BA.debugLineNum = 470;BA.debugLine="IndexW = 106";
+ //BA.debugLineNum = 442;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"ones.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"ones.png");
+ //BA.debugLineNum = 443;BA.debugLine="IndexW = 106";
 _indexw = (int)(106);
- //BA.debugLineNum = 471;BA.debugLine="IndexH = 228";
+ //BA.debugLineNum = 444;BA.debugLine="IndexH = 228";
 _indexh = (int)(228);
  break;
 case 11:
- //BA.debugLineNum = 473;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://103.imagebam.com/download/d78I9T94gLuErZL59eWi6Q/23245/232444333/OneV.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://103.imagebam.com/download/d78I9T94gLuErZL59eWi6Q/23245/232444333/OneV.png");
- //BA.debugLineNum = 474;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+ //BA.debugLineNum = 446;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"onev.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"onev.png");
+ //BA.debugLineNum = 447;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 475;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://101.imagebam.com/download/XztYn-E4j2XfLl8co66zCQ/23245/232446244/OneV.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://101.imagebam.com/download/XztYn-E4j2XfLl8co66zCQ/23245/232446244/OneV.png");
- //BA.debugLineNum = 476;BA.debugLine="IndexW = 85";
+ //BA.debugLineNum = 448;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"onev.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"onev.png");
+ //BA.debugLineNum = 449;BA.debugLine="IndexW = 85";
 _indexw = (int)(85);
- //BA.debugLineNum = 477;BA.debugLine="IndexH = 165";
+ //BA.debugLineNum = 450;BA.debugLine="IndexH = 165";
 _indexh = (int)(165);
  break;
 case 12:
- //BA.debugLineNum = 479;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://106.imagebam.com/download/qnwpbb1HFBzATLlQr7yD7g/23245/232444325/NexusS.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://106.imagebam.com/download/qnwpbb1HFBzATLlQr7yD7g/23245/232444325/NexusS.png");
- //BA.debugLineNum = 480;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
+ //BA.debugLineNum = 452;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"nexuss.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"nexuss.png");
+ //BA.debugLineNum = 453;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 481;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://108.imagebam.com/download/tu5BzK46n3ka_WydBl0pPQ/23245/232446237/NexusS.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://108.imagebam.com/download/tu5BzK46n3ka_WydBl0pPQ/23245/232446237/NexusS.png");
- //BA.debugLineNum = 482;BA.debugLine="IndexW = 45";
+ //BA.debugLineNum = 454;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"nexuss.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"nexuss.png");
+ //BA.debugLineNum = 455;BA.debugLine="IndexW = 45";
 _indexw = (int)(45);
- //BA.debugLineNum = 483;BA.debugLine="IndexH = 165";
+ //BA.debugLineNum = 456;BA.debugLine="IndexH = 165";
 _indexh = (int)(165);
  break;
 case 13:
- //BA.debugLineNum = 485;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://101.imagebam.com/download/fiW5-5yoR6LRtY20rwQmnw/23245/232444302/Nexus4.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://101.imagebam.com/download/fiW5-5yoR6LRtY20rwQmnw/23245/232444302/Nexus4.png");
- //BA.debugLineNum = 486;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7681280)";
+ //BA.debugLineNum = 458;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"nexus4.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"nexus4.png");
+ //BA.debugLineNum = 459;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7681280)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7681280);
- //BA.debugLineNum = 487;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://104.imagebam.com/download/M_vkC9maazTeEad9DTvD9g/23245/232446224/Nexus4-G.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://104.imagebam.com/download/M_vkC9maazTeEad9DTvD9g/23245/232446224/Nexus4-G.png");
- //BA.debugLineNum = 488;BA.debugLine="IndexW = 45";
+ //BA.debugLineNum = 460;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"nexus4.png\")";
+_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"nexus4.png");
+ //BA.debugLineNum = 461;BA.debugLine="IndexW = 45";
 _indexw = (int)(45);
- //BA.debugLineNum = 489;BA.debugLine="IndexH = 193";
+ //BA.debugLineNum = 462;BA.debugLine="IndexH = 193";
 _indexh = (int)(193);
  break;
 case 14:
- //BA.debugLineNum = 491;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://106.imagebam.com/download/E58kNQKNie0lfbXBr8mM-A/23255/232546227/DroidRazrM.png");
- //BA.debugLineNum = 492;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
+ //BA.debugLineNum = 464;BA.debugLine="Device.Initialize(File.DirAssets, \"device/\" & \"droidrazrm.png\")";
+_device.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"droidrazrm.png");
+ //BA.debugLineNum = 465;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
 _shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
- //BA.debugLineNum = 493;BA.debugLine="IndexW = 49";
+ //BA.debugLineNum = 466;BA.debugLine="IndexW = 49";
 _indexw = (int)(49);
- //BA.debugLineNum = 494;BA.debugLine="IndexH = 129";
+ //BA.debugLineNum = 467;BA.debugLine="IndexH = 129";
 _indexh = (int)(129);
- break;
-case 15:
- //BA.debugLineNum = 496;BA.debugLine="If VariantBox.SelectedItem = \"Black\" Then";
-if ((mostCurrent._variantbox.getSelectedItem()).equals("Black")) { 
- //BA.debugLineNum = 497;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzaA/SonyEricssonXperia10Black.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzaA/SonyEricssonXperia10Black.png");
- //BA.debugLineNum = 498;BA.debugLine="IndexW = 235";
-_indexw = (int)(235);
- //BA.debugLineNum = 499;BA.debugLine="IndexH = 191";
-_indexh = (int)(191);
- }else if((mostCurrent._variantbox.getSelectedItem()).equals("White")) { 
- //BA.debugLineNum = 501;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzaQ/SonyEricssonXperia10White.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzaQ/SonyEricssonXperia10White.png");
- //BA.debugLineNum = 502;BA.debugLine="IndexW = 255";
-_indexw = (int)(255);
- //BA.debugLineNum = 503;BA.debugLine="IndexH = 205";
-_indexh = (int)(205);
- };
- //BA.debugLineNum = 505;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480854)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480854);
- break;
-case 16:
- //BA.debugLineNum = 507;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzZQ/HTCGoogleNexusOne.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzZQ/HTCGoogleNexusOne.png");
- //BA.debugLineNum = 508;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 509;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDQzOQ/HTCGoogleNexusOne.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDQzOQ/HTCGoogleNexusOne.png");
- //BA.debugLineNum = 510;BA.debugLine="IndexW = 165";
-_indexw = (int)(165);
- //BA.debugLineNum = 511;BA.debugLine="IndexH = 168";
-_indexh = (int)(168);
- break;
-case 17:
- //BA.debugLineNum = 513;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"HTCHero.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"HTCHero.png");
- //BA.debugLineNum = 514;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
- //BA.debugLineNum = 515;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDQzYQ/HTCHero.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDQzYQ/HTCHero.png");
- //BA.debugLineNum = 516;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"http://ompldr.org/vaDQzYw/HTCHero.png\")";
-_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"http://ompldr.org/vaDQzYw/HTCHero.png");
- //BA.debugLineNum = 517;BA.debugLine="IndexW = 67";
-_indexw = (int)(67);
- //BA.debugLineNum = 518;BA.debugLine="IndexH = 131";
-_indexh = (int)(131);
- break;
-case 18:
- //BA.debugLineNum = 520;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDQzZw/HTCLegend.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDQzZw/HTCLegend.png");
- //BA.debugLineNum = 521;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
- //BA.debugLineNum = 522;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDQzYg/HTCLegend.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDQzYg/HTCLegend.png");
- //BA.debugLineNum = 523;BA.debugLine="IndexW = 67";
-_indexw = (int)(67);
- //BA.debugLineNum = 524;BA.debugLine="IndexH = 131";
-_indexh = (int)(131);
- break;
-case 19:
- //BA.debugLineNum = 550;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDVxcQ/DroidDNA.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDVxcQ/DroidDNA.png");
- //BA.debugLineNum = 551;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r10801920)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r10801920);
- //BA.debugLineNum = 552;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaDY3cw/DroidDNA.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaDY3cw/DroidDNA.png");
- //BA.debugLineNum = 553;BA.debugLine="IndexW = 106";
-_indexw = (int)(106);
- //BA.debugLineNum = 554;BA.debugLine="IndexH = 300";
-_indexh = (int)(300);
- break;
-case 20:
- //BA.debugLineNum = 556;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDVxcA/Vivid.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDVxcA/Vivid.png");
- //BA.debugLineNum = 557;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
- //BA.debugLineNum = 558;BA.debugLine="IndexW = 66";
-_indexw = (int)(66);
- //BA.debugLineNum = 559;BA.debugLine="IndexH = 125";
-_indexh = (int)(125);
- break;
-case 21:
- //BA.debugLineNum = 561;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY3dA/Evo3D.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY3dA/Evo3D.png");
- //BA.debugLineNum = 562;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
- //BA.debugLineNum = 563;BA.debugLine="IndexW = 78";
-_indexw = (int)(78);
- //BA.debugLineNum = 564;BA.debugLine="IndexH = 153";
-_indexh = (int)(153);
- break;
-case 22:
- //BA.debugLineNum = 566;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
-if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
- //BA.debugLineNum = 567;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4MQ/DesireZPort.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4MQ/DesireZPort.png");
- //BA.debugLineNum = 568;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 569;BA.debugLine="IndexW = 94";
-_indexw = (int)(94);
- //BA.debugLineNum = 570;BA.debugLine="IndexH = 162";
-_indexh = (int)(162);
- }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
- //BA.debugLineNum = 572;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4MA/DesireZLand.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4MA/DesireZLand.png");
- //BA.debugLineNum = 573;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r800480)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r800480);
- //BA.debugLineNum = 574;BA.debugLine="IndexW = 189";
-_indexw = (int)(189);
- //BA.debugLineNum = 575;BA.debugLine="IndexH = 79";
-_indexh = (int)(79);
- };
- break;
-case 23:
- //BA.debugLineNum = 578;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4Yw/Desire.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4Yw/Desire.png");
- //BA.debugLineNum = 579;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 580;BA.debugLine="IndexW = 136";
-_indexw = (int)(136);
- //BA.debugLineNum = 581;BA.debugLine="IndexH = 180";
-_indexh = (int)(180);
- break;
-case 24:
- //BA.debugLineNum = 583;BA.debugLine="If VariantBox.SelectedItem = \"Model 1\" Then";
-if ((mostCurrent._variantbox.getSelectedItem()).equals("Model 1")) { 
- //BA.debugLineNum = 584;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4ZQ/DroidCharge.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4ZQ/DroidCharge.png");
- //BA.debugLineNum = 585;BA.debugLine="IndexH = 191";
-_indexh = (int)(191);
- }else if((mostCurrent._variantbox.getSelectedItem()).equals("Model 2")) { 
- //BA.debugLineNum = 587;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4bA/GalaxySAviator.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4bA/GalaxySAviator.png");
- //BA.debugLineNum = 588;BA.debugLine="IndexH = 175";
-_indexh = (int)(175);
- };
- //BA.debugLineNum = 590;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 591;BA.debugLine="IndexW = 60";
-_indexw = (int)(60);
- break;
-case 25:
- //BA.debugLineNum = 593;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY4cA/GalaxyAce.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY4cA/GalaxyAce.png");
- //BA.debugLineNum = 594;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
- //BA.debugLineNum = 595;BA.debugLine="IndexW = 87";
-_indexw = (int)(87);
- //BA.debugLineNum = 596;BA.debugLine="IndexH = 179";
-_indexh = (int)(179);
- break;
-case 26:
- //BA.debugLineNum = 598;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY5aQ/XperiaJ.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY5aQ/XperiaJ.png");
- //BA.debugLineNum = 599;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480854)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480854);
- //BA.debugLineNum = 600;BA.debugLine="IndexW = 75";
-_indexw = (int)(75);
- //BA.debugLineNum = 601;BA.debugLine="IndexH = 172";
-_indexh = (int)(172);
- break;
-case 27:
- //BA.debugLineNum = 603;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDY5eA/Nitro.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDY5eA/Nitro.png");
- //BA.debugLineNum = 604;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
- //BA.debugLineNum = 605;BA.debugLine="IndexW = 113";
-_indexw = (int)(113);
- //BA.debugLineNum = 606;BA.debugLine="IndexH = 191";
-_indexh = (int)(191);
- break;
-case 28:
- //BA.debugLineNum = 608;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
-if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
- //BA.debugLineNum = 609;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZhMw/GalaxyTab10.1Port.png");
- //BA.debugLineNum = 610;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r8001280)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r8001280);
- //BA.debugLineNum = 611;BA.debugLine="IndexW = 129";
-_indexw = (int)(129);
- }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
- //BA.debugLineNum = 613;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZhMg/GalaxyTab10.1Land.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZhMg/GalaxyTab10.1Land.png");
- //BA.debugLineNum = 614;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
- //BA.debugLineNum = 615;BA.debugLine="IndexW = 135";
-_indexw = (int)(135);
- };
- //BA.debugLineNum = 617;BA.debugLine="IndexH = 135";
-_indexh = (int)(135);
- break;
-case 29:
- //BA.debugLineNum = 619;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZhYw/GSII%20Skyrocket.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZhYw/GSII%20Skyrocket.png");
- //BA.debugLineNum = 620;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 621;BA.debugLine="IndexW = 86";
-_indexw = (int)(86);
- //BA.debugLineNum = 622;BA.debugLine="IndexH = 148";
-_indexh = (int)(148);
- break;
-case 30:
- //BA.debugLineNum = 624;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZoYw/EVO4GLTE.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZoYw/EVO4GLTE.png");
- //BA.debugLineNum = 625;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r7201280)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r7201280);
- //BA.debugLineNum = 626;BA.debugLine="IndexW = 88";
-_indexw = (int)(88);
- //BA.debugLineNum = 627;BA.debugLine="IndexH = 199";
-_indexh = (int)(199);
- break;
-case 31:
- //BA.debugLineNum = 629;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDZrdw/EeePadTransformer.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDZrdw/EeePadTransformer.png");
- //BA.debugLineNum = 630;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r1280800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r1280800);
- //BA.debugLineNum = 631;BA.debugLine="IndexW = 165";
-_indexw = (int)(165);
- //BA.debugLineNum = 632;BA.debugLine="IndexH = 157";
-_indexh = (int)(157);
- break;
-case 32:
- //BA.debugLineNum = 634;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDc2NQ/DesireC.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDc2NQ/DesireC.png");
- //BA.debugLineNum = 635;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
- //BA.debugLineNum = 636;BA.debugLine="IndexW = 52";
-_indexw = (int)(52);
- //BA.debugLineNum = 637;BA.debugLine="IndexH = 101";
-_indexh = (int)(101);
- break;
-case 33:
- //BA.debugLineNum = 639;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDc2Zw/Wildfire.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDc2Zw/Wildfire.png");
- //BA.debugLineNum = 640;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r240320)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r240320);
- //BA.debugLineNum = 641;BA.debugLine="IndexW = 43";
-_indexw = (int)(43);
- //BA.debugLineNum = 642;BA.debugLine="IndexH = 76";
-_indexh = (int)(76);
- break;
-case 34:
- //BA.debugLineNum = 644;BA.debugLine="If VariantBox.SelectedItem = \"Portrait\" Then";
-if ((mostCurrent._variantbox.getSelectedItem()).equals("Portrait")) { 
- //BA.debugLineNum = 645;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDhxYg/Droid2.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDhxYg/Droid2.png");
- //BA.debugLineNum = 646;BA.debugLine="IndexW = 110";
-_indexw = (int)(110);
- //BA.debugLineNum = 647;BA.debugLine="IndexH = 193";
-_indexh = (int)(193);
- //BA.debugLineNum = 648;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480854)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480854);
- }else if((mostCurrent._variantbox.getSelectedItem()).equals("Landscape")) { 
- //BA.debugLineNum = 650;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDhxYw/Droid2Horizontal.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDhxYw/Droid2Horizontal.png");
- //BA.debugLineNum = 651;BA.debugLine="IndexW = 198";
-_indexw = (int)(198);
- //BA.debugLineNum = 652;BA.debugLine="IndexH = 95";
-_indexh = (int)(95);
- //BA.debugLineNum = 653;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r854480)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r854480);
- };
- break;
-case 35:
- //BA.debugLineNum = 656;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDhxZA/Optimus2x.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDhxZA/Optimus2x.png");
- //BA.debugLineNum = 657;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 658;BA.debugLine="IndexW = 93";
-_indexw = (int)(93);
- //BA.debugLineNum = 659;BA.debugLine="IndexH = 175";
-_indexh = (int)(175);
- break;
-case 36:
- //BA.debugLineNum = 661;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGIycg/Titan.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGIycg/Titan.png");
- //BA.debugLineNum = 662;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r480800)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r480800);
- //BA.debugLineNum = 663;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaGIydA/Titan.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaGIydA/Titan.png");
- //BA.debugLineNum = 664;BA.debugLine="IndexW = 60";
-_indexw = (int)(60);
- //BA.debugLineNum = 665;BA.debugLine="IndexH = 138";
-_indexh = (int)(138);
- break;
-case 37:
- //BA.debugLineNum = 667;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaDc2Zw/Wildfire.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaDc2Zw/Wildfire.png");
- //BA.debugLineNum = 668;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r240320)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r240320);
- //BA.debugLineNum = 669;BA.debugLine="IndexW = 43";
-_indexw = (int)(43);
- //BA.debugLineNum = 670;BA.debugLine="IndexH = 76";
-_indexh = (int)(76);
- break;
-case 38:
- //BA.debugLineNum = 672;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGIzNg/WildfireS.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGIzNg/WildfireS.png");
- //BA.debugLineNum = 673;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r320480)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r320480);
- //BA.debugLineNum = 674;BA.debugLine="IndexW = 72";
-_indexw = (int)(72);
- //BA.debugLineNum = 675;BA.debugLine="IndexH = 123";
-_indexh = (int)(123);
- break;
-case 39:
- //BA.debugLineNum = 677;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGJxcg/Sensation.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGJxcg/Sensation.png");
- //BA.debugLineNum = 678;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
- //BA.debugLineNum = 679;BA.debugLine="Gloss.Initialize(File.DirAssets, \"gloss/\" & \"http://ompldr.org/vaGJxcw/Sensation.png\")";
-_gloss.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"gloss/"+"http://ompldr.org/vaGJxcw/Sensation.png");
- //BA.debugLineNum = 680;BA.debugLine="Undershadow.Initialize(File.DirAssets, \"undershadow/\" & \"http://ompldr.org/vaGJxdA/Sensation.png\")";
-_undershadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"undershadow/"+"http://ompldr.org/vaGJxdA/Sensation.png");
- //BA.debugLineNum = 681;BA.debugLine="IndexW = 80";
-_indexw = (int)(80);
- //BA.debugLineNum = 682;BA.debugLine="IndexH = 148";
-_indexh = (int)(148);
- break;
-case 40:
- //BA.debugLineNum = 684;BA.debugLine="Image1.Initialize(File.DirAssets, \"device/\" & \"http://ompldr.org/vaGNiaw/Ruby.png\")";
-_image1.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"device/"+"http://ompldr.org/vaGNiaw/Ruby.png");
- //BA.debugLineNum = 685;BA.debugLine="Shadow.Initialize(File.DirAssets, \"shadow/\" & r540960)";
-_shadow.Initialize(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"shadow/"+_r540960);
- //BA.debugLineNum = 686;BA.debugLine="IndexW = 84";
-_indexw = (int)(84);
- //BA.debugLineNum = 687;BA.debugLine="IndexH = 157";
-_indexh = (int)(157);
  break;
 }
 ;
- //BA.debugLineNum = 702;BA.debugLine="PreviewImage.Initialize3(ResizeImage(Image1, Preview.Width, Preview.Height))";
-mostCurrent._previewimage.Initialize3((android.graphics.Bitmap)(_resizeimage(_image1,mostCurrent._preview.getWidth(),mostCurrent._preview.getHeight()).getObject()));
- //BA.debugLineNum = 703;BA.debugLine="BackgroundThread.RunOnGuiThread(\"EndLoading\", Null)";
+ //BA.debugLineNum = 469;BA.debugLine="Dim r As Rect";
+_r = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.RectWrapper();
+ //BA.debugLineNum = 470;BA.debugLine="r.Initialize(0, 0, Device.Width, Device.Height)";
+_r.Initialize((int)(0),(int)(0),_device.getWidth(),_device.getHeight());
+ //BA.debugLineNum = 471;BA.debugLine="WorkingBitmap.InitializeMutable(Device.Width, Device.Height)";
+_workingbitmap.InitializeMutable(_device.getWidth(),_device.getHeight());
+ //BA.debugLineNum = 472;BA.debugLine="WorkingCanvas.Initialize2(WorkingBitmap)";
+_workingcanvas.Initialize2((android.graphics.Bitmap)(_workingbitmap.getObject()));
+ //BA.debugLineNum = 473;BA.debugLine="If Undershadow.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Undershadow, Null, r, Paint)";
+if (_undershadow.IsInitialized()) { 
+_extdraw.drawBitmap(_workingcanvas,(android.graphics.Bitmap)(_undershadow.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_r.getObject()),_paint);};
+ //BA.debugLineNum = 474;BA.debugLine="r.Initialize(IndexW, IndexH, IndexW + LoadedImage.Width, IndexH + LoadedImage.Height)";
+_r.Initialize(_indexw,_indexh,(int)(_indexw+mostCurrent._loadedimage.getWidth()),(int)(_indexh+mostCurrent._loadedimage.getHeight()));
+ //BA.debugLineNum = 475;BA.debugLine="If LoadedImage.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, LoadedImage, Null, r, Paint)";
+if (mostCurrent._loadedimage.IsInitialized()) { 
+_extdraw.drawBitmap(_workingcanvas,(android.graphics.Bitmap)(mostCurrent._loadedimage.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_r.getObject()),_paint);};
+ //BA.debugLineNum = 476;BA.debugLine="r.Initialize(0, 0, Device.Width, Device.Height)";
+_r.Initialize((int)(0),(int)(0),_device.getWidth(),_device.getHeight());
+ //BA.debugLineNum = 477;BA.debugLine="If Shadow.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Shadow, Null, r, Paint)";
+if (_shadow.IsInitialized()) { 
+_extdraw.drawBitmap(_workingcanvas,(android.graphics.Bitmap)(_shadow.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_r.getObject()),_paint);};
+ //BA.debugLineNum = 478;BA.debugLine="If Device.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Device, Null, r, Paint)";
+if (_device.IsInitialized()) { 
+_extdraw.drawBitmap(_workingcanvas,(android.graphics.Bitmap)(_device.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_r.getObject()),_paint);};
+ //BA.debugLineNum = 479;BA.debugLine="If Gloss.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Gloss, Null, r, Paint) 'end of drawing";
+if (_gloss.IsInitialized()) { 
+_extdraw.drawBitmap(_workingcanvas,(android.graphics.Bitmap)(_gloss.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_r.getObject()),_paint);};
+ //BA.debugLineNum = 480;BA.debugLine="PreviewImage.Initialize3(ResizeImage(WorkingBitmap, Preview.Width, Preview.Height))";
+mostCurrent._previewimage.Initialize3((android.graphics.Bitmap)(_resizeimage(_workingbitmap,mostCurrent._preview.getWidth(),mostCurrent._preview.getHeight()).getObject()));
+ //BA.debugLineNum = 481;BA.debugLine="BackgroundThread.RunOnGuiThread(\"EndLoading\", Null)";
 mostCurrent._backgroundthread.RunOnGuiThread("EndLoading",(Object[])(anywheresoftware.b4a.keywords.Common.Null));
- //BA.debugLineNum = 704;BA.debugLine="End Sub";
+ //BA.debugLineNum = 482;BA.debugLine="End Sub";
 return "";
 }
 public static String  _loadbtn_click() throws Exception{
- //BA.debugLineNum = 306;BA.debugLine="Sub Loadbtn_Click";
- //BA.debugLineNum = 307;BA.debugLine="Try";
-try { //BA.debugLineNum = 308;BA.debugLine="cc.Show(\"image/*\", \"\")";
+ //BA.debugLineNum = 310;BA.debugLine="Sub Loadbtn_Click";
+ //BA.debugLineNum = 311;BA.debugLine="Try";
+try { //BA.debugLineNum = 312;BA.debugLine="cc.Show(\"image/*\", \"\")";
 mostCurrent._cc.Show(processBA,"image/*","");
  } 
-       catch (Exception e273) {
-			processBA.setLastException(e273); };
- //BA.debugLineNum = 311;BA.debugLine="End Sub";
+       catch (Exception e277) {
+			processBA.setLastException(e277); };
+ //BA.debugLineNum = 315;BA.debugLine="End Sub";
 return "";
 }
 public static String  _modelbox_itemclick(int _position,Object _value) throws Exception{
- //BA.debugLineNum = 270;BA.debugLine="Sub ModelBox_itemClick (Position As Int, Value As Object)";
- //BA.debugLineNum = 271;BA.debugLine="VariantBox.Clear";
+ //BA.debugLineNum = 272;BA.debugLine="Sub ModelBox_itemClick (Position As Int, Value As Object)";
+ //BA.debugLineNum = 273;BA.debugLine="VariantBox.Clear";
 mostCurrent._variantbox.Clear();
- //BA.debugLineNum = 272;BA.debugLine="Select Case ModelBox.SelectedItem";
+ //BA.debugLineNum = 274;BA.debugLine="Select Case ModelBox.SelectedItem";
 switch (BA.switchObjectToInt(mostCurrent._modelbox.getSelectedItem(),"HTC One X, HTC One X+","Samsung Galaxy SIII","Motorola Xoom","Samsung Galaxy SII, Epic 4G Touch")) {
 case 0:
- //BA.debugLineNum = 274;BA.debugLine="VariantBox.AddAll(Array As String(\"White\", \"Black\"))";
+ //BA.debugLineNum = 276;BA.debugLine="VariantBox.AddAll(Array As String(\"White\", \"Black\"))";
 mostCurrent._variantbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"White","Black"}));
  break;
 case 1:
- //BA.debugLineNum = 276;BA.debugLine="VariantBox.AddAll(Array As String(\"Blue\", \"White\", \"Black\", \"Red\", \"Brown\"))";
+ //BA.debugLineNum = 278;BA.debugLine="VariantBox.AddAll(Array As String(\"Blue\", \"White\", \"Black\", \"Red\", \"Brown\"))";
 mostCurrent._variantbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"Blue","White","Black","Red","Brown"}));
  break;
 case 2:
- //BA.debugLineNum = 278;BA.debugLine="VariantBox.AddAll(Array As String(\"Landscape\", \"Portrait\"))";
+ //BA.debugLineNum = 280;BA.debugLine="VariantBox.AddAll(Array As String(\"Landscape\", \"Portrait\"))";
 mostCurrent._variantbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"Landscape","Portrait"}));
  break;
 case 3:
- //BA.debugLineNum = 280;BA.debugLine="VariantBox.AddAll(Array As String(\"Galaxy SII\", \"Epic 4G Touch\"))";
+ //BA.debugLineNum = 282;BA.debugLine="VariantBox.AddAll(Array As String(\"Galaxy SII\", \"Epic 4G Touch\"))";
 mostCurrent._variantbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"Galaxy SII","Epic 4G Touch"}));
  break;
 }
 ;
- //BA.debugLineNum = 282;BA.debugLine="Loading.Visible = True";
+ //BA.debugLineNum = 284;BA.debugLine="Loading.Visible = True";
 mostCurrent._loading.setVisible(anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 283;BA.debugLine="If BackgroundThread.Running = True Then";
+ //BA.debugLineNum = 285;BA.debugLine="If BackgroundThread.Running = True Then";
 if (mostCurrent._backgroundthread.getRunning()==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 284;BA.debugLine="BackgroundThread.Interrupt";
+ //BA.debugLineNum = 286;BA.debugLine="BackgroundThread.Interrupt";
 mostCurrent._backgroundthread.Interrupt();
  };
- //BA.debugLineNum = 286;BA.debugLine="BackgroundThread.Start(Me, \"ImageProcess\", Null)";
+ //BA.debugLineNum = 288;BA.debugLine="BackgroundThread.Start(Me, \"ImageProcess\", Null)";
 mostCurrent._backgroundthread.Start(main.getObject(),"ImageProcess",(Object[])(anywheresoftware.b4a.keywords.Common.Null));
- //BA.debugLineNum = 287;BA.debugLine="pager.PagingEnabled = False";
+ //BA.debugLineNum = 289;BA.debugLine="pager.PagingEnabled = False";
 mostCurrent._pager.setPagingEnabled(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 288;BA.debugLine="End Sub";
+ //BA.debugLineNum = 290;BA.debugLine="Loadbtn.Enabled = True";
+mostCurrent._loadbtn.setEnabled(anywheresoftware.b4a.keywords.Common.True);
+ //BA.debugLineNum = 291;BA.debugLine="SaveBtn.Enabled = True";
+mostCurrent._savebtn.setEnabled(anywheresoftware.b4a.keywords.Common.True);
+ //BA.debugLineNum = 292;BA.debugLine="End Sub";
 return "";
 }
 public static String  _pager_pagechanged(int _position) throws Exception{
- //BA.debugLineNum = 266;BA.debugLine="Sub Pager_PageChanged (Position As Int)";
- //BA.debugLineNum = 267;BA.debugLine="CurrentPage = Position";
+ //BA.debugLineNum = 268;BA.debugLine="Sub Pager_PageChanged (Position As Int)";
+ //BA.debugLineNum = 269;BA.debugLine="CurrentPage = Position";
 _currentpage = _position;
- //BA.debugLineNum = 268;BA.debugLine="End Sub";
+ //BA.debugLineNum = 270;BA.debugLine="End Sub";
 return "";
 }
 public static String  _pager_pagecreated(int _position,Object _page) throws Exception{
 anywheresoftware.b4a.objects.PanelWrapper _pan = null;
 com.yttrium.scrotter.main._panelinfo _pi = null;
- //BA.debugLineNum = 196;BA.debugLine="Sub Pager_PageCreated (Position As Int, Page As Object)";
- //BA.debugLineNum = 197;BA.debugLine="Log (\"Page created \" & Position)";
+ //BA.debugLineNum = 198;BA.debugLine="Sub Pager_PageCreated (Position As Int, Page As Object)";
+ //BA.debugLineNum = 199;BA.debugLine="Log (\"Page created \" & Position)";
 anywheresoftware.b4a.keywords.Common.Log("Page created "+BA.NumberToString(_position));
- //BA.debugLineNum = 198;BA.debugLine="Dim pan As Panel";
+ //BA.debugLineNum = 200;BA.debugLine="Dim pan As Panel";
 _pan = new anywheresoftware.b4a.objects.PanelWrapper();
- //BA.debugLineNum = 199;BA.debugLine="Dim pi As PanelInfo";
+ //BA.debugLineNum = 201;BA.debugLine="Dim pi As PanelInfo";
 _pi = new com.yttrium.scrotter.main._panelinfo();
- //BA.debugLineNum = 200;BA.debugLine="pan = Page";
+ //BA.debugLineNum = 202;BA.debugLine="pan = Page";
 _pan.setObject((android.view.ViewGroup)(_page));
- //BA.debugLineNum = 201;BA.debugLine="pi = pan.Tag";
+ //BA.debugLineNum = 203;BA.debugLine="pi = pan.Tag";
 _pi = (com.yttrium.scrotter.main._panelinfo)(_pan.getTag());
- //BA.debugLineNum = 202;BA.debugLine="Select pi.PanelType";
+ //BA.debugLineNum = 204;BA.debugLine="Select pi.PanelType";
 switch (BA.switchObjectToInt(_pi.PanelType,_type_settings,_type_preview,_type_options)) {
 case 0:
- //BA.debugLineNum = 204;BA.debugLine="If Not(pi.LayoutLoaded) Then";
+ //BA.debugLineNum = 206;BA.debugLine="If Not(pi.LayoutLoaded) Then";
 if (anywheresoftware.b4a.keywords.Common.Not(_pi.LayoutLoaded)) { 
- //BA.debugLineNum = 205;BA.debugLine="pan.LoadLayout(\"Settings\")";
+ //BA.debugLineNum = 207;BA.debugLine="pan.LoadLayout(\"Settings\")";
 _pan.LoadLayout("Settings",mostCurrent.activityBA);
- //BA.debugLineNum = 206;BA.debugLine="pi.LayoutLoaded = True";
+ //BA.debugLineNum = 208;BA.debugLine="pi.LayoutLoaded = True";
 _pi.LayoutLoaded = anywheresoftware.b4a.keywords.Common.True;
- //BA.debugLineNum = 207;BA.debugLine="ScrotterTitle.Text = \"Scrotter\"";
+ //BA.debugLineNum = 209;BA.debugLine="ScrotterTitle.Text = \"Scrotter\"";
 mostCurrent._scrottertitle.setText((Object)("Scrotter"));
- //BA.debugLineNum = 208;BA.debugLine="ScrotterTitle.TextSize = ScrotterTitle.Height * 800/1000dip";
+ //BA.debugLineNum = 210;BA.debugLine="ScrotterTitle.TextSize = ScrotterTitle.Height * 800/1000dip";
 mostCurrent._scrottertitle.setTextSize((float)(mostCurrent._scrottertitle.getHeight()*800/(double)anywheresoftware.b4a.keywords.Common.DipToCurrent((int)(1000))));
- //BA.debugLineNum = 209;BA.debugLine="ScrotterVers.Text = \"v\" & version & \" (\" & releasedate & \")\"";
+ //BA.debugLineNum = 211;BA.debugLine="ScrotterVers.Text = \"v\" & version & \" (\" & releasedate & \")\"";
 mostCurrent._scrottervers.setText((Object)("v"+_version+" ("+_releasedate+")"));
- //BA.debugLineNum = 210;BA.debugLine="ScrotterVers.TextSize = ScrotterVers.Height * 500/1000dip";
+ //BA.debugLineNum = 212;BA.debugLine="ScrotterVers.TextSize = ScrotterVers.Height * 500/1000dip";
 mostCurrent._scrottervers.setTextSize((float)(mostCurrent._scrottervers.getHeight()*500/(double)anywheresoftware.b4a.keywords.Common.DipToCurrent((int)(1000))));
- //BA.debugLineNum = 211;BA.debugLine="Select theme";
+ //BA.debugLineNum = 213;BA.debugLine="Select theme";
 switch (BA.switchObjectToInt(_theme,"light","dark")) {
 case 0:
- //BA.debugLineNum = 213;BA.debugLine="settingspage.Color = Colors.White";
+ //BA.debugLineNum = 215;BA.debugLine="settingspage.Color = Colors.White";
 mostCurrent._settingspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 214;BA.debugLine="ScrotterTitle.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 216;BA.debugLine="ScrotterTitle.TextColor = Colors.DarkGray";
 mostCurrent._scrottertitle.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 215;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
+ //BA.debugLineNum = 217;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
 mostCurrent._scrottervers.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
  break;
 case 1:
- //BA.debugLineNum = 217;BA.debugLine="settingspage.Color = Colors.RGB(50, 50, 50)";
+ //BA.debugLineNum = 219;BA.debugLine="settingspage.Color = Colors.RGB(50, 50, 50)";
 mostCurrent._settingspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 218;BA.debugLine="ScrotterTitle.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 220;BA.debugLine="ScrotterTitle.TextColor = Colors.LightGray";
 mostCurrent._scrottertitle.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 219;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
+ //BA.debugLineNum = 221;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
 mostCurrent._scrottervers.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
  break;
 }
 ;
  };
- //BA.debugLineNum = 222;BA.debugLine="Loaded(1) = True";
+ //BA.debugLineNum = 224;BA.debugLine="Loaded(1) = True";
 _loaded[(int)(1)] = anywheresoftware.b4a.keywords.Common.True;
  break;
 case 1:
- //BA.debugLineNum = 224;BA.debugLine="If Not(pi.LayoutLoaded) Then";
+ //BA.debugLineNum = 226;BA.debugLine="If Not(pi.LayoutLoaded) Then";
 if (anywheresoftware.b4a.keywords.Common.Not(_pi.LayoutLoaded)) { 
- //BA.debugLineNum = 225;BA.debugLine="pan.LoadLayout(\"Preview\")";
+ //BA.debugLineNum = 227;BA.debugLine="pan.LoadLayout(\"Preview\")";
 _pan.LoadLayout("Preview",mostCurrent.activityBA);
- //BA.debugLineNum = 226;BA.debugLine="pi.LayoutLoaded = True";
+ //BA.debugLineNum = 228;BA.debugLine="pi.LayoutLoaded = True";
 _pi.LayoutLoaded = anywheresoftware.b4a.keywords.Common.True;
- //BA.debugLineNum = 227;BA.debugLine="Select theme";
+ //BA.debugLineNum = 229;BA.debugLine="Select theme";
 switch (BA.switchObjectToInt(_theme,"light","dark")) {
 case 0:
- //BA.debugLineNum = 229;BA.debugLine="previewpage.Color = Colors.White";
+ //BA.debugLineNum = 231;BA.debugLine="previewpage.Color = Colors.White";
 mostCurrent._previewpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
  break;
 case 1:
- //BA.debugLineNum = 231;BA.debugLine="previewpage.Color = Colors.RGB(50, 50, 50)";
+ //BA.debugLineNum = 233;BA.debugLine="previewpage.Color = Colors.RGB(50, 50, 50)";
 mostCurrent._previewpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
  break;
 }
 ;
  };
- //BA.debugLineNum = 234;BA.debugLine="Loaded(2) = True";
+ //BA.debugLineNum = 236;BA.debugLine="Loaded(2) = True";
 _loaded[(int)(2)] = anywheresoftware.b4a.keywords.Common.True;
  break;
 case 2:
- //BA.debugLineNum = 236;BA.debugLine="If Not(pi.LayoutLoaded) Then";
+ //BA.debugLineNum = 238;BA.debugLine="If Not(pi.LayoutLoaded) Then";
 if (anywheresoftware.b4a.keywords.Common.Not(_pi.LayoutLoaded)) { 
- //BA.debugLineNum = 237;BA.debugLine="pan.LoadLayout(\"Options\")";
+ //BA.debugLineNum = 239;BA.debugLine="pan.LoadLayout(\"Options\")";
 _pan.LoadLayout("Options",mostCurrent.activityBA);
- //BA.debugLineNum = 238;BA.debugLine="pi.LayoutLoaded = True";
+ //BA.debugLineNum = 240;BA.debugLine="pi.LayoutLoaded = True";
 _pi.LayoutLoaded = anywheresoftware.b4a.keywords.Common.True;
- //BA.debugLineNum = 239;BA.debugLine="ModelBox.AddAll(Array As String(\"ASUS Eee Pad Transformer\", \"Google Nexus 4\", \"Google Nexus 7\", \"Google Nexus S\", \"HTC Amaze 4G, Ruby\", \"HTC Desire\", \"HTC Desire C\", \"HTC Desire HD, HTC Inspire 4G\", \"HTC Desire Z, T-Mobile G2\", \"HTC Droid DNA\", \"HTC Evo 3D\", \"HTC Evo 4G LTE\", \"HTC Google Nexus One\", \"HTC Hero\", \"HTC Legend\", \"HTC One S\", \"HTC One V\", \"HTC One X, HTC One X+\", \"HTC Sensation\", \"HTC Titan\", \"HTC Vivid\", \"HTC Wildfire\", \"HTC Wildfire S\", \"LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II\", \"LG Optimus 2X\", \"Motorola Droid 2, Milestone 2\", \"Motorola Droid RAZR\", \"Motorola Droid RAZR M\", \"Motorola Xoom\", \"Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G\", \"Samsung Galaxy Ace, Galaxy Cooper\", \"Samsung Galaxy Note II\", \"Samsung Galaxy SII, Epic 4G Touch\", \"Samsung Galaxy SII Skyrocket\", \"Samsung Galaxy SIII\", \"Samsung Galaxy SIII Mini\", \"Samsung Galaxy TAB 10.1\", \"Samsung Google Galaxy Nexus\", \"Sony Ericsson Xperia J\", \"Sony Ericsson Xperia X10\"))";
-mostCurrent._modelbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"ASUS Eee Pad Transformer","Google Nexus 4","Google Nexus 7","Google Nexus S","HTC Amaze 4G, Ruby","HTC Desire","HTC Desire C","HTC Desire HD, HTC Inspire 4G","HTC Desire Z, T-Mobile G2","HTC Droid DNA","HTC Evo 3D","HTC Evo 4G LTE","HTC Google Nexus One","HTC Hero","HTC Legend","HTC One S","HTC One V","HTC One X, HTC One X+","HTC Sensation","HTC Titan","HTC Vivid","HTC Wildfire","HTC Wildfire S","LG Nitro HD, Spectrum, Optimus LTE/LTE L-01D/True HD LTE/LTE II","LG Optimus 2X","Motorola Droid 2, Milestone 2","Motorola Droid RAZR","Motorola Droid RAZR M","Motorola Xoom","Samsung Droid Charge, Galaxy S Aviator, Galaxy S Lightray 4G","Samsung Galaxy Ace, Galaxy Cooper","Samsung Galaxy Note II","Samsung Galaxy SII, Epic 4G Touch","Samsung Galaxy SII Skyrocket","Samsung Galaxy SIII","Samsung Galaxy SIII Mini","Samsung Galaxy TAB 10.1","Samsung Google Galaxy Nexus","Sony Ericsson Xperia J","Sony Ericsson Xperia X10"}));
- //BA.debugLineNum = 240;BA.debugLine="ModelBox.SelectedIndex = 1";
+ //BA.debugLineNum = 241;BA.debugLine="ModelBox.AddAll(Array As String(\"Google Nexus 4\", \"Google Nexus 7\", \"Google Nexus S\", \"HTC Desire HD, HTC Inspire 4G\", \"HTC One S\", \"HTC One V\", \"HTC One X, HTC One X+\", \"Motorola Droid RAZR\", \"Motorola Droid RAZR M\", \"Motorola Xoom\", \"Samsung Galaxy Note II\", \"Samsung Galaxy SII, Epic 4G Touch\", \"Samsung Galaxy SIII\", \"Samsung Galaxy SIII Mini\", \"Samsung Google Galaxy Nexus\"))";
+mostCurrent._modelbox.AddAll(anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"Google Nexus 4","Google Nexus 7","Google Nexus S","HTC Desire HD, HTC Inspire 4G","HTC One S","HTC One V","HTC One X, HTC One X+","Motorola Droid RAZR","Motorola Droid RAZR M","Motorola Xoom","Samsung Galaxy Note II","Samsung Galaxy SII, Epic 4G Touch","Samsung Galaxy SIII","Samsung Galaxy SIII Mini","Samsung Google Galaxy Nexus"}));
+ //BA.debugLineNum = 242;BA.debugLine="ModelBox.SelectedIndex = 1";
 mostCurrent._modelbox.setSelectedIndex((int)(1));
- //BA.debugLineNum = 241;BA.debugLine="Select theme";
+ //BA.debugLineNum = 243;BA.debugLine="Select theme";
 switch (BA.switchObjectToInt(_theme,"light","dark")) {
 case 0:
- //BA.debugLineNum = 243;BA.debugLine="optionspage.Color = Colors.White";
+ //BA.debugLineNum = 245;BA.debugLine="optionspage.Color = Colors.White";
 mostCurrent._optionspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 244;BA.debugLine="ModelBox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 246;BA.debugLine="ModelBox.TextColor = Colors.DarkGray";
 mostCurrent._modelbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 245;BA.debugLine="VariantBox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 247;BA.debugLine="VariantBox.TextColor = Colors.DarkGray";
 mostCurrent._variantbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 246;BA.debugLine="StretchCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 248;BA.debugLine="StretchCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._stretchcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 247;BA.debugLine="GlossCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 249;BA.debugLine="GlossCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._glosscheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 248;BA.debugLine="ShadowCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 250;BA.debugLine="ShadowCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._shadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 249;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 251;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._undershadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
  break;
 case 1:
- //BA.debugLineNum = 251;BA.debugLine="optionspage.Color = Colors.RGB(50, 50, 50)";
+ //BA.debugLineNum = 253;BA.debugLine="optionspage.Color = Colors.RGB(50, 50, 50)";
 mostCurrent._optionspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 252;BA.debugLine="ModelBox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 254;BA.debugLine="ModelBox.TextColor = Colors.LightGray";
 mostCurrent._modelbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 253;BA.debugLine="VariantBox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 255;BA.debugLine="VariantBox.TextColor = Colors.LightGray";
 mostCurrent._variantbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 254;BA.debugLine="StretchCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 256;BA.debugLine="StretchCheckbox.TextColor = Colors.LightGray";
 mostCurrent._stretchcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 255;BA.debugLine="GlossCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 257;BA.debugLine="GlossCheckbox.TextColor = Colors.LightGray";
 mostCurrent._glosscheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 256;BA.debugLine="ShadowCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 258;BA.debugLine="ShadowCheckbox.TextColor = Colors.LightGray";
 mostCurrent._shadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 257;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 259;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.LightGray";
 mostCurrent._undershadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
  break;
 }
 ;
- //BA.debugLineNum = 259;BA.debugLine="ModelBox.Invalidate";
+ //BA.debugLineNum = 261;BA.debugLine="ModelBox.Invalidate";
 mostCurrent._modelbox.Invalidate();
- //BA.debugLineNum = 260;BA.debugLine="VariantBox.Invalidate";
+ //BA.debugLineNum = 262;BA.debugLine="VariantBox.Invalidate";
 mostCurrent._variantbox.Invalidate();
  };
- //BA.debugLineNum = 262;BA.debugLine="Loaded(3) = True";
+ //BA.debugLineNum = 264;BA.debugLine="Loaded(3) = True";
 _loaded[(int)(3)] = anywheresoftware.b4a.keywords.Common.True;
  break;
 }
 ;
- //BA.debugLineNum = 264;BA.debugLine="End Sub";
+ //BA.debugLineNum = 266;BA.debugLine="End Sub";
 return "";
 }
 public static String  _process_globals() throws Exception{
@@ -1395,109 +1094,109 @@ return "";
 public static String  _refreshtheme() throws Exception{
 int _mnum = 0;
 int _vnum = 0;
- //BA.debugLineNum = 98;BA.debugLine="Sub RefreshTheme";
- //BA.debugLineNum = 99;BA.debugLine="Select theme";
+ //BA.debugLineNum = 100;BA.debugLine="Sub RefreshTheme";
+ //BA.debugLineNum = 101;BA.debugLine="Select theme";
 switch (BA.switchObjectToInt(_theme,"light","dark")) {
 case 0:
- //BA.debugLineNum = 101;BA.debugLine="tabs.Color = Colors.White";
+ //BA.debugLineNum = 103;BA.debugLine="tabs.Color = Colors.White";
 mostCurrent._tabs.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 102;BA.debugLine="tabs.BackgroundColorPressed = Colors.DarkGray";
+ //BA.debugLineNum = 104;BA.debugLine="tabs.BackgroundColorPressed = Colors.DarkGray";
 mostCurrent._tabs.setBackgroundColorPressed(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 103;BA.debugLine="tabs.LineColorCenter = Colors.DarkGray";
+ //BA.debugLineNum = 105;BA.debugLine="tabs.LineColorCenter = Colors.DarkGray";
 mostCurrent._tabs.setLineColorCenter(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 104;BA.debugLine="tabs.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 106;BA.debugLine="tabs.TextColor = Colors.LightGray";
 mostCurrent._tabs.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 105;BA.debugLine="tabs.TextColorCenter = Colors.DarkGray";
+ //BA.debugLineNum = 107;BA.debugLine="tabs.TextColorCenter = Colors.DarkGray";
 mostCurrent._tabs.setTextColorCenter(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 106;BA.debugLine="If Loaded(1) = True Then";
+ //BA.debugLineNum = 108;BA.debugLine="If Loaded(1) = True Then";
 if (_loaded[(int)(1)]==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 107;BA.debugLine="settingspage.Color = Colors.White";
+ //BA.debugLineNum = 109;BA.debugLine="settingspage.Color = Colors.White";
 mostCurrent._settingspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 108;BA.debugLine="ScrotterTitle.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 110;BA.debugLine="ScrotterTitle.TextColor = Colors.DarkGray";
 mostCurrent._scrottertitle.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 109;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
+ //BA.debugLineNum = 111;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
 mostCurrent._scrottervers.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
  };
- //BA.debugLineNum = 111;BA.debugLine="If Loaded(2) = True Then previewpage.Color = Colors.White";
+ //BA.debugLineNum = 113;BA.debugLine="If Loaded(2) = True Then previewpage.Color = Colors.White";
 if (_loaded[(int)(2)]==anywheresoftware.b4a.keywords.Common.True) { 
 mostCurrent._previewpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);};
- //BA.debugLineNum = 112;BA.debugLine="If Loaded(3) = True Then";
+ //BA.debugLineNum = 114;BA.debugLine="If Loaded(3) = True Then";
 if (_loaded[(int)(3)]==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 113;BA.debugLine="optionspage.Color = Colors.White";
+ //BA.debugLineNum = 115;BA.debugLine="optionspage.Color = Colors.White";
 mostCurrent._optionspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 114;BA.debugLine="ModelBox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 116;BA.debugLine="ModelBox.TextColor = Colors.DarkGray";
 mostCurrent._modelbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 115;BA.debugLine="VariantBox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 117;BA.debugLine="VariantBox.TextColor = Colors.DarkGray";
 mostCurrent._variantbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 116;BA.debugLine="StretchCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 118;BA.debugLine="StretchCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._stretchcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 117;BA.debugLine="GlossCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 119;BA.debugLine="GlossCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._glosscheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 118;BA.debugLine="ShadowCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 120;BA.debugLine="ShadowCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._shadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- //BA.debugLineNum = 119;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.DarkGray";
+ //BA.debugLineNum = 121;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._undershadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
  };
  break;
 case 1:
- //BA.debugLineNum = 122;BA.debugLine="tabs.Color = Colors.RGB(50, 50, 50)";
+ //BA.debugLineNum = 124;BA.debugLine="tabs.Color = Colors.RGB(50, 50, 50)";
 mostCurrent._tabs.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 123;BA.debugLine="tabs.BackgroundColorPressed = Colors.White";
+ //BA.debugLineNum = 125;BA.debugLine="tabs.BackgroundColorPressed = Colors.White";
 mostCurrent._tabs.setBackgroundColorPressed(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 124;BA.debugLine="tabs.LineColorCenter = Colors.LightGray";
+ //BA.debugLineNum = 126;BA.debugLine="tabs.LineColorCenter = Colors.LightGray";
 mostCurrent._tabs.setLineColorCenter(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 125;BA.debugLine="tabs.TextColor = Colors.Gray";
+ //BA.debugLineNum = 127;BA.debugLine="tabs.TextColor = Colors.Gray";
 mostCurrent._tabs.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
- //BA.debugLineNum = 126;BA.debugLine="tabs.TextColorCenter = Colors.LightGray";
+ //BA.debugLineNum = 128;BA.debugLine="tabs.TextColorCenter = Colors.LightGray";
 mostCurrent._tabs.setTextColorCenter(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 127;BA.debugLine="If Loaded(1) = True Then";
+ //BA.debugLineNum = 129;BA.debugLine="If Loaded(1) = True Then";
 if (_loaded[(int)(1)]==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 128;BA.debugLine="settingspage.Color = Colors.RGB(50, 50, 50)";
+ //BA.debugLineNum = 130;BA.debugLine="settingspage.Color = Colors.RGB(50, 50, 50)";
 mostCurrent._settingspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 129;BA.debugLine="ScrotterTitle.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 131;BA.debugLine="ScrotterTitle.TextColor = Colors.LightGray";
 mostCurrent._scrottertitle.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 130;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
+ //BA.debugLineNum = 132;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
 mostCurrent._scrottervers.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
  };
- //BA.debugLineNum = 132;BA.debugLine="If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)";
+ //BA.debugLineNum = 134;BA.debugLine="If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)";
 if (_loaded[(int)(2)]==anywheresoftware.b4a.keywords.Common.True) { 
 mostCurrent._previewpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));};
- //BA.debugLineNum = 133;BA.debugLine="If Loaded(3) = True Then";
+ //BA.debugLineNum = 135;BA.debugLine="If Loaded(3) = True Then";
 if (_loaded[(int)(3)]==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 134;BA.debugLine="optionspage.Color = Colors.RGB(50, 50, 50)";
+ //BA.debugLineNum = 136;BA.debugLine="optionspage.Color = Colors.RGB(50, 50, 50)";
 mostCurrent._optionspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 135;BA.debugLine="ModelBox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 137;BA.debugLine="ModelBox.TextColor = Colors.LightGray";
 mostCurrent._modelbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 136;BA.debugLine="VariantBox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 138;BA.debugLine="VariantBox.TextColor = Colors.LightGray";
 mostCurrent._variantbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 137;BA.debugLine="StretchCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 139;BA.debugLine="StretchCheckbox.TextColor = Colors.LightGray";
 mostCurrent._stretchcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 138;BA.debugLine="GlossCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 140;BA.debugLine="GlossCheckbox.TextColor = Colors.LightGray";
 mostCurrent._glosscheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 139;BA.debugLine="ShadowCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 141;BA.debugLine="ShadowCheckbox.TextColor = Colors.LightGray";
 mostCurrent._shadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 140;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.LightGray";
+ //BA.debugLineNum = 142;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.LightGray";
 mostCurrent._undershadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
  };
  break;
 }
 ;
- //BA.debugLineNum = 143;BA.debugLine="Dim mnum, vnum As Int";
+ //BA.debugLineNum = 145;BA.debugLine="Dim mnum, vnum As Int";
 _mnum = 0;
 _vnum = 0;
- //BA.debugLineNum = 144;BA.debugLine="mnum = ModelBox.SelectedIndex";
+ //BA.debugLineNum = 146;BA.debugLine="mnum = ModelBox.SelectedIndex";
 _mnum = mostCurrent._modelbox.getSelectedIndex();
- //BA.debugLineNum = 145;BA.debugLine="vnum = VariantBox.SelectedIndex";
+ //BA.debugLineNum = 147;BA.debugLine="vnum = VariantBox.SelectedIndex";
 _vnum = mostCurrent._variantbox.getSelectedIndex();
- //BA.debugLineNum = 146;BA.debugLine="ModelBox.SelectedIndex = 0";
+ //BA.debugLineNum = 148;BA.debugLine="ModelBox.SelectedIndex = 0";
 mostCurrent._modelbox.setSelectedIndex((int)(0));
- //BA.debugLineNum = 147;BA.debugLine="ModelBox.SelectedIndex = mnum";
+ //BA.debugLineNum = 149;BA.debugLine="ModelBox.SelectedIndex = mnum";
 mostCurrent._modelbox.setSelectedIndex(_mnum);
- //BA.debugLineNum = 148;BA.debugLine="VariantBox.SelectedIndex = 0";
+ //BA.debugLineNum = 150;BA.debugLine="VariantBox.SelectedIndex = 0";
 mostCurrent._variantbox.setSelectedIndex((int)(0));
- //BA.debugLineNum = 149;BA.debugLine="VariantBox.SelectedIndex = vnum";
+ //BA.debugLineNum = 151;BA.debugLine="VariantBox.SelectedIndex = vnum";
 mostCurrent._variantbox.setSelectedIndex(_vnum);
- //BA.debugLineNum = 150;BA.debugLine="End Sub";
+ //BA.debugLineNum = 152;BA.debugLine="End Sub";
 return "";
 }
 public static anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper  _resizeimage(anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _original,int _targetx,int _targety) throws Exception{
@@ -1511,53 +1210,53 @@ int _w = 0;
 int _h = 0;
 com.AB.ABExtDrawing.ABExtDrawing _extdraw = null;
 com.AB.ABExtDrawing.ABExtDrawing.ABPaint _paint = null;
- //BA.debugLineNum = 712;BA.debugLine="Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap";
- //BA.debugLineNum = 713;BA.debugLine="Dim origRatio As Float = original.Width / original.Height";
+ //BA.debugLineNum = 490;BA.debugLine="Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap";
+ //BA.debugLineNum = 491;BA.debugLine="Dim origRatio As Float = original.Width / original.Height";
 _origratio = (float)(_original.getWidth()/(double)_original.getHeight());
- //BA.debugLineNum = 714;BA.debugLine="Dim targetRatio As Float = TargetX / TargetY";
+ //BA.debugLineNum = 492;BA.debugLine="Dim targetRatio As Float = TargetX / TargetY";
 _targetratio = (float)(_targetx/(double)_targety);
- //BA.debugLineNum = 715;BA.debugLine="Dim scale As Float";
+ //BA.debugLineNum = 493;BA.debugLine="Dim scale As Float";
 _scale = 0f;
- //BA.debugLineNum = 716;BA.debugLine="If targetRatio > origRatio Then";
+ //BA.debugLineNum = 494;BA.debugLine="If targetRatio > origRatio Then";
 if (_targetratio>_origratio) { 
- //BA.debugLineNum = 717;BA.debugLine="scale = TargetY / original.Height";
+ //BA.debugLineNum = 495;BA.debugLine="scale = TargetY / original.Height";
 _scale = (float)(_targety/(double)_original.getHeight());
  }else {
- //BA.debugLineNum = 719;BA.debugLine="scale = TargetX / original.Width";
+ //BA.debugLineNum = 497;BA.debugLine="scale = TargetX / original.Width";
 _scale = (float)(_targetx/(double)_original.getWidth());
  };
- //BA.debugLineNum = 721;BA.debugLine="Dim C As Canvas";
+ //BA.debugLineNum = 499;BA.debugLine="Dim C As Canvas";
 _c = new anywheresoftware.b4a.objects.drawable.CanvasWrapper();
- //BA.debugLineNum = 722;BA.debugLine="Dim b As Bitmap";
+ //BA.debugLineNum = 500;BA.debugLine="Dim b As Bitmap";
 _b = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
- //BA.debugLineNum = 723;BA.debugLine="b.InitializeMutable(TargetX, TargetY)";
+ //BA.debugLineNum = 501;BA.debugLine="b.InitializeMutable(TargetX, TargetY)";
 _b.InitializeMutable(_targetx,_targety);
- //BA.debugLineNum = 724;BA.debugLine="C.Initialize2(b)";
+ //BA.debugLineNum = 502;BA.debugLine="C.Initialize2(b)";
 _c.Initialize2((android.graphics.Bitmap)(_b.getObject()));
- //BA.debugLineNum = 725;BA.debugLine="C.DrawColor(Colors.Transparent)";
+ //BA.debugLineNum = 503;BA.debugLine="C.DrawColor(Colors.Transparent)";
 _c.DrawColor(anywheresoftware.b4a.keywords.Common.Colors.Transparent);
- //BA.debugLineNum = 726;BA.debugLine="Dim R As Rect";
+ //BA.debugLineNum = 504;BA.debugLine="Dim R As Rect";
 _r = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.RectWrapper();
- //BA.debugLineNum = 727;BA.debugLine="Dim w = original.Width * scale, h = original.Height * scale As Int";
+ //BA.debugLineNum = 505;BA.debugLine="Dim w = original.Width * scale, h = original.Height * scale As Int";
 _w = (int)(_original.getWidth()*_scale);
 _h = (int)(_original.getHeight()*_scale);
- //BA.debugLineNum = 728;BA.debugLine="R.Initialize(TargetX/2-w/2, TargetY/2-h/2, TargetX/2+w/2, TargetY/2+h/2)";
+ //BA.debugLineNum = 506;BA.debugLine="R.Initialize(TargetX/2-w/2, TargetY/2-h/2, TargetX/2+w/2, TargetY/2+h/2)";
 _r.Initialize((int)(_targetx/(double)2-_w/(double)2),(int)(_targety/(double)2-_h/(double)2),(int)(_targetx/(double)2+_w/(double)2),(int)(_targety/(double)2+_h/(double)2));
- //BA.debugLineNum = 729;BA.debugLine="Dim ExtDraw As ABExtDrawing";
+ //BA.debugLineNum = 507;BA.debugLine="Dim ExtDraw As ABExtDrawing";
 _extdraw = new com.AB.ABExtDrawing.ABExtDrawing();
- //BA.debugLineNum = 730;BA.debugLine="Dim paint As ABPaint";
+ //BA.debugLineNum = 508;BA.debugLine="Dim paint As ABPaint";
 _paint = new com.AB.ABExtDrawing.ABExtDrawing.ABPaint();
- //BA.debugLineNum = 731;BA.debugLine="paint.Initialize()";
+ //BA.debugLineNum = 509;BA.debugLine="paint.Initialize()";
 _paint.Initialize();
- //BA.debugLineNum = 732;BA.debugLine="paint.setFilterBitmap(True)";
+ //BA.debugLineNum = 510;BA.debugLine="paint.setFilterBitmap(True)";
 _paint.SetFilterBitmap(anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 733;BA.debugLine="paint.SetAntiAlias(True)";
+ //BA.debugLineNum = 511;BA.debugLine="paint.SetAntiAlias(True)";
 _paint.SetAntiAlias(anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 734;BA.debugLine="ExtDraw.drawBitmap(C, original, Null, R, paint)";
+ //BA.debugLineNum = 512;BA.debugLine="ExtDraw.drawBitmap(C, original, Null, R, paint)";
 _extdraw.drawBitmap(_c,(android.graphics.Bitmap)(_original.getObject()),(android.graphics.Rect)(anywheresoftware.b4a.keywords.Common.Null),(android.graphics.Rect)(_r.getObject()),_paint);
- //BA.debugLineNum = 735;BA.debugLine="Return b";
+ //BA.debugLineNum = 513;BA.debugLine="Return b";
 if (true) return _b;
- //BA.debugLineNum = 736;BA.debugLine="End Sub";
+ //BA.debugLineNum = 514;BA.debugLine="End Sub";
 return null;
 }
 public static String  _savebtn_click() throws Exception{
@@ -1565,65 +1264,65 @@ long _now = 0L;
 String _dt = "";
 int _result = 0;
 String _filename = "";
- //BA.debugLineNum = 290;BA.debugLine="Sub SaveBtn_Click";
- //BA.debugLineNum = 291;BA.debugLine="Dim now As Long";
+ //BA.debugLineNum = 294;BA.debugLine="Sub SaveBtn_Click";
+ //BA.debugLineNum = 295;BA.debugLine="Dim now As Long";
 _now = 0L;
- //BA.debugLineNum = 292;BA.debugLine="Dim dt As String";
+ //BA.debugLineNum = 296;BA.debugLine="Dim dt As String";
 _dt = "";
- //BA.debugLineNum = 293;BA.debugLine="DateTime.DateFormat = \"yyyyMMdd_HHmmss\"";
+ //BA.debugLineNum = 297;BA.debugLine="DateTime.DateFormat = \"yyyyMMdd_HHmmss\"";
 anywheresoftware.b4a.keywords.Common.DateTime.setDateFormat("yyyyMMdd_HHmmss");
- //BA.debugLineNum = 294;BA.debugLine="Dim result As Int";
+ //BA.debugLineNum = 298;BA.debugLine="Dim result As Int";
 _result = 0;
- //BA.debugLineNum = 295;BA.debugLine="result = Msgbox2(\"Save file as what format?\", \"Save Image\", \"PNG\", \"Cancel\", \"JPG\", Null)";
+ //BA.debugLineNum = 299;BA.debugLine="result = Msgbox2(\"Save file as what format?\", \"Save Image\", \"PNG\", \"Cancel\", \"JPG\", Null)";
 _result = anywheresoftware.b4a.keywords.Common.Msgbox2("Save file as what format?","Save Image","PNG","Cancel","JPG",(android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.Null),mostCurrent.activityBA);
- //BA.debugLineNum = 296;BA.debugLine="Select Case result";
+ //BA.debugLineNum = 300;BA.debugLine="Select Case result";
 switch (BA.switchObjectToInt(_result,anywheresoftware.b4a.keywords.Common.DialogResponse.POSITIVE,anywheresoftware.b4a.keywords.Common.DialogResponse.NEGATIVE)) {
 case 0:
- //BA.debugLineNum = 298;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".png\"";
+ //BA.debugLineNum = 302;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".png\"";
 _filename = "Scrotter4A_"+anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow())+".png";
- //BA.debugLineNum = 299;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
+ //BA.debugLineNum = 303;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("File saved to the sdcard at /sdcard/Scrotter/"+_filename+".",anywheresoftware.b4a.keywords.Common.True);
  break;
 case 1:
- //BA.debugLineNum = 301;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".jpg\"";
+ //BA.debugLineNum = 305;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".jpg\"";
 _filename = "Scrotter4A_"+anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow())+".jpg";
- //BA.debugLineNum = 302;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
+ //BA.debugLineNum = 306;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("File saved to the sdcard at /sdcard/Scrotter/"+_filename+".",anywheresoftware.b4a.keywords.Common.True);
  break;
 }
 ;
- //BA.debugLineNum = 304;BA.debugLine="End Sub";
+ //BA.debugLineNum = 308;BA.debugLine="End Sub";
 return "";
 }
 public static String  _themebtn_click() throws Exception{
- //BA.debugLineNum = 747;BA.debugLine="Sub themebtn_Click";
- //BA.debugLineNum = 748;BA.debugLine="If theme = \"light\" Then";
+ //BA.debugLineNum = 525;BA.debugLine="Sub themebtn_Click";
+ //BA.debugLineNum = 526;BA.debugLine="If theme = \"light\" Then";
 if ((_theme).equals("light")) { 
- //BA.debugLineNum = 749;BA.debugLine="theme = \"dark\"";
+ //BA.debugLineNum = 527;BA.debugLine="theme = \"dark\"";
 _theme = "dark";
  }else {
- //BA.debugLineNum = 751;BA.debugLine="theme = \"light\"";
+ //BA.debugLineNum = 529;BA.debugLine="theme = \"light\"";
 _theme = "light";
  };
- //BA.debugLineNum = 753;BA.debugLine="RefreshTheme";
+ //BA.debugLineNum = 531;BA.debugLine="RefreshTheme";
 _refreshtheme();
- //BA.debugLineNum = 754;BA.debugLine="End Sub";
+ //BA.debugLineNum = 532;BA.debugLine="End Sub";
 return "";
 }
 public static String  _variantbox_itemclick(int _position,Object _value) throws Exception{
- //BA.debugLineNum = 738;BA.debugLine="Sub VariantBox_ItemClick (Position As Int, Value As Object)";
- //BA.debugLineNum = 739;BA.debugLine="Loading.Visible = True";
+ //BA.debugLineNum = 516;BA.debugLine="Sub VariantBox_ItemClick (Position As Int, Value As Object)";
+ //BA.debugLineNum = 517;BA.debugLine="Loading.Visible = True";
 mostCurrent._loading.setVisible(anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 740;BA.debugLine="If BackgroundThread.Running = True Then";
+ //BA.debugLineNum = 518;BA.debugLine="If BackgroundThread.Running = True Then";
 if (mostCurrent._backgroundthread.getRunning()==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 741;BA.debugLine="BackgroundThread.Interrupt";
+ //BA.debugLineNum = 519;BA.debugLine="BackgroundThread.Interrupt";
 mostCurrent._backgroundthread.Interrupt();
  };
- //BA.debugLineNum = 743;BA.debugLine="BackgroundThread.Start(Me, \"ImageProcess\", Null)";
+ //BA.debugLineNum = 521;BA.debugLine="BackgroundThread.Start(Me, \"ImageProcess\", Null)";
 mostCurrent._backgroundthread.Start(main.getObject(),"ImageProcess",(Object[])(anywheresoftware.b4a.keywords.Common.Null));
- //BA.debugLineNum = 744;BA.debugLine="pager.PagingEnabled = False";
+ //BA.debugLineNum = 522;BA.debugLine="pager.PagingEnabled = False";
 mostCurrent._pager.setPagingEnabled(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 745;BA.debugLine="End Sub";
+ //BA.debugLineNum = 523;BA.debugLine="End Sub";
 return "";
 }
 }
