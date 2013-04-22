@@ -1,9 +1,16 @@
-master
+0.8.1
+- yttrium
+   Add new Desire HD image, update coordinates appropriately.
+
+0.8
 - yttrium
    Experimental UI changes.
    Added default filename when saving: Scrotter_yyyy-MM-dd_HH:mm:ss.png
    Extreme code cleanup, tidying, and optimizations.
    Switch to .NET Framework 2.0.
+   Fix misbehaving devices, remove any that couldn't be fixed.
+   Switch permanent image hosts toGithub for 100% of images.
+   Add margins to the multi-preview.
 
 0.7.2
 - yttrium
