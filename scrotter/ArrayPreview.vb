@@ -43,13 +43,13 @@ Public Class ArrayPreview
         RefreshPreview()
     End Sub
 
-    Private Sub ArrayPreview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Tmpimg As New Bitmap(New Bitmap((Scrotter.CanvImg(1).Width * Scrotter.ScreenAmountPicker.Value), Scrotter.CanvImg(1).Height, PixelFormat.Format32bppArgb))
+    Private Sub ArrayPreview_Load(sender As Object, e As EventArgs) Handles MyBase.Load, InnerBox.ValueChanged, OuterBox.ValueChanged
+        Dim Tmpimg As New Bitmap(New Bitmap((OuterBox.Value * 2) + (Scrotter.CanvImg(1).Width * Scrotter.ScreenAmountPicker.Value) + (InnerBox.Value * (Scrotter.ScreenAmountPicker.Value - 1)), Scrotter.CanvImg(1).Height + (OuterBox.Value * 2), PixelFormat.Format32bppArgb))
         Dim g As Graphics = Graphics.FromImage(Tmpimg)
         g.Clear(Color.Transparent)
         Dim number As Integer = 1
         Do While number <= Scrotter.ScreenAmountPicker.Value
-            g.DrawImage(Scrotter.CanvImg(number), New Point((Scrotter.CanvImg(1).Width * number) - Scrotter.CanvImg(1).Width, 0))
+            g.DrawImage(Scrotter.CanvImg(number), New Point((OuterBox.Value + (Scrotter.CanvImg(1).Width * number) - Scrotter.CanvImg(1).Width) + ((number - 1) * InnerBox.Value), OuterBox.Value))
             number = number + 1
         Loop
         g.Dispose()
