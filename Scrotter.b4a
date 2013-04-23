@@ -1,6 +1,8 @@
 ﻿Version=2.52
 IconFile=
-NumberOfModules=0
+NumberOfModules=1
+Module1=StateManager
+ModuleVisible1=1
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(Main, ~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	<category android:name="android.intent.category.DEFAULT" />~\n~    <data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~
@@ -10,14 +12,15 @@ File1=Main.bal
 File2=Options.bal
 File3=Preview.bal
 File4=Settings.bal
-NumberOfLibraries=7
+NumberOfLibraries=8
 Library1=abextdrawing
 Library2=ahviewpager
 Library3=core
 Library4=phone
-Library5=reflection
-Library6=sql
-Library7=threading
+Library5=randomaccessfile
+Library6=reflection
+Library7=sql
+Library8=threading
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
@@ -41,10 +44,10 @@ Sub Process_Globals
 	Dim FILL_PARENT As Int : FILL_PARENT = -1
 	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
-	Dim CurrentPage As Int : CurrentPage = 1
+	Dim CurrentPage As Int
 	Dim version As String = "0.1"
 	Dim releasedate As String = "4/18/2013"
-	Dim theme As String = "light"
+	Dim theme As String
 	Dim Loaded(4) As Boolean
 End Sub
 
@@ -69,6 +72,7 @@ Sub Globals
 	Dim SaveBtn As Button
 	Dim Preview As Panel
 	Dim LoadedImage As Bitmap
+	Dim ThemeBox As Spinner
 	'Public Shared OpenPath(7), SavePath As String
     'Public OpenStream As Stream = Nothing
     'Public SaveStream As Stream = Nothing
@@ -80,7 +84,6 @@ Sub Globals
     'Public ReadOnly Version As String = "0.8"
     'Public ReadOnly ReleaseDate As String = "2013-02-12"
     'Private Image(7) As String
-	Dim CurrentPage As Int
 	Dim BackgroundThread As Thread
 	Dim PreviewImage As Bitmap
 	Dim Waiting As Boolean = False
@@ -95,7 +98,8 @@ Sub Globals
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
-	Msgbox("This version of Scrotter is a developer preview only. Many basic functions do not work, and are not yet implemented. Do not treat this version as final!", "Warning")
+	'Msgbox("This version of Scrotter is a developer preview only. Many basic functions do not work, and are not yet implemented. Do not treat this version as final!", "Warning")
+	theme = StateManager.GetSetting2("theme", "Light")
 	container.Initialize
 	settingspage = CreatePanel(TYPE_SETTINGS, "Settings")
 	container.AddPage(settingspage,"Settings")
@@ -111,21 +115,34 @@ Sub Activity_Create(FirstTime As Boolean)
 	Activity.AddView(pager, 0, 29dip, Activity.Width, Activity.Height-29dip)
 	BackgroundThread.Initialise("ImageThread")
 	cc.Initialize("cc")
-	tabs.Color = Colors.White
-	tabs.BackgroundColorPressed = Colors.DarkGray
-	tabs.LineColorCenter = Colors.DarkGray
-	tabs.TextColor = Colors.LightGray
-	tabs.TextColorCenter = Colors.DarkGray
-End Sub
-
-Sub RefreshTheme
+	CurrentPage = StateManager.GetSetting2("CurrentPage", 1)
 	Select theme
-		Case "light"
+		Case "Light"
 			tabs.Color = Colors.White
 			tabs.BackgroundColorPressed = Colors.DarkGray
 			tabs.LineColorCenter = Colors.DarkGray
 			tabs.TextColor = Colors.LightGray
 			tabs.TextColorCenter = Colors.DarkGray
+			tabs.Invalidate
+		Case "Dark"
+			tabs.Color = Colors.RGB(50, 50, 50)
+			tabs.BackgroundColorPressed = Colors.White
+			tabs.LineColorCenter = Colors.LightGray
+			tabs.TextColor = Colors.Gray
+			tabs.TextColorCenter = Colors.LightGray
+			tabs.Invalidate
+	End Select
+End Sub
+
+Sub RefreshTheme
+	Select theme
+		Case "Light"
+			tabs.Color = Colors.White
+			tabs.BackgroundColorPressed = Colors.DarkGray
+			tabs.LineColorCenter = Colors.DarkGray
+			tabs.TextColor = Colors.LightGray
+			tabs.TextColorCenter = Colors.DarkGray
+			tabs.Invalidate
 			If Loaded(1) = True Then
 				settingspage.Color = Colors.White
 				ScrotterTitle.TextColor = Colors.DarkGray
@@ -140,13 +157,16 @@ Sub RefreshTheme
 				GlossCheckbox.TextColor = Colors.DarkGray
 				ShadowCheckbox.TextColor = Colors.DarkGray
 				UnderShadowCheckbox.TextColor = Colors.DarkGray
+				'ModelBox.RemoveView
+				'Activity.AddView(ModelBox, 3%x, 3%x, 100%x - 6%x, 60dip)
 			End If
-		Case "dark"
+		Case "Dark"
 			tabs.Color = Colors.RGB(50, 50, 50)
 			tabs.BackgroundColorPressed = Colors.White
 			tabs.LineColorCenter = Colors.LightGray
 			tabs.TextColor = Colors.Gray
 			tabs.TextColorCenter = Colors.LightGray
+			tabs.Invalidate
 			If Loaded(1) = True Then
 				settingspage.Color = Colors.RGB(50, 50, 50)
 				ScrotterTitle.TextColor = Colors.LightGray
@@ -161,15 +181,21 @@ Sub RefreshTheme
 				GlossCheckbox.TextColor = Colors.LightGray
 				ShadowCheckbox.TextColor = Colors.LightGray
 				UnderShadowCheckbox.TextColor = Colors.LightGray
+				'ModelBox.RemoveView
+				'Activity.AddView(ModelBox, 3%x, 3%x, 100%x - 6%x, 60dip)
 			End If
 	End Select
 	Dim mnum, vnum As Int
 	mnum = ModelBox.SelectedIndex
 	vnum = VariantBox.SelectedIndex
 	ModelBox.SelectedIndex = 0
+	ModelBox.Invalidate
 	ModelBox.SelectedIndex = mnum
+	ModelBox.Invalidate
 	VariantBox.SelectedIndex = 0
+	VariantBox.Invalidate
 	VariantBox.SelectedIndex = vnum
+	VariantBox.Invalidate
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
@@ -203,6 +229,7 @@ End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
 	CurrentPage = pager.CurrentPage
+	StateManager.SaveSettings
 End Sub
 
 Sub CreatePanel(PanelType As Int, Title As String) As Panel
@@ -231,12 +258,14 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 				ScrotterTitle.TextSize = ScrotterTitle.Height * 800/1000dip
 				ScrotterVers.Text = "v" & version & " (" & releasedate & ")"
 				ScrotterVers.TextSize = ScrotterVers.Height * 500/1000dip
+				ThemeBox.AddAll(Array As String("Light", "Dark"))
+				ThemeBox.SelectedIndex = ThemeBox.IndexOf(theme)
 				Select theme
-					Case "light"
+					Case "Light"
 						settingspage.Color = Colors.White
 						ScrotterTitle.TextColor = Colors.DarkGray
 						ScrotterVers.TextColor = Colors.Gray
-					Case "dark"
+					Case "Dark"
 						settingspage.Color = Colors.RGB(50, 50, 50)
 						ScrotterTitle.TextColor = Colors.LightGray
 						ScrotterVers.TextColor = Colors.Gray
@@ -248,9 +277,9 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 				pan.LoadLayout("Preview")
 				pi.LayoutLoaded = True
 				Select theme
-					Case "light"
+					Case "Light"
 						previewpage.Color = Colors.White
-					Case "dark"
+					Case "Dark"
 						previewpage.Color = Colors.RGB(50, 50, 50)
 				End Select
 			End If
@@ -259,11 +288,11 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Options")
 				pi.LayoutLoaded = True
-				ModelBox.AddAll(Array As String("", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"))
+				ModelBox.AddAll(Array As String("Device Selection", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"))
 				none = True
 				ModelBox.Prompt = "Pick your phone!"
 				Select theme
-					Case "light"
+					Case "Light"
 						optionspage.Color = Colors.White
 						ModelBox.TextColor = Colors.DarkGray
 						VariantBox.TextColor = Colors.DarkGray
@@ -271,7 +300,7 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 						GlossCheckbox.TextColor = Colors.DarkGray
 						ShadowCheckbox.TextColor = Colors.DarkGray
 						UnderShadowCheckbox.TextColor = Colors.DarkGray
-					Case "dark"
+					Case "Dark"
 						optionspage.Color = Colors.RGB(50, 50, 50)
 						ModelBox.TextColor = Colors.LightGray
 						VariantBox.TextColor = Colors.LightGray
@@ -288,26 +317,43 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 End Sub
 
 Sub Pager_PageChanged (Position As Int)
-	CurrentPage = Position
+	CurrentPage = pager.CurrentPage
+	StateManager.SetSetting("CurrentPage", CurrentPage)
 End Sub
 
 Sub ModelBox_itemClick (Position As Int, Value As Object)
 	If none = True Then
-		ModelBox.SelectedIndex = ModelBox.SelectedIndex + 1
-		ModelBox.RemoveAt(0)
+		If ModelBox.SelectedIndex = ModelBox.Size Then
+			ModelBox.RemoveAt(0)
+			ModelBox.SelectedIndex = ModelBox.Size
+		Else
+			ModelBox.RemoveAt(0)
+			ModelBox.SelectedIndex = ModelBox.SelectedIndex - 1
+		End If
 		none = False
 	End If
 	VariantBox.Clear
+	UnderShadowCheckbox.Enabled = False
+	UnderShadowCheckbox.Checked = False
+	GlossCheckbox.Enabled = False
+	GlossCheckbox.Checked = False
 	Select Case ModelBox.SelectedItem
 		Case "HTC One X, HTC One X+"
 			VariantBox.AddAll(Array As String("White", "Black"))
+			GlossCheckbox.Enabled = True
 		Case "Samsung Galaxy SIII"
 			VariantBox.AddAll(Array As String("Blue", "White", "Black", "Red", "Brown"))
-		Case "Motorola Xoom"
-			VariantBox.AddAll(Array As String("Landscape", "Portrait"))
+		Case "Motorola Xoom", "Google Nexus 7"
+			VariantBox.AddAll(Array As String("Portrait", "Landscape"))
 		Case "Samsung Galaxy SII, Epic 4G Touch"
 			VariantBox.AddAll(Array As String("Galaxy SII", "Epic 4G Touch"))
+		Case "Samsung Galaxy SIII Mini"
 	End Select
+	VariantBox.SelectedIndex = 0
+	RefreshImage
+End Sub
+
+Sub RefreshImage
 	Loading.Visible = True
 	If BackgroundThread.Running = True Then
 		BackgroundThread.Interrupt
@@ -366,153 +412,152 @@ Sub ImageProcess
 	Dim r7681280 As String = "768x1280.png"
 	Dim r8001280 As String = "800x1280.png"
 	Dim r1280800 As String = "1280x800.png"
-	'end of start inits
 	Select Case ModelBox.SelectedItem
 		Case "Samsung Galaxy SIII Mini"
-                    Device.Initialize(File.DirAssets, "device/" & "samsunggsiiimini.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
-                    IndexW = 78
-                    IndexH = 182
+            Device.Initialize(File.DirAssets, "device/" & "samsunggsiiimini.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+            IndexW = 78
+            IndexH = 182
         Case "HTC Desire HD, HTC Inspire 4G"
-                    Device.Initialize(File.DirAssets, "device/" & "desirehd.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
-                    IndexW = 86
-                    IndexH = 130
+            Device.Initialize(File.DirAssets, "device/" & "desirehd.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+            IndexW = 86
+            IndexH = 130
         Case "HTC One X, HTC One X+"
-                    If VariantBox.SelectedItem = "Black" Then
-                        Device.Initialize(File.DirAssets, "device/" & "onexblack.png")
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "onexblack.png")
-                        IndexW = 113
-                    Else If VariantBox.SelectedItem = "White" Then
-                        Device.Initialize(File.DirAssets, "device/" & "onexwhite.png")
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "onexwhite.png")
-                        IndexW = 115
-                    End If
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
-                    IndexH = 213
+            If VariantBox.SelectedItem = "Black" Then
+                Device.Initialize(File.DirAssets, "device/" & "onexblack.png")
+                Gloss.Initialize(File.DirAssets, "gloss/" & "onexblack.png")
+                IndexW = 113
+            Else If VariantBox.SelectedItem = "White" Then
+                Device.Initialize(File.DirAssets, "device/" & "onexwhite.png")
+                Gloss.Initialize(File.DirAssets, "gloss/" & "onexwhite.png")
+                IndexW = 115
+            End If
+            Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
+            IndexH = 213
     	Case "Samsung Galaxy SIII"
-                    IndexW = 88
-                    If VariantBox.SelectedItem = "Blue" Then
-                        Device.Initialize(File.DirAssets, "device/" & "gsiiiblue.png")
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "gsiiiblue.png")
-                    Else If VariantBox.SelectedItem = "White" Then
-                        Device.Initialize(File.DirAssets, "device/" & "gsiiiwhite.png")
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "gsiiiwhite.png")
-                        IndexW = 84
-                    Else If VariantBox.SelectedItem = "Black" Then
-                        Device.Initialize(File.DirAssets, "device/" & "gsiiiblack.png")
-                    Else If VariantBox.SelectedItem = "Red" Then
-                        Device.Initialize(File.DirAssets, "device/" & "gsiiired.png")
-                    Else If VariantBox.SelectedItem = "Brown" Then
-                        Device.Initialize(File.DirAssets, "device/" & "gsiiibrown.png")
-                    End If
-                    Undershadow.Initialize(File.DirAssets, "undershadow/" & "gsiii.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
-                    IndexH = 184
-                Case "Motorola Xoom"
-                    If VariantBox.SelectedItem = "Portrait" Then
-                        Device.Initialize(File.DirAssets, "device/" & "xoomport.png")
-                        Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "xoomport.png")
-                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "xoomport.png")
-                        IndexW = 199
-                        IndexH = 200
-                    Else If VariantBox.SelectedItem = "Landscape" Then
-                        Device.Initialize(File.DirAssets, "device/" & "xoomland.png")
-                        Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "xoomland.png")
-                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "xoomland.png")
-                        IndexW = 218
-                        IndexH = 191
-                    End If
-                Case "Samsung Galaxy SII, Epic 4G Touch"
-                    If VariantBox.SelectedItem = "Galaxy SII" Then
-                        Device.Initialize(File.DirAssets, "device/" & "gsii.png")
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "gsii.png")
-                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "gsii.png")
-                        IndexH = 191
-                    Else If VariantBox.SelectedItem = "Epic 4G Touch" Then
-                        Device.Initialize(File.DirAssets, "device/" & "epic4gtouch.png")
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "epic4gtouch.png")
-                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "epic4gtouch")
-                    End If
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
-                    IndexW = 132
-                Case "Samsung Google Galaxy Nexus"
-                    Device.Initialize(File.DirAssets, "device/" & "galaxynexus.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
-                    Gloss.Initialize(File.DirAssets, "gloss/" & "galaxynexus.png")
-                    Undershadow.Initialize(File.DirAssets, "undershadow/" & "galaxynexus.png")
-                    IndexW = 155
-                    IndexH = 263
-                Case "Samsung Galaxy Note II"
-                    Device.Initialize(File.DirAssets, "device/" & "galaxynoteii.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
-                    Gloss.Initialize(File.DirAssets, "gloss/" & "galaxynoteii.png")
-                    IndexW = 49
-                    IndexH = 140
-                Case "Motorola Droid RAZR"
-                    Device.Initialize(File.DirAssets, "device/" & "droidrazr.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
-                    IndexW = 150
-                    IndexH = 206
-                Case "Google Nexus 7"
-                    If VariantBox.SelectedItem = "Portrait" Then
-                        Device.Initialize(File.DirAssets, "device/" & "nexus7port.png")
-                        Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "nexus7port.png")
-                        Undershadow.Initialize(File.DirAssets, "undershadow/" & "nexus7port.png")
-                        IndexW = 264
-                        IndexH = 311
-                    Else If VariantBox.SelectedItem = "Landscape" Then
-                        Device.Initialize(File.DirAssets, "device/" & "nexus7land.png")
-                        Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
-                        Gloss.Initialize(File.DirAssets, "gloss/" & "nexus7land.png")
-                        IndexW = 315
-                        IndexH = 270
-                    End If
-                Case "HTC One S"
-                    Device.Initialize(File.DirAssets, "device/" & "ones.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
-                    Gloss.Initialize(File.DirAssets, "gloss/" & "ones.png")
-                    IndexW = 106
-                    IndexH = 228
-                Case "HTC One V"
-                    Device.Initialize(File.DirAssets, "device/" & "onev.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
-                    Gloss.Initialize(File.DirAssets, "gloss/" & "onev.png")
-                    IndexW = 85
-                    IndexH = 165
-                Case "Google Nexus S"
-                    Device.Initialize(File.DirAssets, "device/" & "nexuss.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
-                    Gloss.Initialize(File.DirAssets, "gloss/" & "nexuss.png")
-                    IndexW = 45
-                    IndexH = 165
-                Case "Google Nexus 4"
-                    Device.Initialize(File.DirAssets, "device/" & "nexus4.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r7681280)
-                    Gloss.Initialize(File.DirAssets, "gloss/" & "nexus4.png")
-                    IndexW = 45
-                    IndexH = 193
-                Case "Motorola Droid RAZR M"
-                    Device.Initialize(File.DirAssets, "device/" & "droidrazrm.png")
-                    Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
-                    IndexW = 49
-                    IndexH = 129
-            End Select
+            IndexW = 88
+            If VariantBox.SelectedItem = "Blue" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsiiiblue.png")
+                Gloss.Initialize(File.DirAssets, "gloss/" & "gsiiiblue.png")
+            Else If VariantBox.SelectedItem = "White" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsiiiwhite.png")
+                Gloss.Initialize(File.DirAssets, "gloss/" & "gsiiiwhite.png")
+                IndexW = 84
+            Else If VariantBox.SelectedItem = "Black" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsiiiblack.png")
+            Else If VariantBox.SelectedItem = "Red" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsiiired.png")
+            Else If VariantBox.SelectedItem = "Brown" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsiiibrown.png")
+            End If
+            Undershadow.Initialize(File.DirAssets, "undershadow/" & "gsiii.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
+            IndexH = 184
+        Case "Motorola Xoom"
+            If VariantBox.SelectedItem = "Portrait" Then
+                Device.Initialize(File.DirAssets, "device/" & "xoomport.png")
+                Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
+                Gloss.Initialize(File.DirAssets, "gloss/" & "xoomport.png")
+                Undershadow.Initialize(File.DirAssets, "undershadow/" & "xoomport.png")
+                IndexW = 199
+                IndexH = 200
+            Else If VariantBox.SelectedItem = "Landscape" Then
+                Device.Initialize(File.DirAssets, "device/" & "xoomland.png")
+                Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
+                Gloss.Initialize(File.DirAssets, "gloss/" & "xoomland.png")
+                Undershadow.Initialize(File.DirAssets, "undershadow/" & "xoomland.png")
+                IndexW = 218
+                IndexH = 191
+            End If
+        Case "Samsung Galaxy SII, Epic 4G Touch"
+            If VariantBox.SelectedItem = "Galaxy SII" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsii.png")
+                Gloss.Initialize(File.DirAssets, "gloss/" & "gsii.png")
+                Undershadow.Initialize(File.DirAssets, "undershadow/" & "gsii.png")
+                IndexH = 191
+            Else If VariantBox.SelectedItem = "Epic 4G Touch" Then
+                Device.Initialize(File.DirAssets, "device/" & "epic4gtouch.png")
+                Gloss.Initialize(File.DirAssets, "gloss/" & "epic4gtouch.png")
+                Undershadow.Initialize(File.DirAssets, "undershadow/" & "epic4gtouch")
+            End If
+            Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+            IndexW = 132
+        Case "Samsung Google Galaxy Nexus"
+            Device.Initialize(File.DirAssets, "device/" & "galaxynexus.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
+            Gloss.Initialize(File.DirAssets, "gloss/" & "galaxynexus.png")
+            Undershadow.Initialize(File.DirAssets, "undershadow/" & "galaxynexus.png")
+            IndexW = 155
+            IndexH = 263
+        Case "Samsung Galaxy Note II"
+            Device.Initialize(File.DirAssets, "device/" & "galaxynoteii.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
+            Gloss.Initialize(File.DirAssets, "gloss/" & "galaxynoteii.png")
+            IndexW = 49
+            IndexH = 140
+        Case "Motorola Droid RAZR"
+            Device.Initialize(File.DirAssets, "device/" & "droidrazr.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
+            IndexW = 150
+            IndexH = 206
+        Case "Google Nexus 7"
+            If VariantBox.SelectedItem = "Portrait" Then
+                Device.Initialize(File.DirAssets, "device/" & "nexus7port.png")
+                Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
+                Gloss.Initialize(File.DirAssets, "gloss/" & "nexus7port.png")
+                Undershadow.Initialize(File.DirAssets, "undershadow/" & "nexus7port.png")
+                IndexW = 264
+                IndexH = 311
+            Else If VariantBox.SelectedItem = "Landscape" Then
+                Device.Initialize(File.DirAssets, "device/" & "nexus7land.png")
+                Shadow.Initialize(File.DirAssets, "shadow/" & r1280800)
+                Gloss.Initialize(File.DirAssets, "gloss/" & "nexus7land.png")
+                IndexW = 315
+                IndexH = 270
+            End If
+        Case "HTC One S"
+            Device.Initialize(File.DirAssets, "device/" & "ones.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
+            Gloss.Initialize(File.DirAssets, "gloss/" & "ones.png")
+            IndexW = 106
+            IndexH = 228
+        Case "HTC One V"
+            Device.Initialize(File.DirAssets, "device/" & "onev.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+            Gloss.Initialize(File.DirAssets, "gloss/" & "onev.png")
+            IndexW = 85
+            IndexH = 165
+        Case "Google Nexus S"
+            Device.Initialize(File.DirAssets, "device/" & "nexuss.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+            Gloss.Initialize(File.DirAssets, "gloss/" & "nexuss.png")
+            IndexW = 45
+            IndexH = 165
+        Case "Google Nexus 4"
+            Device.Initialize(File.DirAssets, "device/" & "nexus4.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r7681280)
+            Gloss.Initialize(File.DirAssets, "gloss/" & "nexus4.png")
+            IndexW = 45
+            IndexH = 193
+        Case "Motorola Droid RAZR M"
+            Device.Initialize(File.DirAssets, "device/" & "droidrazrm.png")
+            Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
+            IndexW = 49
+            IndexH = 129
+    End Select
 	Dim r As Rect
 	r.Initialize(0, 0, Device.Width, Device.Height)
 	WorkingBitmap.InitializeMutable(Device.Width, Device.Height)
 	WorkingCanvas.Initialize2(WorkingBitmap)
 	Paint.Initialize()
-	If Undershadow.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Undershadow, Null, r, Paint)
+	If UnderShadowCheckbox.Checked = True AND UnderShadowCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Undershadow, Null, r, Paint)
 	Dim r2 As Rect
 	r2.Initialize(IndexW, IndexH, IndexW + Shadow.Width, IndexH + Shadow.Height)
 	If LoadedImage.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, LoadedImage, Null, r2, Paint)
-	If Shadow.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Shadow, Null, r2, Paint)
+	If ShadowCheckbox.Checked = True AND ShadowCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Shadow, Null, r2, Paint)
 	If Device.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Device, Null, r, Paint)
-	If Gloss.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Gloss, Null, r, Paint) 'end of drawing
+	If GlossCheckbox.Checked = True AND GlossCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Gloss, Null, r, Paint)
 	PreviewImage.Initialize3(ResizeImage(WorkingBitmap, Preview.Width, Preview.Height))
 	FinalBitmap.Initialize3(WorkingBitmap)
 	BackgroundThread.RunOnGuiThread("EndLoading", Null)
@@ -551,21 +596,11 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
 End Sub
 
 Sub VariantBox_ItemClick (Position As Int, Value As Object)
-	Loading.Visible = True
-	If BackgroundThread.Running = True Then
-		BackgroundThread.Interrupt
+	If ModelBox.SelectedItem = "Samsung Galaxy SIII" AND (VariantBox.SelectedItem = "Black" OR VariantBox.SelectedItem = "Brown" OR VariantBox.SelectedItem = "Red") Then
+		GlossCheckbox.Enabled = False
+		GlossCheckbox.Checked = True
 	End If
-	BackgroundThread.Start(Me, "ImageProcess", Null)
-	pager.PagingEnabled = False
-End Sub
-
-Sub themebtn_Click
-	If theme = "light" Then
-		theme = "dark"
-	Else
-		theme = "light"
-	End If
-	RefreshTheme
+	RefreshImage
 End Sub
 
 Sub activity_KeyPress (KeyCode As Int) As Boolean
@@ -575,4 +610,19 @@ Sub activity_KeyPress (KeyCode As Int) As Boolean
 			Return True
 		End If
 	End If
+End Sub
+
+Sub ThemeBox_ItemClick (Position As Int, Value As Object)
+	theme = ThemeBox.SelectedItem
+	StateManager.SetSetting("theme", theme)
+	RefreshTheme
+End Sub
+Sub GlossCheckbox_CheckedChange(Checked As Boolean)
+	RefreshImage
+End Sub
+Sub ShadowCheckbox_CheckedChange(Checked As Boolean)
+	RefreshImage
+End Sub
+Sub UnderShadowCheckbox_CheckedChange(Checked As Boolean)
+	RefreshImage
 End Sub
