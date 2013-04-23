@@ -41,7 +41,7 @@ Sub Process_Globals
 	Dim FILL_PARENT As Int : FILL_PARENT = -1
 	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
-	Dim CurrentPage As Int : CurrentPage = 0
+	Dim CurrentPage As Int : CurrentPage = 1
 	Dim version As String = "0.1"
 	Dim releasedate As String = "4/18/2013"
 	Dim theme As String = "light"
@@ -91,6 +91,7 @@ Sub Globals
 	Dim ScrotterVers As Label
 	Dim themebtn As Button
 	Dim FinalBitmap As Bitmap
+	Dim none As Boolean
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -258,7 +259,9 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Options")
 				pi.LayoutLoaded = True
-				ModelBox.AddAll(Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"))
+				ModelBox.AddAll(Array As String("", "Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"))
+				none = True
+				ModelBox.Prompt = "Pick your phone!"
 				Select theme
 					Case "light"
 						optionspage.Color = Colors.White
@@ -289,6 +292,11 @@ Sub Pager_PageChanged (Position As Int)
 End Sub
 
 Sub ModelBox_itemClick (Position As Int, Value As Object)
+	If none = True Then
+		ModelBox.SelectedIndex = ModelBox.SelectedIndex + 1
+		ModelBox.RemoveAt(0)
+		none = False
+	End If
 	VariantBox.Clear
 	Select Case ModelBox.SelectedItem
 		Case "HTC One X, HTC One X+"
