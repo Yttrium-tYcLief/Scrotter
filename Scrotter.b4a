@@ -320,12 +320,16 @@ Sub SaveBtn_Click
 			Dim Out As OutputStream
 			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
 			FinalBitmap.WriteToStream(Out, 100, "PNG")
+			Out.Flush
+			Out.Close
 			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
 		Case DialogResponse.NEGATIVE
 			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
 			Dim Out As OutputStream
 			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
 			FinalBitmap.WriteToStream(Out, 95, "JPEG")
+			Out.Flush
+			Out.Close
 			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
 	End Select
 End Sub
