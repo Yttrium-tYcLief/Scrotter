@@ -46,7 +46,7 @@ Sub Process_Globals
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int
 	Dim version As String = "0.1"
-	Dim releasedate As String = "4/18/2013"
+	Dim releasedate As String = "4/25/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 End Sub
@@ -153,7 +153,6 @@ Sub RefreshTheme
 				optionspage.Color = Colors.White
 				ModelBox.TextColor = Colors.DarkGray
 				VariantBox.TextColor = Colors.DarkGray
-				StretchCheckbox.TextColor = Colors.DarkGray
 				GlossCheckbox.TextColor = Colors.DarkGray
 				ShadowCheckbox.TextColor = Colors.DarkGray
 				UnderShadowCheckbox.TextColor = Colors.DarkGray
@@ -177,7 +176,6 @@ Sub RefreshTheme
 				optionspage.Color = Colors.RGB(50, 50, 50)
 				ModelBox.TextColor = Colors.LightGray
 				VariantBox.TextColor = Colors.LightGray
-				StretchCheckbox.TextColor = Colors.LightGray
 				GlossCheckbox.TextColor = Colors.LightGray
 				ShadowCheckbox.TextColor = Colors.LightGray
 				UnderShadowCheckbox.TextColor = Colors.LightGray
@@ -296,7 +294,6 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 						optionspage.Color = Colors.White
 						ModelBox.TextColor = Colors.DarkGray
 						VariantBox.TextColor = Colors.DarkGray
-						StretchCheckbox.TextColor = Colors.DarkGray
 						GlossCheckbox.TextColor = Colors.DarkGray
 						ShadowCheckbox.TextColor = Colors.DarkGray
 						UnderShadowCheckbox.TextColor = Colors.DarkGray
@@ -304,7 +301,6 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 						optionspage.Color = Colors.RGB(50, 50, 50)
 						ModelBox.TextColor = Colors.LightGray
 						VariantBox.TextColor = Colors.LightGray
-						StretchCheckbox.TextColor = Colors.LightGray
 						GlossCheckbox.TextColor = Colors.LightGray
 						ShadowCheckbox.TextColor = Colors.LightGray
 						UnderShadowCheckbox.TextColor = Colors.LightGray
