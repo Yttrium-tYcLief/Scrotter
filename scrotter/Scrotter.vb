@@ -165,7 +165,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Model 1", "Model 2"})
                 VariantBox.SelectedIndex = 0
-            Case "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M"
+            Case "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Samsung Galaxy Player 5.0"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -458,6 +458,11 @@ Public Class Scrotter
                     ShadowRes = "768x1280"
                     IndexW = 111
                     IndexH = 300
+                Case "Samsung Galaxy Player 5.0"
+                    DeviceName = "GalaxyPlay5"
+                    ShadowRes = "480x800"
+                    IndexW = 59
+                    IndexH = 122
             End Select
             Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
             If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
