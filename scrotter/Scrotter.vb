@@ -264,6 +264,7 @@ Public Class Scrotter
                         IndexW = 115
                     End If
                     UndershadowUsed = True
+                    GlossUsed = True
                     ShadowRes = "720x1280"
                     IndexH = 213
                 Case "Samsung Galaxy SIII"
