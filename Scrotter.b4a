@@ -44,9 +44,9 @@ Sub Process_Globals
 	Dim FILL_PARENT As Int : FILL_PARENT = -1
 	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
-	Dim CurrentPage As Int
+	Dim CurrentPage As Int = 1
 	Dim version As String = "0.1"
-	Dim releasedate As String = "4/25/2013"
+	Dim releasedate As String = "4/26/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 End Sub
@@ -115,7 +115,6 @@ Sub Activity_Create(FirstTime As Boolean)
 	Activity.AddView(pager, 0, 29dip, Activity.Width, Activity.Height-29dip)
 	BackgroundThread.Initialise("ImageThread")
 	cc.Initialize("cc")
-	CurrentPage = StateManager.GetSetting2("CurrentPage", 1)
 	Select theme
 		Case "Light"
 			tabs.Color = Colors.White
@@ -179,21 +178,10 @@ Sub RefreshTheme
 				GlossCheckbox.TextColor = Colors.LightGray
 				ShadowCheckbox.TextColor = Colors.LightGray
 				UnderShadowCheckbox.TextColor = Colors.LightGray
-				'ModelBox.RemoveView
-				'Activity.AddView(ModelBox, 3%x, 3%x, 100%x - 6%x, 60dip)
+				ModelBox.RemoveView
+				optionspage.AddView(ModelBox, 3%x, 3%x, 100%x - 6%x, 60dip)
 			End If
 	End Select
-	Dim mnum, vnum As Int
-	mnum = ModelBox.SelectedIndex
-	vnum = VariantBox.SelectedIndex
-	ModelBox.SelectedIndex = 0
-	ModelBox.Invalidate
-	ModelBox.SelectedIndex = mnum
-	ModelBox.Invalidate
-	VariantBox.SelectedIndex = 0
-	VariantBox.Invalidate
-	VariantBox.SelectedIndex = vnum
-	VariantBox.Invalidate
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
@@ -223,6 +211,9 @@ Sub Activity_Resume
 		Preview.SetBackgroundImage(ResizeImage(LoadedImage, Preview.Width, Preview.Height))
 		pager.GotoPage(1, False)
     End If
+	Activity.RerunDesignerScript("Settings", pager.Width, pager.Height)
+	Activity.RerunDesignerScript("Preview", pager.Width, pager.Height)
+	Activity.RerunDesignerScript("Options", pager.Width, pager.Height)
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
@@ -339,11 +330,29 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 			GlossCheckbox.Enabled = True
 		Case "Samsung Galaxy SIII"
 			VariantBox.AddAll(Array As String("Blue", "White", "Black", "Red", "Brown"))
+			GlossCheckbox.Enabled = True
 		Case "Motorola Xoom", "Google Nexus 7"
+			GlossCheckbox.Enabled = True
+			UnderShadowCheckbox.Enabled = True
 			VariantBox.AddAll(Array As String("Portrait", "Landscape"))
 		Case "Samsung Galaxy SII, Epic 4G Touch"
+			GlossCheckbox.Enabled = True
+			UnderShadowCheckbox.Enabled = True
 			VariantBox.AddAll(Array As String("Galaxy SII", "Epic 4G Touch"))
 		Case "Samsung Galaxy SIII Mini"
+			GlossCheckbox.Enabled = False
+			UnderShadowCheckbox.Enabled = False
+			GlossCheckbox.Checked = True
+			UnderShadowCheckbox.Checked = True
+		Case "Google Nexus 4", "Motorola Xoom", "Samsung Google Galaxy Nexus"
+			GlossCheckbox.Enabled = True
+			UnderShadowCheckbox.Enabled = True
+		Case "Google Nexus S", "HTC One S", "HTC One V"
+			GlossCheckbox.Enabled = True
+		Case "HTC Desire HD, HTC Inspire 4G"
+			GlossCheckbox.Checked = True
+			UnderShadowCheckbox.Enabled = True
+		Case "Motorola Droid RAZR", "Motorola Droid RAZR M"
 	End Select
 	VariantBox.SelectedIndex = 0
 	RefreshImage
@@ -367,6 +376,7 @@ Sub SaveBtn_Click
 	Select Case result
 		Case DialogResponse.POSITIVE
 			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".png"
+			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
 			Dim Out As OutputStream
 			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
 			FinalBitmap.WriteToStream(Out, 100, "PNG")
@@ -375,6 +385,7 @@ Sub SaveBtn_Click
 			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
 		Case DialogResponse.NEGATIVE
 			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
+			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
 			Dim Out As OutputStream
 			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
 			FinalBitmap.WriteToStream(Out, 95, "JPEG")
@@ -476,6 +487,7 @@ Sub ImageProcess
                 Device.Initialize(File.DirAssets, "device/" & "epic4gtouch.png")
                 Gloss.Initialize(File.DirAssets, "gloss/" & "epic4gtouch.png")
                 Undershadow.Initialize(File.DirAssets, "undershadow/" & "epic4gtouch")
+				IndexH = 175
             End If
             Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
             IndexW = 132
@@ -542,18 +554,18 @@ Sub ImageProcess
             IndexW = 49
             IndexH = 129
     End Select
-	Dim r As Rect
-	r.Initialize(0, 0, Device.Width, Device.Height)
+	Dim R As Rect
+	R.Initialize(0, 0, Device.Width, Device.Height)
 	WorkingBitmap.InitializeMutable(Device.Width, Device.Height)
 	WorkingCanvas.Initialize2(WorkingBitmap)
 	Paint.Initialize()
-	If UnderShadowCheckbox.Checked = True AND UnderShadowCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Undershadow, Null, r, Paint)
+	If UnderShadowCheckbox.Checked = True AND UnderShadowCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Undershadow, Null, R, Paint)
 	Dim r2 As Rect
 	r2.Initialize(IndexW, IndexH, IndexW + Shadow.Width, IndexH + Shadow.Height)
 	If LoadedImage.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, LoadedImage, Null, r2, Paint)
 	If ShadowCheckbox.Checked = True AND ShadowCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Shadow, Null, r2, Paint)
-	If Device.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Device, Null, r, Paint)
-	If GlossCheckbox.Checked = True AND GlossCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Gloss, Null, r, Paint)
+	If Device.IsInitialized Then ExtDraw.drawBitmap(WorkingCanvas, Device, Null, R, Paint)
+	If GlossCheckbox.Checked = True AND GlossCheckbox.Enabled = True Then ExtDraw.drawBitmap(WorkingCanvas, Gloss, Null, R, Paint)
 	PreviewImage.Initialize3(ResizeImage(WorkingBitmap, Preview.Width, Preview.Height))
 	FinalBitmap.Initialize3(WorkingBitmap)
 	BackgroundThread.RunOnGuiThread("EndLoading", Null)
@@ -592,9 +604,16 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
 End Sub
 
 Sub VariantBox_ItemClick (Position As Int, Value As Object)
-	If ModelBox.SelectedItem = "Samsung Galaxy SIII" AND (VariantBox.SelectedItem = "Black" OR VariantBox.SelectedItem = "Brown" OR VariantBox.SelectedItem = "Red") Then
-		GlossCheckbox.Enabled = False
-		GlossCheckbox.Checked = True
+	If ModelBox.SelectedItem = "Samsung Galaxy SIII" Then
+		If (VariantBox.SelectedItem = "Black" OR VariantBox.SelectedItem = "Brown" OR VariantBox.SelectedItem = "Red") Then
+			GlossCheckbox.Enabled = False
+			GlossCheckbox.Checked = True
+		Else
+			If GlossCheckbox.Enabled = False Then
+				GlossCheckbox.Enabled = True
+				GlossCheckbox.Checked = False
+			End If
+		End If
 	End If
 	RefreshImage
 End Sub
