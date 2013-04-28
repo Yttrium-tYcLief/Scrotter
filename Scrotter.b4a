@@ -46,7 +46,7 @@ Sub Process_Globals
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int = 1
 	Dim version As String = "0.1"
-	Dim releasedate As String = "4/26/2013"
+	Dim releasedate As String = "4/28/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 End Sub
@@ -146,6 +146,11 @@ Sub RefreshTheme
 				settingspage.Color = Colors.White
 				ScrotterTitle.TextColor = Colors.DarkGray
 				ScrotterVers.TextColor = Colors.Gray
+				ThemeBox.TextColor = Colors.DarkGray
+				Dim x As Int = ThemeBox.SelectedIndex
+				ThemeBox.Clear
+				ThemeBox.AddAll(Array As String("Light", "Dark"))
+				ThemeBox.SelectedIndex = x
 			End If
 			If Loaded(2) = True Then previewpage.Color = Colors.White
 			If Loaded(3) = True Then
@@ -155,8 +160,22 @@ Sub RefreshTheme
 				GlossCheckbox.TextColor = Colors.DarkGray
 				ShadowCheckbox.TextColor = Colors.DarkGray
 				UnderShadowCheckbox.TextColor = Colors.DarkGray
-				'ModelBox.RemoveView
-				'Activity.AddView(ModelBox, 3%x, 3%x, 100%x - 6%x, 60dip)
+				Dim y As Int = ModelBox.SelectedIndex
+				ModelBox.Clear
+				If none = True Then ModelBox.Add("Device Selection")
+				ModelBox.AddAll(Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"))
+				ModelBox.SelectedIndex = y
+				If VariantBox.Size > 0 Then
+					y = VariantBox.SelectedIndex
+					Dim z As List
+					z.Initialize
+					For count = 0 To VariantBox.Size - 1
+						z.Add(VariantBox.GetItem(count))
+					Next
+					VariantBox.Clear
+					VariantBox.AddAll(z)
+					VariantBox.SelectedIndex = y
+				End If
 			End If
 		Case "Dark"
 			tabs.Color = Colors.RGB(50, 50, 50)
@@ -169,6 +188,11 @@ Sub RefreshTheme
 				settingspage.Color = Colors.RGB(50, 50, 50)
 				ScrotterTitle.TextColor = Colors.LightGray
 				ScrotterVers.TextColor = Colors.Gray
+				ThemeBox.TextColor = Colors.LightGray
+				Dim x As Int = ThemeBox.SelectedIndex
+				ThemeBox.Clear
+				ThemeBox.AddAll(Array As String("Light", "Dark"))
+				ThemeBox.SelectedIndex = x
 			End If
 			If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)
 			If Loaded(3) = True Then
@@ -178,8 +202,23 @@ Sub RefreshTheme
 				GlossCheckbox.TextColor = Colors.LightGray
 				ShadowCheckbox.TextColor = Colors.LightGray
 				UnderShadowCheckbox.TextColor = Colors.LightGray
-				ModelBox.RemoveView
-				optionspage.AddView(ModelBox, 3%x, 3%x, 100%x - 6%x, 60dip)
+				Dim y As Int = ModelBox.SelectedIndex
+				ModelBox.Clear
+				If none = True Then ModelBox.Add("Device Selection")
+				ModelBox.AddAll(Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"))
+				ModelBox.SelectedIndex = y
+				If VariantBox.Size > 0 Then
+					y = VariantBox.SelectedIndex
+					Dim z As List
+					z.Initialize
+					For count = 0 To VariantBox.Size - 1
+						z.Add(VariantBox.GetItem(count))
+					Next
+					VariantBox.Clear
+					VariantBox.AddAll(z)
+					VariantBox.SelectedIndex = y
+					z.Initialize2(Array As String("lol", "lol2"))
+				End If
 			End If
 	End Select
 End Sub
@@ -193,14 +232,16 @@ End Sub
 
 Sub Activity_Resume
 	pager.GotoPage(CurrentPage, False)
-	Dim In As Intent 
-    In = Activity.GetStartingIntent 
-    
+	Activity.RerunDesignerScript("Settings", pager.Width, pager.Height)
+	Activity.RerunDesignerScript("Preview", pager.Width, pager.Height)
+	Activity.RerunDesignerScript("Options", pager.Width, pager.Height)
+	Dim In As Intent
+    In = Activity.GetStartingIntent
     If In.ExtrasToString.Contains("no extras") Then
                'No Data
     Else
 		Log(In.ExtrasToString)
-		Dim UriString As String 
+		Dim UriString As String
 		UriString = In.ExtrasToString
 		UriString = UriString.SubString2(UriString.IndexOf("STREAM=")+7,UriString.IndexOf("}"))
 		If UriString.Contains(",") Then
@@ -211,9 +252,6 @@ Sub Activity_Resume
 		Preview.SetBackgroundImage(ResizeImage(LoadedImage, Preview.Width, Preview.Height))
 		pager.GotoPage(1, False)
     End If
-	Activity.RerunDesignerScript("Settings", pager.Width, pager.Height)
-	Activity.RerunDesignerScript("Preview", pager.Width, pager.Height)
-	Activity.RerunDesignerScript("Options", pager.Width, pager.Height)
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
@@ -254,10 +292,12 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 						settingspage.Color = Colors.White
 						ScrotterTitle.TextColor = Colors.DarkGray
 						ScrotterVers.TextColor = Colors.Gray
+						ThemeBox.TextColor = Colors.DarkGray
 					Case "Dark"
 						settingspage.Color = Colors.RGB(50, 50, 50)
 						ScrotterTitle.TextColor = Colors.LightGray
 						ScrotterVers.TextColor = Colors.Gray
+						ThemeBox.TextColor = Colors.LightGray
 				End Select
 			End If
 			Loaded(1) = True
@@ -428,6 +468,7 @@ Sub ImageProcess
         Case "HTC Desire HD, HTC Inspire 4G"
             Device.Initialize(File.DirAssets, "device/" & "desirehd.png")
             Shadow.Initialize(File.DirAssets, "shadow/" & r480800)
+			Undershadow.Initialize(File.DirAssets, "undershadow/" & "desirehd.png")
             IndexW = 86
             IndexH = 130
         Case "HTC One X, HTC One X+"
