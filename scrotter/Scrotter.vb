@@ -44,7 +44,7 @@ Public Class Scrotter
         openFileDialog1.FilterIndex = 5
         openFileDialog1.RestoreDirectory = True
         If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            LoadImage.Image = My.Resources._301
+            LoadImage.Image = My.Resources.Loading
             Try
                 OpenStream = openFileDialog1.OpenFile()
                 If (OpenStream IsNot Nothing) Then
@@ -209,7 +209,7 @@ Public Class Scrotter
             End Select
         End If
         If BackgroundDownloader.IsBusy = False Then
-            LoadImage.Image = My.Resources._301
+            LoadImage.Image = My.Resources.Loading
             Dim args As ArgumentType = New ArgumentType()
             args.type = 1
             args.var = VariantBox.Text
@@ -376,10 +376,8 @@ Public Class Scrotter
                 Case "Apple iPhone 5"
                     If args.var = "Black" Then
                         DeviceName = "iPhone5Black"
-                        'Overlay = FetchImage("http://ompldr.org/vaDZhNQ/iPhone5Black.png")
                     ElseIf args.var = "White" Then
                         DeviceName = "iPhone5White"
-                        'Overlay = FetchImage("http://ompldr.org/vaDZhNg/iPhone5White.png")
                     End If
                     ShadowRes = "640x1136"
                     IndexW = 133

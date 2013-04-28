@@ -99,7 +99,7 @@ Public Class about
         Dim Updater As Integer
         Version = wc.DownloadString("https://raw.github.com/Yttrium-tYcLief/Scrotter/master/latest/latest")
         If Version > Scrotter.Version Then
-            Updater = MessageBox.Show("You are currently on v" & Scrotter.Version & ", but the newest version is v" & Version & "." & vbNewLine & "Would you like to download the latest update?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Updater = MessageBox.Show("You are currently on v" & Scrotter.Version & ", but the newest version is v" & Version & "." & vbNewLine & "Would you like to download the latest update?" & vbNewLine & "If you do not update, some images may no longer work.", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If Updater = vbYes Then
                 System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe")
                 If prompt = False Then
