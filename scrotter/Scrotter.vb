@@ -151,7 +151,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Portrait", "Landscape"})
                 VariantBox.SelectedIndex = 0
-            Case "HTC One X, HTC One X+"
+            Case "HTC One X, HTC One X+", "HTC One"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"White", "Black"})
                 VariantBox.SelectedIndex = 0
@@ -462,6 +462,16 @@ Public Class Scrotter
                     ShadowRes = "480x800"
                     IndexW = 59
                     IndexH = 122
+                Case "HTC One"
+                    GlossUsed = True
+                    If args.var = "Black" Then
+                        DeviceName = "OneBlack"
+                    ElseIf args.var = "White" Then
+                        DeviceName = "OneWhite"
+                    End If
+                    ShadowRes = "1080x1920"
+                    IndexW = 160
+                    IndexH = 281
             End Select
             Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
             If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
