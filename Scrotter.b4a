@@ -386,10 +386,10 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 			UnderShadowCheckbox.Enabled = False
 			GlossCheckbox.Checked = True
 			UnderShadowCheckbox.Checked = True
-		Case "Google Nexus 4", "Motorola Xoom", "Samsung Google Galaxy Nexus"
+		Case "Motorola Xoom", "Samsung Google Galaxy Nexus"
 			GlossCheckbox.Enabled = True
 			UnderShadowCheckbox.Enabled = True
-		Case "Google Nexus S", "HTC One S", "HTC One V"
+		Case "Google Nexus 4", "Google Nexus S", "HTC One S", "HTC One V"
 			GlossCheckbox.Enabled = True
 		Case "HTC Desire HD, HTC Inspire 4G"
 			GlossCheckbox.Checked = True

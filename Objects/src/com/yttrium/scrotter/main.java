@@ -284,8 +284,6 @@ public anywheresoftware.b4a.objects.collections.List _devicelist = null;
 public com.yttrium.scrotter.statemanager _statemanager = null;
 public static String  _activity_create(boolean _firsttime) throws Exception{
  //BA.debugLineNum = 77;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 78;BA.debugLine="Msgbox(\"This version of Scrotter is a developer preview. Bugs WILL arise and should be reported. Do not treat this version as final!\", \"Warning\")";
-anywheresoftware.b4a.keywords.Common.Msgbox("This version of Scrotter is a developer preview. Bugs WILL arise and should be reported. Do not treat this version as final!","Warning",mostCurrent.activityBA);
  //BA.debugLineNum = 79;BA.debugLine="theme = StateManager.GetSetting2(\"theme\", \"Light\")";
 _theme = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"theme","Light");
  //BA.debugLineNum = 80;BA.debugLine="container.Initialize";
@@ -958,8 +956,8 @@ public static String  _loadbtn_click() throws Exception{
 try { //BA.debugLineNum = 419;BA.debugLine="cc.Show(\"image/*\", \"\")";
 mostCurrent._cc.Show(processBA,"image/*","");
  } 
-       catch (Exception e360) {
-			processBA.setLastException(e360); };
+       catch (Exception e381) {
+			processBA.setLastException(e381); };
  //BA.debugLineNum = 422;BA.debugLine="End Sub";
 return "";
 }
@@ -993,7 +991,7 @@ mostCurrent._glosscheckbox.setEnabled(anywheresoftware.b4a.keywords.Common.False
  //BA.debugLineNum = 344;BA.debugLine="GlossCheckbox.Checked = False";
 mostCurrent._glosscheckbox.setChecked(anywheresoftware.b4a.keywords.Common.False);
  //BA.debugLineNum = 345;BA.debugLine="Select Case ModelBox.SelectedItem";
-switch (BA.switchObjectToInt(mostCurrent._modelbox.getSelectedItem(),"HTC One X, HTC One X+","HTC One","Samsung Galaxy SIII","Motorola Xoom","Google Nexus 7","Samsung Galaxy SII, Epic 4G Touch","Samsung Galaxy SIII Mini","Google Nexus 4","Motorola Xoom","Samsung Google Galaxy Nexus","Google Nexus S","HTC One S","HTC One V","HTC Desire HD, HTC Inspire 4G","Motorola Droid RAZR","Motorola Droid RAZR M")) {
+switch (BA.switchObjectToInt(mostCurrent._modelbox.getSelectedItem(),"HTC One X, HTC One X+","HTC One","Samsung Galaxy SIII","Motorola Xoom","Google Nexus 7","Samsung Galaxy SII, Epic 4G Touch","Samsung Galaxy SIII Mini","Motorola Xoom","Samsung Google Galaxy Nexus","Google Nexus 4","Google Nexus S","HTC One S","HTC One V","HTC Desire HD, HTC Inspire 4G","Motorola Droid RAZR","Motorola Droid RAZR M")) {
 case 0:
 case 1:
  //BA.debugLineNum = 347;BA.debugLine="VariantBox.AddAll(Array As String(\"White\", \"Black\"))";
@@ -1036,12 +1034,12 @@ mostCurrent._undershadowcheckbox.setChecked(anywheresoftware.b4a.keywords.Common
  break;
 case 7:
 case 8:
-case 9:
  //BA.debugLineNum = 366;BA.debugLine="GlossCheckbox.Enabled = True";
 mostCurrent._glosscheckbox.setEnabled(anywheresoftware.b4a.keywords.Common.True);
  //BA.debugLineNum = 367;BA.debugLine="UnderShadowCheckbox.Enabled = True";
 mostCurrent._undershadowcheckbox.setEnabled(anywheresoftware.b4a.keywords.Common.True);
  break;
+case 9:
 case 10:
 case 11:
 case 12:
@@ -1357,9 +1355,9 @@ _z = new anywheresoftware.b4a.objects.collections.List();
 _z.Initialize();
  //BA.debugLineNum = 149;BA.debugLine="For count = 0 To VariantBox.Size - 1";
 {
-final double step122 = 1;
-final double limit122 = (int)(mostCurrent._variantbox.getSize()-1);
-for (_count = (int)(0); (step122 > 0 && _count <= limit122) || (step122 < 0 && _count >= limit122); _count += step122) {
+final double step121 = 1;
+final double limit121 = (int)(mostCurrent._variantbox.getSize()-1);
+for (_count = (int)(0); (step121 > 0 && _count <= limit121) || (step121 < 0 && _count >= limit121); _count += step121) {
  //BA.debugLineNum = 150;BA.debugLine="z.Add(VariantBox.GetItem(count))";
 _z.Add((Object)(mostCurrent._variantbox.GetItem(_count)));
  }
@@ -1443,9 +1441,9 @@ _z = new anywheresoftware.b4a.objects.collections.List();
 _z.Initialize();
  //BA.debugLineNum = 191;BA.debugLine="For count = 0 To VariantBox.Size - 1";
 {
-final double step164 = 1;
-final double limit164 = (int)(mostCurrent._variantbox.getSize()-1);
-for (_count = (int)(0); (step164 > 0 && _count <= limit164) || (step164 < 0 && _count >= limit164); _count += step164) {
+final double step163 = 1;
+final double limit163 = (int)(mostCurrent._variantbox.getSize()-1);
+for (_count = (int)(0); (step163 > 0 && _count <= limit163) || (step163 < 0 && _count >= limit163); _count += step163) {
  //BA.debugLineNum = 192;BA.debugLine="z.Add(VariantBox.GetItem(count))";
 _z.Add((Object)(mostCurrent._variantbox.GetItem(_count)));
  }
@@ -1527,9 +1525,58 @@ if (true) return _b;
 return null;
 }
 public static String  _savebtn_click() throws Exception{
+int _result = 0;
+String _filename = "";
+anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper _out = null;
  //BA.debugLineNum = 390;BA.debugLine="Sub SaveBtn_Click";
- //BA.debugLineNum = 391;BA.debugLine="Msgbox(\"Saving disabled in developer previews.\", \"Sorry!\")";
-anywheresoftware.b4a.keywords.Common.Msgbox("Saving disabled in developer previews.","Sorry!",mostCurrent.activityBA);
+ //BA.debugLineNum = 392;BA.debugLine="DateTime.DateFormat = \"yyyyMMdd_HHmmss\"";
+anywheresoftware.b4a.keywords.Common.DateTime.setDateFormat("yyyyMMdd_HHmmss");
+ //BA.debugLineNum = 393;BA.debugLine="Dim result As Int";
+_result = 0;
+ //BA.debugLineNum = 394;BA.debugLine="result = Msgbox2(\"Save file as what format?\", \"Save Image\", \"PNG\", \"Cancel\", \"JPG\", Null)";
+_result = anywheresoftware.b4a.keywords.Common.Msgbox2("Save file as what format?","Save Image","PNG","Cancel","JPG",(android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.Null),mostCurrent.activityBA);
+ //BA.debugLineNum = 395;BA.debugLine="Select Case result";
+switch (BA.switchObjectToInt(_result,anywheresoftware.b4a.keywords.Common.DialogResponse.POSITIVE,anywheresoftware.b4a.keywords.Common.DialogResponse.NEGATIVE)) {
+case 0:
+ //BA.debugLineNum = 397;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".png\"";
+_filename = "Scrotter4A_"+anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow())+".png";
+ //BA.debugLineNum = 398;BA.debugLine="If File.Exists(File.Combine(File.DirRootExternal, \"Scrotter/\"), \"\") = False Then File.MakeDir(File.DirRootExternal, \"Scrotter/\")";
+if (anywheresoftware.b4a.keywords.Common.File.Exists(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),"")==anywheresoftware.b4a.keywords.Common.False) { 
+anywheresoftware.b4a.keywords.Common.File.MakeDir(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/");};
+ //BA.debugLineNum = 399;BA.debugLine="Dim Out As OutputStream";
+_out = new anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper();
+ //BA.debugLineNum = 400;BA.debugLine="Out = File.OpenOutput(File.Combine(File.DirRootExternal, \"Scrotter/\"), filename, False)";
+_out = anywheresoftware.b4a.keywords.Common.File.OpenOutput(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),_filename,anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 401;BA.debugLine="FinalBitmap.WriteToStream(Out, 100, \"PNG\")";
+mostCurrent._finalbitmap.WriteToStream((java.io.OutputStream)(_out.getObject()),(int)(100),BA.getEnumFromString(android.graphics.Bitmap.CompressFormat.class,"PNG"));
+ //BA.debugLineNum = 402;BA.debugLine="Out.Flush";
+_out.Flush();
+ //BA.debugLineNum = 403;BA.debugLine="Out.Close";
+_out.Close();
+ //BA.debugLineNum = 404;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
+anywheresoftware.b4a.keywords.Common.ToastMessageShow("File saved to the sdcard at /sdcard/Scrotter/"+_filename+".",anywheresoftware.b4a.keywords.Common.True);
+ break;
+case 1:
+ //BA.debugLineNum = 406;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".jpg\"";
+_filename = "Scrotter4A_"+anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow())+".jpg";
+ //BA.debugLineNum = 407;BA.debugLine="If File.Exists(File.Combine(File.DirRootExternal, \"Scrotter/\"), \"\") = False Then File.MakeDir(File.DirRootExternal, \"Scrotter/\")";
+if (anywheresoftware.b4a.keywords.Common.File.Exists(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),"")==anywheresoftware.b4a.keywords.Common.False) { 
+anywheresoftware.b4a.keywords.Common.File.MakeDir(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/");};
+ //BA.debugLineNum = 408;BA.debugLine="Dim Out As OutputStream";
+_out = new anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper();
+ //BA.debugLineNum = 409;BA.debugLine="Out = File.OpenOutput(File.Combine(File.DirRootExternal, \"Scrotter/\"), filename, False)";
+_out = anywheresoftware.b4a.keywords.Common.File.OpenOutput(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),_filename,anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 410;BA.debugLine="FinalBitmap.WriteToStream(Out, 95, \"JPEG\")";
+mostCurrent._finalbitmap.WriteToStream((java.io.OutputStream)(_out.getObject()),(int)(95),BA.getEnumFromString(android.graphics.Bitmap.CompressFormat.class,"JPEG"));
+ //BA.debugLineNum = 411;BA.debugLine="Out.Flush";
+_out.Flush();
+ //BA.debugLineNum = 412;BA.debugLine="Out.Close";
+_out.Close();
+ //BA.debugLineNum = 413;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
+anywheresoftware.b4a.keywords.Common.ToastMessageShow("File saved to the sdcard at /sdcard/Scrotter/"+_filename+".",anywheresoftware.b4a.keywords.Common.True);
+ break;
+}
+;
  //BA.debugLineNum = 415;BA.debugLine="End Sub";
 return "";
 }
