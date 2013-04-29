@@ -163,7 +163,7 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
             Case "Samsung Galaxy SII, Epic 4G Touch"
                 VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Model 1", "Model 2"})
+                VariantBox.Items.AddRange({"Galaxy SII", "Galaxy SII T-Mobile", "Epic 4G Touch"})
                 VariantBox.SelectedIndex = 0
             Case "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Samsung Galaxy Player 5.0"
                 GlossCheckbox.Enabled = False
@@ -207,6 +207,13 @@ Public Class Scrotter
                     GlossCheckbox.Enabled = False
                     GlossCheckbox.Checked = False
             End Select
+        ElseIf ModelBox.Text = "Samsung Galaxy SII, Epic 4G Touch" Then
+            If VariantBox.Text = "Galaxy SII T-Mobile" Then
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
+            Else
+                UnderShadowCheckbox.Enabled = True
+            End If
         End If
         If BackgroundDownloader.IsBusy = False Then
             LoadImage.Image = My.Resources.Loading
@@ -327,17 +334,23 @@ Public Class Scrotter
                     GlossUsed = True
                     UndershadowUsed = True
                 Case "Samsung Galaxy SII, Epic 4G Touch"
-                    If args.var = "Model 1" Then
+                    If args.var = "Galaxy SII" Then
                         DeviceName = "GSII"
+                        IndexW = 132
                         IndexH = 191
-                    ElseIf args.var = "Model 2" Then
+                        UndershadowUsed = True
+                    ElseIf args.var = "Epic 4G Touch" Then
                         DeviceName = "Epic4GTouch"
+                        IndexW = 132
                         IndexH = 175
+                        UndershadowUsed = True
+                    ElseIf args.var = "Galaxy SII T-Mobile" Then
+                        DeviceName = "GSIItmo"
+                        IndexW = 61
+                        IndexH = 145
                     End If
                     ShadowRes = "480x800"
-                    IndexW = 132
                     GlossUsed = True
-                    UndershadowUsed = True
                 Case "Apple iPhone"
                     DeviceName = "iPhone"
                     ShadowRes = "320x480"
