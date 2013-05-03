@@ -1,5 +1,5 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
-'Copyright (C) 2013 Alex West
+'Copyright (C) 2013 Alex and Serah West
 'Version 0.8.1 Beta
 '
 'This program is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@ Public Class Scrotter
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
     Public ReadOnly Version As String = "0.8.1"
-    Public ReadOnly ReleaseDate As String = "2013-4-22"
+    Public ReadOnly ReleaseDate As String = "2013-5-02"
     Private Image(7) As String
     Public AppData As String
 
