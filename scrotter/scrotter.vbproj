@@ -166,6 +166,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Resources\foncesans.otf" />
     <None Include="scrotter_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

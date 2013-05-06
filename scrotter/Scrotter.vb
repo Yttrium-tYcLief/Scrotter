@@ -20,6 +20,8 @@ Imports System.Drawing.Drawing2D
 Imports System.Drawing.Imaging
 Imports System.Threading
 Imports System.Environment
+Imports System.Drawing.Text
+Imports System.Runtime.InteropServices
 
 Public Class Scrotter
     Public Shared OpenPath(7), SavePath As String
@@ -134,7 +136,6 @@ Public Class Scrotter
     End Function
 
     Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
-        StretchCheckbox.Enabled = True
         UnderShadowCheckbox.Enabled = True
         GlossCheckbox.Enabled = True
         ShadowCheckbox.Enabled = True
@@ -199,7 +200,7 @@ Public Class Scrotter
         RefreshPreview()
     End Sub
 
-    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, StretchCheckbox.CheckedChanged, ScreenPicker.ValueChanged
+    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, ScreenPicker.ValueChanged, ReflectBox.CheckedChanged
         ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
         If ModelBox.Text = "Samsung Galaxy SIII" Then
             Select Case VariantBox.Text
@@ -274,6 +275,9 @@ Public Class Scrotter
                     GlossUsed = True
                     ShadowRes = "720x1280"
                     IndexH = 213
+                    For i = 1 To 10
+                        Console.WriteLine(i)
+                    Next
                 Case "Samsung Galaxy SIII"
                     IndexW = 88
                     If args.var = "Blue" Then
@@ -490,14 +494,12 @@ Public Class Scrotter
             If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
             If GlossUsed = True Then Gloss = FetchImage(databaseurl & "Gloss/" & DeviceName & ".png")
             Shadow = FetchImage(databaseurl & "Shadow/" & ShadowRes & ".png")
-            If StretchCheckbox.Checked = True Then
-                Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
-                Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
-                    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
-                    ScreenCapBitmap = imgtmp2
-                End Using
-            End If
+            Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
+            Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
+                graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
+                ScreenCapBitmap = imgtmp2
+            End Using
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
             Dim g As Graphics = Graphics.FromImage(Image3)
@@ -571,4 +573,28 @@ Public Class Scrotter
         ScreenPicker.Enabled = True
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim bm_src1 As Bitmap = CanvImg(ScreenPicker.Value)
+        Dim bm_out As New Bitmap(bm_src1.Width, bm_src1.Height)
+        Using gr As Graphics = Graphics.FromImage(bm_out)
+            'Flip image
+            gr.TranslateTransform(CSng(bm_src1.Width / 2), CSng(bm_src1.Height / 2))
+            gr.RotateTransform(180)
+            gr.TranslateTransform(-CSng(bm_src1.Width / 2), -CSng(bm_src1.Height / 2))
+            ' Give the images alpha gradients.
+            Dim alpha As Integer
+            For x As Integer = 0 To bm_src1.Width - 1
+                For y As Integer = 0 To bm_src1.Height - 1
+                    alpha = (255 * y) \ (bm_src1.Height / 2)
+                    Dim clr As Color = bm_src1.GetPixel(x, y)
+                    clr = Color.FromArgb(alpha, clr.R, clr.G, clr.B)
+                    bm_src1.SetPixel(x, y, clr)
+                Next
+            Next
+            ' Draw the images onto the result.
+            gr.DrawImage(bm_src1, 0, 0)
+        End Using
+        ' Display the result.
+        Preview.Image = bm_out 'picturebox output
+    End Sub
 End Class
