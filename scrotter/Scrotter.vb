@@ -74,7 +74,7 @@ Public Class Scrotter
             Exit Sub
         End If
         Dim saveFileDialog1 As New SaveFileDialog()
-        saveFileDialog1.FileName = "Scrotter_" & DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") & ".png"
+        saveFileDialog1.FileName = "Scrotter_" & DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") & ".png"
         saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|All Files(*.*)|*.*" '|GIF Files(*.GIF)|*.GIF"
         saveFileDialog1.FilterIndex = 2
         saveFileDialog1.RestoreDirectory = True
@@ -502,6 +502,9 @@ Public Class Scrotter
             End Using
             Dim Background As New Bitmap(Image1.Width, Image1.Height)
             Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
+            If ReflectBox.Checked = True Then
+                Image3 = New Bitmap(Image1.Width, Image1.Height * (6 / 5), PixelFormat.Format32bppArgb)
+            End If
             Dim g As Graphics = Graphics.FromImage(Image3)
             g.Clear(Color.Transparent)
             g.DrawImage(Background, New Point(0, 0))
@@ -513,6 +516,31 @@ Public Class Scrotter
             ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
             g.Dispose()
             g = Nothing
+            If ReflectBox.Checked = True Then
+                Dim g2 As Graphics = Graphics.FromImage(Image3)
+                Dim bm_src1 As Bitmap = New Bitmap(Image1.Width, CType(Image1.Height * (1 / 5), Integer), PixelFormat.Format32bppArgb)
+                bm_src1 = CropBitmap(Image1, 0, Image1.Height * (4 / 5), Image1.Width, Image1.Height * (1 / 5))
+                Dim bm_out As New Bitmap(bm_src1.Width, bm_src1.Height, PixelFormat.Format32bppArgb)
+                Using gr As Graphics = Graphics.FromImage(bm_out)
+                    'Flip image
+                    gr.TranslateTransform(CSng(bm_src1.Width / 2), CSng(bm_src1.Height / 2))
+                    gr.TranslateTransform(-CSng(bm_src1.Width / 2), -CSng(bm_src1.Height / 2))
+                    Dim alpha As Integer
+                    For x As Integer = 0 To bm_src1.Width - 1
+                        For y As Integer = 0 To bm_src1.Height - 1
+                            alpha = (255 * y) \ bm_src1.Height
+                            Dim clr As Color = bm_src1.GetPixel(x, y)
+                            clr = Color.FromArgb(alpha, clr.R, clr.G, clr.B)
+                            bm_src1.SetPixel(x, y, clr)
+                        Next
+                    Next
+                    gr.DrawImage(bm_src1, 0, 0)
+                End Using
+                bm_out.RotateFlip(RotateFlipType.RotateNoneFlipY)
+                g2.DrawImage(bm_out, New Point(0, Image1.Height))
+                g2.Dispose()
+                g2 = Nothing
+            End If
             CanvImg(ScreenPicker.Value) = Image3
         End If
     End Sub
@@ -574,7 +602,7 @@ Public Class Scrotter
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim bm_src1 As Bitmap = CanvImg(ScreenPicker.Value)
+        Dim bm_src1 As Bitmap = New Bitmap(CropBitmap(CanvImg(ScreenPicker.Value), 0, CanvImg(ScreenPicker.Value).Height * (2 / 3), CanvImg(ScreenPicker.Value).Width, CanvImg(ScreenPicker.Value).Height / 3))
         Dim bm_out As New Bitmap(bm_src1.Width, bm_src1.Height)
         Using gr As Graphics = Graphics.FromImage(bm_out)
             'Flip image
@@ -585,7 +613,7 @@ Public Class Scrotter
             Dim alpha As Integer
             For x As Integer = 0 To bm_src1.Width - 1
                 For y As Integer = 0 To bm_src1.Height - 1
-                    alpha = (255 * y) \ (bm_src1.Height / 2)
+                    alpha = (255 * y) \ bm_src1.Height
                     Dim clr As Color = bm_src1.GetPixel(x, y)
                     clr = Color.FromArgb(alpha, clr.R, clr.G, clr.B)
                     bm_src1.SetPixel(x, y, clr)
@@ -597,4 +625,10 @@ Public Class Scrotter
         ' Display the result.
         Preview.Image = bm_out 'picturebox output
     End Sub
+
+    Private Function CropBitmap(ByRef bmp As Bitmap, ByVal cropX As Integer, ByVal cropY As Integer, ByVal cropWidth As Integer, ByVal cropHeight As Integer) As Bitmap
+        Dim rect As New Rectangle(cropX, cropY, cropWidth, cropHeight)
+        Dim cropped As Bitmap = bmp.Clone(rect, PixelFormat.Format32bppArgb)
+        Return cropped
+    End Function
 End Class

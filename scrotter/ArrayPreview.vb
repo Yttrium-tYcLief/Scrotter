@@ -141,7 +141,7 @@ Public Class ArrayPreview
 
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
         Dim saveFileDialog1 As New SaveFileDialog()
-        saveFileDialog1.FileName = "Scrotter_" & DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") & ".png"
+        saveFileDialog1.FileName = "Scrotter_" & DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") & ".png"
         saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|All Files(*.*)|*.*" '|GIF Files(*.GIF)|*.GIF"
         saveFileDialog1.FilterIndex = 2
         saveFileDialog1.RestoreDirectory = True
