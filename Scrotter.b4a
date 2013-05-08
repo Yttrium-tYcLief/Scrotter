@@ -5,22 +5,23 @@ Module1=StateManager
 ModuleVisible1=1
 Package=com.yttrium.scrotter
 DoNotOverwriteManifest=False
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(Main, ~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	<category android:name="android.intent.category.DEFAULT" />~\n~    <data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)~\n~
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true"~\n~	android:hardwareAccelerated="true"~\n~    android:anyDensity="true"/>)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddActivityText(Main, ~\n~<intent-filter>~\n~    <action android:name="android.intent.action.SEND" />~\n~	<category android:name="android.intent.category.DEFAULT" />~\n~    <data android:mimeType="image/*" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~AddApplicationText(<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>)
 UserTypesHint=PanelInfo
 NumberOfFiles=4
-File1=Main.bal
-File2=Options.bal
-File3=Preview.bal
-File4=Settings.bal
-NumberOfLibraries=8
+File1=about.bal
+File2=Main.bal
+File3=Options.bal
+File4=Preview.bal
+NumberOfLibraries=9
 Library1=abextdrawing
-Library2=ahviewpager
-Library3=core
-Library4=phone
-Library5=randomaccessfile
-Library6=reflection
-Library7=sql
-Library8=threading
+Library2=ahpreferenceactivity
+Library3=ahviewpager
+Library4=core
+Library5=phone
+Library6=randomaccessfile
+Library7=reflection
+Library8=sql
+Library9=threading
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
@@ -38,7 +39,7 @@ Library8=threading
 Sub Process_Globals
 	'These global variables will be declared once when the application starts.
 	'These variables can be accessed from all modules.
-	Dim TYPE_SETTINGS As Int : TYPE_SETTINGS = 1
+	Dim TYPE_ABOUT As Int : TYPE_ABOUT = 1
 	Dim TYPE_PREVIEW As Int : TYPE_PREVIEW = 2
 	Dim TYPE_OPTIONS As Int : TYPE_OPTIONS = 3
 	Dim FILL_PARENT As Int : FILL_PARENT = -1
@@ -46,17 +47,17 @@ Sub Process_Globals
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int = 1
 	Dim version As String = "0.1"
-	Dim releasedate As String = "4/28/2013"
+	Dim releasedate As String = "5/06/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
+	Dim PrefScreen As AHPreferenceScreen
+	Dim PrefManager As AHPreferenceManager
 End Sub
 
 Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
-	Dim settingspage As Panel
-	Dim optionspage As Panel
-	Dim previewpage As Panel
+	Dim aboutpage, optionspage, previewpage As Panel
 	Dim container As AHPageContainer
 	Dim pager As AHViewPager
 	Dim tabs As AHViewPagerTabs
@@ -72,7 +73,6 @@ Sub Globals
 	Dim SaveBtn As Button
 	Dim Preview As Panel
 	Dim LoadedImage As Bitmap
-	Dim ThemeBox As Spinner
 	'Public Shared OpenPath(7), SavePath As String
     'Public OpenStream As Stream = Nothing
     'Public SaveStream As Stream = Nothing
@@ -95,16 +95,26 @@ Sub Globals
 	Dim themebtn As Button
 	Dim FinalBitmap As Bitmap
 	Dim none As Boolean
+	Dim variantnone As Boolean
 	Dim devicelist As List = Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy Player 5.0", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus")
-	Dim FonceSans As Typeface = Typeface.LoadFromAssets("foncesans.otf")
+	Dim UbuntuRegular As Typeface = Typeface.LoadFromAssets("ubuntureg.ttf")
+	Dim UbuntuLight As Typeface = Typeface.LoadFromAssets("ubuntulight.ttf")
+	
+	Dim ThemeBox As Spinner
+	Dim SettingsBtn As Button
+	Dim SettingsIcon As ImageView
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
 	'Msgbox("This version of Scrotter is a developer preview. Bugs WILL arise and should be reported. Do not treat this version as final!", "Warning")
+    If FirstTime Then
+        CreatePreferenceScreen
+        If PrefManager.GetAll.Size = 0 Then SetDefaults
+    End If
 	theme = StateManager.GetSetting2("theme", "Light")
 	container.Initialize
-	settingspage = CreatePanel(TYPE_SETTINGS, "Settings")
-	container.AddPage(settingspage,"Settings")
+	aboutpage = CreatePanel(TYPE_ABOUT, "About")
+	container.AddPage(aboutpage, "About")
 	previewpage = CreatePanel(TYPE_PREVIEW, "Preview")
 	container.AddPage(previewpage,"Preview")
 	optionspage = CreatePanel(TYPE_OPTIONS, "Options")
@@ -135,6 +145,14 @@ Sub Activity_Create(FirstTime As Boolean)
 	End Select
 End Sub
 
+Sub SetDefaults
+    'defaults are only set on the first run.
+    PrefManager.SetBoolean("check1", True)
+    PrefManager.SetBoolean("check2", False)
+    PrefManager.SetString("edit1", "Hello!")
+    PrefManager.SetString("list1", "Black")
+End Sub
+
 Sub RefreshTheme
 	Select theme
 		Case "Light"
@@ -145,7 +163,7 @@ Sub RefreshTheme
 			tabs.TextColorCenter = Colors.DarkGray
 			tabs.Invalidate
 			If Loaded(1) = True Then
-				settingspage.Color = Colors.White
+				aboutpage.Color = Colors.White
 				ScrotterTitle.TextColor = Colors.DarkGray
 				ScrotterVers.TextColor = Colors.Gray
 				ThemeBox.TextColor = Colors.DarkGray
@@ -153,6 +171,7 @@ Sub RefreshTheme
 				ThemeBox.Clear
 				ThemeBox.AddAll(Array As String("Light", "Dark"))
 				ThemeBox.SelectedIndex = x
+				SettingsBtn.TextColor = Colors.DarkGray
 			End If
 			If Loaded(2) = True Then previewpage.Color = Colors.White
 			If Loaded(3) = True Then
@@ -164,7 +183,7 @@ Sub RefreshTheme
 				UnderShadowCheckbox.TextColor = Colors.DarkGray
 				Dim y As Int = ModelBox.SelectedIndex
 				ModelBox.Clear
-				If none = True Then ModelBox.Add("Device Selection")
+				If none = True Then ModelBox.Add("Pick a device")
 				ModelBox.AddAll(devicelist)
 				ModelBox.SelectedIndex = y
 				If VariantBox.Size > 0 Then
@@ -187,7 +206,7 @@ Sub RefreshTheme
 			tabs.TextColorCenter = Colors.LightGray
 			tabs.Invalidate
 			If Loaded(1) = True Then
-				settingspage.Color = Colors.RGB(50, 50, 50)
+				aboutpage.Color = Colors.RGB(50, 50, 50)
 				ScrotterTitle.TextColor = Colors.LightGray
 				ScrotterVers.TextColor = Colors.Gray
 				ThemeBox.TextColor = Colors.LightGray
@@ -195,6 +214,7 @@ Sub RefreshTheme
 				ThemeBox.Clear
 				ThemeBox.AddAll(Array As String("Light", "Dark"))
 				ThemeBox.SelectedIndex = x
+				
 			End If
 			If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)
 			If Loaded(3) = True Then
@@ -206,7 +226,7 @@ Sub RefreshTheme
 				UnderShadowCheckbox.TextColor = Colors.LightGray
 				Dim y As Int = ModelBox.SelectedIndex
 				ModelBox.Clear
-				If none = True Then ModelBox.Add("Device Selection")
+				If none = True Then ModelBox.Add("Pick a device")
 				ModelBox.AddAll(devicelist)
 				ModelBox.SelectedIndex = y
 				If VariantBox.Size > 0 Then
@@ -219,13 +239,16 @@ Sub RefreshTheme
 					VariantBox.Clear
 					VariantBox.AddAll(z)
 					VariantBox.SelectedIndex = y
-					z.Initialize2(Array As String("lol", "lol2"))
 				End If
 			End If
 	End Select
-	ScrotterTitle.Typeface = FonceSans
-	Loadbtn.Typeface = FonceSans
-	SaveBtn.Typeface = FonceSans
+	ScrotterTitle.Typeface = UbuntuRegular
+	ScrotterVers.Typeface = UbuntuRegular
+	Loadbtn.Typeface = UbuntuRegular
+	SaveBtn.Typeface = UbuntuRegular
+	GlossCheckbox.Typeface = UbuntuRegular
+	ShadowCheckbox.Typeface = UbuntuRegular
+	UnderShadowCheckbox.Typeface = UbuntuRegular
 End Sub
 
 Sub CC_Result (Success As Boolean, Dir As String, FileName As String)
@@ -237,7 +260,7 @@ End Sub
 
 Sub Activity_Resume
 	pager.GotoPage(CurrentPage, False)
-	Activity.RerunDesignerScript("Settings", pager.Width, pager.Height)
+	Activity.RerunDesignerScript("About", pager.Width, pager.Height)
 	Activity.RerunDesignerScript("Preview", pager.Width, pager.Height)
 	Activity.RerunDesignerScript("Options", pager.Width, pager.Height)
 	Dim In As Intent
@@ -257,9 +280,13 @@ Sub Activity_Resume
 		Preview.SetBackgroundImage(ResizeImage(LoadedImage, Preview.Width, Preview.Height))
 		pager.GotoPage(1, False)
     End If
-	ScrotterTitle.Typeface = FonceSans
-	Loadbtn.Typeface = FonceSans
-	SaveBtn.Typeface = FonceSans
+	ScrotterTitle.Typeface = UbuntuRegular
+	ScrotterVers.Typeface = UbuntuRegular
+	Loadbtn.Typeface = UbuntuRegular
+	SaveBtn.Typeface = UbuntuRegular
+	GlossCheckbox.Typeface = UbuntuRegular
+	ShadowCheckbox.Typeface = UbuntuRegular
+	UnderShadowCheckbox.Typeface = UbuntuRegular
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
@@ -285,9 +312,9 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 	pan = Page
 	pi = pan.Tag
 	Select pi.PanelType
-		Case TYPE_SETTINGS
+		Case TYPE_ABOUT
 			If Not(pi.LayoutLoaded) Then
-				pan.LoadLayout("Settings")
+				pan.LoadLayout("About")
 				pi.LayoutLoaded = True
 				ScrotterTitle.Text = "Scrotter"
 				ScrotterTitle.TextSize = ScrotterTitle.Height * 800/1000dip
@@ -297,16 +324,18 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 				ThemeBox.SelectedIndex = ThemeBox.IndexOf(theme)
 				Select theme
 					Case "Light"
-						settingspage.Color = Colors.White
+						aboutpage.Color = Colors.White
 						ScrotterTitle.TextColor = Colors.DarkGray
 						ScrotterVers.TextColor = Colors.Gray
 						ThemeBox.TextColor = Colors.DarkGray
 					Case "Dark"
-						settingspage.Color = Colors.RGB(50, 50, 50)
+						aboutpage.Color = Colors.RGB(50, 50, 50)
 						ScrotterTitle.TextColor = Colors.LightGray
 						ScrotterVers.TextColor = Colors.Gray
 						ThemeBox.TextColor = Colors.LightGray
 				End Select
+				'OptionsScrollView.Panel.AddView(RememberPhone, 15%x, 20dip, 70%x, 50dip)
+				'OptionsScrollView.Panel.AddView(ThemeLabel, 15%x, 
 			End If
 			Loaded(1) = True
 		Case TYPE_PREVIEW
@@ -325,10 +354,11 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Options")
 				pi.LayoutLoaded = True
-				ModelBox.Add("Device Selection")
+				ModelBox.Add("Pick a device")
 				ModelBox.AddAll(devicelist)
+				VariantBox.Add("No variants available")
 				none = True
-				ModelBox.Prompt = "Pick your phone!"
+				ModelBox.Prompt = "Pick your phone"
 				Select theme
 					Case "Light"
 						optionspage.Color = Colors.White
@@ -357,9 +387,21 @@ Sub Pager_PageChanged (Position As Int)
 	StateManager.SetSetting("CurrentPage", CurrentPage)
 End Sub
 
+Sub VariantSet (var As List)
+	If VariantBox.Enabled = False Then VariantBox.Enabled = True
+	VariantBox.Clear
+	variantnone = True
+	VariantBox.Add("Pick a variant")
+	VariantBox.AddAll(var)
+	VariantBox.SelectedIndex = 0
+End Sub
+
 Sub ModelBox_itemClick (Position As Int, Value As Object)
 	If none = True Then
-		If ModelBox.SelectedIndex = ModelBox.Size Then
+		If ModelBox.SelectedIndex = 0 Then
+			ModelBox.RemoveAt(0)
+			ModelBox.SelectedIndex = 0
+		Else If ModelBox.SelectedIndex = ModelBox.Size Then
 			ModelBox.RemoveAt(0)
 			ModelBox.SelectedIndex = ModelBox.Size
 		Else
@@ -369,6 +411,8 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 		none = False
 	End If
 	VariantBox.Clear
+	VariantBox.Add("No variants available")
+	VariantBox.Enabled = False
 	ShadowCheckbox.Enabled = True
 	UnderShadowCheckbox.Enabled = False
 	UnderShadowCheckbox.Checked = False
@@ -376,19 +420,19 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 	GlossCheckbox.Checked = False
 	Select Case ModelBox.SelectedItem
 		Case "HTC One X, HTC One X+", "HTC One"
-			VariantBox.AddAll(Array As String("White", "Black"))
+			VariantSet(Array As String("White", "Black"))
 			GlossCheckbox.Enabled = True
 		Case "Samsung Galaxy SIII"
-			VariantBox.AddAll(Array As String("Blue", "White", "Black", "Red", "Brown"))
+			VariantSet(Array As String("Blue", "White", "Black", "Red", "Brown"))
 			GlossCheckbox.Enabled = True
 		Case "Motorola Xoom", "Google Nexus 7"
 			GlossCheckbox.Enabled = True
 			UnderShadowCheckbox.Enabled = True
-			VariantBox.AddAll(Array As String("Portrait", "Landscape"))
+			VariantSet(Array As String("Portrait", "Landscape"))
 		Case "Samsung Galaxy SII, Epic 4G Touch"
 			GlossCheckbox.Enabled = True
 			UnderShadowCheckbox.Enabled = True
-			VariantBox.AddAll(Array As String("Galaxy SII", "Epic 4G Touch"))
+			VariantSet(Array As String("Galaxy SII", "Epic 4G Touch", "Galaxy SII (T-Mobile)"))
 		Case "Samsung Galaxy SIII Mini"
 			GlossCheckbox.Enabled = False
 			UnderShadowCheckbox.Enabled = False
@@ -404,7 +448,6 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 			UnderShadowCheckbox.Enabled = True
 		Case "Motorola Droid RAZR", "Motorola Droid RAZR M"
 	End Select
-	VariantBox.SelectedIndex = 0
 	RefreshImage
 End Sub
 
@@ -488,7 +531,7 @@ Sub ImageProcess
                 Device.Initialize(File.DirAssets, "device/" & "onexblack.png")
                 Gloss.Initialize(File.DirAssets, "gloss/" & "onexblack.png")
                 IndexW = 113
-            Else If VariantBox.SelectedItem = "White" Then
+            Else If VariantBox.SelectedItem = "White" OR VariantBox.SelectedItem = "Pick a variant" Then
                 Device.Initialize(File.DirAssets, "device/" & "onexwhite.png")
                 Gloss.Initialize(File.DirAssets, "gloss/" & "onexwhite.png")
                 IndexW = 115
@@ -497,7 +540,7 @@ Sub ImageProcess
             IndexH = 213
     	Case "Samsung Galaxy SIII"
             IndexW = 88
-            If VariantBox.SelectedItem = "Blue" Then
+            If VariantBox.SelectedItem = "Blue" OR VariantBox.SelectedItem = "Pick a variant" Then
                 Device.Initialize(File.DirAssets, "device/" & "gsiiiblue.png")
                 Gloss.Initialize(File.DirAssets, "gloss/" & "gsiiiblue.png")
             Else If VariantBox.SelectedItem = "White" Then
@@ -515,7 +558,7 @@ Sub ImageProcess
             Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
             IndexH = 184
         Case "Motorola Xoom"
-            If VariantBox.SelectedItem = "Portrait" Then
+            If VariantBox.SelectedItem = "Portrait" OR VariantBox.SelectedItem = "Pick a variant" Then
                 Device.Initialize(File.DirAssets, "device/" & "xoomport.png")
                 Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
                 Gloss.Initialize(File.DirAssets, "gloss/" & "xoomport.png")
@@ -531,7 +574,7 @@ Sub ImageProcess
                 IndexH = 191
             End If
         Case "Samsung Galaxy SII, Epic 4G Touch"
-            If VariantBox.SelectedItem = "Galaxy SII" Then
+            If VariantBox.SelectedItem = "Galaxy SII" OR VariantBox.SelectedItem = "Pick a variant" Then
                 Device.Initialize(File.DirAssets, "device/" & "gsii.png")
                 Gloss.Initialize(File.DirAssets, "gloss/" & "gsii.png")
                 Undershadow.Initialize(File.DirAssets, "undershadow/" & "gsii.png")
@@ -569,7 +612,7 @@ Sub ImageProcess
             IndexW = 150
             IndexH = 206
         Case "Google Nexus 7"
-            If VariantBox.SelectedItem = "Portrait" Then
+            If VariantBox.SelectedItem = "Portrait" OR VariantBox.SelectedItem = "Pick a variant" Then
                 Device.Initialize(File.DirAssets, "device/" & "nexus7port.png")
                 Shadow.Initialize(File.DirAssets, "shadow/" & r8001280)
                 Gloss.Initialize(File.DirAssets, "gloss/" & "nexus7port.png")
@@ -620,8 +663,8 @@ Sub ImageProcess
 		Case "HTC One"
 			If VariantBox.SelectedItem = "Black" Then
             	Device.Initialize(File.DirAssets, "device/" & "oneblack.png")
-			Else If VariantBox.SelectedItem = "White" Then
-            	Device.Initialize(File.DirAssets, "device/" & "oneblack.png")
+			Else If VariantBox.SelectedItem = "White" OR VariantBox.SelectedItem = "Pick a variant" Then
+            	Device.Initialize(File.DirAssets, "device/" & "onewhite.png")
 			End If
             Gloss.Initialize(File.DirAssets, "gloss/" & "one.png")
             Shadow.Initialize(File.DirAssets, "shadow/" & r10801920)
@@ -678,6 +721,18 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
 End Sub
 
 Sub VariantBox_ItemClick (Position As Int, Value As Object)
+	If variantnone = True Then
+		If Position = 0 Then
+			VariantBox.RemoveAt(0)
+			VariantBox.SelectedIndex = 0
+		Else If Position = VariantBox.Size Then
+			VariantBox.RemoveAt(0)
+			VariantBox.SelectedIndex = VariantBox.Size
+		Else
+			VariantBox.RemoveAt(0)
+		End If
+		variantnone = False
+	End If
 	If ModelBox.SelectedItem = "Samsung Galaxy SIII" Then
 		If (VariantBox.SelectedItem = "Black" OR VariantBox.SelectedItem = "Brown" OR VariantBox.SelectedItem = "Red") Then
 			GlossCheckbox.Enabled = False
@@ -721,4 +776,25 @@ Sub ShadowCheckbox_CheckedChange(Checked As Boolean)
 End Sub
 Sub UnderShadowCheckbox_CheckedChange(Checked As Boolean)
 	RefreshImage
+End Sub
+Sub CreatePreferenceScreen
+    PrefScreen.Initialize("Scrotter", "")
+    'create two categories
+    Dim cat1, cat2 As AHPreferenceCategory
+    cat1.Initialize("Settings")
+    cat1.AddCheckBox("retaindevice", "Save Device", "Save current device as default", "Don't save current device as default", False, "")
+    cat2.Initialize("About")
+	Dim Intent1, Intent2, Intent3 As Intent
+	Intent1.Initialize(Intent1.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.yttrium.scrotter")
+	Intent2.Initialize(Intent2.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.f2prateek.dfg")
+	Intent3.Initialize("", "")
+	cat2.AddIntent("Check for updates", "v" & version & " (" & releasedate & ")", Intent1, "")
+	cat2.AddIntent("DFG", "", Intent2, "")
+	cat2.AddIntent("test", "fag", Intent3, "")
+    'add the categories to the main screen
+    PrefScreen.AddPreferenceCategory(cat1)
+    PrefScreen.AddPreferenceCategory(cat2)
+End Sub
+Sub SettingsBtn_Click
+	StartActivity(PrefScreen.CreateIntent)
 End Sub
