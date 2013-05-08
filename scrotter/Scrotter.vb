@@ -414,8 +414,8 @@ Public Class Scrotter
                     ElseIf args.var = "Gray" Then
                         DeviceName = "GalaxyNoteIIGray"
                     End If
-                    IndexW = 49
-                    IndexH = 140
+                    IndexW = 77
+                    IndexH = 163
                     ShadowRes = "720x1280"
                 Case "Motorola Droid RAZR"
                     DeviceName = "DroidRAZR"
