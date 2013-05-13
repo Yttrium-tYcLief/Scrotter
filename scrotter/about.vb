@@ -96,24 +96,12 @@ Public Class about
         ServicePointManager.ServerCertificateValidationCallback = AddressOf Validator
         Dim wc As New WebClient
         Dim Version As String
-        Dim Updater As Integer
         Version = wc.DownloadString("https://raw.github.com/Yttrium-tYcLief/Scrotter/master/latest/latest")
         If Version > Scrotter.Version Then
-            Updater = MessageBox.Show("You are currently on v" & Scrotter.Version & ", but the newest version is v" & Version & "." & vbNewLine & "Would you like to download the latest update?" & vbNewLine & "If you do not update, some images may no longer work.", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If Updater = vbYes Then
-                System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe")
-                If prompt = False Then
-                    Scrotter.Close()
-                End If
-            Else
-                GoTo final
-            End If
+            Updater.ShowDialog()
         Else
-            If prompt = True Then
-                MessageBox.Show("You are on the latest official version.", "Updater", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
+            If prompt = True Then MessageBox.Show("You are on the latest official version.", "Updater", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-final:
     End Sub
 
     Public Shared Function Validator(sender As Object, certificate As X509Certificate, chain As X509Chain, sslPolicyErrors As SslPolicyErrors) As Boolean

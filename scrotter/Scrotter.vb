@@ -32,7 +32,7 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.8.1"
+    Public ReadOnly Version As String = "0.5"
     Public ReadOnly ReleaseDate As String = "2013-5-02"
     Private Image(7) As String
     Public AppData As String
@@ -515,13 +515,13 @@ Public Class Scrotter
             If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
             ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
             g.Dispose()
-            g = Nothing
             If ReflectBox.Checked = True Then
                 Dim g2 As Graphics = Graphics.FromImage(Image3)
                 Dim bm_src1 As Bitmap = New Bitmap(Image1.Width, CType(Image1.Height * (1 / 5), Integer), PixelFormat.Format32bppArgb)
-                bm_src1 = CropBitmap(Image1, 0, Image1.Height * (4 / 5), Image1.Width, Image1.Height * (1 / 5))
-                Dim bm_out As New Bitmap(bm_src1.Width, bm_src1.Height, PixelFormat.Format32bppArgb)
+                bm_src1 = CropBitmap(Image3, 0, Image1.Height * (4 / 5), Image1.Width, Image1.Height * (1 / 5))
+                Dim bm_out As New Bitmap(Image1.Width, CType(Image1.Height * (1 / 5), Integer))
                 Using gr As Graphics = Graphics.FromImage(bm_out)
+                    gr.Clear(Color.Transparent)
                     'Flip image
                     gr.TranslateTransform(CSng(bm_src1.Width / 2), CSng(bm_src1.Height / 2))
                     gr.TranslateTransform(-CSng(bm_src1.Width / 2), -CSng(bm_src1.Height / 2))
@@ -535,11 +535,11 @@ Public Class Scrotter
                         Next
                     Next
                     gr.DrawImage(bm_src1, 0, 0)
+                    gr.Dispose()
                 End Using
                 bm_out.RotateFlip(RotateFlipType.RotateNoneFlipY)
                 g2.DrawImage(bm_out, New Point(0, Image1.Height))
                 g2.Dispose()
-                g2 = Nothing
             End If
             CanvImg(ScreenPicker.Value) = Image3
         End If
@@ -629,6 +629,10 @@ Public Class Scrotter
     Private Function CropBitmap(ByRef bmp As Bitmap, ByVal cropX As Integer, ByVal cropY As Integer, ByVal cropWidth As Integer, ByVal cropHeight As Integer) As Bitmap
         Dim rect As New Rectangle(cropX, cropY, cropWidth, cropHeight)
         Dim cropped As Bitmap = bmp.Clone(rect, PixelFormat.Format32bppArgb)
-        Return cropped
+        Return bmp
     End Function
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        My.Computer.Network.DownloadFile("https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe", "C:\scrotter.exe", vbNullString, vbNullString, True, 5000, True)
+    End Sub
 End Class
