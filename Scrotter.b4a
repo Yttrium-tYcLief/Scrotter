@@ -784,13 +784,15 @@ Sub CreatePreferenceScreen
     cat1.Initialize("Settings")
     cat1.AddCheckBox("retaindevice", "Save Device", "Save current device as default", "Don't save current device as default", False, "")
     cat2.Initialize("About")
-	Dim Intent1, Intent2, Intent3 As Intent
+	Dim Intent1, Intent2 As Intent
+	Dim Intent3 As Email
+	Intent3.To.Add("tyclief@gmail.com")
+	Intent3.Subject = "[Srotter4Android] YourIssueHere"
 	Intent1.Initialize(Intent1.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.yttrium.scrotter")
 	Intent2.Initialize(Intent2.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.f2prateek.dfg")
-	Intent3.Initialize("", "")
 	cat2.AddIntent("Check for updates", "v" & version & " (" & releasedate & ")", Intent1, "")
 	cat2.AddIntent("DFG", "", Intent2, "")
-	cat2.AddIntent("test", "fag", Intent3, "")
+	cat2.AddIntent("Contact Us", "via email", Intent3.GetIntent, "")
     'add the categories to the main screen
     PrefScreen.AddPreferenceCategory(cat1)
     PrefScreen.AddPreferenceCategory(cat2)
