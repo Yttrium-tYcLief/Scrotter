@@ -109,7 +109,19 @@ animatedcollapse.init()
 
 <ul>
 <li>Fork the project and make pull requests to vb and Designer.vb files.</li>
-</ul><h3>Issues &amp; Suggestions</h3>
+</ul><h3>Versioning</h3>
+
+<ol>
+<li>Update the Version and ReleaseDate variables in Scrotter.vb.</li>
+<li>Compile using the <code>Release</code> tree.</li>
+<li>Copy <code>./scrotter/obj/Release/scrotter.exe</code> to <code>./latest/scrotter.exe</code></li>
+<li>Update the <code>./latest/latest</code> file to match the new version. Make sure there is no newline at the end. Be sure to edit using UTF-8 endinds, and not ANSI ones.</li>
+<li><a href="http://nsis.sourceforge.net/">Install NSIS</a> (Nullsoft Scriptable Install System).</li>
+<li>Open <code>./installation/NSIS Quick Setup Script Generator.exe</code> and import the <code>./installation/Scrotter.ini</code> project.</li>
+<li>After configuring version settings, without changing any other options, click <b>Generate</b> and generate to <code>./latest/installer.exe</code>.</li>
+<li>Push a commit titled "Release v#".</li>
+<li>Finally, add a new tag with <code>git tag -a v#.# -m 'Beta v#.#'</code> and execute <code>git push --tags</code>.</li>
+</ol><h3>Issues &amp; Suggestions</h3>
 
 <ul>
 <li>If you have suggestions or issue reports, please post them in the <a href="https://github.com/Yttrium-tYcLief/Scrotter/issues">issues</a> section.</li>
