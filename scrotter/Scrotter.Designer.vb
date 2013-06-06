@@ -265,6 +265,7 @@ Partial Class Scrotter
         Me.Button2.TabIndex = 18
         Me.Button2.Text = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
         '
         'Button3
         '
@@ -274,6 +275,7 @@ Partial Class Scrotter
         Me.Button3.TabIndex = 19
         Me.Button3.Text = "Button3"
         Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.Visible = False
         '
         'Scrotter
         '

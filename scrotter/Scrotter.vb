@@ -32,7 +32,7 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.9"
+    Public ReadOnly Version As String = "0.9.1"
     Public ReadOnly ReleaseDate As String = "2013-6-06"
     Private Image(7) As String
     Public AppData As String
