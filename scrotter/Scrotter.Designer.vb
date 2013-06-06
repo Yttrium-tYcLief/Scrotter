@@ -255,6 +255,7 @@ Partial Class Scrotter
         Me.ReflectBox.TabIndex = 16
         Me.ReflectBox.Text = "Reflection"
         Me.ReflectBox.UseVisualStyleBackColor = True
+        Me.ReflectBox.Visible = False
         '
         'Button2
         '
