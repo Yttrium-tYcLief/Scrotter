@@ -53,7 +53,6 @@ Partial Class Scrotter
         '
         Me.LoadBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LoadBtn.BackColor = System.Drawing.Color.Transparent
-        Me.LoadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.LoadBtn.Location = New System.Drawing.Point(466, 16)
         Me.LoadBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.LoadBtn.Name = "LoadBtn"
@@ -76,7 +75,6 @@ Partial Class Scrotter
         'ModelBox
         '
         Me.ModelBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ModelBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ModelBox.FormattingEnabled = True
         Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "BlackBerry Z10", "Google Nexus 4", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Player 5.0", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus"})
         Me.ModelBox.Location = New System.Drawing.Point(317, 130)
@@ -90,7 +88,6 @@ Partial Class Scrotter
         'SaveBtn
         '
         Me.SaveBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.SaveBtn.Location = New System.Drawing.Point(350, 574)
         Me.SaveBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.SaveBtn.Name = "SaveBtn"
@@ -117,7 +114,6 @@ Partial Class Scrotter
         '
         Me.VariantBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.VariantBox.Enabled = False
-        Me.VariantBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.VariantBox.FormattingEnabled = True
         Me.VariantBox.Location = New System.Drawing.Point(317, 156)
         Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
@@ -131,7 +127,6 @@ Partial Class Scrotter
         Me.ShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ShadowCheckbox.AutoSize = True
         Me.ShadowCheckbox.Enabled = False
-        Me.ShadowCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ShadowCheckbox.Location = New System.Drawing.Point(316, 546)
         Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ShadowCheckbox.Name = "ShadowCheckbox"
@@ -145,7 +140,6 @@ Partial Class Scrotter
         Me.GlossCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GlossCheckbox.AutoSize = True
         Me.GlossCheckbox.Enabled = False
-        Me.GlossCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.GlossCheckbox.Location = New System.Drawing.Point(413, 524)
         Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.GlossCheckbox.Name = "GlossCheckbox"
@@ -159,7 +153,6 @@ Partial Class Scrotter
         Me.UnderShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UnderShadowCheckbox.AutoSize = True
         Me.UnderShadowCheckbox.Enabled = False
-        Me.UnderShadowCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.UnderShadowCheckbox.Location = New System.Drawing.Point(413, 546)
         Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
@@ -185,7 +178,6 @@ Partial Class Scrotter
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Location = New System.Drawing.Point(317, 574)
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Button1.Name = "Button1"
@@ -218,7 +210,6 @@ Partial Class Scrotter
         'CaptureBtn
         '
         Me.CaptureBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CaptureBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.CaptureBtn.Location = New System.Drawing.Point(317, 50)
         Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.CaptureBtn.Name = "CaptureBtn"
@@ -257,7 +248,6 @@ Partial Class Scrotter
         '
         Me.ReflectBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ReflectBox.AutoSize = True
-        Me.ReflectBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ReflectBox.Location = New System.Drawing.Point(317, 524)
         Me.ReflectBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ReflectBox.Name = "ReflectBox"
@@ -325,7 +315,6 @@ Partial Class Scrotter
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents LoadBtn As System.Windows.Forms.Button
     Friend WithEvents ScreenshotBox As System.Windows.Forms.TextBox
     Friend WithEvents ModelBox As System.Windows.Forms.ComboBox
     Friend WithEvents SaveBtn As System.Windows.Forms.Button
@@ -345,5 +334,6 @@ Partial Class Scrotter
     Friend WithEvents ReflectBox As System.Windows.Forms.CheckBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents LoadBtn As System.Windows.Forms.Button
 
 End Class

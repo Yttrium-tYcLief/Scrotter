@@ -1,8 +1,10 @@
-master
+0.9
 - yttrium
    Rename loading gif (internal)
    Fix One X gloss not showing
    Adjust GSII naming schemes
+   Change theme back to default system
+   Add beautiful new updater with smart changelogs
    New devices:
 	Galaxy Player 5.0
 	HTC One

@@ -36,7 +36,7 @@ Public Class Updater
     End Sub
 
     Public Sub client_DownloadFileCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
-        File.Replace(tmppath, Application.ExecutablePath, Nothing)
+        File.Replace(tmppath, Application.ExecutablePath, tmppath2)
         Application.Restart()
     End Sub
 
