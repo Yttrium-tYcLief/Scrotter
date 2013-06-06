@@ -36,6 +36,21 @@ Public Class Scrotter
     Public ReadOnly ReleaseDate As String = "2013-6-06"
     Private Image(7) As String
     Public AppData As String
+    Public Database(,) As String
+
+    Private Sub LoadDatabase()
+        Dim line As String() = IO.File.ReadAllLines(System.IO.Path.Combine(Application.StartupPath, "db.xls"))
+        For x = 0 To line.Length
+            For y = 0 To 9
+                If line(x).Contains(",") = True Then
+                    Database(x, y) = line(x).Substring(0, line(x).IndexOf(","))
+                    line(x) = line(x).Substring(line(x).IndexOf(",") + 1)
+                Else
+                    Database(x, y) = line(x)
+                End If
+            Next
+        Next
+    End Sub
 
     Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
         Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
