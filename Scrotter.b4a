@@ -95,7 +95,7 @@ Sub Globals
 	Dim themebtn As Button
 	Dim FinalBitmap As Bitmap
 	Dim savedphone As String
-	Dim savephone As Boolean = False
+	Dim savephone As String = "False"
 	Dim themelist As List = Array As String("Dark", "Light")
 	Dim devicelist As List = Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy Player 5.0", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus")
 	Dim UbuntuRegular As Typeface = Typeface.LoadFromAssets("ubuntureg.ttf")
@@ -113,7 +113,7 @@ Sub Activity_Create(FirstTime As Boolean)
     End If
 	theme = StateManager.GetSetting2("theme", "Light")
 	savedphone = StateManager.GetSetting2("savedphone", "")
-	savephone = StateManager.GetSetting2("savephone", False)
+	savephone = StateManager.GetSetting2("savephone", "False")
 	
 	container.Initialize
 	aboutpage = CreatePanel(TYPE_ABOUT, "About")
@@ -283,7 +283,7 @@ Sub Activity_Resume
 	RefreshTheme
 	savephone = PrefManager.GetString("retaindevice")
 	StateManager.SetSetting("savephone", savephone)
-	If savephone = True Then savedphone = ModelBox.SelectedItem
+	If savephone = "True" Then savedphone = ModelBox.SelectedItem
 	StateManager.SetSetting("savedphone", savedphone)
 End Sub
 
@@ -386,7 +386,7 @@ Sub VariantSet (var As List)
 End Sub
 
 Sub ModelBox_itemClick (Position As Int, Value As Object)
-	If savephone = True Then savedphone = ModelBox.SelectedItem
+	If savephone = "True" Then savedphone = ModelBox.SelectedItem
 	VariantBox.Clear
 	VariantBox.Add("No variants available")
 	VariantBox.Enabled = False
