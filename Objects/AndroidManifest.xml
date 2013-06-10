@@ -6,7 +6,7 @@
 	android:versionName="0.1"
 	android:installLocation="preferExternal">
 	
-	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="15"/>
+	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="15"/>
 	<supports-screens android:largeScreens="true" 
 	    android:normalScreens="true" 
 	    android:smallScreens="true"
@@ -20,6 +20,7 @@
 		android:label="Scrotter">
 		
 		<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>
+		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIez0WOCFFG_Fq3wWHPsHrFVqUb3ubbiEZ0ySG5w" />
 		<activity
 			android:windowSoftInputMode="stateHidden"
 			android:launchMode="singleTop"
