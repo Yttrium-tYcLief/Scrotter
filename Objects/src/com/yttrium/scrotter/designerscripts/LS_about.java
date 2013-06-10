@@ -30,23 +30,21 @@ views.get("scrottervers").setWidth((int)((views.get("scrottertitle").getWidth())
 views.get("scrottervers").setLeft((int)((views.get("scrottertitle").getLeft() + views.get("scrottertitle").getWidth()) - (views.get("scrottervers").getWidth())));
 //BA.debugLineNum = 13;BA.debugLine="ScrotterVers.Bottom = IconView.Bottom"[about/General script]
 views.get("scrottervers").setTop((int)((views.get("iconview").getTop() + views.get("iconview").getHeight()) - (views.get("scrottervers").getHeight())));
-//BA.debugLineNum = 14;BA.debugLine="ThemeBox.Height = 50dip"[about/General script]
-views.get("themebox").setHeight((int)((50d * scale)));
-//BA.debugLineNum = 15;BA.debugLine="SettingsBtn.Height = 72dip"[about/General script]
+//BA.debugLineNum = 14;BA.debugLine="SettingsBtn.Height = 72dip"[about/General script]
 views.get("settingsbtn").setHeight((int)((72d * scale)));
-//BA.debugLineNum = 16;BA.debugLine="SettingsBtn.Bottom = 100%y - 5%x"[about/General script]
+//BA.debugLineNum = 15;BA.debugLine="SettingsBtn.Bottom = 100%y - 5%x"[about/General script]
 views.get("settingsbtn").setTop((int)((100d / 100 * height)-(5d / 100 * width) - (views.get("settingsbtn").getHeight())));
-//BA.debugLineNum = 17;BA.debugLine="SettingsBtn.Left = 10%x"[about/General script]
+//BA.debugLineNum = 16;BA.debugLine="SettingsBtn.Left = 10%x"[about/General script]
 views.get("settingsbtn").setLeft((int)((10d / 100 * width)));
-//BA.debugLineNum = 18;BA.debugLine="SettingsBtn.Width = 80%x"[about/General script]
+//BA.debugLineNum = 17;BA.debugLine="SettingsBtn.Width = 80%x"[about/General script]
 views.get("settingsbtn").setWidth((int)((80d / 100 * width)));
-//BA.debugLineNum = 19;BA.debugLine="SettingsIcon.Height = 60dip"[about/General script]
+//BA.debugLineNum = 18;BA.debugLine="SettingsIcon.Height = 60dip"[about/General script]
 views.get("settingsicon").setHeight((int)((60d * scale)));
-//BA.debugLineNum = 20;BA.debugLine="SettingsIcon.Width = 60dip"[about/General script]
+//BA.debugLineNum = 19;BA.debugLine="SettingsIcon.Width = 60dip"[about/General script]
 views.get("settingsicon").setWidth((int)((60d * scale)));
-//BA.debugLineNum = 21;BA.debugLine="SettingsIcon.Left = SettingsBtn.Left + 6dip"[about/General script]
+//BA.debugLineNum = 20;BA.debugLine="SettingsIcon.Left = SettingsBtn.Left + 6dip"[about/General script]
 views.get("settingsicon").setLeft((int)((views.get("settingsbtn").getLeft())+(6d * scale)));
-//BA.debugLineNum = 22;BA.debugLine="SettingsIcon.Top = SettingsBtn.Top + 6dip"[about/General script]
+//BA.debugLineNum = 21;BA.debugLine="SettingsIcon.Top = SettingsBtn.Top + 6dip"[about/General script]
 views.get("settingsicon").setTop((int)((views.get("settingsbtn").getTop())+(6d * scale)));
 
 }

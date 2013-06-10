@@ -47,7 +47,7 @@ Sub Process_Globals
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int = 1
 	Dim version As String = "0.1"
-	Dim releasedate As String = "5/06/2013"
+	Dim releasedate As String = "6/10/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 	Dim PrefScreen As AHPreferenceScreen
@@ -94,13 +94,13 @@ Sub Globals
 	Dim ScrotterVers As Label
 	Dim themebtn As Button
 	Dim FinalBitmap As Bitmap
-	Dim none As Boolean
-	Dim variantnone As Boolean
+	Dim savedphone As String
+	Dim savephone As Boolean = False
+	Dim themelist As List = Array As String("Dark", "Light")
 	Dim devicelist As List = Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy Player 5.0", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus")
 	Dim UbuntuRegular As Typeface = Typeface.LoadFromAssets("ubuntureg.ttf")
 	Dim UbuntuLight As Typeface = Typeface.LoadFromAssets("ubuntulight.ttf")
 	
-	Dim ThemeBox As Spinner
 	Dim SettingsBtn As Button
 	Dim SettingsIcon As ImageView
 End Sub
@@ -112,6 +112,9 @@ Sub Activity_Create(FirstTime As Boolean)
         If PrefManager.GetAll.Size = 0 Then SetDefaults
     End If
 	theme = StateManager.GetSetting2("theme", "Light")
+	savedphone = StateManager.GetSetting2("savedphone", "")
+	savephone = StateManager.GetSetting2("savephone", False)
+	
 	container.Initialize
 	aboutpage = CreatePanel(TYPE_ABOUT, "About")
 	container.AddPage(aboutpage, "About")
@@ -166,11 +169,6 @@ Sub RefreshTheme
 				aboutpage.Color = Colors.White
 				ScrotterTitle.TextColor = Colors.DarkGray
 				ScrotterVers.TextColor = Colors.Gray
-				ThemeBox.TextColor = Colors.DarkGray
-				Dim x As Int = ThemeBox.SelectedIndex
-				ThemeBox.Clear
-				ThemeBox.AddAll(Array As String("Light", "Dark"))
-				ThemeBox.SelectedIndex = x
 				SettingsBtn.TextColor = Colors.DarkGray
 			End If
 			If Loaded(2) = True Then previewpage.Color = Colors.White
@@ -183,7 +181,6 @@ Sub RefreshTheme
 				UnderShadowCheckbox.TextColor = Colors.DarkGray
 				Dim y As Int = ModelBox.SelectedIndex
 				ModelBox.Clear
-				If none = True Then ModelBox.Add("Pick a device")
 				ModelBox.AddAll(devicelist)
 				ModelBox.SelectedIndex = y
 				If VariantBox.Size > 0 Then
@@ -209,11 +206,6 @@ Sub RefreshTheme
 				aboutpage.Color = Colors.RGB(50, 50, 50)
 				ScrotterTitle.TextColor = Colors.LightGray
 				ScrotterVers.TextColor = Colors.Gray
-				ThemeBox.TextColor = Colors.LightGray
-				Dim x As Int = ThemeBox.SelectedIndex
-				ThemeBox.Clear
-				ThemeBox.AddAll(Array As String("Light", "Dark"))
-				ThemeBox.SelectedIndex = x
 				
 			End If
 			If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)
@@ -226,7 +218,6 @@ Sub RefreshTheme
 				UnderShadowCheckbox.TextColor = Colors.LightGray
 				Dim y As Int = ModelBox.SelectedIndex
 				ModelBox.Clear
-				If none = True Then ModelBox.Add("Pick a device")
 				ModelBox.AddAll(devicelist)
 				ModelBox.SelectedIndex = y
 				If VariantBox.Size > 0 Then
@@ -287,6 +278,13 @@ Sub Activity_Resume
 	GlossCheckbox.Typeface = UbuntuRegular
 	ShadowCheckbox.Typeface = UbuntuRegular
 	UnderShadowCheckbox.Typeface = UbuntuRegular
+	theme = PrefManager.GetString("theme")
+	StateManager.SetSetting("theme", theme)
+	RefreshTheme
+	savephone = PrefManager.GetString("retaindevice")
+	StateManager.SetSetting("savephone", savephone)
+	If savephone = True Then savedphone = ModelBox.SelectedItem
+	StateManager.SetSetting("savedphone", savedphone)
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
@@ -320,19 +318,15 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 				ScrotterTitle.TextSize = ScrotterTitle.Height * 800/1000dip
 				ScrotterVers.Text = "v" & version & " (" & releasedate & ")"
 				ScrotterVers.TextSize = ScrotterVers.Height * 500/1000dip
-				ThemeBox.AddAll(Array As String("Light", "Dark"))
-				ThemeBox.SelectedIndex = ThemeBox.IndexOf(theme)
 				Select theme
 					Case "Light"
 						aboutpage.Color = Colors.White
 						ScrotterTitle.TextColor = Colors.DarkGray
 						ScrotterVers.TextColor = Colors.Gray
-						ThemeBox.TextColor = Colors.DarkGray
 					Case "Dark"
 						aboutpage.Color = Colors.RGB(50, 50, 50)
 						ScrotterTitle.TextColor = Colors.LightGray
 						ScrotterVers.TextColor = Colors.Gray
-						ThemeBox.TextColor = Colors.LightGray
 				End Select
 				'OptionsScrollView.Panel.AddView(RememberPhone, 15%x, 20dip, 70%x, 50dip)
 				'OptionsScrollView.Panel.AddView(ThemeLabel, 15%x, 
@@ -354,10 +348,8 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Options")
 				pi.LayoutLoaded = True
-				ModelBox.Add("Pick a device")
 				ModelBox.AddAll(devicelist)
 				VariantBox.Add("No variants available")
-				none = True
 				ModelBox.Prompt = "Pick your phone"
 				Select theme
 					Case "Light"
@@ -390,26 +382,11 @@ End Sub
 Sub VariantSet (var As List)
 	If VariantBox.Enabled = False Then VariantBox.Enabled = True
 	VariantBox.Clear
-	variantnone = True
-	VariantBox.Add("Pick a variant")
 	VariantBox.AddAll(var)
-	VariantBox.SelectedIndex = 0
 End Sub
 
 Sub ModelBox_itemClick (Position As Int, Value As Object)
-	If none = True Then
-		If ModelBox.SelectedIndex = 0 Then
-			ModelBox.RemoveAt(0)
-			ModelBox.SelectedIndex = 0
-		Else If ModelBox.SelectedIndex = ModelBox.Size Then
-			ModelBox.RemoveAt(0)
-			ModelBox.SelectedIndex = ModelBox.Size
-		Else
-			ModelBox.RemoveAt(0)
-			ModelBox.SelectedIndex = ModelBox.SelectedIndex - 1
-		End If
-		none = False
-	End If
+	If savephone = True Then savedphone = ModelBox.SelectedItem
 	VariantBox.Clear
 	VariantBox.Add("No variants available")
 	VariantBox.Enabled = False
@@ -721,18 +698,6 @@ Sub ResizeImage(original As Bitmap, TargetX As Int, TargetY As Int) As Bitmap
 End Sub
 
 Sub VariantBox_ItemClick (Position As Int, Value As Object)
-	If variantnone = True Then
-		If Position = 0 Then
-			VariantBox.RemoveAt(0)
-			VariantBox.SelectedIndex = 0
-		Else If Position = VariantBox.Size Then
-			VariantBox.RemoveAt(0)
-			VariantBox.SelectedIndex = VariantBox.Size
-		Else
-			VariantBox.RemoveAt(0)
-		End If
-		variantnone = False
-	End If
 	If ModelBox.SelectedItem = "Samsung Galaxy SIII" Then
 		If (VariantBox.SelectedItem = "Black" OR VariantBox.SelectedItem = "Brown" OR VariantBox.SelectedItem = "Red") Then
 			GlossCheckbox.Enabled = False
@@ -763,11 +728,6 @@ Sub activity_KeyPress (KeyCode As Int) As Boolean
 	End If
 End Sub
 
-Sub ThemeBox_ItemClick (Position As Int, Value As Object)
-	theme = ThemeBox.SelectedItem
-	StateManager.SetSetting("theme", theme)
-	RefreshTheme
-End Sub
 Sub GlossCheckbox_CheckedChange(Checked As Boolean)
 	RefreshImage
 End Sub
@@ -782,17 +742,18 @@ Sub CreatePreferenceScreen
     'create two categories
     Dim cat1, cat2 As AHPreferenceCategory
     cat1.Initialize("Settings")
-    cat1.AddCheckBox("retaindevice", "Save Device", "Save current device as default", "Don't save current device as default", False, "")
+    cat1.AddCheckBox("retaindevice", "Save Device", "Save current device as default", "Don't save current device as default", savephone, "")
+	cat1.AddList("theme", "Theme", "Currently selected: " & theme, "Dark", Null, themelist)
     cat2.Initialize("About")
 	Dim Intent1, Intent2 As Intent
 	Dim Intent3 As Email
 	Intent3.To.Add("tyclief@gmail.com")
-	Intent3.Subject = "[Srotter4Android] YourIssueHere"
+	Intent3.Subject = "[Scrotter4Android] YourIssueHere"
 	Intent1.Initialize(Intent1.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.yttrium.scrotter")
 	Intent2.Initialize(Intent2.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.f2prateek.dfg")
 	cat2.AddIntent("Check for updates", "v" & version & " (" & releasedate & ")", Intent1, "")
 	cat2.AddIntent("DFG", "", Intent2, "")
-	cat2.AddIntent("Contact Us", "via email", Intent3.GetIntent, "")
+	cat2.AddIntent("Contact Us", "via email", Intent3.GetIntent, Null)
     'add the categories to the main screen
     PrefScreen.AddPreferenceCategory(cat1)
     PrefScreen.AddPreferenceCategory(cat2)
