@@ -281,7 +281,7 @@ public anywheresoftware.b4a.objects.LabelWrapper _scrottervers = null;
 public anywheresoftware.b4a.objects.ButtonWrapper _themebtn = null;
 public anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper _finalbitmap = null;
 public static String _savedphone = "";
-public static boolean _savephone = false;
+public static String _savephone = "";
 public anywheresoftware.b4a.objects.collections.List _themelist = null;
 public anywheresoftware.b4a.objects.collections.List _devicelist = null;
 public anywheresoftware.b4a.keywords.constants.TypefaceWrapper _ubunturegular = null;
@@ -299,12 +299,12 @@ _createpreferencescreen();
 if (_prefmanager.GetAll().getSize()==0) { 
 _setdefaults();};
  };
- //BA.debugLineNum = 89;BA.debugLine="theme = StateManager.GetSetting2(\"theme\", \"Light\")";
-_theme = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"theme","Light");
+ //BA.debugLineNum = 89;BA.debugLine="theme = StateManager.GetSetting2(\"theme\", \"Dark\")";
+_theme = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"theme","Dark");
  //BA.debugLineNum = 90;BA.debugLine="savedphone = StateManager.GetSetting2(\"savedphone\", \"\")";
 mostCurrent._savedphone = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"savedphone","");
- //BA.debugLineNum = 91;BA.debugLine="savephone = StateManager.GetSetting2(\"savephone\", False)";
-_savephone = BA.ObjectToBoolean(mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"savephone",String.valueOf(anywheresoftware.b4a.keywords.Common.False)));
+ //BA.debugLineNum = 91;BA.debugLine="savephone = StateManager.GetSetting2(\"savephone\", \"False\")";
+mostCurrent._savephone = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"savephone","False");
  //BA.debugLineNum = 93;BA.debugLine="container.Initialize";
 mostCurrent._container.Initialize(mostCurrent.activityBA);
  //BA.debugLineNum = 94;BA.debugLine="aboutpage = CreatePanel(TYPE_ABOUT, \"About\")";
@@ -455,12 +455,15 @@ _theme = _prefmanager.GetString("theme");
 mostCurrent._statemanager._setsetting(mostCurrent.activityBA,"theme",_theme);
  //BA.debugLineNum = 258;BA.debugLine="RefreshTheme";
 _refreshtheme();
- //BA.debugLineNum = 259;BA.debugLine="savephone = PrefManager.GetString(\"retaindevice\")";
-_savephone = BA.ObjectToBoolean(_prefmanager.GetString("retaindevice"));
+ //BA.debugLineNum = 259;BA.debugLine="If PrefManager.GetBoolean(\"retaindevice\") = True Then savephone = \"True\" Else savephone = \"False\"";
+if (_prefmanager.GetBoolean("retaindevice")==anywheresoftware.b4a.keywords.Common.True) { 
+mostCurrent._savephone = "True";}
+else {
+mostCurrent._savephone = "False";};
  //BA.debugLineNum = 260;BA.debugLine="StateManager.SetSetting(\"savephone\", savephone)";
-mostCurrent._statemanager._setsetting(mostCurrent.activityBA,"savephone",String.valueOf(_savephone));
- //BA.debugLineNum = 261;BA.debugLine="If savephone = True Then savedphone = ModelBox.SelectedItem";
-if (_savephone==anywheresoftware.b4a.keywords.Common.True) { 
+mostCurrent._statemanager._setsetting(mostCurrent.activityBA,"savephone",mostCurrent._savephone);
+ //BA.debugLineNum = 261;BA.debugLine="If savephone = \"True\" Then savedphone = ModelBox.SelectedItem";
+if ((mostCurrent._savephone).equals("True")) { 
 mostCurrent._savedphone = mostCurrent._modelbox.getSelectedItem();};
  //BA.debugLineNum = 262;BA.debugLine="StateManager.SetSetting(\"savedphone\", savedphone)";
 mostCurrent._statemanager._setsetting(mostCurrent.activityBA,"savedphone",mostCurrent._savedphone);
@@ -507,45 +510,36 @@ anywheresoftware.b4a.objects.preferenceactivity.PreferenceCategoryWrapper _cat1 
 anywheresoftware.b4a.objects.preferenceactivity.PreferenceCategoryWrapper _cat2 = null;
 anywheresoftware.b4a.objects.IntentWrapper _intent1 = null;
 anywheresoftware.b4a.objects.IntentWrapper _intent2 = null;
-anywheresoftware.b4a.phone.Phone.Email _intent3 = null;
- //BA.debugLineNum = 715;BA.debugLine="Sub CreatePreferenceScreen";
- //BA.debugLineNum = 716;BA.debugLine="PrefScreen.Initialize(\"Scrotter\", \"\")";
+ //BA.debugLineNum = 718;BA.debugLine="Sub CreatePreferenceScreen";
+ //BA.debugLineNum = 719;BA.debugLine="PrefScreen.Initialize(\"Scrotter\", \"\")";
 _prefscreen.Initialize("Scrotter","");
- //BA.debugLineNum = 718;BA.debugLine="Dim cat1, cat2 As AHPreferenceCategory";
+ //BA.debugLineNum = 721;BA.debugLine="Dim cat1, cat2 As AHPreferenceCategory";
 _cat1 = new anywheresoftware.b4a.objects.preferenceactivity.PreferenceCategoryWrapper();
 _cat2 = new anywheresoftware.b4a.objects.preferenceactivity.PreferenceCategoryWrapper();
- //BA.debugLineNum = 719;BA.debugLine="cat1.Initialize(\"Settings\")";
+ //BA.debugLineNum = 722;BA.debugLine="cat1.Initialize(\"Settings\")";
 _cat1.Initialize("Settings");
- //BA.debugLineNum = 720;BA.debugLine="cat1.AddCheckBox(\"retaindevice\", \"Save Device\", \"Save current device as default\", \"Don't save current device as default\", savephone, \"\")";
-_cat1.AddCheckBox("retaindevice","Save Device","Save current device as default","Don't save current device as default",_savephone,"");
- //BA.debugLineNum = 721;BA.debugLine="cat1.AddList(\"theme\", \"Theme\", \"Currently selected: \" & theme, \"Dark\", Null, themelist)";
-_cat1.AddList("theme","Theme","Currently selected: "+_theme,"Dark",String.valueOf(anywheresoftware.b4a.keywords.Common.Null),mostCurrent._themelist);
- //BA.debugLineNum = 722;BA.debugLine="cat2.Initialize(\"About\")";
+ //BA.debugLineNum = 723;BA.debugLine="cat1.AddCheckBox(\"retaindevice\", \"Save Device\", \"Save current device as default\", \"Don't save current device as default\", ParseSavePhone, \"\")";
+_cat1.AddCheckBox("retaindevice","Save Device","Save current device as default","Don't save current device as default",_parsesavephone(),"");
+ //BA.debugLineNum = 724;BA.debugLine="cat1.AddList(\"theme\", \"Theme\", \"\", \"Dark\", Null, themelist)";
+_cat1.AddList("theme","Theme","","Dark",String.valueOf(anywheresoftware.b4a.keywords.Common.Null),mostCurrent._themelist);
+ //BA.debugLineNum = 725;BA.debugLine="cat2.Initialize(\"About\")";
 _cat2.Initialize("About");
- //BA.debugLineNum = 723;BA.debugLine="Dim Intent1, Intent2 As Intent";
+ //BA.debugLineNum = 726;BA.debugLine="Dim Intent1, Intent2 As Intent";
 _intent1 = new anywheresoftware.b4a.objects.IntentWrapper();
 _intent2 = new anywheresoftware.b4a.objects.IntentWrapper();
- //BA.debugLineNum = 724;BA.debugLine="Dim Intent3 As Email";
-_intent3 = new anywheresoftware.b4a.phone.Phone.Email();
- //BA.debugLineNum = 725;BA.debugLine="Intent3.To.Add(\"tyclief@gmail.com\")";
-_intent3.To.Add((Object)("tyclief@gmail.com"));
- //BA.debugLineNum = 726;BA.debugLine="Intent3.Subject = \"[Scrotter4Android] YourIssueHere\"";
-_intent3.Subject = "[Scrotter4Android] YourIssueHere";
  //BA.debugLineNum = 727;BA.debugLine="Intent1.Initialize(Intent1.ACTION_VIEW, \"https://play.google.com/store/apps/details?id=com.yttrium.scrotter\")";
 _intent1.Initialize(_intent1.ACTION_VIEW,"https://play.google.com/store/apps/details?id=com.yttrium.scrotter");
- //BA.debugLineNum = 728;BA.debugLine="Intent2.Initialize(Intent2.ACTION_VIEW, \"https://play.google.com/store/apps/details?id=com.f2prateek.dfg\")";
-_intent2.Initialize(_intent2.ACTION_VIEW,"https://play.google.com/store/apps/details?id=com.f2prateek.dfg");
+ //BA.debugLineNum = 728;BA.debugLine="Intent2.Initialize(Intent2.ACTION_VIEW, \"mailto:cab@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.\")";
+_intent2.Initialize(_intent2.ACTION_VIEW,"mailto:cab@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.");
  //BA.debugLineNum = 729;BA.debugLine="cat2.AddIntent(\"Check for updates\", \"v\" & version & \" (\" & releasedate & \")\", Intent1, \"\")";
 _cat2.AddIntent("Check for updates","v"+_version+" ("+_releasedate+")",(android.content.Intent)(_intent1.getObject()),"");
- //BA.debugLineNum = 730;BA.debugLine="cat2.AddIntent(\"DFG\", \"\", Intent2, \"\")";
-_cat2.AddIntent("DFG","",(android.content.Intent)(_intent2.getObject()),"");
- //BA.debugLineNum = 731;BA.debugLine="cat2.AddIntent(\"Contact Us\", \"via email\", Intent3.GetIntent, Null)";
-_cat2.AddIntent("Contact Us","via email",_intent3.GetIntent(),String.valueOf(anywheresoftware.b4a.keywords.Common.Null));
- //BA.debugLineNum = 733;BA.debugLine="PrefScreen.AddPreferenceCategory(cat1)";
+ //BA.debugLineNum = 730;BA.debugLine="cat2.AddIntent(\"Contact Us\", \"via email\", Intent2, \"\")";
+_cat2.AddIntent("Contact Us","via email",(android.content.Intent)(_intent2.getObject()),"");
+ //BA.debugLineNum = 732;BA.debugLine="PrefScreen.AddPreferenceCategory(cat1)";
 _prefscreen.AddPreferenceCategory(_cat1);
- //BA.debugLineNum = 734;BA.debugLine="PrefScreen.AddPreferenceCategory(cat2)";
+ //BA.debugLineNum = 733;BA.debugLine="PrefScreen.AddPreferenceCategory(cat2)";
 _prefscreen.AddPreferenceCategory(_cat2);
- //BA.debugLineNum = 735;BA.debugLine="End Sub";
+ //BA.debugLineNum = 734;BA.debugLine="End Sub";
 return "";
 }
 public static String  _endloading() throws Exception{
@@ -636,8 +630,8 @@ mostCurrent._themebtn = new anywheresoftware.b4a.objects.ButtonWrapper();
 mostCurrent._finalbitmap = new anywheresoftware.b4a.objects.drawable.CanvasWrapper.BitmapWrapper();
  //BA.debugLineNum = 72;BA.debugLine="Dim savedphone As String";
 mostCurrent._savedphone = "";
- //BA.debugLineNum = 73;BA.debugLine="Dim savephone As Boolean = False";
-_savephone = anywheresoftware.b4a.keywords.Common.False;
+ //BA.debugLineNum = 73;BA.debugLine="Dim savephone As String = \"False\"";
+mostCurrent._savephone = "False";
  //BA.debugLineNum = 74;BA.debugLine="Dim themelist As List = Array As String(\"Dark\", \"Light\")";
 mostCurrent._themelist = new anywheresoftware.b4a.objects.collections.List();
 mostCurrent._themelist = anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"Dark","Light"});
@@ -1068,8 +1062,8 @@ return "";
 }
 public static String  _modelbox_itemclick(int _position,Object _value) throws Exception{
  //BA.debugLineNum = 363;BA.debugLine="Sub ModelBox_itemClick (Position As Int, Value As Object)";
- //BA.debugLineNum = 364;BA.debugLine="If savephone = True Then savedphone = ModelBox.SelectedItem";
-if (_savephone==anywheresoftware.b4a.keywords.Common.True) { 
+ //BA.debugLineNum = 364;BA.debugLine="If savephone = \"True\" Then savedphone = ModelBox.SelectedItem";
+if ((mostCurrent._savephone).equals("True")) { 
 mostCurrent._savedphone = mostCurrent._modelbox.getSelectedItem();};
  //BA.debugLineNum = 365;BA.debugLine="VariantBox.Clear";
 mostCurrent._variantbox.Clear();
@@ -1304,6 +1298,16 @@ _loaded[(int)(3)] = anywheresoftware.b4a.keywords.Common.True;
  //BA.debugLineNum = 350;BA.debugLine="End Sub";
 return "";
 }
+public static boolean  _parsesavephone() throws Exception{
+ //BA.debugLineNum = 715;BA.debugLine="Sub ParseSavePhone As Boolean";
+ //BA.debugLineNum = 716;BA.debugLine="If savephone = \"False\" Then Return False Else Return True";
+if ((mostCurrent._savephone).equals("False")) { 
+if (true) return anywheresoftware.b4a.keywords.Common.False;}
+else {
+if (true) return anywheresoftware.b4a.keywords.Common.True;};
+ //BA.debugLineNum = 717;BA.debugLine="End Sub";
+return false;
+}
 public static String  _process_globals() throws Exception{
  //BA.debugLineNum = 14;BA.debugLine="Sub Process_Globals";
  //BA.debugLineNum = 17;BA.debugLine="Dim TYPE_ABOUT As Int : TYPE_ABOUT = 1";
@@ -1332,8 +1336,8 @@ _wrap_content = (int)(-2);
 _currentpage = (int)(1);
  //BA.debugLineNum = 24;BA.debugLine="Dim version As String = \"0.1\"";
 _version = "0.1";
- //BA.debugLineNum = 25;BA.debugLine="Dim releasedate As String = \"6/10/2013\"";
-_releasedate = "6/10/2013";
+ //BA.debugLineNum = 25;BA.debugLine="Dim releasedate As String = \"6/11/2013\"";
+_releasedate = "6/11/2013";
  //BA.debugLineNum = 26;BA.debugLine="Dim theme As String";
 _theme = "";
  //BA.debugLineNum = 27;BA.debugLine="Dim Loaded(4) As Boolean";
@@ -1670,10 +1674,10 @@ _prefmanager.SetString("list1","Black");
 return "";
 }
 public static String  _settingsbtn_click() throws Exception{
- //BA.debugLineNum = 736;BA.debugLine="Sub SettingsBtn_Click";
- //BA.debugLineNum = 737;BA.debugLine="StartActivity(PrefScreen.CreateIntent)";
+ //BA.debugLineNum = 735;BA.debugLine="Sub SettingsBtn_Click";
+ //BA.debugLineNum = 736;BA.debugLine="StartActivity(PrefScreen.CreateIntent)";
 anywheresoftware.b4a.keywords.Common.StartActivity(mostCurrent.activityBA,(Object)(_prefscreen.CreateIntent()));
- //BA.debugLineNum = 738;BA.debugLine="End Sub";
+ //BA.debugLineNum = 737;BA.debugLine="End Sub";
 return "";
 }
 public static String  _shadowcheckbox_checkedchange(boolean _checked) throws Exception{

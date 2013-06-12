@@ -47,7 +47,7 @@ Sub Process_Globals
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int = 1
 	Dim version As String = "0.1"
-	Dim releasedate As String = "6/10/2013"
+	Dim releasedate As String = "6/11/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 	Dim PrefScreen As AHPreferenceScreen
@@ -111,7 +111,7 @@ Sub Activity_Create(FirstTime As Boolean)
         CreatePreferenceScreen
         If PrefManager.GetAll.Size = 0 Then SetDefaults
     End If
-	theme = StateManager.GetSetting2("theme", "Light")
+	theme = StateManager.GetSetting2("theme", "Dark")
 	savedphone = StateManager.GetSetting2("savedphone", "")
 	savephone = StateManager.GetSetting2("savephone", "False")
 	
@@ -281,7 +281,7 @@ Sub Activity_Resume
 	theme = PrefManager.GetString("theme")
 	StateManager.SetSetting("theme", theme)
 	RefreshTheme
-	savephone = PrefManager.GetString("retaindevice")
+	If PrefManager.GetBoolean("retaindevice") = True Then savephone = "True" Else savephone = "False"
 	StateManager.SetSetting("savephone", savephone)
 	If savephone = "True" Then savedphone = ModelBox.SelectedItem
 	StateManager.SetSetting("savedphone", savedphone)
@@ -737,23 +737,22 @@ End Sub
 Sub UnderShadowCheckbox_CheckedChange(Checked As Boolean)
 	RefreshImage
 End Sub
+Sub ParseSavePhone As Boolean
+	If savephone = "False" Then Return False Else Return True
+End Sub
 Sub CreatePreferenceScreen
     PrefScreen.Initialize("Scrotter", "")
     'create two categories
     Dim cat1, cat2 As AHPreferenceCategory
     cat1.Initialize("Settings")
-    cat1.AddCheckBox("retaindevice", "Save Device", "Save current device as default", "Don't save current device as default", savephone, "")
-	cat1.AddList("theme", "Theme", "Currently selected: " & theme, "Dark", Null, themelist)
+    cat1.AddCheckBox("retaindevice", "Save Device", "Save current device as default", "Don't save current device as default", ParseSavePhone, "")
+	cat1.AddList("theme", "Theme", "", "Dark", Null, themelist)
     cat2.Initialize("About")
 	Dim Intent1, Intent2 As Intent
-	Dim Intent3 As Email
-	Intent3.To.Add("tyclief@gmail.com")
-	Intent3.Subject = "[Scrotter4Android] YourIssueHere"
 	Intent1.Initialize(Intent1.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.yttrium.scrotter")
-	Intent2.Initialize(Intent2.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.f2prateek.dfg")
+	Intent2.Initialize(Intent2.ACTION_VIEW, "mailto:cab@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.")
 	cat2.AddIntent("Check for updates", "v" & version & " (" & releasedate & ")", Intent1, "")
-	cat2.AddIntent("DFG", "", Intent2, "")
-	cat2.AddIntent("Contact Us", "via email", Intent3.GetIntent, Null)
+	cat2.AddIntent("Contact Us", "via email", Intent2, "")
     'add the categories to the main screen
     PrefScreen.AddPreferenceCategory(cat1)
     PrefScreen.AddPreferenceCategory(cat2)
