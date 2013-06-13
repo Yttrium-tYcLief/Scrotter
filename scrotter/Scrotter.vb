@@ -33,7 +33,7 @@ Public Class Scrotter
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
     Public ReadOnly Version As String = "0.9.2"
-    Public ReadOnly ReleaseDate As String = "2013-6-06"
+    Public ReadOnly ReleaseDate As String = "2013-6-13"
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String
@@ -181,7 +181,7 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Galaxy SII", "Galaxy SII T-Mobile", "Epic 4G Touch"})
                 VariantBox.SelectedIndex = 0
-            Case "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Samsung Galaxy Player 5.0", "Samsung Galaxy SIV"
+            Case "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Samsung Galaxy Player 5.0"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
@@ -211,6 +211,14 @@ Public Class Scrotter
             Case "HTC Desire HD, HTC Inspire 4G"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = True
+            Case "Samsung Galaxy SIV"
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Blue", "White"})
+                VariantBox.SelectedIndex = 0
         End Select
         RefreshPreview()
     End Sub
@@ -505,10 +513,23 @@ Public Class Scrotter
                     IndexW = 160
                     IndexH = 281
                 Case "Samsung Galaxy SIV"
-                    DeviceName = "GSIVBlue"
-                    ShadowRes = "1080x1920"
-                    IndexW = 58
-                    IndexH = 218
+                    If args.var = "Blue" Then
+                        DeviceName = "GSIVBlue"
+                        ShadowRes = "1080x1920"
+                        IndexW = 58
+                        IndexH = 218
+                    ElseIf args.var = "White" Then
+                        DeviceName = "GSIVWhite"
+                        ShadowRes = "720x1280"
+                        IndexW = 45
+                        IndexH = 159
+                        Dim imgtmp As New Bitmap(1280, 720)
+                        Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
+                            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                            graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 1280, 720)
+                            ScreenCapBitmap = imgtmp
+                        End Using
+                    End If
             End Select
             Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
             If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
