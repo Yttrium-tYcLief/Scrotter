@@ -33,7 +33,7 @@ Public Class Scrotter
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
     Public ReadOnly Version As String = "0.9.2"
-    Public ReadOnly ReleaseDate As String = "2013-6-13"
+    Public ReadOnly ReleaseDate As String = "2013-6-24"
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String
@@ -186,7 +186,7 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "HTC One S", "HTC One V", "Google Nexus 4"
+            Case "HTC One S", "HTC One V", "Google Nexus 4", "Kyocera RiSE"
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
             Case "Apple iPhone 3G, 3GS"
@@ -530,6 +530,12 @@ Public Class Scrotter
                             ScreenCapBitmap = imgtmp
                         End Using
                     End If
+                Case "Kyocera RiSE"
+                    GlossUsed = True
+                    DeviceName = "KyoceraRise"
+                    ShadowRes = "320x480"
+                    IndexW = 65
+                    IndexH = 132
             End Select
             Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
             If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
