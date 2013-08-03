@@ -54,6 +54,7 @@ Partial Class Updater
         '
         'ChangelogBtn
         '
+        Me.ChangelogBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ChangelogBtn.Location = New System.Drawing.Point(12, 201)
         Me.ChangelogBtn.Name = "ChangelogBtn"
         Me.ChangelogBtn.Size = New System.Drawing.Size(136, 28)
@@ -63,6 +64,7 @@ Partial Class Updater
         '
         'LicenseBtn
         '
+        Me.LicenseBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LicenseBtn.Location = New System.Drawing.Point(154, 201)
         Me.LicenseBtn.Name = "LicenseBtn"
         Me.LicenseBtn.Size = New System.Drawing.Size(94, 28)
@@ -72,6 +74,7 @@ Partial Class Updater
         '
         'NoBtn
         '
+        Me.NoBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NoBtn.Location = New System.Drawing.Point(298, 201)
         Me.NoBtn.Name = "NoBtn"
         Me.NoBtn.Size = New System.Drawing.Size(114, 28)
@@ -81,6 +84,7 @@ Partial Class Updater
         '
         'YesBtn
         '
+        Me.YesBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.YesBtn.Location = New System.Drawing.Point(418, 201)
         Me.YesBtn.Name = "YesBtn"
         Me.YesBtn.Size = New System.Drawing.Size(114, 28)
@@ -90,6 +94,7 @@ Partial Class Updater
         '
         'ProgressBar
         '
+        Me.ProgressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ProgressBar.Location = New System.Drawing.Point(298, 201)
         Me.ProgressBar.Name = "ProgressBar"
         Me.ProgressBar.Size = New System.Drawing.Size(234, 28)
@@ -98,6 +103,9 @@ Partial Class Updater
         '
         'HistoryBox
         '
+        Me.HistoryBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.HistoryBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.HistoryBox.Font = New System.Drawing.Font("Ubuntu Mono", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HistoryBox.Location = New System.Drawing.Point(12, 76)
@@ -122,7 +130,8 @@ Partial Class Updater
         Me.Controls.Add(Me.ChangelogBtn)
         Me.Controls.Add(Me.HistoryBoxLabel)
         Me.Controls.Add(Me.VersionLabel)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.MinimumSize = New System.Drawing.Size(510, 240)
         Me.Name = "Updater"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
