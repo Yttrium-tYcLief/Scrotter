@@ -1,5 +1,5 @@
 ﻿Type=StaticCode
-Version=2.52
+Version=2.71
 @EndOfDesignText@
 'StateManager v1.11
 'Code module

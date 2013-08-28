@@ -23,8 +23,8 @@ public class main extends Activity implements B4AActivity{
 	BA activityBA;
     ActivityWrapper _activity;
     java.util.ArrayList<B4AMenuItem> menuItems;
-	private static final boolean fullScreen = false;
-	private static final boolean includeTitle = false;
+	public static final boolean fullScreen = false;
+	public static final boolean includeTitle = false;
     public static WeakReference<Activity> previousOne;
 
 	@Override
@@ -39,7 +39,7 @@ public class main extends Activity implements B4AActivity{
 		else if (previousOne != null) {
 			Activity p = previousOne.get();
 			if (p != null && p != this) {
-                anywheresoftware.b4a.keywords.Common.Log("Killing previous instance (main).");
+                BA.LogInfo("Killing previous instance (main).");
 				p.finish();
 			}
 		}
@@ -85,13 +85,13 @@ public class main extends Activity implements B4AActivity{
         initializeProcessGlobals();		
         initializeGlobals();
         
-        anywheresoftware.b4a.keywords.Common.Log("** Activity (main) Create, isFirst = " + isFirst + " **");
+        BA.LogInfo("** Activity (main) Create, isFirst = " + isFirst + " **");
         processBA.raiseEvent2(null, true, "activity_create", false, isFirst);
 		isFirst = false;
 		if (this != mostCurrent)
 			return;
         processBA.setActivityPaused(false);
-        anywheresoftware.b4a.keywords.Common.Log("** Activity (main) Resume **");
+        BA.LogInfo("** Activity (main) Resume **");
         processBA.raiseEvent(null, "activity_resume");
         if (android.os.Build.VERSION.SDK_INT >= 11) {
 			try {
@@ -129,6 +129,10 @@ public class main extends Activity implements B4AActivity{
 		}
 		return true;
 	}
+    public void onWindowFocusChanged(boolean hasFocus) {
+       super.onWindowFocusChanged(hasFocus);
+       processBA.raiseEvent2(null, true, "activity_windowfocuschanged", false, hasFocus);
+    }
 	private class B4AMenuItemsClickListener implements android.view.MenuItem.OnMenuItemClickListener {
 		private final String eventName;
 		public B4AMenuItemsClickListener(String eventName) {
@@ -180,7 +184,7 @@ public class main extends Activity implements B4AActivity{
         if (_activity == null) //workaround for emulator bug (Issue 2423)
             return;
 		anywheresoftware.b4a.Msgbox.dismiss(true);
-        anywheresoftware.b4a.keywords.Common.Log("** Activity (main) Pause, UserClosed = " + activityBA.activity.isFinishing() + " **");
+        BA.LogInfo("** Activity (main) Pause, UserClosed = " + activityBA.activity.isFinishing() + " **");
         processBA.raiseEvent2(_activity, true, "activity_pause", false, activityBA.activity.isFinishing());		
         processBA.setActivityPaused(true);
         mostCurrent = null;
@@ -213,7 +217,7 @@ public class main extends Activity implements B4AActivity{
 			if (mostCurrent == null || mostCurrent != activity.get())
 				return;
 			processBA.setActivityPaused(false);
-            anywheresoftware.b4a.keywords.Common.Log("** Activity (main) Resume **");
+            BA.LogInfo("** Activity (main) Resume **");
 		    processBA.raiseEvent(mostCurrent._activity, "activity_resume", (Object[])null);
 		}
     }
@@ -300,8 +304,8 @@ _createpreferencescreen();
 if (_prefmanager.GetAll().getSize()==0) { 
 _setdefaults();};
  };
- //BA.debugLineNum = 89;BA.debugLine="theme = StateManager.GetSetting2(\"theme\", \"Dark\")";
-_theme = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"theme","Dark");
+ //BA.debugLineNum = 89;BA.debugLine="theme = StateManager.GetSetting2(\"theme\", \"Light\")";
+_theme = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"theme","Light");
  //BA.debugLineNum = 90;BA.debugLine="savedphone = StateManager.GetSetting2(\"savedphone\", \"\")";
 mostCurrent._savedphone = mostCurrent._statemanager._getsetting2(mostCurrent.activityBA,"savedphone","");
  //BA.debugLineNum = 91;BA.debugLine="savedvariant = StateManager.GetSetting2(\"savedvariant\", \"\")";
@@ -338,9 +342,6 @@ mostCurrent._activity.AddView((android.view.View)(mostCurrent._pager.getObject()
 mostCurrent._backgroundthread.Initialise(processBA,"ImageThread");
  //BA.debugLineNum = 108;BA.debugLine="cc.Initialize(\"cc\")";
 mostCurrent._cc.Initialize("cc");
- //BA.debugLineNum = 109;BA.debugLine="Select theme";
-switch (BA.switchObjectToInt(_theme,"Light","Dark")) {
-case 0:
  //BA.debugLineNum = 111;BA.debugLine="tabs.Color = Colors.White";
 mostCurrent._tabs.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
  //BA.debugLineNum = 112;BA.debugLine="tabs.BackgroundColorPressed = Colors.DarkGray";
@@ -353,23 +354,6 @@ mostCurrent._tabs.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Light
 mostCurrent._tabs.setTextColorCenter(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
  //BA.debugLineNum = 116;BA.debugLine="tabs.Invalidate";
 mostCurrent._tabs.Invalidate();
- break;
-case 1:
- //BA.debugLineNum = 118;BA.debugLine="tabs.Color = Colors.RGB(50, 50, 50)";
-mostCurrent._tabs.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 119;BA.debugLine="tabs.BackgroundColorPressed = Colors.White";
-mostCurrent._tabs.setBackgroundColorPressed(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 120;BA.debugLine="tabs.LineColorCenter = Colors.LightGray";
-mostCurrent._tabs.setLineColorCenter(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 121;BA.debugLine="tabs.TextColor = Colors.Gray";
-mostCurrent._tabs.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
- //BA.debugLineNum = 122;BA.debugLine="tabs.TextColorCenter = Colors.LightGray";
-mostCurrent._tabs.setTextColorCenter(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 123;BA.debugLine="tabs.Invalidate";
-mostCurrent._tabs.Invalidate();
- break;
-}
-;
  //BA.debugLineNum = 125;BA.debugLine="End Sub";
 return "";
 }
@@ -470,9 +454,9 @@ mostCurrent._statemanager._setsetting(mostCurrent.activityBA,"savephone",mostCur
 if ((mostCurrent._savephone).equals("True")) { 
  //BA.debugLineNum = 263;BA.debugLine="For x = 0 To ModelBox.Size - 1";
 {
-final double step228 = 1;
-final double limit228 = (int)(mostCurrent._modelbox.getSize()-1);
-for (_x = (int)(0); (step228 > 0 && _x <= limit228) || (step228 < 0 && _x >= limit228); _x += step228) {
+final double step178 = 1;
+final double limit178 = (int)(mostCurrent._modelbox.getSize()-1);
+for (_x = (int)(0); (step178 > 0 && _x <= limit178) || (step178 < 0 && _x >= limit178); _x += step178) {
  //BA.debugLineNum = 264;BA.debugLine="If ModelBox.GetItem(x) = savedphone Then ModelBox.SelectedIndex = x";
 if ((mostCurrent._modelbox.GetItem(_x)).equals(mostCurrent._savedphone)) { 
 mostCurrent._modelbox.setSelectedIndex(_x);};
@@ -538,8 +522,6 @@ _cat2 = new anywheresoftware.b4a.objects.preferenceactivity.PreferenceCategoryWr
 _cat1.Initialize("Settings");
  //BA.debugLineNum = 740;BA.debugLine="cat1.AddCheckBox(\"retaindevice\", \"Save Device\", \"Save current device as default\", \"Don't save current device as default\", ParseSavePhone, \"\")";
 _cat1.AddCheckBox("retaindevice","Save Device","Save current device as default","Don't save current device as default",_parsesavephone(),"");
- //BA.debugLineNum = 741;BA.debugLine="cat1.AddList(\"theme\", \"Theme\", \"\", \"Dark\", Null, themelist)";
-_cat1.AddList("theme","Theme","","Dark",String.valueOf(anywheresoftware.b4a.keywords.Common.Null),mostCurrent._themelist);
  //BA.debugLineNum = 742;BA.debugLine="cat2.Initialize(\"About\")";
 _cat2.Initialize("About");
  //BA.debugLineNum = 743;BA.debugLine="Dim Intent1, Intent2 As Intent";
@@ -547,8 +529,8 @@ _intent1 = new anywheresoftware.b4a.objects.IntentWrapper();
 _intent2 = new anywheresoftware.b4a.objects.IntentWrapper();
  //BA.debugLineNum = 744;BA.debugLine="Intent1.Initialize(Intent1.ACTION_VIEW, \"https://play.google.com/store/apps/details?id=com.yttrium.scrotter\")";
 _intent1.Initialize(_intent1.ACTION_VIEW,"https://play.google.com/store/apps/details?id=com.yttrium.scrotter");
- //BA.debugLineNum = 745;BA.debugLine="Intent2.Initialize(Intent2.ACTION_VIEW, \"mailto:cab@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.\")";
-_intent2.Initialize(_intent2.ACTION_VIEW,"mailto:cab@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.");
+ //BA.debugLineNum = 745;BA.debugLine="Intent2.Initialize(Intent2.ACTION_VIEW, \"mailto:tyclief@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.\")";
+_intent2.Initialize(_intent2.ACTION_VIEW,"mailto:tyclief@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.");
  //BA.debugLineNum = 746;BA.debugLine="cat2.AddIntent(\"Check for updates\", \"v\" & version & \" (\" & releasedate & \")\", Intent1, \"\")";
 _cat2.AddIntent("Check for updates","v"+_version+" ("+_releasedate+")",(android.content.Intent)(_intent1.getObject()),"");
  //BA.debugLineNum = 747;BA.debugLine="cat2.AddIntent(\"Contact Us\", \"via email\", Intent2, \"\")";
@@ -1074,8 +1056,8 @@ public static String  _loadbtn_click() throws Exception{
 try { //BA.debugLineNum = 462;BA.debugLine="cc.Show(\"image/*\", \"\")";
 mostCurrent._cc.Show(processBA,"image/*","");
  } 
-       catch (Exception e395) {
-			processBA.setLastException(e395); };
+       catch (Exception e345) {
+			processBA.setLastException(e345); };
  //BA.debugLineNum = 465;BA.debugLine="End Sub";
 return "";
 }
@@ -1176,9 +1158,9 @@ case 15:
 if ((mostCurrent._savephone).equals("True") && mostCurrent._variantbox.getSize()>0) { 
  //BA.debugLineNum = 414;BA.debugLine="For x = 0 To VariantBox.Size - 1";
 {
-final double step371 = 1;
-final double limit371 = (int)(mostCurrent._variantbox.getSize()-1);
-for (_x = (int)(0); (step371 > 0 && _x <= limit371) || (step371 < 0 && _x >= limit371); _x += step371) {
+final double step299 = 1;
+final double limit299 = (int)(mostCurrent._variantbox.getSize()-1);
+for (_x = (int)(0); (step299 > 0 && _x <= limit299) || (step299 < 0 && _x >= limit299); _x += step299) {
  //BA.debugLineNum = 415;BA.debugLine="If VariantBox.GetItem(x) = savedvariant Then VariantBox.SelectedIndex = x";
 if ((mostCurrent._variantbox.GetItem(_x)).equals(mostCurrent._savedvariant)) { 
 mostCurrent._variantbox.setSelectedIndex(_x);};
@@ -1232,26 +1214,12 @@ mostCurrent._scrottertitle.setTextSize((float)(mostCurrent._scrottertitle.getHei
 mostCurrent._scrottervers.setText((Object)("v"+_version+" ("+_releasedate+")"));
  //BA.debugLineNum = 302;BA.debugLine="ScrotterVers.TextSize = ScrotterVers.Height * 500/1000dip";
 mostCurrent._scrottervers.setTextSize((float)(mostCurrent._scrottervers.getHeight()*500/(double)anywheresoftware.b4a.keywords.Common.DipToCurrent((int)(1000))));
- //BA.debugLineNum = 303;BA.debugLine="Select theme";
-switch (BA.switchObjectToInt(_theme,"Light","Dark")) {
-case 0:
  //BA.debugLineNum = 305;BA.debugLine="aboutpage.Color = Colors.White";
 mostCurrent._aboutpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
  //BA.debugLineNum = 306;BA.debugLine="ScrotterTitle.TextColor = Colors.DarkGray";
 mostCurrent._scrottertitle.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
  //BA.debugLineNum = 307;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
 mostCurrent._scrottervers.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
- break;
-case 1:
- //BA.debugLineNum = 309;BA.debugLine="aboutpage.Color = Colors.RGB(50, 50, 50)";
-mostCurrent._aboutpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 310;BA.debugLine="ScrotterTitle.TextColor = Colors.LightGray";
-mostCurrent._scrottertitle.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 311;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
-mostCurrent._scrottervers.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
- break;
-}
-;
  };
  //BA.debugLineNum = 316;BA.debugLine="Loaded(1) = True";
 _loaded[(int)(1)] = anywheresoftware.b4a.keywords.Common.True;
@@ -1263,18 +1231,8 @@ if (anywheresoftware.b4a.keywords.Common.Not(_pi.LayoutLoaded)) {
 _pan.LoadLayout("Preview",mostCurrent.activityBA);
  //BA.debugLineNum = 320;BA.debugLine="pi.LayoutLoaded = True";
 _pi.LayoutLoaded = anywheresoftware.b4a.keywords.Common.True;
- //BA.debugLineNum = 321;BA.debugLine="Select theme";
-switch (BA.switchObjectToInt(_theme,"Light","Dark")) {
-case 0:
  //BA.debugLineNum = 323;BA.debugLine="previewpage.Color = Colors.White";
 mostCurrent._previewpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
- break;
-case 1:
- //BA.debugLineNum = 325;BA.debugLine="previewpage.Color = Colors.RGB(50, 50, 50)";
-mostCurrent._previewpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- break;
-}
-;
  };
  //BA.debugLineNum = 328;BA.debugLine="Loaded(2) = True";
 _loaded[(int)(2)] = anywheresoftware.b4a.keywords.Common.True;
@@ -1292,9 +1250,6 @@ mostCurrent._modelbox.AddAll(mostCurrent._devicelist);
 mostCurrent._variantbox.Add("No variants available");
  //BA.debugLineNum = 335;BA.debugLine="ModelBox.Prompt = \"Pick your phone\"";
 mostCurrent._modelbox.setPrompt("Pick your phone");
- //BA.debugLineNum = 336;BA.debugLine="Select theme";
-switch (BA.switchObjectToInt(_theme,"Light","Dark")) {
-case 0:
  //BA.debugLineNum = 338;BA.debugLine="optionspage.Color = Colors.White";
 mostCurrent._optionspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
  //BA.debugLineNum = 339;BA.debugLine="ModelBox.TextColor = Colors.DarkGray";
@@ -1307,23 +1262,6 @@ mostCurrent._glosscheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Col
 mostCurrent._shadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
  //BA.debugLineNum = 343;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.DarkGray";
 mostCurrent._undershadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.DarkGray);
- break;
-case 1:
- //BA.debugLineNum = 345;BA.debugLine="optionspage.Color = Colors.RGB(50, 50, 50)";
-mostCurrent._optionspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 346;BA.debugLine="ModelBox.TextColor = Colors.LightGray";
-mostCurrent._modelbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 347;BA.debugLine="VariantBox.TextColor = Colors.LightGray";
-mostCurrent._variantbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 348;BA.debugLine="GlossCheckbox.TextColor = Colors.LightGray";
-mostCurrent._glosscheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 349;BA.debugLine="ShadowCheckbox.TextColor = Colors.LightGray";
-mostCurrent._shadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 350;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.LightGray";
-mostCurrent._undershadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- break;
-}
-;
  //BA.debugLineNum = 352;BA.debugLine="ModelBox.Invalidate";
 mostCurrent._modelbox.Invalidate();
  //BA.debugLineNum = 353;BA.debugLine="VariantBox.Invalidate";
@@ -1373,10 +1311,10 @@ _wrap_content = (int)(-2);
 ;
  //BA.debugLineNum = 23;BA.debugLine="Dim CurrentPage As Int = 1";
 _currentpage = (int)(1);
- //BA.debugLineNum = 24;BA.debugLine="Dim version As String = \"0.9\"";
-_version = "0.9";
- //BA.debugLineNum = 25;BA.debugLine="Dim releasedate As String = \"6/17/2013\"";
-_releasedate = "6/17/2013";
+ //BA.debugLineNum = 24;BA.debugLine="Dim version As String = \"1.0\"";
+_version = "1.0";
+ //BA.debugLineNum = 25;BA.debugLine="Dim releasedate As String = \"8/27/2013\"";
+_releasedate = "8/27/2013";
  //BA.debugLineNum = 26;BA.debugLine="Dim theme As String";
 _theme = "";
  //BA.debugLineNum = 27;BA.debugLine="Dim Loaded(4) As Boolean";
@@ -1414,9 +1352,6 @@ int _y = 0;
 anywheresoftware.b4a.objects.collections.List _z = null;
 int _count = 0;
  //BA.debugLineNum = 135;BA.debugLine="Sub RefreshTheme";
- //BA.debugLineNum = 136;BA.debugLine="Select theme";
-switch (BA.switchObjectToInt(_theme,"Light","Dark")) {
-case 0:
  //BA.debugLineNum = 138;BA.debugLine="tabs.Color = Colors.White";
 mostCurrent._tabs.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
  //BA.debugLineNum = 139;BA.debugLine="tabs.BackgroundColorPressed = Colors.DarkGray";
@@ -1475,9 +1410,9 @@ _z = new anywheresoftware.b4a.objects.collections.List();
 _z.Initialize();
  //BA.debugLineNum = 166;BA.debugLine="For count = 0 To VariantBox.Size - 1";
 {
-final double step134 = 1;
-final double limit134 = (int)(mostCurrent._variantbox.getSize()-1);
-for (_count = (int)(0); (step134 > 0 && _count <= limit134) || (step134 < 0 && _count >= limit134); _count += step134) {
+final double step122 = 1;
+final double limit122 = (int)(mostCurrent._variantbox.getSize()-1);
+for (_count = (int)(0); (step122 > 0 && _count <= limit122) || (step122 < 0 && _count >= limit122); _count += step122) {
  //BA.debugLineNum = 167;BA.debugLine="z.Add(VariantBox.GetItem(count))";
 _z.Add((Object)(mostCurrent._variantbox.GetItem(_count)));
  }
@@ -1490,84 +1425,6 @@ mostCurrent._variantbox.AddAll(_z);
 mostCurrent._variantbox.setSelectedIndex(_y);
  };
  };
- break;
-case 1:
- //BA.debugLineNum = 175;BA.debugLine="tabs.Color = Colors.RGB(50, 50, 50)";
-mostCurrent._tabs.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 176;BA.debugLine="tabs.BackgroundColorPressed = Colors.White";
-mostCurrent._tabs.setBackgroundColorPressed(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 177;BA.debugLine="tabs.LineColorCenter = Colors.LightGray";
-mostCurrent._tabs.setLineColorCenter(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 178;BA.debugLine="tabs.TextColor = Colors.Gray";
-mostCurrent._tabs.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
- //BA.debugLineNum = 179;BA.debugLine="tabs.TextColorCenter = Colors.LightGray";
-mostCurrent._tabs.setTextColorCenter(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 180;BA.debugLine="tabs.Invalidate";
-mostCurrent._tabs.Invalidate();
- //BA.debugLineNum = 181;BA.debugLine="If Loaded(1) = True Then";
-if (_loaded[(int)(1)]==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 182;BA.debugLine="aboutpage.Color = Colors.RGB(50, 50, 50)";
-mostCurrent._aboutpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 183;BA.debugLine="ScrotterTitle.TextColor = Colors.LightGray";
-mostCurrent._scrottertitle.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 184;BA.debugLine="ScrotterVers.TextColor = Colors.Gray";
-mostCurrent._scrottervers.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Gray);
- //BA.debugLineNum = 185;BA.debugLine="SettingsBtn.TextColor = Colors.LightGray";
-mostCurrent._settingsbtn.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- };
- //BA.debugLineNum = 187;BA.debugLine="If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)";
-if (_loaded[(int)(2)]==anywheresoftware.b4a.keywords.Common.True) { 
-mostCurrent._previewpage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));};
- //BA.debugLineNum = 188;BA.debugLine="If Loaded(3) = True Then";
-if (_loaded[(int)(3)]==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 189;BA.debugLine="optionspage.Color = Colors.RGB(50, 50, 50)";
-mostCurrent._optionspage.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int)(50),(int)(50),(int)(50)));
- //BA.debugLineNum = 190;BA.debugLine="ModelBox.TextColor = Colors.LightGray";
-mostCurrent._modelbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 191;BA.debugLine="VariantBox.TextColor = Colors.LightGray";
-mostCurrent._variantbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 192;BA.debugLine="GlossCheckbox.TextColor = Colors.LightGray";
-mostCurrent._glosscheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 193;BA.debugLine="ShadowCheckbox.TextColor = Colors.LightGray";
-mostCurrent._shadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 194;BA.debugLine="UnderShadowCheckbox.TextColor = Colors.LightGray";
-mostCurrent._undershadowcheckbox.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.LightGray);
- //BA.debugLineNum = 195;BA.debugLine="Dim y As Int = ModelBox.SelectedIndex";
-_y = mostCurrent._modelbox.getSelectedIndex();
- //BA.debugLineNum = 196;BA.debugLine="ModelBox.Clear";
-mostCurrent._modelbox.Clear();
- //BA.debugLineNum = 197;BA.debugLine="ModelBox.AddAll(devicelist)";
-mostCurrent._modelbox.AddAll(mostCurrent._devicelist);
- //BA.debugLineNum = 198;BA.debugLine="ModelBox.SelectedIndex = y";
-mostCurrent._modelbox.setSelectedIndex(_y);
- //BA.debugLineNum = 199;BA.debugLine="If VariantBox.Size > 0 Then";
-if (mostCurrent._variantbox.getSize()>0) { 
- //BA.debugLineNum = 200;BA.debugLine="y = VariantBox.SelectedIndex";
-_y = mostCurrent._variantbox.getSelectedIndex();
- //BA.debugLineNum = 201;BA.debugLine="Dim z As List";
-_z = new anywheresoftware.b4a.objects.collections.List();
- //BA.debugLineNum = 202;BA.debugLine="z.Initialize";
-_z.Initialize();
- //BA.debugLineNum = 203;BA.debugLine="For count = 0 To VariantBox.Size - 1";
-{
-final double step171 = 1;
-final double limit171 = (int)(mostCurrent._variantbox.getSize()-1);
-for (_count = (int)(0); (step171 > 0 && _count <= limit171) || (step171 < 0 && _count >= limit171); _count += step171) {
- //BA.debugLineNum = 204;BA.debugLine="z.Add(VariantBox.GetItem(count))";
-_z.Add((Object)(mostCurrent._variantbox.GetItem(_count)));
- }
-};
- //BA.debugLineNum = 206;BA.debugLine="VariantBox.Clear";
-mostCurrent._variantbox.Clear();
- //BA.debugLineNum = 207;BA.debugLine="VariantBox.AddAll(z)";
-mostCurrent._variantbox.AddAll(_z);
- //BA.debugLineNum = 208;BA.debugLine="VariantBox.SelectedIndex = y";
-mostCurrent._variantbox.setSelectedIndex(_y);
- };
- };
- break;
-}
-;
  //BA.debugLineNum = 212;BA.debugLine="ScrotterTitle.Typeface = UbuntuRegular";
 mostCurrent._scrottertitle.setTypeface((android.graphics.Typeface)(mostCurrent._ubunturegular.getObject()));
  //BA.debugLineNum = 213;BA.debugLine="ScrotterVers.Typeface = UbuntuRegular";
@@ -1646,9 +1503,58 @@ if (true) return _b;
 return null;
 }
 public static String  _savebtn_click() throws Exception{
+int _result = 0;
+String _filename = "";
+anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper _out = null;
  //BA.debugLineNum = 433;BA.debugLine="Sub SaveBtn_Click";
- //BA.debugLineNum = 434;BA.debugLine="Msgbox(\"Saving disabled in developer previews.\", \"Sorry!\")";
-anywheresoftware.b4a.keywords.Common.Msgbox("Saving disabled in developer previews.","Sorry!",mostCurrent.activityBA);
+ //BA.debugLineNum = 435;BA.debugLine="DateTime.DateFormat = \"yyyyMMdd_HHmmss\"";
+anywheresoftware.b4a.keywords.Common.DateTime.setDateFormat("yyyyMMdd_HHmmss");
+ //BA.debugLineNum = 436;BA.debugLine="Dim result As Int";
+_result = 0;
+ //BA.debugLineNum = 437;BA.debugLine="result = Msgbox2(\"Save file as what format?\", \"Save Image\", \"PNG\", \"Cancel\", \"JPG\", Null)";
+_result = anywheresoftware.b4a.keywords.Common.Msgbox2("Save file as what format?","Save Image","PNG","Cancel","JPG",(android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.Null),mostCurrent.activityBA);
+ //BA.debugLineNum = 438;BA.debugLine="Select Case result";
+switch (BA.switchObjectToInt(_result,anywheresoftware.b4a.keywords.Common.DialogResponse.POSITIVE,anywheresoftware.b4a.keywords.Common.DialogResponse.NEGATIVE)) {
+case 0:
+ //BA.debugLineNum = 440;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".png\"";
+_filename = "Scrotter4A_"+anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow())+".png";
+ //BA.debugLineNum = 441;BA.debugLine="If File.Exists(File.Combine(File.DirRootExternal, \"Scrotter/\"), \"\") = False Then File.MakeDir(File.DirRootExternal, \"Scrotter/\")";
+if (anywheresoftware.b4a.keywords.Common.File.Exists(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),"")==anywheresoftware.b4a.keywords.Common.False) { 
+anywheresoftware.b4a.keywords.Common.File.MakeDir(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/");};
+ //BA.debugLineNum = 442;BA.debugLine="Dim Out As OutputStream";
+_out = new anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper();
+ //BA.debugLineNum = 443;BA.debugLine="Out = File.OpenOutput(File.Combine(File.DirRootExternal, \"Scrotter/\"), filename, False)";
+_out = anywheresoftware.b4a.keywords.Common.File.OpenOutput(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),_filename,anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 444;BA.debugLine="FinalBitmap.WriteToStream(Out, 100, \"PNG\")";
+mostCurrent._finalbitmap.WriteToStream((java.io.OutputStream)(_out.getObject()),(int)(100),BA.getEnumFromString(android.graphics.Bitmap.CompressFormat.class,"PNG"));
+ //BA.debugLineNum = 445;BA.debugLine="Out.Flush";
+_out.Flush();
+ //BA.debugLineNum = 446;BA.debugLine="Out.Close";
+_out.Close();
+ //BA.debugLineNum = 447;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
+anywheresoftware.b4a.keywords.Common.ToastMessageShow("File saved to the sdcard at /sdcard/Scrotter/"+_filename+".",anywheresoftware.b4a.keywords.Common.True);
+ break;
+case 1:
+ //BA.debugLineNum = 449;BA.debugLine="Dim filename As String = \"Scrotter4A_\" & DateTime.Date(DateTime.now) & \".jpg\"";
+_filename = "Scrotter4A_"+anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow())+".jpg";
+ //BA.debugLineNum = 450;BA.debugLine="If File.Exists(File.Combine(File.DirRootExternal, \"Scrotter/\"), \"\") = False Then File.MakeDir(File.DirRootExternal, \"Scrotter/\")";
+if (anywheresoftware.b4a.keywords.Common.File.Exists(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),"")==anywheresoftware.b4a.keywords.Common.False) { 
+anywheresoftware.b4a.keywords.Common.File.MakeDir(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/");};
+ //BA.debugLineNum = 451;BA.debugLine="Dim Out As OutputStream";
+_out = new anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper();
+ //BA.debugLineNum = 452;BA.debugLine="Out = File.OpenOutput(File.Combine(File.DirRootExternal, \"Scrotter/\"), filename, False)";
+_out = anywheresoftware.b4a.keywords.Common.File.OpenOutput(anywheresoftware.b4a.keywords.Common.File.Combine(anywheresoftware.b4a.keywords.Common.File.getDirRootExternal(),"Scrotter/"),_filename,anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 453;BA.debugLine="FinalBitmap.WriteToStream(Out, 95, \"JPEG\")";
+mostCurrent._finalbitmap.WriteToStream((java.io.OutputStream)(_out.getObject()),(int)(95),BA.getEnumFromString(android.graphics.Bitmap.CompressFormat.class,"JPEG"));
+ //BA.debugLineNum = 454;BA.debugLine="Out.Flush";
+_out.Flush();
+ //BA.debugLineNum = 455;BA.debugLine="Out.Close";
+_out.Close();
+ //BA.debugLineNum = 456;BA.debugLine="ToastMessageShow (\"File saved to the sdcard at /sdcard/Scrotter/\" & filename & \".\", True)";
+anywheresoftware.b4a.keywords.Common.ToastMessageShow("File saved to the sdcard at /sdcard/Scrotter/"+_filename+".",anywheresoftware.b4a.keywords.Common.True);
+ break;
+}
+;
  //BA.debugLineNum = 458;BA.debugLine="End Sub";
 return "";
 }

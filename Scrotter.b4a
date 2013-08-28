@@ -1,4 +1,4 @@
-﻿Version=2.52
+﻿Version=2.71
 IconFile=
 NumberOfModules=1
 Module1=StateManager
@@ -26,7 +26,7 @@ Library9=threading
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
 	#VersionCode: 01
-	#VersionName: 0.1
+	#VersionName: 1.0
 	#SupportedOrientations: portrait
 	#CanInstallToExternalStorage: True
 #End Region
@@ -46,8 +46,8 @@ Sub Process_Globals
 	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int = 1
-	Dim version As String = "0.9"
-	Dim releasedate As String = "6/17/2013"
+	Dim version As String = "1.0"
+	Dim releasedate As String = "8/27/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 	Dim PrefScreen As AHPreferenceScreen
@@ -111,7 +111,7 @@ Sub Activity_Create(FirstTime As Boolean)
         CreatePreferenceScreen
         If PrefManager.GetAll.Size = 0 Then SetDefaults
     End If
-	theme = StateManager.GetSetting2("theme", "Dark")
+	theme = StateManager.GetSetting2("theme", "Light")
 	savedphone = StateManager.GetSetting2("savedphone", "")
 	savedvariant = StateManager.GetSetting2("savedvariant", "")
 	savephone = StateManager.GetSetting2("savephone", "False")
@@ -131,22 +131,22 @@ Sub Activity_Create(FirstTime As Boolean)
 	Activity.AddView(pager, 0, 29dip, Activity.Width, Activity.Height-29dip)
 	BackgroundThread.Initialise("ImageThread")
 	cc.Initialize("cc")
-	Select theme
-		Case "Light"
+'	Select theme
+'		Case "Light"
 			tabs.Color = Colors.White
 			tabs.BackgroundColorPressed = Colors.DarkGray
 			tabs.LineColorCenter = Colors.DarkGray
 			tabs.TextColor = Colors.LightGray
 			tabs.TextColorCenter = Colors.DarkGray
 			tabs.Invalidate
-		Case "Dark"
-			tabs.Color = Colors.RGB(50, 50, 50)
-			tabs.BackgroundColorPressed = Colors.White
-			tabs.LineColorCenter = Colors.LightGray
-			tabs.TextColor = Colors.Gray
-			tabs.TextColorCenter = Colors.LightGray
-			tabs.Invalidate
-	End Select
+'		Case "Dark"
+'			tabs.Color = Colors.RGB(50, 50, 50)
+'			tabs.BackgroundColorPressed = Colors.White
+'			tabs.LineColorCenter = Colors.LightGray
+'			tabs.TextColor = Colors.Gray
+'			tabs.TextColorCenter = Colors.LightGray
+'			tabs.Invalidate
+'	End Select
 End Sub
 
 Sub SetDefaults
@@ -158,8 +158,8 @@ Sub SetDefaults
 End Sub
 
 Sub RefreshTheme
-	Select theme
-		Case "Light"
+'	Select theme
+'		Case "Light"
 			tabs.Color = Colors.White
 			tabs.BackgroundColorPressed = Colors.DarkGray
 			tabs.LineColorCenter = Colors.DarkGray
@@ -196,44 +196,44 @@ Sub RefreshTheme
 					VariantBox.SelectedIndex = y
 				End If
 			End If
-		Case "Dark"
-			tabs.Color = Colors.RGB(50, 50, 50)
-			tabs.BackgroundColorPressed = Colors.White
-			tabs.LineColorCenter = Colors.LightGray
-			tabs.TextColor = Colors.Gray
-			tabs.TextColorCenter = Colors.LightGray
-			tabs.Invalidate
-			If Loaded(1) = True Then
-				aboutpage.Color = Colors.RGB(50, 50, 50)
-				ScrotterTitle.TextColor = Colors.LightGray
-				ScrotterVers.TextColor = Colors.Gray
-				SettingsBtn.TextColor = Colors.LightGray
-			End If
-			If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)
-			If Loaded(3) = True Then
-				optionspage.Color = Colors.RGB(50, 50, 50)
-				ModelBox.TextColor = Colors.LightGray
-				VariantBox.TextColor = Colors.LightGray
-				GlossCheckbox.TextColor = Colors.LightGray
-				ShadowCheckbox.TextColor = Colors.LightGray
-				UnderShadowCheckbox.TextColor = Colors.LightGray
-				Dim y As Int = ModelBox.SelectedIndex
-				ModelBox.Clear
-				ModelBox.AddAll(devicelist)
-				ModelBox.SelectedIndex = y
-				If VariantBox.Size > 0 Then
-					y = VariantBox.SelectedIndex
-					Dim z As List
-					z.Initialize
-					For count = 0 To VariantBox.Size - 1
-						z.Add(VariantBox.GetItem(count))
-					Next
-					VariantBox.Clear
-					VariantBox.AddAll(z)
-					VariantBox.SelectedIndex = y
-				End If
-			End If
-	End Select
+'		Case "Dark"
+'			tabs.Color = Colors.RGB(50, 50, 50)
+'			tabs.BackgroundColorPressed = Colors.White
+'			tabs.LineColorCenter = Colors.LightGray
+'			tabs.TextColor = Colors.Gray
+'			tabs.TextColorCenter = Colors.LightGray
+'			tabs.Invalidate
+'			If Loaded(1) = True Then
+'				aboutpage.Color = Colors.RGB(50, 50, 50)
+'				ScrotterTitle.TextColor = Colors.LightGray
+'				ScrotterVers.TextColor = Colors.Gray
+'				SettingsBtn.TextColor = Colors.LightGray
+'			End If
+'			If Loaded(2) = True Then  previewpage.Color = Colors.RGB(50, 50, 50)
+'			If Loaded(3) = True Then
+'				optionspage.Color = Colors.RGB(50, 50, 50)
+'				ModelBox.TextColor = Colors.LightGray
+'				VariantBox.TextColor = Colors.LightGray
+'				GlossCheckbox.TextColor = Colors.LightGray
+'				ShadowCheckbox.TextColor = Colors.LightGray
+'				UnderShadowCheckbox.TextColor = Colors.LightGray
+'				Dim y As Int = ModelBox.SelectedIndex
+'				ModelBox.Clear
+'				ModelBox.AddAll(devicelist)
+'				ModelBox.SelectedIndex = y
+'				If VariantBox.Size > 0 Then
+'					y = VariantBox.SelectedIndex
+'					Dim z As List
+'					z.Initialize
+'					For count = 0 To VariantBox.Size - 1
+'						z.Add(VariantBox.GetItem(count))
+'					Next
+'					VariantBox.Clear
+'					VariantBox.AddAll(z)
+'					VariantBox.SelectedIndex = y
+'				End If
+'			End If
+'	End Select
 	ScrotterTitle.Typeface = UbuntuRegular
 	ScrotterVers.Typeface = UbuntuRegular
 	Loadbtn.Typeface = UbuntuRegular
@@ -325,16 +325,16 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 				ScrotterTitle.TextSize = ScrotterTitle.Height * 800/1000dip
 				ScrotterVers.Text = "v" & version & " (" & releasedate & ")"
 				ScrotterVers.TextSize = ScrotterVers.Height * 500/1000dip
-				Select theme
-					Case "Light"
+'				Select theme
+'					Case "Light"
 						aboutpage.Color = Colors.White
 						ScrotterTitle.TextColor = Colors.DarkGray
 						ScrotterVers.TextColor = Colors.Gray
-					Case "Dark"
-						aboutpage.Color = Colors.RGB(50, 50, 50)
-						ScrotterTitle.TextColor = Colors.LightGray
-						ScrotterVers.TextColor = Colors.Gray
-				End Select
+'					Case "Dark"
+'						aboutpage.Color = Colors.RGB(50, 50, 50)
+'						ScrotterTitle.TextColor = Colors.LightGray
+'						ScrotterVers.TextColor = Colors.Gray
+'				End Select
 				'OptionsScrollView.Panel.AddView(RememberPhone, 15%x, 20dip, 70%x, 50dip)
 				'OptionsScrollView.Panel.AddView(ThemeLabel, 15%x, 
 			End If
@@ -343,12 +343,12 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 			If Not(pi.LayoutLoaded) Then
 				pan.LoadLayout("Preview")
 				pi.LayoutLoaded = True
-				Select theme
-					Case "Light"
+'				Select theme
+'					Case "Light"
 						previewpage.Color = Colors.White
-					Case "Dark"
-						previewpage.Color = Colors.RGB(50, 50, 50)
-				End Select
+'					Case "Dark"
+'						previewpage.Color = Colors.RGB(50, 50, 50)
+'				End Select
 			End If
 			Loaded(2) = True
 		Case TYPE_OPTIONS
@@ -358,22 +358,22 @@ Sub Pager_PageCreated (Position As Int, Page As Object)
 				ModelBox.AddAll(devicelist)
 				VariantBox.Add("No variants available")
 				ModelBox.Prompt = "Pick your phone"
-				Select theme
-					Case "Light"
+'				Select theme
+'					Case "Light"
 						optionspage.Color = Colors.White
 						ModelBox.TextColor = Colors.DarkGray
 						VariantBox.TextColor = Colors.DarkGray
 						GlossCheckbox.TextColor = Colors.DarkGray
 						ShadowCheckbox.TextColor = Colors.DarkGray
 						UnderShadowCheckbox.TextColor = Colors.DarkGray
-					Case "Dark"
-						optionspage.Color = Colors.RGB(50, 50, 50)
-						ModelBox.TextColor = Colors.LightGray
-						VariantBox.TextColor = Colors.LightGray
-						GlossCheckbox.TextColor = Colors.LightGray
-						ShadowCheckbox.TextColor = Colors.LightGray
-						UnderShadowCheckbox.TextColor = Colors.LightGray
-				End Select
+'					Case "Dark"
+'						optionspage.Color = Colors.RGB(50, 50, 50)
+'						ModelBox.TextColor = Colors.LightGray
+'						VariantBox.TextColor = Colors.LightGray
+'						GlossCheckbox.TextColor = Colors.LightGray
+'						ShadowCheckbox.TextColor = Colors.LightGray
+'						UnderShadowCheckbox.TextColor = Colors.LightGray
+'				End Select
 				ModelBox.Invalidate
 				VariantBox.Invalidate
 			End If
@@ -456,30 +456,30 @@ Sub RefreshImage
 End Sub
 
 Sub SaveBtn_Click
-	Msgbox("Saving disabled in developer previews.", "Sorry!")
-'	DateTime.DateFormat = "yyyyMMdd_HHmmss"
-'	Dim result As Int
-'	result = Msgbox2("Save file as what format?", "Save Image", "PNG", "Cancel", "JPG", Null)
-'	Select Case result
-'		Case DialogResponse.POSITIVE
-'			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".png"
-'			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
-'			Dim Out As OutputStream
-'			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
-'			FinalBitmap.WriteToStream(Out, 100, "PNG")
-'			Out.Flush
-'			Out.Close
-'			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
-'		Case DialogResponse.NEGATIVE
-'			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
-'			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
-'			Dim Out As OutputStream
-'			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
-'			FinalBitmap.WriteToStream(Out, 95, "JPEG")
-'			Out.Flush
-'			Out.Close
-'			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
-'	End Select
+'	Msgbox("Saving disabled in developer previews.", "Sorry!")
+	DateTime.DateFormat = "yyyyMMdd_HHmmss"
+	Dim result As Int
+	result = Msgbox2("Save file as what format?", "Save Image", "PNG", "Cancel", "JPG", Null)
+	Select Case result
+		Case DialogResponse.POSITIVE
+			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".png"
+			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
+			Dim Out As OutputStream
+			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
+			FinalBitmap.WriteToStream(Out, 100, "PNG")
+			Out.Flush
+			Out.Close
+			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
+		Case DialogResponse.NEGATIVE
+			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
+			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
+			Dim Out As OutputStream
+			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
+			FinalBitmap.WriteToStream(Out, 95, "JPEG")
+			Out.Flush
+			Out.Close
+			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
+	End Select
 End Sub
 
 Sub Loadbtn_Click
@@ -763,11 +763,11 @@ Sub CreatePreferenceScreen
     Dim cat1, cat2 As AHPreferenceCategory
     cat1.Initialize("Settings")
     cat1.AddCheckBox("retaindevice", "Save Device", "Save current device as default", "Don't save current device as default", ParseSavePhone, "")
-	cat1.AddList("theme", "Theme", "", "Dark", Null, themelist)
+	'cat1.AddList("theme", "Theme", "", "Dark", Null, themelist)
     cat2.Initialize("About")
 	Dim Intent1, Intent2 As Intent
 	Intent1.Initialize(Intent1.ACTION_VIEW, "https://play.google.com/store/apps/details?id=com.yttrium.scrotter")
-	Intent2.Initialize(Intent2.ACTION_VIEW, "mailto:cab@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.")
+	Intent2.Initialize(Intent2.ACTION_VIEW, "mailto:tyclief@gmail.com?subject=[Scrotter4Android] YourIssueHere&body=Please write your feedback here.")
 	cat2.AddIntent("Check for updates", "v" & version & " (" & releasedate & ")", Intent1, "")
 	cat2.AddIntent("Contact Us", "via email", Intent2, "")
     'add the categories to the main screen
