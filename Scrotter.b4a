@@ -445,6 +445,9 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 		Case "HTC One X, HTC One X+", "HTC One"
 			VariantSet(Array As String("White", "Black"))
 			GlossCheckbox.Enabled = True
+		Case "Samsung Galaxy Note II"
+			VariantSet(Array As String("White", "Gray"))
+			GlossCheckbox.Checked = True
 		Case "Samsung Galaxy SIII"
 			VariantSet(Array As String("Blue", "White", "Black", "Red", "Brown"))
 			GlossCheckbox.Enabled = True
@@ -633,11 +636,14 @@ Sub ImageProcess
             IndexW = 155
             IndexH = 263
         Case "Samsung Galaxy Note II"
-            Device.Initialize(File.DirAssets, "device/" & "galaxynoteii.png")
+            If VariantBox.SelectedItem = "Gray" Then
+                Device.Initialize(File.DirAssets, "device/" & "galaxynoteiigray.png")
+            Else If VariantBox.SelectedItem = "White" OR VariantBox.SelectedItem = "Pick a variant" Then
+                Device.Initialize(File.DirAssets, "device/" & "galaxynoteiiwhite.png")
+            End If
             Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
-            Gloss.Initialize(File.DirAssets, "gloss/" & "galaxynoteii.png")
-            IndexW = 49
-            IndexH = 140
+            IndexH = 163
+			IndexW = 77
         Case "Motorola Droid RAZR"
             Device.Initialize(File.DirAssets, "device/" & "droidrazr.png")
             Shadow.Initialize(File.DirAssets, "shadow/" & r540960)
