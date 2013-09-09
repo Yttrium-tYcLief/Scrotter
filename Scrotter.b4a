@@ -12,16 +12,17 @@ File1=about.bal
 File2=Main.bal
 File3=Options.bal
 File4=Preview.bal
-NumberOfLibraries=9
+NumberOfLibraries=10
 Library1=abextdrawing
 Library2=ahpreferenceactivity
 Library3=ahviewpager
 Library4=core
-Library5=phone
-Library6=randomaccessfile
-Library7=reflection
-Library8=sql
-Library9=threading
+Library5=licensing
+Library6=phone
+Library7=randomaccessfile
+Library8=reflection
+Library9=sql
+Library10=threading
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
@@ -52,6 +53,9 @@ Sub Process_Globals
 	Dim Loaded(4) As Boolean
 	Dim PrefScreen As AHPreferenceScreen
 	Dim PrefManager As AHPreferenceManager
+	Dim publicKey As String = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiWpDfRB3l6X23cYlTK9mh7dwBtFjDhsteYZd+po2hvMjD9gfIzrqsMxzxTPL+9Oh1kWc27kmVJt+XkfpcvZIh7x9lrz8Hx33EDfQRQ5SULveFnsXX68H8GR4YJxuHvTtWkILLUDo1TpS3sMc+bi88sDk0ShU01ocFIDTMG3CFdPuqFMIYb5SA2sypQD4Z7SLA5gyNLGZ1s910LgPuGli1JOud0TazEOqVLekIPhsEMmWma7ANPzmX75u1aqGjUAbIAn5jl9rgQoFiNLb/gyEfpJyFxtCNKjVr1WdJ5UhzbIDyFmbjqPQ3OixWXanhk2szwpzeEbEXfSMdsV54MA3kQIDAQAB"
+	Dim test_1 As String
+	Dim DeveloperVersion As Boolean = True
 End Sub
 
 Sub Globals
@@ -100,13 +104,20 @@ Sub Globals
 	Dim devicelist As List = Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy Player 5.0", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus")
 	Dim UbuntuRegular As Typeface = Typeface.LoadFromAssets("ubuntureg.ttf")
 	Dim UbuntuLight As Typeface = Typeface.LoadFromAssets("ubuntulight.ttf")
-	
 	Dim SettingsBtn As Button
 	Dim SettingsIcon As ImageView
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
 	'Msgbox("This version of Scrotter is a developer preview. Bugs WILL arise and should be reported. Do not treat this version as final!", "Warning")
+	Dim lc As LicenseChecker
+    Dim p As PhoneId
+	Dim Licensed As Boolean = StateManager.GetSetting2("Licensed", False)
+	If Licensed = False Then
+    	lc.Initialize("lc", p.GetDeviceId, publicKey, "kljdflkf".GetBytes("UTF8"))
+    	lc.SetVariableAndValue("test_1", "YouSneakyFuck")
+    	lc.CheckAccess
+	End If
     If FirstTime Then
         CreatePreferenceScreen
         If PrefManager.GetAll.Size = 0 Then SetDefaults
@@ -148,6 +159,31 @@ Sub Activity_Create(FirstTime As Boolean)
 '			tabs.Invalidate
 '	End Select
 End Sub
+
+Sub lc_Allow
+    Log("Allow")
+    StateManager.SetSetting("Licensed", True)
+    StateManager.SaveSettings
+End Sub
+Sub lc_DontAllow
+	If DeveloperVersion = True Then
+		Log("DevPassAllow")
+		StateManager.SetSetting("Licensed", False)
+    	StateManager.SaveSettings
+	Else
+	    Log("DontAllow")
+    	StateManager.SetSetting("Licensed", False)
+    	StateManager.SaveSettings
+    	ToastMessageShow("Closing application.", True)
+    	Activity.Finish
+	End If
+End Sub
+Sub lc_Error (ErrorCode As String)
+    Log("error: " & ErrorCode)
+    ToastMessageShow("Closing application.", True)
+    Activity.Finish
+End Sub
+
 
 Sub SetDefaults
     'defaults are only set on the first run.
@@ -456,30 +492,33 @@ Sub RefreshImage
 End Sub
 
 Sub SaveBtn_Click
-'	Msgbox("Saving disabled in developer previews.", "Sorry!")
-	DateTime.DateFormat = "yyyyMMdd_HHmmss"
-	Dim result As Int
-	result = Msgbox2("Save file as what format?", "Save Image", "PNG", "Cancel", "JPG", Null)
-	Select Case result
-		Case DialogResponse.POSITIVE
-			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".png"
-			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
-			Dim Out As OutputStream
-			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
-			FinalBitmap.WriteToStream(Out, 100, "PNG")
-			Out.Flush
-			Out.Close
-			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
-		Case DialogResponse.NEGATIVE
-			Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
-			If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
-			Dim Out As OutputStream
-			Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
-			FinalBitmap.WriteToStream(Out, 95, "JPEG")
-			Out.Flush
-			Out.Close
-			ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
-	End Select
+	If DeveloperVersion = True Then
+		Msgbox("Saving disabled in developer previews.", "Sorry!")
+	Else
+		DateTime.DateFormat = "yyyyMMdd_HHmmss"
+		Dim result As Int
+		result = Msgbox2("Save file as what format?", "Save Image", "PNG", "Cancel", "JPG", Null)
+		Select Case result
+			Case DialogResponse.POSITIVE
+				Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".png"
+				If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
+				Dim Out As OutputStream
+				Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
+				FinalBitmap.WriteToStream(Out, 100, "PNG")
+				Out.Flush
+				Out.Close
+				ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
+			Case DialogResponse.NEGATIVE
+				Dim filename As String = "Scrotter4A_" & DateTime.Date(DateTime.now) & ".jpg"
+				If File.Exists(File.Combine(File.DirRootExternal, "Scrotter/"), "") = False Then File.MakeDir(File.DirRootExternal, "Scrotter/")
+				Dim Out As OutputStream
+				Out = File.OpenOutput(File.Combine(File.DirRootExternal, "Scrotter/"), filename, False)
+				FinalBitmap.WriteToStream(Out, 95, "JPEG")
+				Out.Flush
+				Out.Close
+				ToastMessageShow ("File saved to the sdcard at /sdcard/Scrotter/" & filename & ".", True)
+		End Select
+	End If
 End Sub
 
 Sub Loadbtn_Click
