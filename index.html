@@ -66,7 +66,7 @@ animatedcollapse.init()
 
 <p>The name "Scrotter" is a portmanteau: SCReenshOT framER.</p>
 
-<p>Scrotter supports .BMP, .JPG, .PNG, and .GIF.</p>
+<p>Scrotter supports BMP, JPG, and PNG.</p>
 
 <p>You can read the changelog <a href="https://raw.github.com/Yttrium-tYcLief/Scrotter/master/changelog">here</a>.</p>
 
@@ -76,7 +76,7 @@ animatedcollapse.init()
 <h3>On Windows</h3>
 
 <ol>
-<li>Install Microsoft <a href="http://www.microsoft.com/en-us/download/details.aspx?id=17851">.NET Framework 4</a>.</li>
+<li>Install Microsoft <a href="http://www.microsoft.com/en-us/download/details.aspx?id=17851">.NET Framework 4</a> if it is not already installed. This comes built-in with Windows 8.</li>
 <li>Download the latest compiled release by clicking the button to the right, or download any version from our <a href="https://www.dropbox.com/sh/uforojjgr491o9a/Yiz3sjfDt5">archive</a>.</li>
 </ol>
 
@@ -98,7 +98,7 @@ animatedcollapse.init()
 
 <h2>Development &amp; Contribution</h2>
 
-<div style="float: left"><img src="http://ompldr.org/vaDk3Zw/$R9RNJNQ.png" /></div>
+<div style="float: left"></div>
 <h3>Getting started</h3>
 
 <ul>
@@ -120,8 +120,9 @@ animatedcollapse.init()
 <ol>
 <li>Update the Version and ReleaseDate variables in Scrotter.vb.</li>
 <li>Compile using the <code>Release</code> tree.</li>
+    <li>NGEN <code>./scrotter/obj/Release/scrotter.exe</code> as described under Compiling.</li>
 <li>Copy <code>./scrotter/obj/Release/scrotter.exe</code> to <code>./latest/scrotter.exe</code></li>
-<li>Update the <code>./latest/latest</code> file to match the new version. Make sure there is no newline at the end. Be sure to edit using UTF-8 endinds, and not ANSI ones.</li>
+<li>Update the <code>./latest/latest</code> file to match the new version. Make sure there is no newline at the end. Be sure to edit using UTF-8 endings, not ANSI ones.</li>
 <li><a href="http://nsis.sourceforge.net/">Install NSIS</a> (Nullsoft Scriptable Install System).</li>
 <li>Open <code>./installation/NSIS Quick Setup Script Generator.exe</code> and import the <code>./installation/Scrotter.ini</code> project.</li>
 <li>After configuring version settings, without changing any other options, click <b>Generate</b> and generate to <code>./latest/installer.exe</code>.</li>
@@ -165,7 +166,8 @@ animatedcollapse.init()
                     
                     <br />
                     <br />
-                  <a href="https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe"><img alt="Download Scrotter for Windows" src="images/DownloadForWindows.png" /></a>
+                  <a href="https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/installer.exe"><img alt="Download Scrotter for Windows (Installer)" src="images/DownloadForWindowsInstaller.png" /></a>
+                  <a href="https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe"><img alt="Download Scrotter for Windows (Portable Executable)" src="images/DownloadForWindowsPortable.png" /></a>
 
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://yttrium-tyclief.github.io/Scrotter/"><img style="margin: 0; width: 300; height: 300;" alt="Scrotter for Windows" src="images/Windows.png" /></a><a href="http://yttrium-tyclief.github.io/Scrotter/Android/"><img style="margin: 0; width: 300; height: 300;" alt="Scrotter for Android" src="images/Android.png" /></a>
           
