@@ -26,8 +26,8 @@ Library10=threading
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
-	#VersionCode: 01
-	#VersionName: 1.0
+	#VersionCode: 02
+	#VersionName: 1.1
 	#SupportedOrientations: portrait
 	#CanInstallToExternalStorage: True
 #End Region
@@ -47,15 +47,15 @@ Sub Process_Globals
 	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int = 1
-	Dim version As String = "1.0"
-	Dim releasedate As String = "8/27/2013"
+	Dim version As String = "1.1"
+	Dim releasedate As String = "9/13/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 	Dim PrefScreen As AHPreferenceScreen
 	Dim PrefManager As AHPreferenceManager
 	Dim publicKey As String = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiWpDfRB3l6X23cYlTK9mh7dwBtFjDhsteYZd+po2hvMjD9gfIzrqsMxzxTPL+9Oh1kWc27kmVJt+XkfpcvZIh7x9lrz8Hx33EDfQRQ5SULveFnsXX68H8GR4YJxuHvTtWkILLUDo1TpS3sMc+bi88sDk0ShU01ocFIDTMG3CFdPuqFMIYb5SA2sypQD4Z7SLA5gyNLGZ1s910LgPuGli1JOud0TazEOqVLekIPhsEMmWma7ANPzmX75u1aqGjUAbIAn5jl9rgQoFiNLb/gyEfpJyFxtCNKjVr1WdJ5UhzbIDyFmbjqPQ3OixWXanhk2szwpzeEbEXfSMdsV54MA3kQIDAQAB"
 	Dim test_1 As String
-	Dim DeveloperVersion As Boolean = True
+	Dim DeveloperVersion As Boolean = False
 End Sub
 
 Sub Globals
