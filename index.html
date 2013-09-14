@@ -117,6 +117,7 @@ animatedcollapse.init()
 <ul>
 <li>Fork the project and make pull requests to vb and Designer.vb files.</li>
 </ul><h3>Versioning</h3>
+            <p>Before beginning, be sure you DON&#39;T have Scrotter installed on your computer. If so, uninstall it from the installation directory. The directory <code>C:\Program Files (x86)\Scrotter</code> should NOT exist.</p>
 
 <ol>
 <li>Update the Version and ReleaseDate variables in Scrotter.vb.</li>
@@ -126,7 +127,9 @@ animatedcollapse.init()
 <li>Update the <code>./latest/latest</code> file to match the new version. Make sure there is no newline at the end. Be sure to edit using UTF-8 endings, not ANSI ones.</li>
 <li><a href="http://nsis.sourceforge.net/">Install NSIS</a> (Nullsoft Scriptable Install System).</li>
 <li>Open <code>./installation/NSIS Quick Setup Script Generator.exe</code> and import the <code>./installation/Scrotter.ini</code> project.</li>
-<li>After configuring version settings, without changing any other options, click <b>Generate</b> and generate to <code>./latest/installer.exe</code>.</li>
+<li>After configuring version settings, under &quot;Include License&quot;, point it to the file at <code>./installation/LICENSE.txt</code>. </li>
+    <li>Click Next, and then point the Main exe to <code>./latest/scrotter.exe</code> before clicking Next again. </li>
+    <li>Generate to <code>./latest/installer.exe</code>.</li>
 <li>Push a commit titled "Release v#".</li>
 <li>Finally, add a new tag with <code>git tag -a v#.# -m 'Beta v#.#'</code> and execute <code>git push --tags</code>.</li>
 </ol><h3>Issues &amp; Suggestions</h3>
