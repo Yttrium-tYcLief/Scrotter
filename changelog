@@ -1,3 +1,11 @@
+0.9.4
+- yttrium
+   Fixed bug that caused a folder called "False" to be created upon startup
+   Created installer
+   Switched license to LPPLv1.3c
+   New device:
+        Optimus 4X HD
+
 0.9.3
 - yttrium
    Make update window resizable.

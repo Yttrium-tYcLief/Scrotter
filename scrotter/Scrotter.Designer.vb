@@ -76,7 +76,7 @@ Partial Class Scrotter
         '
         Me.ModelBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ModelBox.FormattingEnabled = True
-        Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "BlackBerry Z10", "Google Nexus 4", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Kyocera RiSE", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Player 5.0", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy SIV", "Samsung Google Galaxy Nexus"})
+        Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "BlackBerry Z10", "Google Nexus 4", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Kyocera RiSE", "LG Optimus 4X HD", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Player 5.0", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy SIV", "Samsung Google Galaxy Nexus"})
         Me.ModelBox.Location = New System.Drawing.Point(317, 130)
         Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ModelBox.MaxDropDownItems = 16
@@ -127,10 +127,10 @@ Partial Class Scrotter
         Me.ShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ShadowCheckbox.AutoSize = True
         Me.ShadowCheckbox.Enabled = False
-        Me.ShadowCheckbox.Location = New System.Drawing.Point(316, 546)
+        Me.ShadowCheckbox.Location = New System.Drawing.Point(314, 546)
         Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ShadowCheckbox.Name = "ShadowCheckbox"
-        Me.ShadowCheckbox.Size = New System.Drawing.Size(91, 20)
+        Me.ShadowCheckbox.Size = New System.Drawing.Size(93, 20)
         Me.ShadowCheckbox.TabIndex = 9
         Me.ShadowCheckbox.Text = "Edge Shadow"
         Me.ShadowCheckbox.UseVisualStyleBackColor = True
@@ -140,10 +140,10 @@ Partial Class Scrotter
         Me.GlossCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GlossCheckbox.AutoSize = True
         Me.GlossCheckbox.Enabled = False
-        Me.GlossCheckbox.Location = New System.Drawing.Point(413, 524)
+        Me.GlossCheckbox.Location = New System.Drawing.Point(411, 524)
         Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.GlossCheckbox.Name = "GlossCheckbox"
-        Me.GlossCheckbox.Size = New System.Drawing.Size(52, 20)
+        Me.GlossCheckbox.Size = New System.Drawing.Size(54, 20)
         Me.GlossCheckbox.TabIndex = 8
         Me.GlossCheckbox.Text = "Gloss"
         Me.GlossCheckbox.UseVisualStyleBackColor = True
@@ -153,10 +153,10 @@ Partial Class Scrotter
         Me.UnderShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UnderShadowCheckbox.AutoSize = True
         Me.UnderShadowCheckbox.Enabled = False
-        Me.UnderShadowCheckbox.Location = New System.Drawing.Point(413, 546)
+        Me.UnderShadowCheckbox.Location = New System.Drawing.Point(411, 546)
         Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
-        Me.UnderShadowCheckbox.Size = New System.Drawing.Size(97, 20)
+        Me.UnderShadowCheckbox.Size = New System.Drawing.Size(99, 20)
         Me.UnderShadowCheckbox.TabIndex = 10
         Me.UnderShadowCheckbox.Text = "Under Shadow"
         Me.UnderShadowCheckbox.UseVisualStyleBackColor = True
@@ -248,10 +248,10 @@ Partial Class Scrotter
         '
         Me.ReflectBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ReflectBox.AutoSize = True
-        Me.ReflectBox.Location = New System.Drawing.Point(317, 524)
+        Me.ReflectBox.Location = New System.Drawing.Point(315, 524)
         Me.ReflectBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ReflectBox.Name = "ReflectBox"
-        Me.ReflectBox.Size = New System.Drawing.Size(76, 20)
+        Me.ReflectBox.Size = New System.Drawing.Size(78, 20)
         Me.ReflectBox.TabIndex = 16
         Me.ReflectBox.Text = "Reflection"
         Me.ReflectBox.UseVisualStyleBackColor = True

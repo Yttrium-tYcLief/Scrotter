@@ -32,8 +32,8 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.9.3"
-    Public ReadOnly ReleaseDate As String = "2013-7-26"
+    Public ReadOnly Version As String = "0.9.4"
+    Public ReadOnly ReleaseDate As String = "2013-9-14"
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String
@@ -152,9 +152,11 @@ Public Class Scrotter
 
     Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
         UnderShadowCheckbox.Enabled = True
+        UnderShadowCheckbox.Checked = False
         GlossCheckbox.Enabled = True
-        ShadowCheckbox.Enabled = True
         GlossCheckbox.Checked = False
+        ShadowCheckbox.Enabled = True
+        ShadowCheckbox.Checked = False
         VariantBox.Enabled = False
         VariantBox.Items.Clear()
         VariantBox.Text = "Variant"
@@ -211,6 +213,11 @@ Public Class Scrotter
             Case "HTC Desire HD, HTC Inspire 4G"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = True
+            Case "LG Optimus 4X HD"
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = True
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
             Case "Samsung Galaxy SIV"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
@@ -536,6 +543,11 @@ Public Class Scrotter
                     ShadowRes = "320x480"
                     IndexW = 65
                     IndexH = 132
+                Case "LG Optimus 4X HD"
+                    DeviceName = "Optimus4XHD"
+                    ShadowRes = "720x1280"
+                    IndexW = 92
+                    IndexH = 215
             End Select
             Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
             If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
@@ -624,8 +636,7 @@ Public Class Scrotter
         Dim t As Type = Type.[GetType]("Mono.Runtime")
         If t Is Nothing Then IsMono = False Else IsMono = True
         about.CheckForUpdates(False)
-        If IsMono = False Then AppData = System.IO.Directory.Exists(SpecialFolder.ApplicationData & ".scrotter/") Else System.IO.Directory.Exists(SpecialFolder.Personal & ".scrotter/") 'Per-platform specifics are not usually good as code should be consistent, but this is okay for directory structures
-        System.IO.Directory.CreateDirectory(AppData)
+        'If IsMono = False Then AppData = System.IO.Directory.Exists(SpecialFolder.ApplicationData & ".scrotter/") Else System.IO.Directory.Exists(SpecialFolder.Personal & ".scrotter/") 'Per-platform specifics are not usually good as code should be consistent, but this is okay for directory structures
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
