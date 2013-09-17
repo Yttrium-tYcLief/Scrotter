@@ -188,7 +188,13 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "HTC One S", "HTC One V", "Google Nexus 4", "Kyocera RiSE"
+            Case "HTC One S", "HTC One V", "Kyocera RiSE"
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
+            Case "Google Nexus 4"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Normal", "Angled"})
+                VariantBox.SelectedIndex = 0
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
             Case "Apple iPhone 3G, 3GS"
@@ -275,11 +281,16 @@ Public Class Scrotter
             Dim Shadow As New Bitmap(720, 1280)
             Dim IndexW As Integer = 0
             Dim IndexH As Integer = 0
+            Dim DistortPt1 As New PointF
+            Dim DistortPt2 As New PointF
+            Dim DistortPt3 As New PointF
+            Dim DistortPt4 As New PointF
             Dim Overlay As New Bitmap(720, 1280)
             Dim DeviceName As String = ""
             Dim ShadowRes As String = ""
             Dim GlossUsed As Boolean = False
             Dim UndershadowUsed As Boolean = False
+            Dim Perspective As Boolean = False
             Dim databaseurl As String = "https://raw.github.com/Yttrium-tYcLief/Scrotter/database/"
             Select Case args.model
                 Case "Samsung Galaxy SIII Mini"
@@ -485,10 +496,25 @@ Public Class Scrotter
                     IndexH = 165
                     GlossUsed = True
                 Case "Google Nexus 4"
-                    DeviceName = "Nexus4"
+                    If args.var = "Normal" Then
+                        DeviceName = "Nexus4"
+                        IndexW = 45
+                        IndexH = 193
+                    ElseIf args.var = "Angled" Then
+                        DeviceName = "Nexus4Angle"
+                        IndexW = 137
+                        IndexH = 60
+                        DistortPt1.X = 0
+                        DistortPt1.Y = 240
+                        DistortPt2.X = 521
+                        DistortPt2.Y = 1
+                        DistortPt3.X = 1304
+                        DistortPt3.Y = 470
+                        DistortPt4.X = 772
+                        DistortPt4.Y = 789
+                        Perspective = True
+                    End If
                     ShadowRes = "768x1280"
-                    IndexW = 45
-                    IndexH = 193
                     GlossUsed = True
                 Case "Motorola Droid RAZR M"
                     DeviceName = "DroidRazrM"
@@ -549,58 +575,90 @@ Public Class Scrotter
                     IndexW = 92
                     IndexH = 215
             End Select
-            Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
-            If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
-            If GlossUsed = True Then Gloss = FetchImage(databaseurl & "Gloss/" & DeviceName & ".png")
-            Shadow = FetchImage(databaseurl & "Shadow/" & ShadowRes & ".png")
-            Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
-            Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
-                graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
-                graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
-                ScreenCapBitmap = imgtmp2
-            End Using
-            Dim Background As New Bitmap(Image1.Width, Image1.Height)
-            Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
-            If ReflectBox.Checked = True Then
-                Image3 = New Bitmap(Image1.Width, Image1.Height * (6 / 5), PixelFormat.Format32bppArgb)
-            End If
-            Dim g As Graphics = Graphics.FromImage(Image3)
-            g.Clear(Color.Transparent)
-            g.DrawImage(Background, New Point(0, 0))
-            If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
-            g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
-            If ShadowCheckbox.Checked = True Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
-            g.DrawImage(Image1, New Point(0, 0))
-            If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
-            ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
-            g.Dispose()
-            If ReflectBox.Checked = True Then
-                Dim g2 As Graphics = Graphics.FromImage(Image3)
-                Dim bm_src1 As Bitmap = New Bitmap(Image1.Width, CType(Image1.Height * (1 / 5), Integer), PixelFormat.Format32bppArgb)
-                bm_src1 = CropBitmap(Image3, 0, Image1.Height * (4 / 5), Image1.Width, Image1.Height * (1 / 5))
-                Dim bm_out As New Bitmap(Image1.Width, CType(Image1.Height * (1 / 5), Integer))
-                Using gr As Graphics = Graphics.FromImage(bm_out)
-                    gr.Clear(Color.Transparent)
-                    'Flip image
-                    gr.TranslateTransform(CSng(bm_src1.Width / 2), CSng(bm_src1.Height / 2))
-                    gr.TranslateTransform(-CSng(bm_src1.Width / 2), -CSng(bm_src1.Height / 2))
-                    Dim alpha As Integer
-                    For x As Integer = 0 To bm_src1.Width - 1
-                        For y As Integer = 0 To bm_src1.Height - 1
-                            alpha = (255 * y) \ bm_src1.Height
-                            Dim clr As Color = bm_src1.GetPixel(x, y)
-                            clr = Color.FromArgb(alpha, clr.R, clr.G, clr.B)
-                            bm_src1.SetPixel(x, y, clr)
-                        Next
-                    Next
-                    gr.DrawImage(bm_src1, 0, 0)
-                    gr.Dispose()
+            If Perspective = True Then
+                Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
+                If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
+                If GlossUsed = True Then Gloss = FetchImage(databaseurl & "Gloss/" & DeviceName & ".png")
+                Shadow = FetchImage(databaseurl & "Shadow/" & ShadowRes & ".png")
+                Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
+                Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
+                    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                    graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
+                    If ShadowCheckbox.Checked = True Then graphicsHandle.DrawImage((Shadow), New Point(0, 0))
+                    ScreenCapBitmap = imgtmp2
                 End Using
-                bm_out.RotateFlip(RotateFlipType.RotateNoneFlipY)
-                g2.DrawImage(bm_out, New Point(0, Image1.Height))
-                g2.Dispose()
+                Dim filter As New YLScsDrawing.Imaging.Filters.FreeTransform()
+                filter.Bitmap = ScreenCapBitmap
+                ' assign FourCorners (the four X/Y coords) of the new perspective shape
+                ' coords 0-3 are in a clockwise rotation from top left: top left, top right, bottom right, bottom left
+                filter.FourCorners = New System.Drawing.PointF() {DistortPt1, DistortPt2, DistortPt3, DistortPt4}
+                filter.IsBilinearInterpolation = True
+                Dim Background As New Bitmap(Image1.Width, Image1.Height)
+                Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
+                Dim g As Graphics = Graphics.FromImage(Image3)
+                g.Clear(Color.Transparent)
+                g.DrawImage(Background, New Point(0, 0))
+                g.DrawImage(Image1, New Point(0, 0))
+                g.DrawImage(filter.Bitmap, New Point(IndexW, IndexH))
+                If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
+                ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
+                g.Dispose()
+                CanvImg(ScreenPicker.Value) = Image3
+            Else
+                Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
+                If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
+                If GlossUsed = True Then Gloss = FetchImage(databaseurl & "Gloss/" & DeviceName & ".png")
+                Shadow = FetchImage(databaseurl & "Shadow/" & ShadowRes & ".png")
+                Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
+                Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
+                    graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                    graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
+                    ScreenCapBitmap = imgtmp2
+                End Using
+                Dim Background As New Bitmap(Image1.Width, Image1.Height)
+                Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
+                If ReflectBox.Checked = True Then
+                    Image3 = New Bitmap(Image1.Width, Image1.Height * (6 / 5), PixelFormat.Format32bppArgb)
+                End If
+                Dim g As Graphics = Graphics.FromImage(Image3)
+                g.Clear(Color.Transparent)
+                g.DrawImage(Background, New Point(0, 0))
+                If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
+                g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
+                If ShadowCheckbox.Checked = True Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
+                g.DrawImage(Image1, New Point(0, 0))
+                If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
+                ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
+                g.Dispose()
+                If ReflectBox.Checked = True Then
+                    Dim g2 As Graphics = Graphics.FromImage(Image3)
+                    Dim bm_src1 As Bitmap = New Bitmap(Image1.Width, CType(Image1.Height * (1 / 5), Integer), PixelFormat.Format32bppArgb)
+                    bm_src1 = CropBitmap(Image3, 0, Image1.Height * (4 / 5), Image1.Width, Image1.Height * (1 / 5))
+                    Dim bm_out As New Bitmap(Image1.Width, CType(Image1.Height * (1 / 5), Integer))
+                    Using gr As Graphics = Graphics.FromImage(bm_out)
+                        gr.Clear(Color.Transparent)
+                        'Flip image
+                        gr.TranslateTransform(CSng(bm_src1.Width / 2), CSng(bm_src1.Height / 2))
+                        gr.TranslateTransform(-CSng(bm_src1.Width / 2), -CSng(bm_src1.Height / 2))
+                        Dim alpha As Integer
+                        For x As Integer = 0 To bm_src1.Width - 1
+                            For y As Integer = 0 To bm_src1.Height - 1
+                                alpha = (255 * y) \ bm_src1.Height
+                                Dim clr As Color = bm_src1.GetPixel(x, y)
+                                clr = Color.FromArgb(alpha, clr.R, clr.G, clr.B)
+                                bm_src1.SetPixel(x, y, clr)
+                            Next
+                        Next
+                        gr.DrawImage(bm_src1, 0, 0)
+                        gr.Dispose()
+                    End Using
+                    bm_out.RotateFlip(RotateFlipType.RotateNoneFlipY)
+                    g2.DrawImage(bm_out, New Point(0, Image1.Height))
+                    g2.Dispose()
+                End If
+                CanvImg(ScreenPicker.Value) = Image3
             End If
-            CanvImg(ScreenPicker.Value) = Image3
+            
         End If
     End Sub
 
