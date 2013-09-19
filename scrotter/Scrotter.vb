@@ -179,6 +179,18 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
                 VariantBox.SelectedIndex = 0
+            Case "Apple iPhone 5S"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Black", "Black Angled", "Gold", "Gold Angled", "White", "White Angled"})
+                VariantBox.SelectedIndex = 0
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
+            Case "Apple iPhone 5C"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Blue", "Green", "Red", "White", "Yellow"})
+                VariantBox.SelectedIndex = 0
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = False
             Case "Samsung Galaxy SII, Epic 4G Touch"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Galaxy SII", "Galaxy SII T-Mobile", "Epic 4G Touch"})
@@ -574,6 +586,54 @@ Public Class Scrotter
                     ShadowRes = "720x1280"
                     IndexW = 92
                     IndexH = 215
+                Case "Apple iPhone 5C"
+                    If args.var = "Blue" Then
+                        DeviceName = "iPhone5CBlue"
+                    ElseIf args.var = "Green" Then
+                        DeviceName = "iPhone5CGreen"
+                    ElseIf args.var = "Red" Then
+                        DeviceName = "iPhone5CRed"
+                    ElseIf args.var = "White" Then
+                        DeviceName = "iPhone5CWhite"
+                    ElseIf args.var = "Yellow" Then
+                        DeviceName = "iPhone5CYellow"
+                    End If
+                    ShadowRes = "640x1136"
+                    IndexW = 220
+                    IndexH = 283
+                    UndershadowUsed = True
+                Case "Apple iPhone 5S"
+                    If args.var = "Black" Then
+                        DeviceName = "iPhone5SBlack"
+                    ElseIf args.var = "Gold" Then
+                        DeviceName = "iPhone5SGold"
+                    ElseIf args.var = "White" Then
+                        DeviceName = "iPhone5SWhite"
+                    ElseIf args.var = "Black Angled" Then
+                        DeviceName = "iPhone5SBlackAngle"
+                    ElseIf args.var = "Gold Angled" Then
+                        DeviceName = "iPhone5SGoldAngle"
+                    ElseIf args.var = "White Angled" Then
+                        DeviceName = "iPhone5SWhiteAngle"
+                    End If
+                    If args.var = "Black" Or args.var = "Gold" Or args.var = "White" Then
+                        IndexW = 198
+                        IndexH = 416
+                    ElseIf args.var = "Black Angled" Or args.var = "Gold Angled" Or args.var = "White Angled" Then
+                        IndexW = 249
+                        IndexH = 354
+                        DistortPt1.X = 0
+                        DistortPt1.Y = 0
+                        DistortPt2.X = 467
+                        DistortPt2.Y = 92
+                        DistortPt3.X = 467
+                        DistortPt3.Y = 1145
+                        DistortPt4.X = 0
+                        DistortPt4.Y = 1131
+                        Perspective = True
+                    End If
+                    ShadowRes = "640x1136"
+                    UndershadowUsed = True
             End Select
             If Perspective = True Then
                 Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
@@ -624,9 +684,9 @@ Public Class Scrotter
                 g.Clear(Color.Transparent)
                 g.DrawImage(Background, New Point(0, 0))
                 If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
+                g.DrawImage(Image1, New Point(0, 0))
                 g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
                 If ShadowCheckbox.Checked = True Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
-                g.DrawImage(Image1, New Point(0, 0))
                 If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
                 g.Dispose()
