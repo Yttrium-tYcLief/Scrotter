@@ -658,9 +658,9 @@ Public Class Scrotter
                 Dim g As Graphics = Graphics.FromImage(Image3)
                 g.Clear(Color.Transparent)
                 g.DrawImage(Background, New Point(0, 0))
+                If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
                 g.DrawImage(Image1, New Point(0, 0))
                 g.DrawImage(filter.Bitmap, New Point(IndexW, IndexH))
-                If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
                 g.Dispose()
                 CanvImg(ScreenPicker.Value) = Image3

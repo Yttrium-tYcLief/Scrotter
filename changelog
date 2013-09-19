@@ -1,3 +1,11 @@
+master
+- yttrium
+   Add perspective distortion rendering
+   New devices:
+        Nexus 4 Angled
+        iPhone 5C (Blue, Green, Red, White, Yellow)
+        iPhone 5S (Black [Angled], Gold [Angled], White [Angled])
+
 0.9.4
 - yttrium
    Fixed bug that caused a folder called "False" to be created upon startup
