@@ -175,9 +175,13 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPad Mini"
+            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPad Mini"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
+                VariantBox.SelectedIndex = 0
+            Case "Apple iPhone 5"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Black", "Black Angled", "White", "White Angled"})
                 VariantBox.SelectedIndex = 0
             Case "Apple iPhone 5S"
                 VariantBox.Enabled = True
@@ -263,6 +267,13 @@ Public Class Scrotter
             Else
                 UnderShadowCheckbox.Enabled = True
             End If
+        ElseIf ModelBox.Text = "Apple iPhone 5" Then
+            If VariantBox.Text = "White Angled" Then
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
+            Else
+                UnderShadowCheckbox.Enabled = True
+            End If
         End If
         If BackgroundDownloader.IsBusy = False Then
             LoadImage.Image = My.Resources.Loading
@@ -303,6 +314,7 @@ Public Class Scrotter
             Dim GlossUsed As Boolean = False
             Dim UndershadowUsed As Boolean = False
             Dim Perspective As Boolean = False
+            Dim OverlayUsed As Boolean = False
             Dim databaseurl As String = "https://raw.github.com/Yttrium-tYcLief/Scrotter/database/"
             Select Case args.model
                 Case "Samsung Galaxy SIII Mini"
@@ -446,12 +458,41 @@ Public Class Scrotter
                 Case "Apple iPhone 5"
                     If args.var = "Black" Then
                         DeviceName = "iPhone5Black"
+                        IndexW = 133
+                        IndexH = 287
                     ElseIf args.var = "White" Then
                         DeviceName = "iPhone5White"
+                        IndexW = 133
+                        IndexH = 287
+                    ElseIf args.var = "White Angled" Then
+                        DeviceName = "iPhone5WhiteAngle"
+                        IndexW = 336
+                        IndexH = 293
+                        DistortPt1.X = 0
+                        DistortPt1.Y = 321
+                        DistortPt2.X = 679
+                        DistortPt2.Y = 0
+                        DistortPt3.X = 1584
+                        DistortPt3.Y = 826
+                        DistortPt4.X = 865
+                        DistortPt4.Y = 1243
+                        Perspective = True
+                    ElseIf args.var = "Black Angled" Then
+                        DeviceName = "iPhone5BlackAngle"
+                        IndexW = 415
+                        IndexH = 192
+                        DistortPt1.X = 974
+                        DistortPt1.Y = 0
+                        DistortPt2.X = 1511
+                        DistortPt2.Y = 321
+                        DistortPt3.X = 544
+                        DistortPt3.Y = 936
+                        DistortPt4.X = 0
+                        DistortPt4.Y = 563
+                        Perspective = True
+                        OverlayUsed = True
                     End If
                     ShadowRes = "640x1136"
-                    IndexW = 133
-                    IndexH = 287
                     GlossUsed = True
                     UndershadowUsed = True
                 Case "Samsung Google Galaxy Nexus"
@@ -640,6 +681,7 @@ Public Class Scrotter
                 If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
                 If GlossUsed = True Then Gloss = FetchImage(databaseurl & "Gloss/" & DeviceName & ".png")
                 Shadow = FetchImage(databaseurl & "Shadow/" & ShadowRes & ".png")
+                If OverlayUsed = True Then Overlay = FetchImage(databaseurl & "Overlay/" & DeviceName & ".png")
                 Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
                 Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
                     graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
@@ -662,6 +704,7 @@ Public Class Scrotter
                 g.DrawImage(Image1, New Point(0, 0))
                 g.DrawImage(filter.Bitmap, New Point(IndexW, IndexH))
                 If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
+                If OverlayUsed = True Then g.DrawImage(Overlay, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
                 g.Dispose()
                 CanvImg(ScreenPicker.Value) = Image3
@@ -670,6 +713,7 @@ Public Class Scrotter
                 If UndershadowUsed = True Then Undershadow = FetchImage(databaseurl & "Undershadow/" & DeviceName & ".png")
                 If GlossUsed = True Then Gloss = FetchImage(databaseurl & "Gloss/" & DeviceName & ".png")
                 Shadow = FetchImage(databaseurl & "Shadow/" & ShadowRes & ".png")
+                If OverlayUsed = True Then Overlay = FetchImage(databaseurl & "Overlay/" & DeviceName & ".png")
                 Dim imgtmp2 As New Bitmap(Shadow.Width, Shadow.Height)
                 Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
                     graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
@@ -689,6 +733,7 @@ Public Class Scrotter
                 g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
                 If ShadowCheckbox.Checked = True Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
                 If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
+                If OverlayUsed = True Then g.DrawImage(Overlay, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
                 g.Dispose()
                 If ReflectBox.Checked = True Then
