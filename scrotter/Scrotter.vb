@@ -248,6 +248,12 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Blue", "White"})
                 VariantBox.SelectedIndex = 0
+            Case "Motorola Moto X"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Black", "White"})
+                VariantBox.SelectedIndex = 0
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
         End Select
         RefreshPreview()
     End Sub
@@ -598,6 +604,16 @@ Public Class Scrotter
                     ShadowRes = "1080x1920"
                     IndexW = 160
                     IndexH = 281
+                Case "Motorola Moto X"
+                    GlossUsed = True
+                    If args.var = "Black" Then
+                        DeviceName = "MotoXBlack"
+                    ElseIf args.var = "White" Then
+                        DeviceName = "MotoXWhite"
+                    End If
+                    ShadowRes = "720x1280"
+                    IndexW = 52
+                    IndexH = 194
                 Case "Samsung Galaxy SIV"
                     If args.var = "Blue" Then
                         DeviceName = "GSIVBlue"
