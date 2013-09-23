@@ -175,7 +175,7 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPad Mini"
+            Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPad Mini", "Sony Xperia S"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
                 VariantBox.SelectedIndex = 0
@@ -235,7 +235,7 @@ Public Class Scrotter
             Case "HTC Desire HD, HTC Inspire 4G"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = True
-            Case "LG Optimus 4X HD"
+            Case "LG Optimus 4X HD", "Sony Xperia Z"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = True
                 UnderShadowCheckbox.Enabled = False
@@ -691,6 +691,23 @@ Public Class Scrotter
                     End If
                     ShadowRes = "640x1136"
                     UndershadowUsed = True
+                Case "Sony Xperia S"
+                    If args.var = "Black" Then
+                        DeviceName = "XperiaSBlack"
+                    ElseIf args.var = "White" Then
+                        DeviceName = "XperiaSWhite"
+                    End If
+                    ShadowRes = "720x1280"
+                    GlossUsed = True
+                    UndershadowUsed = True
+                    IndexW = 281
+                    IndexH = 301
+                Case "Sony Xperia Z"
+                    GlossUsed = True
+                    DeviceName = "XperiaZ"
+                    ShadowRes = "1080x1920"
+                    IndexW = 107
+                    IndexH = 196
             End Select
             If Perspective = True Then
                 Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
@@ -736,6 +753,15 @@ Public Class Scrotter
                     graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
                     ScreenCapBitmap = imgtmp2
                 End Using
+                If args.model = "Sony Xperia Z" Then
+                    Dim imgtmp As New Bitmap(676, 1194)
+                    Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
+                        graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                        graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 676, 1194)
+                        If ShadowCheckbox.Checked = True Then graphicsHandle.DrawImage((Shadow), 0, 0, 676, 1194)
+                        ScreenCapBitmap = imgtmp
+                    End Using
+                End If
                 Dim Background As New Bitmap(Image1.Width, Image1.Height)
                 Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
                 If ReflectBox.Checked = True Then
@@ -747,7 +773,7 @@ Public Class Scrotter
                 If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
                 g.DrawImage(Image1, New Point(0, 0))
                 g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
-                If ShadowCheckbox.Checked = True Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
+                If ShadowCheckbox.Checked = True And (args.model = "Sony Xperia Z") = False Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
                 If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
                 If OverlayUsed = True Then g.DrawImage(Overlay, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
