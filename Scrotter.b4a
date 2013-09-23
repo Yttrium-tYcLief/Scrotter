@@ -26,8 +26,8 @@ Library10=threading
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Scrotter
-	#VersionCode: 02
-	#VersionName: 1.1
+	#VersionCode: 03
+	#VersionName: 1.2
 	#SupportedOrientations: portrait
 	#CanInstallToExternalStorage: True
 #End Region
@@ -47,8 +47,8 @@ Sub Process_Globals
 	Dim WRAP_CONTENT As Int : WRAP_CONTENT = -2
 	Type PanelInfo (PanelType As Int, LayoutLoaded As Boolean) 
 	Dim CurrentPage As Int = 1
-	Dim version As String = "1.1"
-	Dim releasedate As String = "9/13/2013"
+	Dim version As String = "1.2"
+	Dim releasedate As String = "9/23/2013"
 	Dim theme As String
 	Dim Loaded(4) As Boolean
 	Dim PrefScreen As AHPreferenceScreen
@@ -101,7 +101,7 @@ Sub Globals
 	Dim savedphone, savedvariant As String
 	Dim savephone As String = "False"
 	Dim themelist As List = Array As String("Dark", "Light")
-	Dim devicelist As List = Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy Player 5.0", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Google Galaxy Nexus")
+	Dim devicelist As List = Array As String("Google Nexus 4", "Google Nexus 7", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Xoom", "Samsung Galaxy Note II", "Samsung Galaxy Player 5.0", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy SIV", "Samsung Google Galaxy Nexus")
 	Dim UbuntuRegular As Typeface = Typeface.LoadFromAssets("ubuntureg.ttf")
 	Dim UbuntuLight As Typeface = Typeface.LoadFromAssets("ubuntulight.ttf")
 	Dim SettingsBtn As Button
@@ -445,6 +445,8 @@ Sub ModelBox_itemClick (Position As Int, Value As Object)
 		Case "HTC One X, HTC One X+", "HTC One"
 			VariantSet(Array As String("White", "Black"))
 			GlossCheckbox.Enabled = True
+		Case "Samsung Galaxy SIV"
+			VariantSet(Array As String("White", "Blue"))
 		Case "Samsung Galaxy Note II"
 			VariantSet(Array As String("White", "Gray"))
 			GlossCheckbox.Checked = True
@@ -592,6 +594,19 @@ Sub ImageProcess
             Undershadow.Initialize(File.DirAssets, "undershadow/" & "gsiii.png")
             Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
             IndexH = 184
+        Case "Samsung Galaxy SIV"
+            If VariantBox.SelectedItem = "Blue" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsivblue.png")
+                IndexW = 58
+            	IndexH = 218
+            	Shadow.Initialize(File.DirAssets, "shadow/" & r10801920)
+            Else If VariantBox.SelectedItem = "White" OR VariantBox.SelectedItem = "Pick a variant" Then
+                Device.Initialize(File.DirAssets, "device/" & "gsivwhite.png")
+                IndexW = 45
+            	IndexH = 159
+            	Shadow.Initialize(File.DirAssets, "shadow/" & r7201280)
+				If LoadedImage.IsInitialized Then LoadedImage = CreateScaledBitmap(LoadedImage, 720, 1280, True)
+            End If
         Case "Motorola Xoom"
             If VariantBox.SelectedItem = "Portrait" OR VariantBox.SelectedItem = "Pick a variant" Then
                 Device.Initialize(File.DirAssets, "device/" & "xoomport.png")
@@ -724,6 +739,15 @@ Sub ImageProcess
 	PreviewImage.Initialize3(ResizeImage(WorkingBitmap, Preview.Width, Preview.Height))
 	FinalBitmap.Initialize3(WorkingBitmap)
 	BackgroundThread.RunOnGuiThread("EndLoading", Null)
+End Sub
+
+Sub CreateScaledBitmap(Original As Bitmap, Width As Int, Height As Int, Filter As Boolean) As Bitmap
+   Dim r As Reflector
+   Dim b As Bitmap
+   b = r.RunStaticMethod("android.graphics.Bitmap", "createScaledBitmap", _
+      Array As Object(Original, Width, Height, Filter), _
+      Array As String("android.graphics.Bitmap", "java.lang.int", "java.lang.int", "java.lang.boolean"))
+   Return b
 End Sub
 
 Sub EndLoading
