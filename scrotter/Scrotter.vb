@@ -893,7 +893,7 @@ Public Class Scrotter
     Private Function CropBitmap(ByRef bmp As Bitmap, ByVal cropX As Integer, ByVal cropY As Integer, ByVal cropWidth As Integer, ByVal cropHeight As Integer) As Bitmap
         Dim rect As New Rectangle(cropX, cropY, cropWidth, cropHeight)
         Dim cropped As Bitmap = bmp.Clone(rect, PixelFormat.Format32bppArgb)
-        Return bmp
+        Return cropped
     End Function
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
