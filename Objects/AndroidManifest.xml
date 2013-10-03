@@ -2,8 +2,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.yttrium.scrotter"
-	android:versionCode="3"
-	android:versionName="1.2"
+	android:versionCode="5"
+	android:versionName="1.4"
 	android:installLocation="preferExternal">
 	
 	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="15"/>
@@ -20,7 +20,8 @@
 	<application
 		android:icon="@drawable/icon"
 		android:label="Scrotter"
-		android:theme="@android:style/Theme.Holo.Light">
+		android:theme="@android:style/Theme.Holo.Light"
+		android:largeHeap="true">
 		
 		<activity android:name="anywheresoftware.b4a.objects.preferenceactivity"/>
 		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIez0WOCFFG_Fq3wWHPsHrFVqUb3ubbiEZ0ySG5w" />
