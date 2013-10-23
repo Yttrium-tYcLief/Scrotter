@@ -3,11 +3,13 @@ master
    Add perspective distortion rendering
    New devices:
         Nexus 4 Angled
+	Nexus 4 Slant
         iPhone 5C (Blue, Green, Red, White, Yellow)
         iPhone 5S (Black [Angled], Gold [Angled], White [Angled])
 	iPhone 5 Angled (Black, White)
         Sony Xperia S (Black, White)
         Sony Xperia Z
+	LG G2
 
 0.9.4
 - yttrium

@@ -209,7 +209,7 @@ Public Class Scrotter
                 UnderShadowCheckbox.Checked = False
             Case "Google Nexus 4"
                 VariantBox.Enabled = True
-                VariantBox.Items.AddRange({"Normal", "Angled"})
+                VariantBox.Items.AddRange({"Normal", "Angled", "Slant"})
                 VariantBox.SelectedIndex = 0
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
@@ -279,6 +279,21 @@ Public Class Scrotter
                 UnderShadowCheckbox.Checked = False
             Else
                 UnderShadowCheckbox.Enabled = True
+            End If
+        ElseIf ModelBox.Text = "Google Nexus 4" Then
+            If VariantBox.Text = "Slant" Then
+                GlossCheckbox.Enabled = False
+                GlossCheckbox.Checked = True
+                UnderShadowCheckbox.Enabled = True
+            ElseIf VariantBox.Text = "Angled" Then
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = True
+                GlossCheckbox.Enabled = True
+            Else
+                GlossCheckbox.Checked = False
+                GlossCheckbox.Enabled = False
+                UnderShadowCheckbox.Enabled = False
+                UnderShadowCheckbox.Checked = False
             End If
         End If
         If BackgroundDownloader.IsBusy = False Then
@@ -572,6 +587,20 @@ Public Class Scrotter
                         DistortPt4.X = 772
                         DistortPt4.Y = 789
                         Perspective = True
+                    ElseIf args.var = "Slant" Then
+                        DeviceName = "Nexus4Slant"
+                        IndexW = 339
+                        IndexH = 154
+                        DistortPt1.X = 0
+                        DistortPt1.Y = 0
+                        DistortPt2.X = 506
+                        DistortPt2.Y = 34
+                        DistortPt3.X = 734
+                        DistortPt3.Y = 991
+                        DistortPt4.X = 212
+                        DistortPt4.Y = 1021
+                        Perspective = True
+                        UndershadowUsed = True
                     End If
                     ShadowRes = "768x1280"
                     GlossUsed = True
@@ -708,6 +737,13 @@ Public Class Scrotter
                     ShadowRes = "1080x1920"
                     IndexW = 107
                     IndexH = 196
+                Case "LG G2"
+                    DeviceName = "LGG2"
+                    ShadowRes = "1080x1920"
+                    GlossUsed = True
+                    UndershadowUsed = True
+                    IndexW = 190
+                    IndexH = 218
             End Select
             If Perspective = True Then
                 Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
@@ -761,6 +797,14 @@ Public Class Scrotter
                         If ShadowCheckbox.Checked = True Then graphicsHandle.DrawImage((Shadow), 0, 0, 676, 1194)
                         ScreenCapBitmap = imgtmp
                     End Using
+                ElseIf args.model = "LG G2" Then
+                    Dim imgtmp As New Bitmap(637, 1120)
+                    Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
+                        graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+                        graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 637, 1120)
+                        If ShadowCheckbox.Checked = True Then graphicsHandle.DrawImage((Shadow), 0, 0, 637, 1120)
+                        ScreenCapBitmap = imgtmp
+                    End Using
                 End If
                 Dim Background As New Bitmap(Image1.Width, Image1.Height)
                 Dim Image3 As New Bitmap(Image1.Width, Image1.Height, PixelFormat.Format32bppArgb)
@@ -773,7 +817,7 @@ Public Class Scrotter
                 If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
                 g.DrawImage(Image1, New Point(0, 0))
                 g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
-                If ShadowCheckbox.Checked = True And (args.model = "Sony Xperia Z") = False Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
+                If ShadowCheckbox.Checked = True And ((args.model = "Sony Xperia Z") Or (args.model = "LG G2")) = False Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
                 If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
                 If OverlayUsed = True Then g.DrawImage(Overlay, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
