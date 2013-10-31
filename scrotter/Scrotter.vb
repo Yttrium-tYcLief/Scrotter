@@ -1,18 +1,18 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex and Serah West
-'Version 0.9.3 Beta
+'Version 0.9.5 Beta
 '
-'This program is free software; you can redistribute it and/or
-'modify it under the terms of the GNU General Public License
-'as published by the Free Software Foundation; either version 2
-'of the License, or (at your option) any later version.
+'This work may be distributed and/or modified under the
+'conditions of the LaTeX Project Public License, either version 1.3
+'of this license or (at your option) any later version.
+'The latest version of this license is in
+'  http://www.latex-project.org/lppl.txt
+'and version 1.3 or later is part of all distributions of LaTeX
+'version 2005/12/01 or later.
 '
-'This program is distributed in the hope that it will be useful,
-'but WITHOUT ANY WARRANTY; without even the implied warranty of
-'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'GNU General Public License for more details.
+'This work has the LPPL maintenance status `maintained'.
 '
-'The GNU General Public License may be read at http://www.gnu.org/licenses/gpl-2.0.html.
+'The Current Maintainer of this work is Alex West.
 
 Imports System.Net
 Imports System.IO
@@ -32,8 +32,8 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.9.4"
-    Public ReadOnly ReleaseDate As String = "2013-9-14"
+    Public ReadOnly Version As String = "0.9.5"
+    Public ReadOnly ReleaseDate As String = "2013-10-31"
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String
@@ -213,7 +213,7 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "Apple iPhone 3G, 3GS"
+            Case "Apple iPhone 3G, 3GS", "Google Nexus 5"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
             Case "BlackBerry Z10"
@@ -744,6 +744,12 @@ Public Class Scrotter
                     UndershadowUsed = True
                     IndexW = 190
                     IndexH = 218
+                Case "Google Nexus 5"
+                    DeviceName = "Nexus5"
+                    ShadowRes = "1080x1920"
+                    UndershadowUsed = True
+                    IndexW = 366
+                    IndexH = 282
             End Select
             If Perspective = True Then
                 Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
