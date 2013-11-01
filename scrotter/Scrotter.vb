@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
 'Copyright (C) 2013 Alex and Serah West
-'Version 0.9.5 Beta
+'Version 0.9.6 Beta
 '
 'This work may be distributed and/or modified under the
 'conditions of the LaTeX Project Public License, either version 1.3
@@ -32,8 +32,8 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.9.5"
-    Public ReadOnly ReleaseDate As String = "2013-10-31"
+    Public ReadOnly Version As String = "0.9.6"
+    Public ReadOnly ReleaseDate As String = "2013-11-01"
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String

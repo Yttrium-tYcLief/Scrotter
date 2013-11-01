@@ -86,10 +86,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="YLScsDrawing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\YLScsDrawing.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -120,6 +116,14 @@
     <Compile Include="ArrayPreview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Drawing\Canvas.designer.vb">
+      <DependentUpon>Canvas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Drawing\Canvas.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Drawing\FreeTransform.vb" />
+    <Compile Include="Drawing\ImageData.vb" />
     <Compile Include="Scrotter.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +152,7 @@
     <Compile Include="Updater.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Drawing\Vector.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="about.resx">

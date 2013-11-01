@@ -1,6 +1,10 @@
 master
 - yttrium
 
+0.9.6
+- yttrium
+   Bundled YLScsDrawing within the application, app should run again
+
 0.9.5
 - yttrium
    Add perspective distortion rendering
