@@ -78,6 +78,10 @@ Public Class Scrotter
         End If
     End Sub
 
+    Private Sub LoadImg(Image As Bitmap)
+
+    End Sub
+
     Private Sub Save(sender As Object, e As EventArgs) Handles SaveBtn.Click
         If ScreenAmountPicker.Value > 1 Then
             Dim number As Integer = 1
@@ -856,7 +860,7 @@ Public Class Scrotter
                 End If
                 CanvImg(ScreenPicker.Value) = Image3
             End If
-            
+
         End If
     End Sub
 
@@ -893,6 +897,22 @@ Public Class Scrotter
         If t Is Nothing Then IsMono = False Else IsMono = True
         about.CheckForUpdates(False)
         'If IsMono = False Then AppData = System.IO.Directory.Exists(SpecialFolder.ApplicationData & ".scrotter/") Else System.IO.Directory.Exists(SpecialFolder.Personal & ".scrotter/") 'Per-platform specifics are not usually good as code should be consistent, but this is okay for directory structures
+        Me.AllowDrop = True
+    End Sub
+
+    Private Sub Scrotter_DragDrop(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
+        Dim files() As String = e.Data.GetData(DataFormats.FileDrop)
+        For Each path In files
+            OpenPath(ScreenPicker.Value) = path
+            ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
+            RefreshLists()
+        Next
+    End Sub
+
+    Private Sub Scrotter_DragEnter(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles Me.DragEnter
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
