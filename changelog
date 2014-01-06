@@ -1,6 +1,10 @@
 master
 - yttrium
    Added Drag and Drop support
+   Added automatic rotation (for landscape devices)
+   New device:
+        Nexus 5
+        Nexus 5 Slant
 
 0.9.6
 - yttrium

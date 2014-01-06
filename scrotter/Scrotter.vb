@@ -217,7 +217,11 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "Apple iPhone 3G, 3GS", "Google Nexus 5"
+            Case "Google Nexus 5"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"Black Normal", "Black Landscape", "Black Slant", "Black Slant Landscape", "White Normal", "White Landscape", "White Slant", "White Slant Landscape"})
+                VariantBox.SelectedIndex = 0
+            Case "Apple iPhone 3G, 3GS"
                 GlossCheckbox.Enabled = False
                 GlossCheckbox.Checked = False
             Case "BlackBerry Z10"
@@ -410,6 +414,9 @@ Public Class Scrotter
                             graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 1280, 800)
                             ScreenCapBitmap = imgtmp
                         End Using
+                        If ScreenCapBitmap.Width > ScreenCapBitmap.Height Then
+                            ScreenCapBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone)
+                        End If
                     End If
                     GlossUsed = True
                     UndershadowUsed = True
@@ -424,6 +431,9 @@ Public Class Scrotter
                         ShadowRes = "1280x800"
                         IndexW = 218
                         IndexH = 191
+                        If ScreenCapBitmap.Width < ScreenCapBitmap.Height Then
+                            ScreenCapBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone)
+                        End If
                     End If
                     GlossUsed = True
                     UndershadowUsed = True
@@ -552,6 +562,9 @@ Public Class Scrotter
                         ShadowRes = "1280x800"
                         IndexW = 315
                         IndexH = 270
+                        If ScreenCapBitmap.Width < ScreenCapBitmap.Height Then
+                            ScreenCapBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone)
+                        End If
                     End If
                     GlossUsed = True
                     UndershadowUsed = True
@@ -749,11 +762,65 @@ Public Class Scrotter
                     IndexW = 190
                     IndexH = 218
                 Case "Google Nexus 5"
-                    DeviceName = "Nexus5"
                     ShadowRes = "1080x1920"
+                    If args.var = "Black Normal" Then
+                        DeviceName = "Nexus5Black"
+                    ElseIf args.var = "Black Landscape" Then
+                        DeviceName = "Nexus5BlackLand"
+                    ElseIf args.var = "Black Slant" Then
+                        DeviceName = "Nexus5BlackSlant"
+                    ElseIf args.var = "Black Slant Landscape" Then
+                        DeviceName = "Nexus5BlackSlantLand"
+                    ElseIf args.var = "White Normal" Then
+                        DeviceName = "Nexus5White"
+                    ElseIf args.var = "White Landscape" Then
+                        DeviceName = "Nexus5WhiteLand"
+                    ElseIf args.var = "White Slant" Then
+                        DeviceName = "Nexus5WhiteSlant"
+                    ElseIf args.var = "White Slant Landscape" Then
+                        DeviceName = "Nexus5WhiteSlantLand"
+                    End If
+                    If args.var = "Black Normal" Or args.var = "White Normal" Then
+                        IndexW = 164
+                        IndexH = 222
+                    ElseIf args.var = "Black Landscape" Or args.var = "White Landscape" Then
+                        IndexW = 267
+                        IndexH = 79
+                        ShadowRes = "1920x1080"
+                        If ScreenCapBitmap.Width < ScreenCapBitmap.Height Then
+                            ScreenCapBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone)
+                        End If
+                    ElseIf args.var = "Black Slant" Or args.var = "White Slant" Then
+                        IndexW = 455
+                        IndexH = 147
+                        DistortPt1.X = 0
+                        DistortPt1.Y = 0
+                        DistortPt2.X = 763
+                        DistortPt2.Y = 69
+                        DistortPt3.X = 1258
+                        DistortPt3.Y = 1691
+                        DistortPt4.X = 487
+                        DistortPt4.Y = 1744
+                        Perspective = True
+                    ElseIf args.var = "Black Slant Landscape" Or args.var = "White Slant Landscape" Then
+                        IndexW = 279
+                        IndexH = 119
+                        DistortPt1.X = 0
+                        DistortPt1.Y = 39
+                        DistortPt2.X = 1590
+                        DistortPt2.Y = 0
+                        DistortPt3.X = 1811
+                        DistortPt3.Y = 917
+                        DistortPt4.X = 184
+                        DistortPt4.Y = 1066
+                        Perspective = True
+                        ShadowRes = "1920x1080"
+                        If ScreenCapBitmap.Width < ScreenCapBitmap.Height Then
+                            ScreenCapBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone)
+                        End If
+                    End If
                     UndershadowUsed = True
-                    IndexW = 366
-                    IndexH = 282
+                    GlossUsed = True
             End Select
             If Perspective = True Then
                 Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
