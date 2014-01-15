@@ -208,7 +208,7 @@ Public Class Scrotter
                 GlossCheckbox.Checked = False
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
-            Case "HTC One S", "HTC One V", "Kyocera RiSE"
+            Case "HTC One S", "HTC One V", "Kyocera RiSE", "Sony Xperia Sola"
                 UnderShadowCheckbox.Enabled = False
                 UnderShadowCheckbox.Checked = False
             Case "Google Nexus 4"
@@ -821,6 +821,12 @@ Public Class Scrotter
                     End If
                     UndershadowUsed = True
                     GlossUsed = True
+                Case "Sony Xperia Sola"
+                    DeviceName = "XperiaSola"
+                    ShadowRes = "480x854"
+                    GlossUsed = True
+                    IndexW = 95
+                    IndexH = 141
             End Select
             If Perspective = True Then
                 Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
@@ -1002,7 +1008,7 @@ Public Class Scrotter
         ScreenPicker.Enabled = True
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         Dim bm_src1 As Bitmap = New Bitmap(CropBitmap(CanvImg(ScreenPicker.Value), 0, CanvImg(ScreenPicker.Value).Height * (2 / 3), CanvImg(ScreenPicker.Value).Width, CanvImg(ScreenPicker.Value).Height / 3))
         Dim bm_out As New Bitmap(bm_src1.Width, bm_src1.Height)
         Using gr As Graphics = Graphics.FromImage(bm_out)
@@ -1033,7 +1039,11 @@ Public Class Scrotter
         Return cropped
     End Function
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         My.Computer.Network.DownloadFile("https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe", "C:\scrotter.exe", vbNullString, vbNullString, True, 5000, True)
+    End Sub
+
+    Private Sub RefreshPreview(sender As Object, e As EventArgs) Handles VariantBox.SelectedValueChanged, UnderShadowCheckbox.CheckedChanged, ShadowCheckbox.CheckedChanged, ScreenPicker.ValueChanged, ReflectBox.CheckedChanged, GlossCheckbox.CheckedChanged
+
     End Sub
 End Class

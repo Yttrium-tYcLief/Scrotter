@@ -1,10 +1,15 @@
 master
 - yttrium
-   Added Drag and Drop support
+   Added Drag & Drop support
    Added automatic rotation (for landscape devices)
-   New device:
+   Slightly rearranged interface:
+      Hid "Capture from Android" button
+      Lined up toggles neatly
+      Moved multi screen counters to under device model dropdown
+   New devices:
         Nexus 5
         Nexus 5 Slant
+        Sony Xperia Sola
 
 0.9.6
 - yttrium
