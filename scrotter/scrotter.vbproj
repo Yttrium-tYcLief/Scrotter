@@ -47,7 +47,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DefineDebug>False</DefineDebug>
     <DefineTrace>True</DefineTrace>
@@ -86,6 +86,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2012.3.1211.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.Themes.Aqua, Version=2012.3.1211.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.UI, Version=2012.3.1211.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="TelerikCommon, Version=2012.3.1211.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -124,6 +128,12 @@
     </Compile>
     <Compile Include="Drawing\FreeTransform.vb" />
     <Compile Include="Drawing\ImageData.vb" />
+    <Compile Include="Preferences.Designer.vb">
+      <DependentUpon>Preferences.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Scrotter.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ArrayPreview.resx">
       <DependentUpon>ArrayPreview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences.resx">
+      <DependentUpon>Preferences.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scrotter.resx">
       <DependentUpon>Scrotter.vb</DependentUpon>
@@ -220,6 +233,10 @@
     <None Include="Resources\Scrotter-About.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>call "$(DevEnvDir)..\..\vc\vcvarsall.bat" x86
+"$(DevEnvDir)..\..\vc\bin\EditBin.exe" "$(TargetPath)"  /LARGEADDRESSAWARE</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

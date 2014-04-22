@@ -37,6 +37,9 @@ Public Class Scrotter
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String
+    Private CacheKey As New List(Of String)
+    Private CacheData As New List(Of Bitmap)
+    Private FetchedImage As New Bitmap(1, 1)
 
     Private Sub LoadDatabase()
         Dim line As String() = IO.File.ReadAllLines(System.IO.Path.Combine(Application.StartupPath, "db.xls"))
@@ -52,53 +55,27 @@ Public Class Scrotter
         Next
     End Sub
 
-    Private Sub LoadBtn_Click(sender As Object, e As EventArgs) Handles LoadBtn.Click
-        Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-        Dim openFileDialog1 As New OpenFileDialog()
-        openFileDialog1.Title = "Please select your screenshot..."
-        openFileDialog1.InitialDirectory = lastfolderopen
-        openFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|GIF Files(*.GIF)|*.GIF|All Files(*.*)|*.*"
-        openFileDialog1.FilterIndex = 5
-        openFileDialog1.RestoreDirectory = True
-        If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            LoadImage.Image = My.Resources.Loading
-            Try
-                OpenStream = openFileDialog1.OpenFile()
-                If (OpenStream IsNot Nothing) Then
-                    OpenPath(ScreenPicker.Value) = openFileDialog1.FileName
-                    ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
-                    RefreshLists()
-                End If
-            Catch Ex As Exception
-            Finally
-                If (OpenStream IsNot Nothing) Then
-                    OpenStream.Close()
-                End If
-            End Try
-        End If
-    End Sub
-
     Private Sub LoadImg(Image As Bitmap)
 
     End Sub
 
-    Private Sub Save(sender As Object, e As EventArgs) Handles SaveBtn.Click
-        If ScreenAmountPicker.Value > 1 Then
-            Dim number As Integer = 1
-            Do While number <= ScreenAmountPicker.Value
-                If CanvImg(number) Is Nothing Then CanvImg(number) = New Bitmap(CanvImg(1).Width, CanvImg(1).Height)
-                number = number + 1
-            Loop
-            ArrayPreview.ShowDialog()
-            Exit Sub
-        End If
+    Private Sub SaveArray(sender As Object, e As EventArgs) Handles SaveMultipleToolStripMenuItem.Click
+        Dim number As Integer = 1
+        Do While number <= ScreenAmountPicker.Value
+            If CanvImg(number) Is Nothing Then CanvImg(number) = New Bitmap(CanvImg(1).Width, CanvImg(1).Height)
+            number = number + 1
+        Loop
+        ArrayPreview.ShowDialog()
+    End Sub
+
+    Private Sub Save(sender As Object, e As EventArgs) Handles SaveAsToolStripMenuItem.Click
         Dim saveFileDialog1 As New SaveFileDialog()
         saveFileDialog1.FileName = "Scrotter_" & DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") & ".png"
         saveFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|All Files(*.*)|*.*" '|GIF Files(*.GIF)|*.GIF"
         saveFileDialog1.FilterIndex = 2
         saveFileDialog1.RestoreDirectory = True
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
-            SaveImg = CanvImg(1)
+            SaveImg = CanvImg(ScreenPicker.Value)
             SaveStream = saveFileDialog1.OpenFile()
             If (SaveStream IsNot Nothing) Then
                 SavePath = saveFileDialog1.FileName
@@ -155,12 +132,12 @@ Public Class Scrotter
     End Function
 
     Private Sub RefreshLists() Handles ModelBox.SelectedValueChanged
-        UnderShadowCheckbox.Enabled = True
-        UnderShadowCheckbox.Checked = False
-        GlossCheckbox.Enabled = True
-        GlossCheckbox.Checked = False
-        ShadowCheckbox.Enabled = True
-        ShadowCheckbox.Checked = False
+        UnderShadowToolStripMenuItem.Enabled = True
+        UnderShadowToolStripMenuItem.Checked = False
+        GlossToolStripMenuItem.Enabled = True
+        GlossToolStripMenuItem.Checked = False
+        EdgeShadowToolStripMenuItem.Enabled = True
+        EdgeShadowToolStripMenuItem.Checked = False
         VariantBox.Enabled = False
         VariantBox.Items.Clear()
         VariantBox.Text = "Variant"
@@ -177,8 +154,8 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"White", "Black"})
                 VariantBox.SelectedIndex = 0
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Case "Apple iPhone 4", "Apple iPhone 4S", "Apple iPad Mini", "Sony Xperia S"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
@@ -191,68 +168,68 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "Black Angled", "Gold", "Gold Angled", "White", "White Angled"})
                 VariantBox.SelectedIndex = 0
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = False
             Case "Apple iPhone 5C"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Blue", "Green", "Red", "White", "Yellow"})
                 VariantBox.SelectedIndex = 0
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = False
             Case "Samsung Galaxy SII, Epic 4G Touch"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Galaxy SII", "Galaxy SII T-Mobile", "Epic 4G Touch"})
                 VariantBox.SelectedIndex = 0
             Case "Samsung Galaxy SIII Mini", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Samsung Galaxy Player 5.0"
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Case "HTC One S", "HTC One V", "Kyocera RiSE", "Sony Xperia Sola"
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Case "Google Nexus 4"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Normal", "Angled", "Slant"})
                 VariantBox.SelectedIndex = 0
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Case "Google Nexus 5"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black Normal", "Black Landscape", "Black Slant", "Black Slant Landscape", "White Normal", "White Landscape", "White Slant", "White Slant Landscape"})
                 VariantBox.SelectedIndex = 0
             Case "Apple iPhone 3G, 3GS"
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = False
             Case "BlackBerry Z10"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
                 VariantBox.SelectedIndex = 0
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Case "Samsung Galaxy Note II"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"White", "Gray"})
                 VariantBox.SelectedIndex = 0
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Case "HTC Desire HD, HTC Inspire 4G"
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = True
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = True
             Case "LG Optimus 4X HD", "Sony Xperia Z"
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = True
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = True
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Case "Samsung Galaxy SIV"
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Blue", "White"})
                 VariantBox.SelectedIndex = 0
@@ -260,52 +237,51 @@ Public Class Scrotter
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"Black", "White"})
                 VariantBox.SelectedIndex = 0
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
         End Select
         RefreshPreview()
     End Sub
 
-    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, ShadowCheckbox.CheckedChanged, GlossCheckbox.CheckedChanged, UnderShadowCheckbox.CheckedChanged, ScreenPicker.ValueChanged, ReflectBox.CheckedChanged
-        ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
+    Private Sub RefreshPreview() Handles VariantBox.SelectedValueChanged, EdgeShadowToolStripMenuItem.CheckedChanged, GlossToolStripMenuItem.CheckedChanged, UnderShadowToolStripMenuItem.CheckedChanged, ScreenPicker.ValueChanged, ReflectBox.CheckedChanged
         If ModelBox.Text = "Samsung Galaxy SIII" Then
             Select Case VariantBox.Text
                 Case "Black", "Red", "Brown"
-                    GlossCheckbox.Enabled = False
-                    GlossCheckbox.Checked = False
+                    GlossToolStripMenuItem.Enabled = False
+                    GlossToolStripMenuItem.Checked = False
             End Select
         ElseIf ModelBox.Text = "Samsung Galaxy SII, Epic 4G Touch" Then
             If VariantBox.Text = "Galaxy SII T-Mobile" Then
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Else
-                UnderShadowCheckbox.Enabled = True
+                UnderShadowToolStripMenuItem.Enabled = True
             End If
         ElseIf ModelBox.Text = "Apple iPhone 5" Then
             If VariantBox.Text = "White Angled" Then
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             Else
-                UnderShadowCheckbox.Enabled = True
+                UnderShadowToolStripMenuItem.Enabled = True
             End If
         ElseIf ModelBox.Text = "Google Nexus 4" Then
             If VariantBox.Text = "Slant" Then
-                GlossCheckbox.Enabled = False
-                GlossCheckbox.Checked = True
-                UnderShadowCheckbox.Enabled = True
+                GlossToolStripMenuItem.Enabled = False
+                GlossToolStripMenuItem.Checked = True
+                UnderShadowToolStripMenuItem.Enabled = True
             ElseIf VariantBox.Text = "Angled" Then
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = True
-                GlossCheckbox.Enabled = True
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = True
+                GlossToolStripMenuItem.Enabled = True
             Else
-                GlossCheckbox.Checked = False
-                GlossCheckbox.Enabled = False
-                UnderShadowCheckbox.Enabled = False
-                UnderShadowCheckbox.Checked = False
+                GlossToolStripMenuItem.Checked = False
+                GlossToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
             End If
         End If
         If BackgroundDownloader.IsBusy = False Then
-            LoadImage.Image = My.Resources.Loading
+            ProgressBar.Visible = True
             Dim args As ArgumentType = New ArgumentType()
             args.type = 1
             args.var = VariantBox.Text
@@ -838,7 +814,7 @@ Public Class Scrotter
                 Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp2)
                     graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
                     graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, Shadow.Width, Shadow.Height)
-                    If ShadowCheckbox.Checked = True Then graphicsHandle.DrawImage((Shadow), New Point(0, 0))
+                    If EdgeShadowToolStripMenuItem.Checked = True Then graphicsHandle.DrawImage((Shadow), New Point(0, 0))
                     ScreenCapBitmap = imgtmp2
                 End Using
                 Dim filter As New YLScsDrawing.Imaging.Filters.FreeTransform()
@@ -852,10 +828,10 @@ Public Class Scrotter
                 Dim g As Graphics = Graphics.FromImage(Image3)
                 g.Clear(Color.Transparent)
                 g.DrawImage(Background, New Point(0, 0))
-                If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
+                If UnderShadowToolStripMenuItem.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
                 g.DrawImage(Image1, New Point(0, 0))
                 g.DrawImage(filter.Bitmap, New Point(IndexW, IndexH))
-                If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
+                If GlossToolStripMenuItem.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
                 If OverlayUsed = True Then g.DrawImage(Overlay, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
                 g.Dispose()
@@ -877,7 +853,7 @@ Public Class Scrotter
                     Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
                         graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
                         graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 676, 1194)
-                        If ShadowCheckbox.Checked = True Then graphicsHandle.DrawImage((Shadow), 0, 0, 676, 1194)
+                        If EdgeShadowToolStripMenuItem.Checked = True Then graphicsHandle.DrawImage((Shadow), 0, 0, 676, 1194)
                         ScreenCapBitmap = imgtmp
                     End Using
                 ElseIf args.model = "LG G2" Then
@@ -885,7 +861,7 @@ Public Class Scrotter
                     Using graphicsHandle As Graphics = Graphics.FromImage(imgtmp)
                         graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
                         graphicsHandle.DrawImage(ScreenCapBitmap, 0, 0, 637, 1120)
-                        If ShadowCheckbox.Checked = True Then graphicsHandle.DrawImage((Shadow), 0, 0, 637, 1120)
+                        If EdgeShadowToolStripMenuItem.Checked = True Then graphicsHandle.DrawImage((Shadow), 0, 0, 637, 1120)
                         ScreenCapBitmap = imgtmp
                     End Using
                 End If
@@ -897,11 +873,11 @@ Public Class Scrotter
                 Dim g As Graphics = Graphics.FromImage(Image3)
                 g.Clear(Color.Transparent)
                 g.DrawImage(Background, New Point(0, 0))
-                If UnderShadowCheckbox.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
+                If UnderShadowToolStripMenuItem.Checked = True Then g.DrawImage(Undershadow, New Point(0, 0))
                 g.DrawImage(Image1, New Point(0, 0))
                 g.DrawImage(ScreenCapBitmap, New Point(IndexW, IndexH))
-                If ShadowCheckbox.Checked = True And ((args.model = "Sony Xperia Z") Or (args.model = "LG G2")) = False Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
-                If GlossCheckbox.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
+                If EdgeShadowToolStripMenuItem.Checked = True And ((args.model = "Sony Xperia Z") Or (args.model = "LG G2")) = False Then g.DrawImage((Shadow), New Point(IndexW, IndexH))
+                If GlossToolStripMenuItem.Checked = True Then g.DrawImage(Gloss, New Point(0, 0))
                 If OverlayUsed = True Then g.DrawImage(Overlay, New Point(0, 0))
                 ' If (args.model = "Apple iPhone 5") Then g.DrawImage(Overlay, New Point(0, 0))
                 g.Dispose()
@@ -951,9 +927,42 @@ Public Class Scrotter
         Return New Bitmap(720, 1280)
     End Function
 
+
+    Private Function FetchImage2(ByVal url As String) As Bitmap
+        If CacheKey.Contains(url) Then
+            Return CacheData(CacheKey.IndexOf(url))
+        Else
+            Try
+                Dim NewImage As New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(url)))
+                If CacheKey.Count > 15 Then
+                    CacheKey.RemoveAt(0)
+                    CacheData.RemoveAt(0)
+                End If
+                CacheKey.Add(url)
+                CacheData.Add(NewImage)
+                Return NewImage
+            Catch ex As Exception
+            End Try
+        End If
+        Return New Bitmap(720, 1280)
+    End Function
+
+    Private Sub ModelBox_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ModelBox.Click
+        'If ModelBox.Items.Contains("Select your phone") = False Then
+        'ModelBox.Items.Add("Select your phone")
+        'End If
+        ModelBox.Text = "Select your phone"
+    End Sub
+
+    Private Sub ModelBox_DropDown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ModelBox.DropDown
+        'If ModelBox.Items.Contains("Select your phone") Then
+        'ModelBox.Items.Remove("Select your phone")
+        'End If
+    End Sub
+
     Private Sub BackgroundDownloader_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundDownloader.RunWorkerCompleted
         Preview.Image = CanvImg(ScreenPicker.Value)
-        LoadImage.Image = Nothing
+        ProgressBar.Visible = False
     End Sub
 
     Private Sub CaptureBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaptureBtn.Click
@@ -977,7 +986,6 @@ Public Class Scrotter
         Dim files() As String = e.Data.GetData(DataFormats.FileDrop)
         For Each path In files
             OpenPath(ScreenPicker.Value) = path
-            ScreenshotBox.Text = OpenPath(ScreenPicker.Value)
             RefreshLists()
         Next
     End Sub
@@ -988,18 +996,18 @@ Public Class Scrotter
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub HelpBtn_Click(sender As Object, e As EventArgs) Handles HelpBtn.Click
         about.ShowDialog()
     End Sub
 
     Private Sub ScreenAmountPicker_ValueChanged(sender As Object, e As EventArgs) Handles ScreenAmountPicker.ValueChanged
         If ScreenAmountPicker.Value > 1 Then
             ScreenPicker.Maximum = ScreenAmountPicker.Value
-            SaveBtn.Text = "Save Multiple Screens As..."
+            SaveMultipleToolStripMenuItem.Enabled = True
         Else
             ScreenPicker.Value = 1
             ScreenPicker.Maximum = 1
-            SaveBtn.Text = "Save As..."
+            SaveMultipleToolStripMenuItem.Enabled = False
         End If
     End Sub
 
@@ -1043,7 +1051,167 @@ Public Class Scrotter
         My.Computer.Network.DownloadFile("https://github.com/Yttrium-tYcLief/Scrotter/raw/master/latest/scrotter.exe", "C:\scrotter.exe", vbNullString, vbNullString, True, 5000, True)
     End Sub
 
-    Private Sub RefreshPreview(sender As Object, e As EventArgs) Handles VariantBox.SelectedValueChanged, UnderShadowCheckbox.CheckedChanged, ShadowCheckbox.CheckedChanged, ScreenPicker.ValueChanged, ReflectBox.CheckedChanged, GlossCheckbox.CheckedChanged
+    Private Sub RefreshPreview(sender As Object, e As EventArgs) Handles VariantBox.SelectedValueChanged, UnderShadowToolStripMenuItem.CheckedChanged, EdgeShadowToolStripMenuItem.CheckedChanged, ScreenPicker.ValueChanged, ReflectBox.CheckedChanged, GlossToolStripMenuItem.CheckedChanged
 
+    End Sub
+
+    Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+        Dim lastfolderopen As String = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        Dim openFileDialog1 As New OpenFileDialog()
+        openFileDialog1.Title = "Please select your screenshot..."
+        openFileDialog1.InitialDirectory = lastfolderopen
+        openFileDialog1.Filter = "BMP Files(*.BMP)|*.BMP|PNG Files(*.PNG)|*.PNG|JPG Files(*.JPG)|*.JPG|GIF Files(*.GIF)|*.GIF|All Files(*.*)|*.*"
+        openFileDialog1.FilterIndex = 5
+        openFileDialog1.RestoreDirectory = True
+        If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            ProgressBar.Visible = True
+            Try
+                OpenStream = openFileDialog1.OpenFile()
+                If (OpenStream IsNot Nothing) Then
+                    OpenPath(ScreenPicker.Value) = openFileDialog1.FileName
+                    RefreshLists()
+                End If
+            Catch Ex As Exception
+            Finally
+                If (OpenStream IsNot Nothing) Then
+                    OpenStream.Close()
+                End If
+            End Try
+        End If
+    End Sub
+
+    Private Sub MemoryTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MemoryTimer.Tick
+        Dim c As Process = Process.GetCurrentProcess()
+        MemoryLabel.Text = "Memory Usage: " & Math.Round(c.WorkingSet64 / 1000000) & "MB"
+
+
+
+        'MessageBox.Show("Mem Usage (Working Set): " & c.WorkingSet64 / 1024 & " K" & vbCrLf _
+        '& "VM Size (Private Bytes): " & c.PagedMemorySize64 / 1024 & " K" & vbCrLf _
+        '& "GC TotalMemory: " & GC.GetTotalMemory(True) & " bytes", "Current Memory Usage")
+    End Sub
+
+    Private Sub WebsiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WebsiteToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("http://yttrium-tyclief.github.com/Scrotter/")
+    End Sub
+
+    Private Sub ContributeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ContributeToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter")
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        ScreenAmountPicker.Value = 1
+        ToolStripMenuItem10.Visible = True
+        ToolStripMenuItem11.Visible = False
+        ToolStripMenuItem12.Visible = False
+        ToolStripMenuItem13.Visible = False
+        ToolStripMenuItem14.Visible = False
+        ToolStripMenuItem15.Visible = False
+        ToolStripMenuItem16.Visible = False
+    End Sub
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
+        ScreenAmountPicker.Value = 2
+        ToolStripMenuItem10.Visible = True
+        ToolStripMenuItem11.Visible = True
+        ToolStripMenuItem12.Visible = False
+        ToolStripMenuItem13.Visible = False
+        ToolStripMenuItem14.Visible = False
+        ToolStripMenuItem15.Visible = False
+        ToolStripMenuItem16.Visible = False
+    End Sub
+
+    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
+        ScreenAmountPicker.Value = 3
+        ToolStripMenuItem10.Visible = True
+        ToolStripMenuItem11.Visible = True
+        ToolStripMenuItem12.Visible = True
+        ToolStripMenuItem13.Visible = False
+        ToolStripMenuItem14.Visible = False
+        ToolStripMenuItem15.Visible = False
+        ToolStripMenuItem16.Visible = False
+    End Sub
+
+    Private Sub ToolStripMenuItem6_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem6.Click
+        ScreenAmountPicker.Value = 4
+        ToolStripMenuItem10.Visible = True
+        ToolStripMenuItem11.Visible = True
+        ToolStripMenuItem12.Visible = True
+        ToolStripMenuItem13.Visible = True
+        ToolStripMenuItem14.Visible = False
+        ToolStripMenuItem15.Visible = False
+        ToolStripMenuItem16.Visible = False
+    End Sub
+
+    Private Sub ToolStripMenuItem7_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem7.Click
+        ScreenAmountPicker.Value = 5
+        ToolStripMenuItem10.Visible = True
+        ToolStripMenuItem11.Visible = True
+        ToolStripMenuItem12.Visible = True
+        ToolStripMenuItem13.Visible = True
+        ToolStripMenuItem14.Visible = True
+        ToolStripMenuItem15.Visible = False
+        ToolStripMenuItem16.Visible = False
+    End Sub
+
+    Private Sub ToolStripMenuItem8_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem8.Click
+        ScreenAmountPicker.Value = 6
+        ToolStripMenuItem10.Visible = True
+        ToolStripMenuItem11.Visible = True
+        ToolStripMenuItem12.Visible = True
+        ToolStripMenuItem13.Visible = True
+        ToolStripMenuItem14.Visible = True
+        ToolStripMenuItem15.Visible = True
+        ToolStripMenuItem16.Visible = False
+    End Sub
+
+    Private Sub ToolStripMenuItem9_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem9.Click
+        ScreenAmountPicker.Value = 7
+        ToolStripMenuItem10.Visible = True
+        ToolStripMenuItem11.Visible = True
+        ToolStripMenuItem12.Visible = True
+        ToolStripMenuItem13.Visible = True
+        ToolStripMenuItem14.Visible = True
+        ToolStripMenuItem15.Visible = True
+        ToolStripMenuItem16.Visible = True
+    End Sub
+
+    Private Sub ToolStripMenuItem10_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem10.Click
+        ScreenPicker.Value = 1
+        RefreshPreview()
+    End Sub
+
+    Private Sub ToolStripMenuItem11_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem11.Click
+        ScreenPicker.Value = 2
+        RefreshPreview()
+    End Sub
+
+    Private Sub ToolStripMenuItem12_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem12.Click
+        ScreenPicker.Value = 3
+        RefreshPreview()
+    End Sub
+
+    Private Sub ToolStripMenuItem13_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem13.Click
+        ScreenPicker.Value = 4
+        RefreshPreview()
+    End Sub
+
+    Private Sub ToolStripMenuItem14_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem14.Click
+        ScreenPicker.Value = 5
+        RefreshPreview()
+    End Sub
+
+    Private Sub ToolStripMenuItem15_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem15.Click
+        ScreenPicker.Value = 6
+        RefreshPreview()
+    End Sub
+
+    Private Sub ToolStripMenuItem16_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem16.Click
+        ScreenPicker.Value = 7
+        RefreshPreview()
+    End Sub
+
+    Private Sub PreferencesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PreferencesToolStripMenuItem.Click
+        Preferences.ShowDialog()
     End Sub
 End Class

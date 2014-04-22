@@ -22,193 +22,89 @@ Partial Class Scrotter
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Scrotter))
-        Me.LoadBtn = New System.Windows.Forms.Button()
-        Me.ScreenshotBox = New System.Windows.Forms.TextBox()
         Me.ModelBox = New System.Windows.Forms.ComboBox()
-        Me.SaveBtn = New System.Windows.Forms.Button()
-        Me.Preview = New System.Windows.Forms.PictureBox()
         Me.VariantBox = New System.Windows.Forms.ComboBox()
-        Me.ShadowCheckbox = New System.Windows.Forms.CheckBox()
-        Me.GlossCheckbox = New System.Windows.Forms.CheckBox()
-        Me.UnderShadowCheckbox = New System.Windows.Forms.CheckBox()
         Me.BackgroundDownloader = New System.ComponentModel.BackgroundWorker()
-        Me.LoadImage = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.CaptureBtn = New System.Windows.Forms.Button()
         Me.ScreenPicker = New System.Windows.Forms.NumericUpDown()
         Me.ScreenAmountPicker = New System.Windows.Forms.NumericUpDown()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveMultipleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PreferencesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GlossToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EdgeShadowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UnderShadowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ScreensToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NumberOfScreensToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CurrentScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem14 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem15 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem16 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WebsiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContributeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpBtn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MemoryLabel = New System.Windows.Forms.ToolStripTextBox()
         Me.ReflectBox = New System.Windows.Forms.CheckBox()
-        CType(Me.Preview, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LoadImage, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MemoryTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.ProgressBar = New System.Windows.Forms.ProgressBar()
+        Me.Preview = New System.Windows.Forms.PictureBox()
         CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
+        CType(Me.Preview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'LoadBtn
-        '
-        Me.LoadBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LoadBtn.BackColor = System.Drawing.Color.Transparent
-        Me.LoadBtn.Location = New System.Drawing.Point(466, 16)
-        Me.LoadBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.LoadBtn.Name = "LoadBtn"
-        Me.LoadBtn.Size = New System.Drawing.Size(75, 31)
-        Me.LoadBtn.TabIndex = 1
-        Me.LoadBtn.Text = "Browse..."
-        Me.LoadBtn.UseVisualStyleBackColor = False
-        '
-        'ScreenshotBox
-        '
-        Me.ScreenshotBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ScreenshotBox.Location = New System.Drawing.Point(317, 22)
-        Me.ScreenshotBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.ScreenshotBox.Name = "ScreenshotBox"
-        Me.ScreenshotBox.ReadOnly = True
-        Me.ScreenshotBox.Size = New System.Drawing.Size(143, 20)
-        Me.ScreenshotBox.TabIndex = 0
-        Me.ScreenshotBox.Text = "Screenshot"
         '
         'ModelBox
         '
-        Me.ModelBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ModelBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ModelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ModelBox.FormattingEnabled = True
         Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPhone 5C", "Apple iPhone 5S", "BlackBerry Z10", "Google Nexus 4", "Google Nexus 5", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Kyocera RiSE", "LG G2", "LG Optimus 4X HD", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Moto X", "Motorola Xoom", "Samsung Galaxy Player 5.0", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy SIV", "Samsung Google Galaxy Nexus", "Sony Xperia S", "Sony Xperia Sola", "Sony Xperia Z"})
-        Me.ModelBox.Location = New System.Drawing.Point(317, 57)
+        Me.ModelBox.Location = New System.Drawing.Point(12, 27)
         Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ModelBox.MaxDropDownItems = 16
         Me.ModelBox.Name = "ModelBox"
-        Me.ModelBox.Size = New System.Drawing.Size(224, 24)
+        Me.ModelBox.Size = New System.Drawing.Size(299, 24)
         Me.ModelBox.TabIndex = 5
-        Me.ModelBox.Text = "Device Model"
-        '
-        'SaveBtn
-        '
-        Me.SaveBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SaveBtn.Location = New System.Drawing.Point(350, 574)
-        Me.SaveBtn.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.SaveBtn.Name = "SaveBtn"
-        Me.SaveBtn.Size = New System.Drawing.Size(197, 33)
-        Me.SaveBtn.TabIndex = 12
-        Me.SaveBtn.Text = "Save As..."
-        Me.SaveBtn.UseVisualStyleBackColor = True
-        '
-        'Preview
-        '
-        Me.Preview.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Preview.InitialImage = Nothing
-        Me.Preview.Location = New System.Drawing.Point(0, 0)
-        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.Preview.Name = "Preview"
-        Me.Preview.Size = New System.Drawing.Size(302, 619)
-        Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Preview.TabIndex = 6
-        Me.Preview.TabStop = False
         '
         'VariantBox
         '
         Me.VariantBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.VariantBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.VariantBox.Enabled = False
         Me.VariantBox.FormattingEnabled = True
-        Me.VariantBox.Location = New System.Drawing.Point(317, 83)
+        Me.VariantBox.Location = New System.Drawing.Point(317, 27)
         Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.VariantBox.Name = "VariantBox"
-        Me.VariantBox.Size = New System.Drawing.Size(224, 24)
+        Me.VariantBox.Size = New System.Drawing.Size(230, 24)
         Me.VariantBox.TabIndex = 6
-        Me.VariantBox.Text = "Variant"
-        '
-        'ShadowCheckbox
-        '
-        Me.ShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ShadowCheckbox.AutoSize = True
-        Me.ShadowCheckbox.Enabled = False
-        Me.ShadowCheckbox.Location = New System.Drawing.Point(327, 514)
-        Me.ShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.ShadowCheckbox.Name = "ShadowCheckbox"
-        Me.ShadowCheckbox.Size = New System.Drawing.Size(93, 20)
-        Me.ShadowCheckbox.TabIndex = 9
-        Me.ShadowCheckbox.Text = "Edge Shadow"
-        Me.ShadowCheckbox.UseVisualStyleBackColor = True
-        '
-        'GlossCheckbox
-        '
-        Me.GlossCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GlossCheckbox.AutoSize = True
-        Me.GlossCheckbox.Enabled = False
-        Me.GlossCheckbox.Location = New System.Drawing.Point(327, 484)
-        Me.GlossCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.GlossCheckbox.Name = "GlossCheckbox"
-        Me.GlossCheckbox.Size = New System.Drawing.Size(54, 20)
-        Me.GlossCheckbox.TabIndex = 8
-        Me.GlossCheckbox.Text = "Gloss"
-        Me.GlossCheckbox.UseVisualStyleBackColor = True
-        '
-        'UnderShadowCheckbox
-        '
-        Me.UnderShadowCheckbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.UnderShadowCheckbox.AutoSize = True
-        Me.UnderShadowCheckbox.Enabled = False
-        Me.UnderShadowCheckbox.Location = New System.Drawing.Point(327, 544)
-        Me.UnderShadowCheckbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.UnderShadowCheckbox.Name = "UnderShadowCheckbox"
-        Me.UnderShadowCheckbox.Size = New System.Drawing.Size(99, 20)
-        Me.UnderShadowCheckbox.TabIndex = 10
-        Me.UnderShadowCheckbox.Text = "Under Shadow"
-        Me.UnderShadowCheckbox.UseVisualStyleBackColor = True
         '
         'BackgroundDownloader
         '
         '
-        'LoadImage
-        '
-        Me.LoadImage.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.LoadImage.InitialImage = Nothing
-        Me.LoadImage.Location = New System.Drawing.Point(396, 296)
-        Me.LoadImage.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.LoadImage.Name = "LoadImage"
-        Me.LoadImage.Size = New System.Drawing.Size(64, 79)
-        Me.LoadImage.TabIndex = 11
-        Me.LoadImage.TabStop = False
-        '
-        'Button1
-        '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(317, 574)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(27, 33)
-        Me.Button1.TabIndex = 11
-        Me.Button1.Text = "?"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(398, 116)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(102, 17)
-        Me.Label1.TabIndex = 14
-        Me.Label1.Text = "Number of Screens"
-        Me.Label1.UseCompatibleTextRendering = True
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(417, 140)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 16)
-        Me.Label2.TabIndex = 15
-        Me.Label2.Text = "Current Screen"
-        '
         'CaptureBtn
         '
         Me.CaptureBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CaptureBtn.Location = New System.Drawing.Point(317, 219)
+        Me.CaptureBtn.Location = New System.Drawing.Point(317, 549)
         Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.CaptureBtn.Name = "CaptureBtn"
         Me.CaptureBtn.Size = New System.Drawing.Size(224, 28)
@@ -221,7 +117,7 @@ Partial Class Scrotter
         '
         Me.ScreenPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ScreenPicker.Enabled = False
-        Me.ScreenPicker.Location = New System.Drawing.Point(505, 138)
+        Me.ScreenPicker.Location = New System.Drawing.Point(505, 140)
         Me.ScreenPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ScreenPicker.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -229,12 +125,13 @@ Partial Class Scrotter
         Me.ScreenPicker.Size = New System.Drawing.Size(36, 20)
         Me.ScreenPicker.TabIndex = 4
         Me.ScreenPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenPicker.Visible = False
         '
         'ScreenAmountPicker
         '
         Me.ScreenAmountPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ScreenAmountPicker.Enabled = False
-        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 114)
+        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 116)
         Me.ScreenAmountPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ScreenAmountPicker.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
         Me.ScreenAmountPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -242,12 +139,233 @@ Partial Class Scrotter
         Me.ScreenAmountPicker.Size = New System.Drawing.Size(36, 20)
         Me.ScreenAmountPicker.TabIndex = 3
         Me.ScreenAmountPicker.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ScreenAmountPicker.Visible = False
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.BackColor = System.Drawing.SystemColors.Control
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.StyleToolStripMenuItem, Me.ScreensToolStripMenuItem, Me.HelpToolStripMenuItem, Me.MemoryLabel})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.MenuStrip1.Size = New System.Drawing.Size(559, 27)
+        Me.MenuStrip1.TabIndex = 18
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.BackColor = System.Drawing.SystemColors.Control
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.SaveMultipleToolStripMenuItem, Me.PreferencesToolStripMenuItem})
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(37, 23)
+        Me.ToolStripMenuItem1.Text = "File"
+        '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.OpenToolStripMenuItem.Text = "Open..."
+        '
+        'SaveAsToolStripMenuItem
+        '
+        Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.SaveAsToolStripMenuItem.Text = "Save As..."
+        '
+        'SaveMultipleToolStripMenuItem
+        '
+        Me.SaveMultipleToolStripMenuItem.Enabled = False
+        Me.SaveMultipleToolStripMenuItem.Name = "SaveMultipleToolStripMenuItem"
+        Me.SaveMultipleToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.SaveMultipleToolStripMenuItem.Text = "Save Array As..."
+        '
+        'PreferencesToolStripMenuItem
+        '
+        Me.PreferencesToolStripMenuItem.Name = "PreferencesToolStripMenuItem"
+        Me.PreferencesToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.PreferencesToolStripMenuItem.Text = "Preferences"
+        Me.PreferencesToolStripMenuItem.Visible = False
+        '
+        'StyleToolStripMenuItem
+        '
+        Me.StyleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GlossToolStripMenuItem, Me.EdgeShadowToolStripMenuItem, Me.UnderShadowToolStripMenuItem})
+        Me.StyleToolStripMenuItem.Name = "StyleToolStripMenuItem"
+        Me.StyleToolStripMenuItem.Size = New System.Drawing.Size(44, 23)
+        Me.StyleToolStripMenuItem.Text = "Style"
+        '
+        'GlossToolStripMenuItem
+        '
+        Me.GlossToolStripMenuItem.CheckOnClick = True
+        Me.GlossToolStripMenuItem.Name = "GlossToolStripMenuItem"
+        Me.GlossToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.GlossToolStripMenuItem.Text = "Gloss"
+        '
+        'EdgeShadowToolStripMenuItem
+        '
+        Me.EdgeShadowToolStripMenuItem.CheckOnClick = True
+        Me.EdgeShadowToolStripMenuItem.Name = "EdgeShadowToolStripMenuItem"
+        Me.EdgeShadowToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.EdgeShadowToolStripMenuItem.Text = "Edge Shadow"
+        '
+        'UnderShadowToolStripMenuItem
+        '
+        Me.UnderShadowToolStripMenuItem.CheckOnClick = True
+        Me.UnderShadowToolStripMenuItem.Name = "UnderShadowToolStripMenuItem"
+        Me.UnderShadowToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.UnderShadowToolStripMenuItem.Text = "Drop Shadow"
+        '
+        'ScreensToolStripMenuItem
+        '
+        Me.ScreensToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NumberOfScreensToolStripMenuItem, Me.CurrentScreenToolStripMenuItem})
+        Me.ScreensToolStripMenuItem.Name = "ScreensToolStripMenuItem"
+        Me.ScreensToolStripMenuItem.Size = New System.Drawing.Size(59, 23)
+        Me.ScreensToolStripMenuItem.Text = "Screens"
+        '
+        'NumberOfScreensToolStripMenuItem
+        '
+        Me.NumberOfScreensToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripMenuItem9})
+        Me.NumberOfScreensToolStripMenuItem.Name = "NumberOfScreensToolStripMenuItem"
+        Me.NumberOfScreensToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.NumberOfScreensToolStripMenuItem.Text = "Number of Screens"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem3.Text = "1"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem4.Text = "2"
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem5.Text = "3"
+        '
+        'ToolStripMenuItem6
+        '
+        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem6.Text = "4"
+        '
+        'ToolStripMenuItem7
+        '
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem7.Text = "5"
+        '
+        'ToolStripMenuItem8
+        '
+        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
+        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem8.Text = "6"
+        '
+        'ToolStripMenuItem9
+        '
+        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
+        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem9.Text = "7"
+        '
+        'CurrentScreenToolStripMenuItem
+        '
+        Me.CurrentScreenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ToolStripMenuItem12, Me.ToolStripMenuItem13, Me.ToolStripMenuItem14, Me.ToolStripMenuItem15, Me.ToolStripMenuItem16})
+        Me.CurrentScreenToolStripMenuItem.Name = "CurrentScreenToolStripMenuItem"
+        Me.CurrentScreenToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.CurrentScreenToolStripMenuItem.Text = "Current Screen"
+        '
+        'ToolStripMenuItem10
+        '
+        Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
+        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem10.Text = "1"
+        '
+        'ToolStripMenuItem11
+        '
+        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
+        Me.ToolStripMenuItem11.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem11.Text = "2"
+        Me.ToolStripMenuItem11.Visible = False
+        '
+        'ToolStripMenuItem12
+        '
+        Me.ToolStripMenuItem12.Name = "ToolStripMenuItem12"
+        Me.ToolStripMenuItem12.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem12.Text = "3"
+        Me.ToolStripMenuItem12.Visible = False
+        '
+        'ToolStripMenuItem13
+        '
+        Me.ToolStripMenuItem13.Name = "ToolStripMenuItem13"
+        Me.ToolStripMenuItem13.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem13.Text = "4"
+        Me.ToolStripMenuItem13.Visible = False
+        '
+        'ToolStripMenuItem14
+        '
+        Me.ToolStripMenuItem14.Name = "ToolStripMenuItem14"
+        Me.ToolStripMenuItem14.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem14.Text = "5"
+        Me.ToolStripMenuItem14.Visible = False
+        '
+        'ToolStripMenuItem15
+        '
+        Me.ToolStripMenuItem15.Name = "ToolStripMenuItem15"
+        Me.ToolStripMenuItem15.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem15.Text = "6"
+        Me.ToolStripMenuItem15.Visible = False
+        '
+        'ToolStripMenuItem16
+        '
+        Me.ToolStripMenuItem16.Name = "ToolStripMenuItem16"
+        Me.ToolStripMenuItem16.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripMenuItem16.Text = "7"
+        Me.ToolStripMenuItem16.Visible = False
+        '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WebsiteToolStripMenuItem, Me.ContributeToolStripMenuItem, Me.HelpBtn})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 23)
+        Me.HelpToolStripMenuItem.Text = "Help"
+        '
+        'WebsiteToolStripMenuItem
+        '
+        Me.WebsiteToolStripMenuItem.Name = "WebsiteToolStripMenuItem"
+        Me.WebsiteToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.WebsiteToolStripMenuItem.Text = "Website"
+        '
+        'ContributeToolStripMenuItem
+        '
+        Me.ContributeToolStripMenuItem.Name = "ContributeToolStripMenuItem"
+        Me.ContributeToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.ContributeToolStripMenuItem.Text = "Contribute"
+        '
+        'HelpBtn
+        '
+        Me.HelpBtn.Name = "HelpBtn"
+        Me.HelpBtn.Size = New System.Drawing.Size(151, 22)
+        Me.HelpBtn.Text = "About Scrotter"
+        '
+        'MemoryLabel
+        '
+        Me.MemoryLabel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.MemoryLabel.AutoSize = False
+        Me.MemoryLabel.BackColor = System.Drawing.SystemColors.Control
+        Me.MemoryLabel.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.MemoryLabel.Name = "MemoryLabel"
+        Me.MemoryLabel.ReadOnly = True
+        Me.MemoryLabel.Size = New System.Drawing.Size(140, 23)
+        Me.MemoryLabel.Text = "Memory Usage: "
         '
         'ReflectBox
         '
         Me.ReflectBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ReflectBox.AutoSize = True
-        Me.ReflectBox.Location = New System.Drawing.Point(327, 454)
+        Me.ReflectBox.Location = New System.Drawing.Point(12, 557)
         Me.ReflectBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.ReflectBox.Name = "ReflectBox"
         Me.ReflectBox.Size = New System.Drawing.Size(78, 20)
@@ -256,61 +374,109 @@ Partial Class Scrotter
         Me.ReflectBox.UseVisualStyleBackColor = True
         Me.ReflectBox.Visible = False
         '
+        'MemoryTimer
+        '
+        Me.MemoryTimer.Enabled = True
+        Me.MemoryTimer.Interval = 500
+        '
+        'ProgressBar
+        '
+        Me.ProgressBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ProgressBar.Location = New System.Drawing.Point(12, 584)
+        Me.ProgressBar.MarqueeAnimationSpeed = 10
+        Me.ProgressBar.Name = "ProgressBar"
+        Me.ProgressBar.Size = New System.Drawing.Size(535, 23)
+        Me.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.ProgressBar.TabIndex = 19
+        '
+        'Preview
+        '
+        Me.Preview.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Preview.InitialImage = Nothing
+        Me.Preview.Location = New System.Drawing.Point(12, 66)
+        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.Preview.Name = "Preview"
+        Me.Preview.Size = New System.Drawing.Size(535, 518)
+        Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Preview.TabIndex = 6
+        Me.Preview.TabStop = False
+        '
         'Scrotter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(559, 619)
+        Me.Controls.Add(Me.ModelBox)
+        Me.Controls.Add(Me.ProgressBar)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.ReflectBox)
         Me.Controls.Add(Me.CaptureBtn)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ScreenPicker)
         Me.Controls.Add(Me.ScreenAmountPicker)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.LoadImage)
-        Me.Controls.Add(Me.UnderShadowCheckbox)
-        Me.Controls.Add(Me.GlossCheckbox)
-        Me.Controls.Add(Me.ShadowCheckbox)
         Me.Controls.Add(Me.VariantBox)
         Me.Controls.Add(Me.Preview)
-        Me.Controls.Add(Me.SaveBtn)
-        Me.Controls.Add(Me.ModelBox)
-        Me.Controls.Add(Me.ScreenshotBox)
-        Me.Controls.Add(Me.LoadBtn)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.MinimumSize = New System.Drawing.Size(500, 405)
         Me.Name = "Scrotter"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Scrotter"
-        CType(Me.Preview, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LoadImage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
+        CType(Me.Preview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ScreenshotBox As System.Windows.Forms.TextBox
     Friend WithEvents ModelBox As System.Windows.Forms.ComboBox
-    Friend WithEvents SaveBtn As System.Windows.Forms.Button
     Friend WithEvents Preview As System.Windows.Forms.PictureBox
     Friend WithEvents VariantBox As System.Windows.Forms.ComboBox
-    Friend WithEvents ShadowCheckbox As System.Windows.Forms.CheckBox
-    Friend WithEvents GlossCheckbox As System.Windows.Forms.CheckBox
-    Friend WithEvents UnderShadowCheckbox As System.Windows.Forms.CheckBox
     Friend WithEvents BackgroundDownloader As System.ComponentModel.BackgroundWorker
-    Friend WithEvents LoadImage As System.Windows.Forms.PictureBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents CaptureBtn As System.Windows.Forms.Button
     Friend WithEvents ScreenPicker As System.Windows.Forms.NumericUpDown
     Friend WithEvents ScreenAmountPicker As System.Windows.Forms.NumericUpDown
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveAsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveMultipleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WebsiteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ContributeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HelpBtn As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents StyleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ScreensToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GlossToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EdgeShadowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UnderShadowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ReflectBox As System.Windows.Forms.CheckBox
-    Friend WithEvents LoadBtn As System.Windows.Forms.Button
+    Friend WithEvents MemoryTimer As System.Windows.Forms.Timer
+    Friend WithEvents PreferencesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MemoryLabel As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents ProgressBar As System.Windows.Forms.ProgressBar
+    Friend WithEvents NumberOfScreensToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CurrentScreenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem6 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem8 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem10 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem12 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem13 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem14 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem15 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem16 As System.Windows.Forms.ToolStripMenuItem
 
 End Class
