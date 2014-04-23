@@ -2,13 +2,15 @@ master
 - yttrium
    Added Drag & Drop support
    Added automatic rotation (for landscape devices)
-   Slightly rearranged interface:
-      Hid "Capture from Android" button
-      Lined up toggles neatly
-      Moved multi screen counters to under device model dropdown
+   Major interface redesign:
+	Hid "capture from Android" button
+	Restructed the entire UI to be menu-driven rather than button-driven
+	Changed loading bar to use an indeterminate (marquee) loading bar rather than Win8's loading circle
+   Scrotter is now Large Address Aware (LAA). This means that x86 builds can use up to 3GB of RAM on 32bit systems, and up to 4GB on 64bit systems. This should resolve any "out of memory" (OOM) errors that happen when handling large arrays of very high resolution devices.
+   There is also a memory usage counter in the top right, following Photoshop's example since Scrotter, while a small application, manipulates large amounts of incredibly large images.
    New devices:
-        Nexus 5
-        Nexus 5 Slant
+        Nexus 5 (Black, White)
+        Nexus 5 Slant (Black, White)
         Sony Xperia Sola
 
 0.9.6
