@@ -79,11 +79,11 @@ Partial Class Scrotter
         Me.ModelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ModelBox.FormattingEnabled = True
         Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPhone 5C", "Apple iPhone 5S", "BlackBerry Z10", "Google Nexus 4", "Google Nexus 5", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Kyocera RiSE", "LG G2", "LG Optimus 4X HD", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Moto X", "Motorola Xoom", "Samsung Galaxy Player 5.0", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy SIV", "Samsung Google Galaxy Nexus", "Sony Xperia S", "Sony Xperia Sola", "Sony Xperia Z"})
-        Me.ModelBox.Location = New System.Drawing.Point(12, 27)
-        Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.ModelBox.Location = New System.Drawing.Point(12, 28)
+        Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ModelBox.MaxDropDownItems = 16
         Me.ModelBox.Name = "ModelBox"
-        Me.ModelBox.Size = New System.Drawing.Size(299, 24)
+        Me.ModelBox.Size = New System.Drawing.Size(299, 21)
         Me.ModelBox.TabIndex = 5
         '
         'VariantBox
@@ -92,10 +92,10 @@ Partial Class Scrotter
         Me.VariantBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.VariantBox.Enabled = False
         Me.VariantBox.FormattingEnabled = True
-        Me.VariantBox.Location = New System.Drawing.Point(317, 27)
-        Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.VariantBox.Location = New System.Drawing.Point(317, 28)
+        Me.VariantBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.VariantBox.Name = "VariantBox"
-        Me.VariantBox.Size = New System.Drawing.Size(230, 24)
+        Me.VariantBox.Size = New System.Drawing.Size(230, 21)
         Me.VariantBox.TabIndex = 6
         '
         'BackgroundDownloader
@@ -104,10 +104,9 @@ Partial Class Scrotter
         'CaptureBtn
         '
         Me.CaptureBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CaptureBtn.Location = New System.Drawing.Point(317, 549)
-        Me.CaptureBtn.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CaptureBtn.Location = New System.Drawing.Point(317, 446)
         Me.CaptureBtn.Name = "CaptureBtn"
-        Me.CaptureBtn.Size = New System.Drawing.Size(224, 28)
+        Me.CaptureBtn.Size = New System.Drawing.Size(224, 23)
         Me.CaptureBtn.TabIndex = 2
         Me.CaptureBtn.Text = "Capture from Android Device"
         Me.CaptureBtn.UseVisualStyleBackColor = True
@@ -117,7 +116,7 @@ Partial Class Scrotter
         '
         Me.ScreenPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ScreenPicker.Enabled = False
-        Me.ScreenPicker.Location = New System.Drawing.Point(505, 140)
+        Me.ScreenPicker.Location = New System.Drawing.Point(505, 114)
         Me.ScreenPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ScreenPicker.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ScreenPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -131,7 +130,7 @@ Partial Class Scrotter
         '
         Me.ScreenAmountPicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ScreenAmountPicker.Enabled = False
-        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 116)
+        Me.ScreenAmountPicker.Location = New System.Drawing.Point(505, 94)
         Me.ScreenAmountPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ScreenAmountPicker.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
         Me.ScreenAmountPicker.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -365,10 +364,10 @@ Partial Class Scrotter
         '
         Me.ReflectBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ReflectBox.AutoSize = True
-        Me.ReflectBox.Location = New System.Drawing.Point(12, 557)
-        Me.ReflectBox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.ReflectBox.Location = New System.Drawing.Point(16, 452)
+        Me.ReflectBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ReflectBox.Name = "ReflectBox"
-        Me.ReflectBox.Size = New System.Drawing.Size(78, 20)
+        Me.ReflectBox.Size = New System.Drawing.Size(74, 17)
         Me.ReflectBox.TabIndex = 16
         Me.ReflectBox.Text = "Reflection"
         Me.ReflectBox.UseVisualStyleBackColor = True
@@ -383,10 +382,11 @@ Partial Class Scrotter
         '
         Me.ProgressBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ProgressBar.Location = New System.Drawing.Point(12, 584)
+        Me.ProgressBar.Location = New System.Drawing.Point(12, 474)
+        Me.ProgressBar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ProgressBar.MarqueeAnimationSpeed = 10
         Me.ProgressBar.Name = "ProgressBar"
-        Me.ProgressBar.Size = New System.Drawing.Size(535, 23)
+        Me.ProgressBar.Size = New System.Drawing.Size(535, 19)
         Me.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         Me.ProgressBar.TabIndex = 19
         '
@@ -396,20 +396,20 @@ Partial Class Scrotter
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Preview.InitialImage = Nothing
-        Me.Preview.Location = New System.Drawing.Point(12, 66)
-        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.Preview.Location = New System.Drawing.Point(12, 54)
+        Me.Preview.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Preview.Name = "Preview"
-        Me.Preview.Size = New System.Drawing.Size(535, 518)
+        Me.Preview.Size = New System.Drawing.Size(535, 439)
         Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Preview.TabIndex = 6
         Me.Preview.TabStop = False
         '
         'Scrotter
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(559, 619)
+        Me.ClientSize = New System.Drawing.Size(559, 503)
         Me.Controls.Add(Me.ModelBox)
         Me.Controls.Add(Me.ProgressBar)
         Me.Controls.Add(Me.MenuStrip1)
@@ -421,8 +421,8 @@ Partial Class Scrotter
         Me.Controls.Add(Me.Preview)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.MinimumSize = New System.Drawing.Size(500, 405)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(500, 335)
         Me.Name = "Scrotter"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
