@@ -32,8 +32,8 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.9.6"
-    Public ReadOnly ReleaseDate As String = "2013-11-01"
+    Public ReadOnly Version As String = "0.9.7"
+    Public ReadOnly ReleaseDate As String = "2014-04-30"
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String
@@ -1213,5 +1213,9 @@ Public Class Scrotter
 
     Private Sub PreferencesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PreferencesToolStripMenuItem.Click
         Preferences.ShowDialog()
+    End Sub
+
+    Private Sub ReportABugToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportABugToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/issues/new")
     End Sub
 End Class

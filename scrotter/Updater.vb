@@ -10,14 +10,21 @@ Public Class Updater
     Private Sub Updater_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ServicePointManager.ServerCertificateValidationCallback = AddressOf Validator
         Dim wc As New WebClient
-        Version = wc.DownloadString("https://raw.github.com/Yttrium-tYcLief/Scrotter/master/latest/latest")
-        If Version > Scrotter.Version Then
-            VersionLabel.Text = "You are currently on v" & Scrotter.Version & ", but the newest version is v" & Version & ". If you do" & vbNewLine & "not update, some images may no longer work. Would you like to update?"
-            HistoryBox.Text = wc.DownloadString("https://raw.github.com/Yttrium-tYcLief/Scrotter/v" & Version & "/changelog")
-            HistoryBox.Text = HistoryBox.Text.Substring(0, HistoryBox.Text.IndexOf(Scrotter.Version) - 1)
-        Else
-            Me.Close()
-        End If
+        Try
+            Version = wc.DownloadString("https://raw.github.com/Yttrium-tYcLief/Scrotter/master/latest/latest")
+            Dim VersionNumsCurrent(2), VersionNumsNew(2) As Integer
+            VersionNumsCurrent = Array.ConvertAll(Scrotter.Version.Split("."), Function(str) Int32.Parse(str))
+            VersionNumsNew = Array.ConvertAll(Version.Split("."), Function(str) Int32.Parse(str))
+
+            If VersionNumsCurrent(0) < VersionNumsNew(0) Or (VersionNumsCurrent(0) = VersionNumsNew(0) And VersionNumsCurrent(1) < VersionNumsNew(1)) Or (VersionNumsCurrent(0) = VersionNumsNew(0) And VersionNumsCurrent(1) = VersionNumsNew(1) And VersionNumsCurrent(2) < VersionNumsNew(2)) Then
+                VersionLabel.Text = "You are currently on v" & Scrotter.Version & ", but the newest version is v" & Version.Replace(vbCr, "").Replace(vbLf, "") & ". If you do not update, some images may no longer work. Would you like to update?"
+                HistoryBox.Text = wc.DownloadString("https://raw.github.com/Yttrium-tYcLief/Scrotter/master/changelog")
+                HistoryBox.Text = HistoryBox.Text.Substring(HistoryBox.Text.IndexOf(Version), HistoryBox.Text.IndexOf(Scrotter.Version) - HistoryBox.Text.IndexOf(Version) - 1)
+            Else
+                Me.Close()
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub YesBtn_Click(sender As Object, e As EventArgs) Handles YesBtn.Click
@@ -44,10 +51,10 @@ Public Class Updater
         Me.Close()
     End Sub
     Private Sub LicenseBtn_Click(sender As Object, e As EventArgs) Handles LicenseBtn.Click
-        System.Diagnostics.Process.Start("https://github.com/Yttrium-tYcLief/Scrotter/blob/master/LICENSE.creole")
+        System.Diagnostics.Process.Start("https://raw.githubusercontent.com/Yttrium-tYcLief/Scrotter/master/LICENSE")
     End Sub
     Private Sub ChangelogBtn_Click(sender As Object, e As EventArgs) Handles ChangelogBtn.Click
-        System.Diagnostics.Process.Start("https://raw.github.com/Yttrium-tYcLief/Scrotter/v" & Version & "/changelog")
+        System.Diagnostics.Process.Start("https://raw.github.com/Yttrium-tYcLief/Scrotter/master/changelog")
     End Sub
 
     Public Shared Function Validator(sender As Object, certificate As X509Certificate, chain As X509Chain, sslPolicyErrors As SslPolicyErrors) As Boolean

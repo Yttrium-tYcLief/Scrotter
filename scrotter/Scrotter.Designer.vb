@@ -66,6 +66,7 @@ Partial Class Scrotter
         Me.MemoryTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Preview = New System.Windows.Forms.PictureBox()
+        Me.ReportABugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -326,7 +327,7 @@ Partial Class Scrotter
         '
         'HelpToolStripMenuItem
         '
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WebsiteToolStripMenuItem, Me.ContributeToolStripMenuItem, Me.HelpBtn})
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WebsiteToolStripMenuItem, Me.ContributeToolStripMenuItem, Me.HelpBtn, Me.ReportABugToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 23)
         Me.HelpToolStripMenuItem.Text = "Help"
@@ -334,19 +335,19 @@ Partial Class Scrotter
         'WebsiteToolStripMenuItem
         '
         Me.WebsiteToolStripMenuItem.Name = "WebsiteToolStripMenuItem"
-        Me.WebsiteToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.WebsiteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.WebsiteToolStripMenuItem.Text = "Website"
         '
         'ContributeToolStripMenuItem
         '
         Me.ContributeToolStripMenuItem.Name = "ContributeToolStripMenuItem"
-        Me.ContributeToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.ContributeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ContributeToolStripMenuItem.Text = "Contribute"
         '
         'HelpBtn
         '
         Me.HelpBtn.Name = "HelpBtn"
-        Me.HelpBtn.Size = New System.Drawing.Size(151, 22)
+        Me.HelpBtn.Size = New System.Drawing.Size(152, 22)
         Me.HelpBtn.Text = "About Scrotter"
         '
         'MemoryLabel
@@ -403,6 +404,12 @@ Partial Class Scrotter
         Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Preview.TabIndex = 6
         Me.Preview.TabStop = False
+        '
+        'ReportABugToolStripMenuItem
+        '
+        Me.ReportABugToolStripMenuItem.Name = "ReportABugToolStripMenuItem"
+        Me.ReportABugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ReportABugToolStripMenuItem.Text = "Report a Bug"
         '
         'Scrotter
         '
@@ -478,5 +485,6 @@ Partial Class Scrotter
     Friend WithEvents ToolStripMenuItem14 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem15 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem16 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ReportABugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
