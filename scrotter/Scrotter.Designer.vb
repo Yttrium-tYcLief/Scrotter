@@ -61,12 +61,12 @@ Partial Class Scrotter
         Me.WebsiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContributeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpBtn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportABugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MemoryLabel = New System.Windows.Forms.ToolStripTextBox()
         Me.ReflectBox = New System.Windows.Forms.CheckBox()
         Me.MemoryTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Preview = New System.Windows.Forms.PictureBox()
-        Me.ReportABugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.ScreenPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ScreenAmountPicker, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -79,7 +79,7 @@ Partial Class Scrotter
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ModelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ModelBox.FormattingEnabled = True
-        Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPhone 5C", "Apple iPhone 5S", "BlackBerry Z10", "Google Nexus 4", "Google Nexus 5", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Kyocera RiSE", "LG G2", "LG Optimus 4X HD", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Moto X", "Motorola Xoom", "Samsung Galaxy Player 5.0", "Samsung Galaxy Note II", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy SIV", "Samsung Google Galaxy Nexus", "Sony Xperia S", "Sony Xperia Sola", "Sony Xperia Z"})
+        Me.ModelBox.Items.AddRange(New Object() {"Apple iPhone", "Apple iPhone 3G, 3GS", "Apple iPhone 4", "Apple iPhone 4S", "Apple iPhone 5", "Apple iPhone 5C", "Apple iPhone 5S", "BlackBerry Z10", "Google Nexus 4", "Google Nexus 5", "Google Nexus 7", "Google Nexus 10", "Google Nexus S", "HTC Desire HD, HTC Inspire 4G", "HTC One", "HTC One S", "HTC One V", "HTC One X, HTC One X+", "Kyocera RiSE", "LG G2", "LG Optimus 4X HD", "Motorola Droid RAZR", "Motorola Droid RAZR M", "Motorola Moto X", "Motorola Xoom", "Samsung Galaxy Player 5.0", "Samsung Galaxy Note II", "Samsung Galaxy Note III", "Samsung Galaxy SII, Epic 4G Touch", "Samsung Galaxy SIII", "Samsung Galaxy SIII Mini", "Samsung Galaxy SIV", "Samsung Galaxy SV", "Samsung Google Galaxy Nexus", "Sony Xperia S", "Sony Xperia Sola", "Sony Xperia Z"})
         Me.ModelBox.Location = New System.Drawing.Point(12, 28)
         Me.ModelBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ModelBox.MaxDropDownItems = 16
@@ -335,20 +335,26 @@ Partial Class Scrotter
         'WebsiteToolStripMenuItem
         '
         Me.WebsiteToolStripMenuItem.Name = "WebsiteToolStripMenuItem"
-        Me.WebsiteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.WebsiteToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.WebsiteToolStripMenuItem.Text = "Website"
         '
         'ContributeToolStripMenuItem
         '
         Me.ContributeToolStripMenuItem.Name = "ContributeToolStripMenuItem"
-        Me.ContributeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ContributeToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.ContributeToolStripMenuItem.Text = "Contribute"
         '
         'HelpBtn
         '
         Me.HelpBtn.Name = "HelpBtn"
-        Me.HelpBtn.Size = New System.Drawing.Size(152, 22)
+        Me.HelpBtn.Size = New System.Drawing.Size(151, 22)
         Me.HelpBtn.Text = "About Scrotter"
+        '
+        'ReportABugToolStripMenuItem
+        '
+        Me.ReportABugToolStripMenuItem.Name = "ReportABugToolStripMenuItem"
+        Me.ReportABugToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.ReportABugToolStripMenuItem.Text = "Report a Bug"
         '
         'MemoryLabel
         '
@@ -404,12 +410,6 @@ Partial Class Scrotter
         Me.Preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Preview.TabIndex = 6
         Me.Preview.TabStop = False
-        '
-        'ReportABugToolStripMenuItem
-        '
-        Me.ReportABugToolStripMenuItem.Name = "ReportABugToolStripMenuItem"
-        Me.ReportABugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ReportABugToolStripMenuItem.Text = "Report a Bug"
         '
         'Scrotter
         '

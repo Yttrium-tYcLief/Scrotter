@@ -1,3 +1,9 @@
+0.9.8
+- yttrium
+   New devices:
+        Galaxy Note III
+        Galaxy SV
+
 0.9.7
 - yttrium
  This is actually a major release, but because of constraints in old updater versions, it must be published as a minor release.

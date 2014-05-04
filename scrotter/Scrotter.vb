@@ -1,6 +1,6 @@
 ﻿'Scrotter, a program designed by yttrium to frame mobile screenshots.
-'Copyright (C) 2013 Alex and Serah West
-'Version 0.9.6 Beta
+'Copyright (C) 2014 Alex and Serah West
+'Version 0.9.8 Beta
 '
 'This work may be distributed and/or modified under the
 'conditions of the LaTeX Project Public License, either version 1.3
@@ -32,8 +32,8 @@ Public Class Scrotter
     Public CanvImg(7) As Image
     Public Image2 As New Bitmap(720, 1280)
     Public Shared IsMono As Boolean
-    Public ReadOnly Version As String = "0.9.7"
-    Public ReadOnly ReleaseDate As String = "2014-04-30"
+    Public ReadOnly Version As String = "0.9.8"
+    Public ReadOnly ReleaseDate As String = "2014-05-04"
     Private Image(7) As String
     Public AppData As String
     Public Database(,) As String
@@ -142,6 +142,10 @@ Public Class Scrotter
         VariantBox.Items.Clear()
         VariantBox.Text = "Variant"
         Select Case ModelBox.Text
+            Case "Samsung Galaxy SV"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"White", "Black", "Gold"})
+                VariantBox.SelectedIndex = 0
             Case "Samsung Galaxy SIII"
                 VariantBox.Enabled = True
                 VariantBox.Items.AddRange({"White", "Blue", "Red", "Brown", "Black"})
@@ -215,6 +219,12 @@ Public Class Scrotter
                 VariantBox.SelectedIndex = 0
                 GlossToolStripMenuItem.Enabled = False
                 GlossToolStripMenuItem.Checked = False
+                UnderShadowToolStripMenuItem.Enabled = False
+                UnderShadowToolStripMenuItem.Checked = False
+            Case "Samsung Galaxy Note III"
+                VariantBox.Enabled = True
+                VariantBox.Items.AddRange({"White", "Gray"})
+                VariantBox.SelectedIndex = 0
                 UnderShadowToolStripMenuItem.Enabled = False
                 UnderShadowToolStripMenuItem.Checked = False
             Case "HTC Desire HD, HTC Inspire 4G"
@@ -803,6 +813,29 @@ Public Class Scrotter
                     GlossUsed = True
                     IndexW = 95
                     IndexH = 141
+                Case "Samsung Galaxy Note III"
+                    If args.var = "White" Then
+                        DeviceName = "GNoteIIIWhite"
+                    ElseIf args.var = "Gray" Then
+                        DeviceName = "GNoteIIIGray"
+                    End If
+                    ShadowRes = "1080x1920"
+                    GlossUsed = True
+                    IndexW = 64
+                    IndexH = 200
+                Case "Samsung Galaxy SV"
+                    If args.var = "White" Then
+                        DeviceName = "GSVWhite"
+                    ElseIf args.var = "Black" Then
+                        DeviceName = "GSVBlack"
+                    ElseIf args.var = "Gold" Then
+                        DeviceName = "GSVGold"
+                    End If
+                    ShadowRes = "1080x1920"
+                    GlossUsed = True
+                    UndershadowUsed = True
+                    IndexW = 75
+                    IndexH = 248
             End Select
             If Perspective = True Then
                 Image1 = FetchImage(databaseurl & "Device/" & DeviceName & ".png")
